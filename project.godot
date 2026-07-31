@@ -39,7 +39,7 @@ enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", 
 
 [gui]
 
-theme/custom="res://resources/themes/lore.tres"
+theme/custom="res://resources/themes/steal_this_theme.tres"
 
 [input]
 
