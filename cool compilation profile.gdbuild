@@ -1,0 +1,15 @@
+{
+	"disabled_build_options": {
+		"disable_3d": true,
+		"disable_navigation_3d": true,
+		"disable_physics_3d": true,
+		"module_godot_physics_3d_enabled": false,
+		"module_text_server_fb_enabled": true
+	},
+	"disabled_classes": [
+		"NavigationAgent3D",
+		"Node3D",
+		"World3D"
+	],
+	"type": "build_profile"
+}
