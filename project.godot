@@ -35,11 +35,15 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/health_hitbox_hurtbox/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [gui]
 
 theme/custom="res://resources/themes/lore.tres"
+
+[input_devices]
+
+buffering/agile_event_flushing=true
 
 [internationalization]
 
