@@ -7,12 +7,16 @@ extends Node
 
 var walk_buffer: float = 0.0
 var idle_time: float = 0.0
-var current_facing: MovementComponent.Direction = MovementComponent.Direction.DOWN
+var current_facing: MovementComponent.Direction = MovementComponent.DEFAULT_DIRECTION
 
-@onready var sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = get_node_or_null("%AnimatedSprite2D")
 
 
 func _ready() -> void:
+	if not sprite:
+		push_error("AnimationComponent: %AnimatedSprite2D not found. Disabling.")
+		set_process(false)
+		return
 	sprite.play("start")
 
 
@@ -20,18 +24,15 @@ func play_walk(facing: MovementComponent.Direction) -> void:
 	walk_buffer = buffer_duration
 	idle_time = 0.0
 	current_facing = facing
-
 	var anim_name: String = MovementComponent.DIRECTION_NAMES.get(facing, "down")
-	if sprite.animation != anim_name or not sprite.is_playing():
-		sprite.play(anim_name)
+	_play_if_needed(anim_name)
 
 
 func update_walk_buffer(delta: float) -> void:
 	walk_buffer -= delta
 	if walk_buffer > 0.0:
 		var anim_name: String = MovementComponent.DIRECTION_NAMES.get(current_facing, "down")
-		if sprite.animation != anim_name or not sprite.is_playing():
-			sprite.play(anim_name)
+		_play_if_needed(anim_name)
 	else:
 		walk_buffer = 0.0
 		idle_time += delta
@@ -40,5 +41,9 @@ func update_walk_buffer(delta: float) -> void:
 
 
 func play_idle() -> void:
-	if sprite.animation != "idle" or not sprite.is_playing():
-		sprite.play("idle")
+	_play_if_needed("idle")
+
+
+func _play_if_needed(anim_name: String) -> void:
+	if sprite.animation != anim_name or not sprite.is_playing():
+		sprite.play(anim_name)

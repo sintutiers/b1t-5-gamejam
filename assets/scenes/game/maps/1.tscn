@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://bb63f0lorb008"]
 
-[ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="1_f0fay"]
+[ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="1_f0fay"]
+[ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="2_der4t"]
 
-[sub_resource type="TileSet" id="TileSet_s1a5k"]
+[node name="1" type="Node2D" unique_id=1401155993]
 
-[node name="1" type="Node2D" unique_id=1814634890]
+[node name="BackgroundColor" type="Sprite2D" parent="." unique_id=377731885]
+position = Vector2(235, 151)
+scale = Vector2(7.875, 4.109375)
+texture = ExtResource("1_f0fay")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1669375837]
-tile_set = SubResource("TileSet_s1a5k")
-
-[node name="RapierCharacterBody2D" parent="." unique_id=2042953629 instance=ExtResource("1_f0fay")]
-position = Vector2(39, 160)
+[node name="player" parent="." unique_id=2042953629 instance=ExtResource("2_der4t")]
+position = Vector2(236, 233)

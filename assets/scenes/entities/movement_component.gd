@@ -3,6 +3,9 @@ class_name MovementComponent
 extends Node
 
 enum Direction {NONE, UP, DOWN, LEFT, RIGHT}
+
+const DEFAULT_DIRECTION: Direction = Direction.DOWN
+
 const DIRECTION_NAMES: Dictionary[Direction, String] = {
 	Direction.UP: "up",
 	Direction.DOWN: "down",
@@ -12,17 +15,27 @@ const DIRECTION_NAMES: Dictionary[Direction, String] = {
 
 @export var move_speed: int = 200
 
-var facing: Direction = Direction.DOWN
-var is_interacting: bool = false
+var facing: Direction = DEFAULT_DIRECTION
+
+var is_interacting: bool = false:
+	set(value):
+		is_interacting = value
+		if value and body:
+			body.velocity = Vector2.ZERO
+
+const FACING_THRESHOLD: float = 0.5
 
 @onready var animation: AnimationComponent = get_node_or_null("%AnimationComponent")
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 
 
 func _ready() -> void:
-	assert(body != null, "Movement_Component expects parent to be RapierCharacterBody2D.")
+	if not body:
+		push_error("MovementComponent: expects parent to be RapierCharacterBody2D. Disabling.")
+		set_physics_process(false)
+		return
 	if not animation:
-		push_warning("Movement_Component: Animation_Component would be nice to have no?")
+		push_warning("MovementComponent: AnimationComponent not found.")
 
 
 func _physics_process(delta: float) -> void:
@@ -43,28 +56,22 @@ func _physics_process(delta: float) -> void:
 			animation.update_walk_buffer(delta)
 
 	body.move_and_slide()
-	body.position = body.position.round() # temp, should be improved
 
 
-func set_interacting(value: bool) -> void:
-	is_interacting = value
-	if value:
-		body.velocity = Vector2.ZERO
+func get_global_position() -> Vector2:
+	return body.global_position
 
 
 func _update_facing(direction: Vector2) -> void:
-	var threshold: float = 0.5
 	var new_facing: Direction = facing
-
 	if abs(direction.x) >= abs(direction.y):
-		if direction.x > threshold:
+		if direction.x > FACING_THRESHOLD:
 			new_facing = Direction.RIGHT
-		elif direction.x < -threshold:
+		elif direction.x < -FACING_THRESHOLD:
 			new_facing = Direction.LEFT
 	else:
-		if direction.y > threshold:
+		if direction.y > FACING_THRESHOLD:
 			new_facing = Direction.DOWN
-		elif direction.y < -threshold:
+		elif direction.y < -FACING_THRESHOLD:
 			new_facing = Direction.UP
-
 	facing = new_facing

@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://unuoxxc2hyxj"]
 
-[ext_resource type="Script" uid="uid://5j02dhyh7cxw" path="res://assets/scenes/entities/player.gd" id="1_47qcb"]
+[ext_resource type="Script" uid="uid://c5qpdmvd63ugb" path="res://addons/godot-rapier2d/custom_nodes/rapier_character_body_2d.gd" id="1_s1a5k"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://assets/scenes/entities/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://assets/scenes/entities/animation_component.gd" id="2_47qcb"]
 [ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
+[ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://assets/scenes/entities/interaction_component_player.gd" id="5_jyv41"]
+[ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
 
@@ -14,12 +16,14 @@ animations = [{
 "texture": ExtResource("2_s1a5k")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"start",
 "speed": 5.0
 }]
 
-[node name="RapierCharacterBody2D" type="CharacterBody2D" unique_id=2042953629]
-script = ExtResource("1_47qcb")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+
+[node name="player" type="CharacterBody2D" unique_id=2042953629]
+script = ExtResource("1_s1a5k")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
@@ -28,9 +32,23 @@ shape = SubResource("CapsuleShape2D_q1sf4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=360970681]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_q1sf4")
+animation = &"start"
 
 [node name="animation" type="Node" parent="." unique_id=764092827]
+unique_name_in_owner = true
 script = ExtResource("2_47qcb")
 
 [node name="movement" type="Node" parent="." unique_id=1232315220]
+unique_name_in_owner = true
 script = ExtResource("2_3irjl")
+
+[node name="interaction" type="Node" parent="." unique_id=1388805479]
+script = ExtResource("5_jyv41")
+
+[node name="InteractAreaPlayer" type="Area2D" parent="." unique_id=569756058]
+unique_name_in_owner = true
+script = ExtResource("6_iphvx")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractAreaPlayer" unique_id=1988242562]
+shape = SubResource("RectangleShape2D_q1sf4")
