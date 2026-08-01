@@ -14,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x2ody")
-next_level_path = "res://scenes/game/levels/level_3.tscn"
+next_level_path = "uid://m1wlwjw5cmpw"
 
 [node name="BackgroundColor" type="ColorRect" parent="." unique_id=1479828644]
 unique_name_in_owner = true
