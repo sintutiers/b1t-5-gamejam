@@ -15,7 +15,6 @@ next_scene_path = "uid://cfx76eix10ayh"
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1317385298]
 process_mode = 3
 autoplay = true
-bus = &"Music"
 
 [node name="ImagesContainer" type="MarginContainer" parent="." unique_id=1471559661]
 unique_name_in_owner = true

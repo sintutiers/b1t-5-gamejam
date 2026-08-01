@@ -12,22 +12,22 @@ config_version=5
 
 config/name="b1t 5 gamejam"
 config/version="1.0.0"
-run/main_scene="res://scenes/opening/opening.tscn"
+run/main_scene="uid://4atoxgqigr8l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="uid://h2vpda812ch5"
+buses/default_bus_layout="uid://b281q64oi4hyt"
 
 [autoload]
 
-DebugMenu="*uid://cggqb75a8w8r"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 AppConfig="*uid://cjke6crjg14a0"
 SceneLoader="*uid://cbwmrnp0af35y"
 ProjectMusicController="*uid://r5t485lr3p7t"
 ProjectUISoundController="*uid://cc37235kj4384"
+DebugMenu="*uid://cggqb75a8w8r"
 DialogueManager="*uid://c3rodes2l3gxb"
 
 [debug]
@@ -58,7 +58,7 @@ folder_colors={
 
 [gui]
 
-theme/custom="res://resources/themes/lore.tres"
+theme/custom="uid://lkdb7ln8gmaa"
 
 [input]
 
@@ -112,6 +112,7 @@ cancel={
 [internationalization]
 
 locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
+locale/translations_pot_files=PackedStringArray("res://assets/dialogue/PLACEHOLDER.dialogue")
 
 [maaacks_game_template]
 
