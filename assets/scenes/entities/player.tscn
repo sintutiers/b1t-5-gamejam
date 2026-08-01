@@ -1,12 +1,36 @@
 [gd_scene format=3 uid="uid://unuoxxc2hyxj"]
 
-[ext_resource type="Script" uid="uid://c5qpdmvd63ugb" path="res://addons/godot-rapier2d/custom_nodes/rapier_character_body_2d.gd" id="1_qkn2w"]
+[ext_resource type="Script" uid="uid://5j02dhyh7cxw" path="res://assets/scenes/entities/player.gd" id="1_47qcb"]
+[ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://assets/scenes/entities/movement_component.gd" id="2_3irjl"]
+[ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://assets/scenes/entities/animation_component.gd" id="2_47qcb"]
+[ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1sf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s1a5k")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="RapierCharacterBody2D" type="CharacterBody2D" unique_id=2042953629]
-script = ExtResource("1_qkn2w")
+script = ExtResource("1_47qcb")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
 shape = SubResource("CapsuleShape2D_q1sf4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=360970681]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_q1sf4")
+
+[node name="animation" type="Node" parent="." unique_id=764092827]
+script = ExtResource("2_47qcb")
+
+[node name="movement" type="Node" parent="." unique_id=1232315220]
+script = ExtResource("2_3irjl")

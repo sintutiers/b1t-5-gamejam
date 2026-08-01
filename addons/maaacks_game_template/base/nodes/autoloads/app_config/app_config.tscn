@@ -5,5 +5,5 @@
 [node name="AppConfig" type="Node" unique_id=1177605314]
 script = ExtResource("1_o0k5w")
 main_menu_scene_path = "uid://cfx76eix10ayh"
-game_scene_path = "uid://dxo015ur0ndgj"
+game_scene_path = "uid://cpmb5cfcuq6a2"
 ending_scene_path = "uid://bjsumd3epogpb"

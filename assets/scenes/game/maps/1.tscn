@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bb63f0lorb008"]
+
+[ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="1_f0fay"]
+
+[sub_resource type="TileSet" id="TileSet_s1a5k"]
+
+[node name="1" type="Node2D" unique_id=1814634890]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1669375837]
+tile_set = SubResource("TileSet_s1a5k")
+
+[node name="RapierCharacterBody2D" parent="." unique_id=2042953629 instance=ExtResource("1_f0fay")]
+position = Vector2(39, 160)
