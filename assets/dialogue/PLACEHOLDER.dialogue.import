@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://qcrj8vf7em5u"
+path="res://.godot/imported/PLACEHOLDER.dialogue-4dfc9ceddd54dcd5d6aba0371cb3a892.tres"
+
+[deps]
+
+source_file="res://assets/dialogue/PLACEHOLDER.dialogue"
+dest_files=["res://.godot/imported/PLACEHOLDER.dialogue-4dfc9ceddd54dcd5d6aba0371cb3a892.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://unuoxxc2hyxj"]
+
+[ext_resource type="Script" uid="uid://c5qpdmvd63ugb" path="res://addons/godot-rapier2d/custom_nodes/rapier_character_body_2d.gd" id="1_qkn2w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
+
+[node name="RapierCharacterBody2D" type="CharacterBody2D" unique_id=2042953629]
+script = ExtResource("1_qkn2w")
+metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
+shape = SubResource("CapsuleShape2D_q1sf4")

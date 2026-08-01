@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fcjph")
+next_scene_path = "uid://cfx76eix10ayh"
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1317385298]
 process_mode = 3

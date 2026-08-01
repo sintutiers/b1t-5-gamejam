@@ -22,7 +22,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -57.0
+offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -129,7 +129,6 @@ button_pressed = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Run"
 
 [node name="SetDefaultThemeLabel" type="Label" parent="VBoxContainer/StepsContainer" unique_id=1847430117]
