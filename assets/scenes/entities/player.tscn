@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://unuoxxc2hyxj"]
 
 [ext_resource type="Script" uid="uid://c5qpdmvd63ugb" path="res://addons/godot-rapier2d/custom_nodes/rapier_character_body_2d.gd" id="1_s1a5k"]
-[ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://assets/scenes/entities/movement_component.gd" id="2_3irjl"]
-[ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://assets/scenes/entities/animation_component.gd" id="2_47qcb"]
+[ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
+[ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
 [ext_resource type="Texture2D" uid="uid://bc1brx5ex756u" path="res://assets/art/controlableSprites/playerSprite(notDone)(front) _0000.png" id="2_fj81o"]
 [ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
 [ext_resource type="Texture2D" uid="uid://dto5e4ieyoytf" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="3_fj81o"]
 [ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="4_fj81o"]
 [ext_resource type="Texture2D" uid="uid://2ngmiilwh86b" path="res://assets/art/controlableSprites/playerSprite(notDone)(left) _0001.png" id="4_itj73"]
 [ext_resource type="Texture2D" uid="uid://eu0i8c1pv778" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
-[ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://assets/scenes/entities/interaction_component_player.gd" id="5_jyv41"]
+[ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://scripts/components/interaction_component_player.gd" id="5_jyv41"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
 [ext_resource type="Texture2D" uid="uid://dtdvby7d5x67r" path="res://assets/art/interactableSprites/jumpTiles(jumpTileLeft) _0000.png" id="6_u63s7"]
 [ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="9_uyujk"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="14_bfnip"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="15_p1n6j"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="16_502cd"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="17_p1n6j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q1sf4"]
 animations = [{
@@ -116,3 +120,45 @@ metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractAreaPlayer" unique_id=1988242562]
 shape = SubResource("RectangleShape2D_q1sf4")
+
+[node name="StateChart" type="Node" parent="." unique_id=944945574]
+script = ExtResource("14_bfnip")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart" unique_id=296013926]
+script = ExtResource("15_p1n6j")
+initial_state = NodePath("Move")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Move" type="Node" parent="StateChart/CompoundState" unique_id=81078134]
+script = ExtResource("16_502cd")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="launch" type="Node" parent="StateChart/CompoundState/Move" unique_id=456055586]
+script = ExtResource("17_p1n6j")
+to = NodePath("../../Launch")
+delay_in_seconds = "0.0"
+
+[node name="interact" type="Node" parent="StateChart/CompoundState/Move" unique_id=664146275]
+script = ExtResource("17_p1n6j")
+to = NodePath("../../Interact")
+delay_in_seconds = "0.0"
+
+[node name="Interact" type="Node" parent="StateChart/CompoundState" unique_id=1287122747]
+script = ExtResource("16_502cd")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="interact_end" type="Node" parent="StateChart/CompoundState/Interact" unique_id=934271323]
+script = ExtResource("17_p1n6j")
+to = NodePath("../../Move")
+delay_in_seconds = "0.0"
+
+[node name="Launch" type="Node" parent="StateChart/CompoundState" unique_id=744168537]
+script = ExtResource("16_502cd")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/Launch" unique_id=808605584]
+script = ExtResource("17_p1n6j")
+to = NodePath("../../Move")
+delay_in_seconds = "0.5"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
 [ext_resource type="Texture2D" uid="uid://eu0i8c1pv778" path="res://assets/art/interactableSprites/pathColor.png" id="7_5r203"]
-[ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://assets/scenes/entities/jumppad_component.gd" id="8_ux65l"]
+[ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
@@ -39,6 +39,7 @@ follow_mode = 2
 follow_target = NodePath("../player")
 zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_4p6eu")
+draw_limits = true
 
 [node name="jumppadtest" type="Area2D" parent="." unique_id=884582300]
 script = ExtResource("8_ux65l")
