@@ -17,7 +17,7 @@ ss2d/version="3.3.1"
 config/name="cool b1t (5) gamejam"
 config/description="our cool game jam
 made by dean and chiel"
-config/version="1.0.0"
+config/version="v not done for release yet"
 run/main_scene="uid://4atoxgqigr8l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://bc1brx5ex756u"
@@ -54,7 +54,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/health_hitbox_hurtbox/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/health_hitbox_hurtbox/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 
@@ -138,3 +138,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
