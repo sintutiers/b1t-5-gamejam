@@ -11,8 +11,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	if DialogueManager.dialogue_ended.is_connected(_on_dialogue_ended):
-		DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
+	DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -34,9 +33,9 @@ func interact() -> void:
 		var interactable: Interactable = _find_interactable(node)
 		if not interactable:
 			continue
-		var d2: float = movement.get_global_position().distance_squared_to(interactable.global_position)
-		if d2 < closest_dist_sq:
-			closest_dist_sq = d2
+		var dist_sq: float = movement.get_global_position().distance_squared_to(interactable.global_position)
+		if dist_sq < closest_dist_sq:
+			closest_dist_sq = dist_sq
 			closest = interactable
 
 	if closest:
@@ -46,10 +45,10 @@ func interact() -> void:
 
 func _find_interactable(node: Node2D) -> Interactable:
 	if node is Interactable:
-		return node as Interactable
+		return node
 	for child: Node in node.get_children():
 		if child is Interactable:
-			return child as Interactable
+			return child
 	return null
 
 
@@ -60,10 +59,10 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 func _find_sibling_of_type(type: Script) -> Node:
 	var parent: Node = get_parent()
 	if not parent:
-		push_error("InteractionComponent: nothing to search asshat")
+		push_error("InteractionComponent: parent null, cant find '%s'." % type.resource_path)
 		return null
 	for child: Node in parent.get_children():
 		if is_instance_of(child, type):
 			return child
-	push_warning("InteractionComponent: nothing of " + type.resource_path + " found.")
+	push_warning("InteractionComponent: no sibling of '%s' found." % type.resource_path)
 	return null
