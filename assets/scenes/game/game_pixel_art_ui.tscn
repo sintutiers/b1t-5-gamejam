@@ -54,6 +54,7 @@ stretch = true
 
 [node name="ConfigurableSubViewport" type="SubViewport" parent="ViewportContainer" unique_id=204786699]
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 size = Vector2i(1152, 648)

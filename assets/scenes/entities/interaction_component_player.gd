@@ -2,8 +2,8 @@
 class_name InteractionComponent
 extends Node
 
-@onready var interact_area: RapierArea2D = %InteractAreaPlayer
-@onready var movement: MovementComponent = %movement
+@onready var interact_area: RapierArea2D = _find_sibling_of_type(RapierArea2D)
+@onready var movement: MovementComponent = _find_sibling_of_type(MovementComponent)
 
 
 func _ready() -> void:
@@ -55,3 +55,15 @@ func _find_interactable(node: Node2D) -> Interactable:
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	movement.is_interacting = false
+
+
+func _find_sibling_of_type(type: Script) -> Node:
+	var parent: Node = get_parent()
+	if not parent:
+		push_error("InteractionComponent: nothing to search asshat")
+		return null
+	for child: Node in parent.get_children():
+		if is_instance_of(child, type):
+			return child
+	push_warning("InteractionComponent: nothing of " + type.resource_path + " found.")
+	return null

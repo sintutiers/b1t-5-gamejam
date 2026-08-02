@@ -3,22 +3,87 @@
 [ext_resource type="Script" uid="uid://c5qpdmvd63ugb" path="res://addons/godot-rapier2d/custom_nodes/rapier_character_body_2d.gd" id="1_s1a5k"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://assets/scenes/entities/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://assets/scenes/entities/animation_component.gd" id="2_47qcb"]
+[ext_resource type="Texture2D" uid="uid://bc1brx5ex756u" path="res://assets/art/controlableSprites/playerSprite(notDone)(front) _0000.png" id="2_fj81o"]
 [ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
+[ext_resource type="Texture2D" uid="uid://dto5e4ieyoytf" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="3_fj81o"]
+[ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="4_fj81o"]
+[ext_resource type="Texture2D" uid="uid://2ngmiilwh86b" path="res://assets/art/controlableSprites/playerSprite(notDone)(left) _0001.png" id="4_itj73"]
+[ext_resource type="Texture2D" uid="uid://eu0i8c1pv778" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
 [ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://assets/scenes/entities/interaction_component_player.gd" id="5_jyv41"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
+[ext_resource type="Texture2D" uid="uid://dtdvby7d5x67r" path="res://assets/art/interactableSprites/jumpTiles(jumpTileLeft) _0000.png" id="6_u63s7"]
+[ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="9_uyujk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q1sf4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_fj81o")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_s1a5k")
+}],
+"loop": 0,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vy3dg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fj81o")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fj81o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u63s7")
+}],
+"loop": 0,
+"name": &"left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fj81o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fj81o")
+}],
+"loop": 0,
+"name": &"right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fj81o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fj81o")
 }],
 "loop": 1,
 "name": &"start",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_itj73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uyujk")
+}],
+"loop": 0,
+"name": &"up",
+"speed": 2.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
 
@@ -26,23 +91,22 @@ animations = [{
 script = ExtResource("1_s1a5k")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
-shape = SubResource("CapsuleShape2D_q1sf4")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=360970681]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_q1sf4")
-animation = &"start"
+animation = &"up"
 
-[node name="animation" type="Node" parent="." unique_id=764092827]
-unique_name_in_owner = true
-script = ExtResource("2_47qcb")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
+shape = SubResource("CapsuleShape2D_q1sf4")
 
 [node name="movement" type="Node" parent="." unique_id=1232315220]
-unique_name_in_owner = true
 script = ExtResource("2_3irjl")
 
+[node name="animation" type="Node" parent="." unique_id=764092827]
+script = ExtResource("2_47qcb")
+
 [node name="interaction" type="Node" parent="." unique_id=1388805479]
+unique_name_in_owner = true
 script = ExtResource("5_jyv41")
 
 [node name="InteractAreaPlayer" type="Area2D" parent="." unique_id=569756058]
