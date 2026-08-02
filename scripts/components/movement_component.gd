@@ -3,41 +3,29 @@ class_name MovementComponent
 extends Node
 
 enum Direction {NONE, UP, DOWN, LEFT, RIGHT}
-
 const DEFAULT_DIRECTION: Direction = Direction.DOWN
-
 const DIRECTION_NAMES: Dictionary[Direction, String] = {
 	Direction.UP: "up",
 	Direction.DOWN: "down",
 	Direction.LEFT: "left",
 	Direction.RIGHT: "right",
 }
+const FACING_THRESHOLD: float = 0.5
 
-@export var move_speed: int = 200
+@export var move_speed: int = 150
 
 var facing: Direction = DEFAULT_DIRECTION
-
 var is_interacting: bool = false:
 	set(value):
 		is_interacting = value
-		if value and body:
-			body.velocity = Vector2.ZERO
+		if value:
+			state_chart.send_event(&"interact")
+		else:
+			state_chart.send_event(&"interact_end")
 
-const FACING_THRESHOLD: float = 0.5
-
-@onready var animation: AnimationComponent = _find_animation_component()
+@onready var animation: AnimationComponent = _find_sibling_of_type(AnimationComponent)
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
-
-# yeah im not asigning it manually, fuck that. search it yourself
-func _find_animation_component() -> AnimationComponent:
-	var parent := get_parent()
-	if not parent:
-		return null
-	for child in parent.get_children():
-		if child is AnimationComponent:
-			return child
-	push_warning("MovementComponent: no sibling AnimationComponent found.")
-	return null
+@onready var state_chart: StateChart = %StateChart
 
 func _ready() -> void:
 	if not body:
@@ -47,13 +35,15 @@ func _ready() -> void:
 	if not animation:
 		push_warning("MovementComponent: AnimationComponent not found.")
 
+func launch(velocity: Vector2) -> void:
+	body.velocity = velocity
+	state_chart.send_event(&"launch")
 
-func _physics_process(delta: float) -> void:
-	if is_interacting:
-		body.velocity = Vector2.ZERO
-		body.move_and_slide()
-		return
+func get_global_position() -> Vector2:
+	return body.global_position
 
+func _on_move_physics_update(delta: float) -> void:
+	print("move physics update firing")
 	var input_dir: Vector2 = Input.get_vector(&"left", &"right", &"up", &"down")
 	if input_dir != Vector2.ZERO:
 		body.velocity = input_dir * move_speed
@@ -64,13 +54,14 @@ func _physics_process(delta: float) -> void:
 		body.velocity = Vector2.ZERO
 		if animation:
 			animation.update_walk_buffer(delta)
-
 	body.move_and_slide()
 
+func _on_interact_physics_update(_delta: float) -> void:
+	body.velocity = Vector2.ZERO
+	body.move_and_slide()
 
-func get_global_position() -> Vector2:
-	return body.global_position
-
+func _on_launch_physics_update(_delta: float) -> void:
+	body.move_and_slide()
 
 func _update_facing(direction: Vector2) -> void:
 	var new_facing: Direction = facing
@@ -85,3 +76,25 @@ func _update_facing(direction: Vector2) -> void:
 		elif direction.y < -FACING_THRESHOLD:
 			new_facing = Direction.UP
 	facing = new_facing
+
+# yeah im not asgning this manually, fuck that. do it yourself
+func _find_sibling_of_type(type: Script) -> Node:
+	var parent: Node = get_parent()
+	if not parent:
+		push_error("MovementComponent: parent null, cant find '%s'." % type.resource_path)
+		return null
+	for child: Node in parent.get_children():
+		if is_instance_of(child, type):
+			return child
+	push_warning("MovementComponent: no sibling of '%s' found." % type.resource_path)
+	return null
+
+func _physics_process(delta: float) -> void:
+	print("physics process running, move active: ", %Move.active)
+	print("move: ", %Move.active, " interact: ", %Interact.active, " launch: ", %Launch.active)
+	if %Move.active:
+		_on_move_physics_update(delta)
+	elif %Interact.active:
+		_on_interact_physics_update(delta)
+	elif %Launch.active:
+		_on_launch_physics_update(delta)

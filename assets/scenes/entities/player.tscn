@@ -122,7 +122,9 @@ metadata/_custom_type_script = "uid://cburu6b4ckehs"
 shape = SubResource("RectangleShape2D_q1sf4")
 
 [node name="StateChart" type="Node" parent="." unique_id=944945574]
+unique_name_in_owner = true
 script = ExtResource("14_bfnip")
+track_in_editor = true
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="CompoundState" type="Node" parent="StateChart" unique_id=296013926]
@@ -131,20 +133,24 @@ initial_state = NodePath("Move")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
 [node name="Move" type="Node" parent="StateChart/CompoundState" unique_id=81078134]
+unique_name_in_owner = true
 script = ExtResource("16_502cd")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
 [node name="launch" type="Node" parent="StateChart/CompoundState/Move" unique_id=456055586]
 script = ExtResource("17_p1n6j")
 to = NodePath("../../Launch")
+event = &"launch"
 delay_in_seconds = "0.0"
 
 [node name="interact" type="Node" parent="StateChart/CompoundState/Move" unique_id=664146275]
 script = ExtResource("17_p1n6j")
 to = NodePath("../../Interact")
+event = &"interact"
 delay_in_seconds = "0.0"
 
 [node name="Interact" type="Node" parent="StateChart/CompoundState" unique_id=1287122747]
+unique_name_in_owner = true
 script = ExtResource("16_502cd")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
@@ -154,6 +160,7 @@ to = NodePath("../../Move")
 delay_in_seconds = "0.0"
 
 [node name="Launch" type="Node" parent="StateChart/CompoundState" unique_id=744168537]
+unique_name_in_owner = true
 script = ExtResource("16_502cd")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
@@ -162,3 +169,7 @@ script = ExtResource("17_p1n6j")
 to = NodePath("../../Move")
 delay_in_seconds = "0.5"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[connection signal="state_physics_processing" from="StateChart/CompoundState/Move" to="movement" method="_on_move_physics_update"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/Interact" to="movement" method="_on_interact_physics_update"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/Launch" to="movement" method="_on_launch_physics_update"]
