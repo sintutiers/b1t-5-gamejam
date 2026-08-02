@@ -9,14 +9,12 @@ var walk_buffer: float = 0.0
 var idle_time: float = 0.0
 var current_facing: MovementComponent.Direction = MovementComponent.DEFAULT_DIRECTION
 
-@onready var sprite: AnimatedSprite2D = get_node_or_null("%AnimatedSprite2D")
+@onready var sprite: AnimatedSprite2D = %AnimatedSprite2D
 
 
 func _ready() -> void:
-	if not sprite:
-		push_error("AnimationComponent: %AnimatedSprite2D not found. Disabling.")
-		set_process(false)
-		return
+	#assert(sprite, "AnimationComponent: sprite not assigned")
+	
 	sprite.play("start")
 
 

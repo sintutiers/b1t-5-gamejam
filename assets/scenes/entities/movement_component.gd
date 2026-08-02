@@ -25,9 +25,19 @@ var is_interacting: bool = false:
 
 const FACING_THRESHOLD: float = 0.5
 
-@onready var animation: AnimationComponent = get_node_or_null("%AnimationComponent")
+@onready var animation: AnimationComponent = _find_animation_component()
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 
+# yeah im not asigning it manually, fuck that. search it yourself
+func _find_animation_component() -> AnimationComponent:
+	var parent := get_parent()
+	if not parent:
+		return null
+	for child in parent.get_children():
+		if child is AnimationComponent:
+			return child
+	push_warning("MovementComponent: no sibling AnimationComponent found.")
+	return null
 
 func _ready() -> void:
 	if not body:
