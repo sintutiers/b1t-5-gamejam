@@ -17,7 +17,7 @@ ss2d/version="3.3.1"
 config/name="cool b1t (5) gamejam"
 config/description="our cool game jam
 made by dean and chiel"
-config/version="v not done for release yet"
+config/version="not done for release yet"
 run/main_scene="uid://4atoxgqigr8l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://bc1brx5ex756u"
@@ -65,7 +65,8 @@ folder_colors={
 
 [gui]
 
-theme/custom="uid://d1s1xd38gtks2"
+theme/custom="uid://bac1khm2nmjl3"
+theme/custom_font="uid://coisyh8l6rcuc"
 
 [input]
 
