@@ -17,8 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bq0w7uaotgfct" path="res://examples/guide_examples/remapping/ui/remapping_dialog.tscn" id="7_g0vxv"]
 [ext_resource type="PackedScene" uid="uid://c36cnvgv2ur60" path="res://examples/guide_examples/shared/fireball/fireball.tscn" id="7_w2y2e"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="14_e0a18"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="16_42q6r"]
 
-[node name="Remapping" type="Node"]
+[node name="Remapping" type="Node" unique_id=1621357280]
 script = ExtResource("1_3d1tp")
 keyboard = ExtResource("2_issuo")
 controller = ExtResource("3_apwxt")
@@ -28,7 +29,7 @@ switch_to_keyboard = ExtResource("5_aqwgr")
 switch_to_controller = ExtResource("6_jncg0")
 open_menu = ExtResource("3_g1dlj")
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="." unique_id=2092517778]
 position = Vector2(546, 317)
 texture = ExtResource("1_gkmxq")
 script = ExtResource("2_n3drv")
@@ -36,9 +37,9 @@ move_action = ExtResource("4_07jn1")
 fire_action = ExtResource("6_esnhm")
 fireball_scene = ExtResource("7_w2y2e")
 
-[node name="HUD Layer" type="CanvasLayer" parent="."]
+[node name="HUD Layer" type="CanvasLayer" parent="." unique_id=287849094]
 
-[node name="Label" type="RichTextLabel" parent="HUD Layer"]
+[node name="Label" type="RichTextLabel" parent="HUD Layer" unique_id=1243936648]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -55,15 +56,15 @@ script = ExtResource("14_e0a18")
 instructions_text = "Use %s to move.
 Press %s to fire a fireball.
 Press %s to change input mappings."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("4_07jn1"), ExtResource("6_esnhm"), ExtResource("3_g1dlj")])
+actions = Array[ExtResource("16_42q6r")]([ExtResource("4_07jn1"), ExtResource("6_esnhm"), ExtResource("3_g1dlj")])
 
-[node name="UI Layer" type="CanvasLayer" parent="."]
+[node name="UI Layer" type="CanvasLayer" parent="." unique_id=1688632793]
 
-[node name="RemappingDialog" parent="UI Layer" instance=ExtResource("7_g0vxv")]
+[node name="RemappingDialog" parent="UI Layer" unique_id=902679939 instance=ExtResource("7_g0vxv")]
 unique_name_in_owner = true
 visible = false
 
-[node name="DebugLayer" type="CanvasLayer" parent="."]
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1905425183]
 
-[node name="GuideDebugger" parent="DebugLayer" instance=ExtResource("5_kdgir")]
+[node name="GuideDebugger" parent="DebugLayer" unique_id=914515732 instance=ExtResource("5_kdgir")]
 theme = ExtResource("7_8t2l7")

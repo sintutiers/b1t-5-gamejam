@@ -6,15 +6,15 @@
 radius = 7.99901
 height = 32.0275
 
-[node name="banana" type="Node2D" groups=["food"]]
+[node name="banana" type="Node2D" unique_id=56334355 groups=["food"]]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=154852515]
 texture_filter = 1
 texture = ExtResource("1_uoy0d")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1394665078]
 metadata/owner = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=278090102]
 rotation = 1.5865
 shape = SubResource("CapsuleShape2D_vo3bi")

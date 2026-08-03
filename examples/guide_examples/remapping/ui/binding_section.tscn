@@ -9,7 +9,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" unique_id=468127114]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,18 +19,18 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_hoxsv")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1439391940]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h8l7u")
 
-[node name="BindingSection" type="MarginContainer" parent="."]
+[node name="BindingSection" type="MarginContainer" parent="." unique_id=1409517009]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="BindingSection"]
+[node name="Label" type="Label" parent="BindingSection" unique_id=307764280]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22

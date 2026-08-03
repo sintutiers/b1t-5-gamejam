@@ -46,4 +46,3 @@ func rescale() -> void:
 	scale = Vector2(scale_factor, scale_factor)	
 	
 	
-

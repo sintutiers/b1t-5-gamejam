@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://dbf0wsbnpx3u8" path="res://examples/guide_examples/input_prompts/mapping_contexts/keyboard_activated.tres" id="6_ofh7e"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="7_li4sj"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="8_i8f53"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="9_b6ep1"]
 
 [sub_resource type="Gradient" id="Gradient_j5prp"]
 offsets = PackedFloat32Array(0, 0.184375, 0.496875, 1)
@@ -17,7 +18,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.603922, 1, 1, 0.370487, 0.325751, 
 gradient = SubResource("Gradient_j5prp")
 
 [sub_resource type="Curve" id="Curve_3lhls"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 0.449663), 0.0, 0.0, 0, 0, Vector2(1, 2.46539), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -35,7 +36,7 @@ scale_over_velocity_max = 2.0
 scale_over_velocity_curve = SubResource("CurveTexture_rgacx")
 color_ramp = SubResource("GradientTexture1D_d1csl")
 
-[node name="InputPrompts" type="Node2D"]
+[node name="InputPrompts" type="Node2D" unique_id=271933837]
 script = ExtResource("1_ogapc")
 mapping_context = ExtResource("2_drrnj")
 fire = ExtResource("3_gessh")
@@ -43,16 +44,16 @@ controller_activated = ExtResource("4_hasd2")
 mouse_activated = ExtResource("5_dndl7")
 keyboard_activated = ExtResource("6_ofh7e")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2094889335]
 unique_name_in_owner = true
 position = Vector2(939, 335)
 emitting = false
 amount = 400
 process_material = SubResource("ParticleProcessMaterial_1unui")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=242297603]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1068021867]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -63,17 +64,17 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=343876308]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=319888789]
 layout_mode = 2
 
-[node name="Spacer2" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Spacer2" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=974732955]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1036883606]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme = ExtResource("7_li4sj")
@@ -81,48 +82,48 @@ text = "This example shows how input prompts can be configured at runtime. We ha
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Spacer" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=514002472]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1900039114]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=230264481]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/CenterContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=1344469768]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_li4sj")
 script = ExtResource("8_i8f53")
 instructions_text = "%s to do the magic action!"
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("3_gessh")])
+actions = Array[ExtResource("9_b6ep1")]([ExtResource("3_gessh")])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/HBoxContainer" unique_id=1685932458]
 layout_mode = 2
 
-[node name="DeviceSelection" type="OptionButton" parent="CanvasLayer/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="DeviceSelection" type="OptionButton" parent="CanvasLayer/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1423092533]
 layout_mode = 2
 theme = ExtResource("7_li4sj")
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Show input for all devices"
 popup/item_0/id = 0
 popup/item_1/text = "Show input for currently active device"
 popup/item_1/id = 1
 
-[node name="ControllerTypeOverride" type="OptionButton" parent="CanvasLayer/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="ControllerTypeOverride" type="OptionButton" parent="CanvasLayer/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1387411114]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_li4sj")
-item_count = 5
 selected = 0
+item_count = 5
 popup/item_0/text = "Use detected controller type"
 popup/item_0/id = 0
 popup/item_1/text = "Force Microsoft Controller"

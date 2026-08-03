@@ -2,43 +2,43 @@
 
 [ext_resource type="Script" uid="uid://crd0csh0x7405" path="res://examples/godot_state_charts_examples/save_and_load/color_box/color_box.gd" id="1_3xrxu"]
 
-[node name="ColorBox" type="MarginContainer"]
+[node name="ColorBox" type="MarginContainer" unique_id=1977935236]
 custom_minimum_size = Vector2(300, 150)
 offset_right = 300.0
 offset_bottom = 150.0
 script = ExtResource("1_3xrxu")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1529579578]
 unique_name_in_owner = true
 layout_mode = 2
 color = Color(1, 0.533702, 0.467874, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1718711407]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=56949283]
 layout_mode = 2
 
-[node name="IdLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="IdLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=902025566]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Box-ID"
 
-[node name="TimeInStateLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TimeInStateLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1189548688]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Time in State: 1.2s"
 
-[node name="TransitionTimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TransitionTimeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=177346607]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Time Until Transition: 1.2s"
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=549461444]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Change Color"

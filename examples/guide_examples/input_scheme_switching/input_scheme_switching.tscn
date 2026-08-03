@@ -13,15 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://c36cnvgv2ur60" path="res://examples/guide_examples/shared/fireball/fireball.tscn" id="8_t3npb"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="10_vp4t3"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="11_qdni4"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="13_ltvms"]
 
-[node name="InputSchemeSwitching" type="Node2D"]
+[node name="InputSchemeSwitching" type="Node2D" unique_id=284812059]
 script = ExtResource("1_7l2n1")
 joystick_scheme = ExtResource("2_fx1v6")
 keyboard_scheme = ExtResource("3_pvyn2")
 switch_to_keyboard = ExtResource("4_tts5j")
 switch_to_joystick = ExtResource("6_b05vw")
 
-[node name="Player" type="Node2D" parent="."]
+[node name="Player" type="Node2D" parent="." unique_id=614331262]
 position = Vector2(929, 695)
 script = ExtResource("7_2r4ev")
 speed = 300.0
@@ -29,12 +30,12 @@ move_action = ExtResource("4_3bnea")
 shoot_action = ExtResource("5_4yg1b")
 fireball_scene = ExtResource("8_t3npb")
 
-[node name="GodotLogo" type="Sprite2D" parent="Player"]
+[node name="GodotLogo" type="Sprite2D" parent="Player" unique_id=544807533]
 texture = ExtResource("1_t4jeg")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1034759414]
 
-[node name="InstructionsLabel" type="RichTextLabel" parent="UI"]
+[node name="InstructionsLabel" type="RichTextLabel" parent="UI" unique_id=1778315213]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 1
@@ -52,9 +53,9 @@ fit_content = true
 script = ExtResource("11_qdni4")
 instructions_text = "%s to move.
 %s to shoot a fireball."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("4_3bnea"), ExtResource("5_4yg1b")])
+actions = Array[ExtResource("13_ltvms")]([ExtResource("4_3bnea"), ExtResource("5_4yg1b")])
 
-[node name="Debugger" type="CanvasLayer" parent="."]
+[node name="Debugger" type="CanvasLayer" parent="." unique_id=980483315]
 
-[node name="GuideDebugger" parent="Debugger" instance=ExtResource("8_nv6u5")]
+[node name="GuideDebugger" parent="Debugger" unique_id=1194051788 instance=ExtResource("8_nv6u5")]
 theme = ExtResource("10_vp4t3")

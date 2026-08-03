@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxu6258urdtf1"]
+[gd_scene format=3 uid="uid://cxu6258urdtf1"]
 
 [ext_resource type="Theme" uid="uid://dud4fe6fsicvm" path="res://addons/rmsmartshape/assets/gui_theme.res" id="1_byls6"]
 [ext_resource type="Script" uid="uid://jmh3fa1lggij" path="res://addons/rmsmartshape/scenes/GUI_InfoPanel.gd" id="2"]
 
-[node name="GUI_InfoPanel" type="PanelContainer"]
+[node name="GUI_InfoPanel" type="PanelContainer" unique_id=862875493]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,30 +15,30 @@ mouse_filter = 2
 theme = ExtResource("1_byls6")
 script = ExtResource("2")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1599249956]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Properties" type="VBoxContainer" parent="."]
+[node name="Properties" type="VBoxContainer" parent="." unique_id=1073772795]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IDX" type="Label" parent="Properties"]
+[node name="IDX" type="Label" parent="Properties" unique_id=517943290]
 unique_name_in_owner = true
 layout_mode = 2
 text = "IDX: 13"
 
-[node name="Tex" type="Label" parent="Properties"]
+[node name="Tex" type="Label" parent="Properties" unique_id=982443127]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Tex: 1"
 
-[node name="Width" type="Label" parent="Properties"]
+[node name="Width" type="Label" parent="Properties" unique_id=76308095]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Width: 1.0"
 
-[node name="Flip" type="Label" parent="Properties"]
+[node name="Flip" type="Label" parent="Properties" unique_id=68522443]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Flip: N"

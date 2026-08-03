@@ -16,5 +16,3 @@ func _ready() -> void:
 	switch_to_keyboard_and_mouse.triggered \
 		.connect(func() -> void: GUIDE.enable_mapping_context(keyboard_and_mouse, true))
 	
-
-

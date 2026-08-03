@@ -14,9 +14,6 @@ game_scene_path = "uid://cpmb5cfcuq6a2"
 options_packed_scene = ExtResource("3_0jpat")
 credits_packed_scene = ExtResource("4_m0ubd")
 
-[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" parent_id_path=PackedInt32Array(556427956) index="0" unique_id=359406872]
-text = "cool b1t (5) gamejam"
-
 [node name="ContinueGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" parent_id_path=PackedInt32Array(2017477786) index="1" unique_id=1495566523]
 unique_name_in_owner = true
 visible = false
@@ -28,9 +25,6 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Level Select"
-
-[node name="VersionLabel" parent="VersionMargin/VersionContainer" parent_id_path=PackedInt32Array(1603969262) index="0" unique_id=793266470]
-text = "vv not done for release yet"
 
 [node name="NewGameConfirmation" parent="." index="5" unique_id=487332143 instance=ExtResource("5_627ab")]
 unique_name_in_owner = true

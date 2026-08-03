@@ -7,18 +7,18 @@
 [ext_resource type="Resource" uid="uid://uscuhd84vv0i" path="res://examples/guide_examples/quick_start/mapping_contexts/actions/move.tres" id="3_nwedj"]
 [ext_resource type="Resource" uid="uid://d0dmecppsgpo6" path="res://examples/guide_examples/quick_start/mapping_contexts/actions/say_hi.tres" id="6_xqef5"]
 
-[node name="QuickStart" type="Node2D"]
+[node name="QuickStart" type="Node2D" unique_id=1984750381]
 script = ExtResource("1_eetgd")
 mapping_context = ExtResource("2_enypg")
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="." unique_id=1588955209]
 position = Vector2(979, 544)
 texture = ExtResource("1_twtcc")
 script = ExtResource("2_75sqh")
 move_action = ExtResource("3_nwedj")
 say_hi_action = ExtResource("6_xqef5")
 
-[node name="MessagePanel" type="PanelContainer" parent="Player"]
+[node name="MessagePanel" type="PanelContainer" parent="Player" unique_id=1137118483]
 unique_name_in_owner = true
 visible = false
 offset_left = 38.0
@@ -26,7 +26,7 @@ offset_top = -161.0
 offset_right = 122.0
 offset_bottom = -73.0
 
-[node name="Label" type="Label" parent="Player/MessagePanel"]
+[node name="Label" type="Label" parent="Player/MessagePanel" unique_id=1534292484]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Hi!"

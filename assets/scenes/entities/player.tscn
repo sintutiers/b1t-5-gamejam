@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bhjfbnptlsrpn" path="res://assets/scenes/entities/player.gd" id="1_p1n6j"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="2_502cd"]
 [ext_resource type="Texture2D" uid="uid://bc1brx5ex756u" path="res://assets/art/controlableSprites/playerSprite(notDone)(front) _0000.png" id="2_fj81o"]
 [ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
 [ext_resource type="Texture2D" uid="uid://dto5e4ieyoytf" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="3_fj81o"]
@@ -13,12 +14,14 @@
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
 [ext_resource type="Texture2D" uid="uid://dtdvby7d5x67r" path="res://assets/art/interactableSprites/jumpTiles(jumpTileLeft) _0000.png" id="6_u63s7"]
 [ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="9_uyujk"]
-[ext_resource type="Resource" uid="uid://cxn2ibe1mn3sa" path="res://input/move.tres" id="12_502cd"]
-[ext_resource type="Resource" uid="uid://2hl7iqpondhj" path="res://input/2d_axis_mapping.tres" id="13_tqwgt"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="14_bfnip"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="15_p1n6j"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="16_502cd"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="17_p1n6j"]
+
+[sub_resource type="Resource" id="Resource_tqwgt"]
+script = ExtResource("2_502cd")
+action_value_type = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p1n6j"]
 radius = 40.0
@@ -98,7 +101,7 @@ animations = [{
 
 [node name="player" type="CharacterBody2D" unique_id=2042953629]
 script = ExtResource("1_p1n6j")
-move_action = ExtResource("12_502cd")
+move_action = SubResource("Resource_tqwgt")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 
 [node name="RapierArea2D" type="Area2D" parent="." unique_id=292023860]
@@ -118,7 +121,6 @@ shape = SubResource("CapsuleShape2D_q1sf4")
 
 [node name="movement" type="Node" parent="." unique_id=1232315220]
 script = ExtResource("2_3irjl")
-mapping_context = ExtResource("13_tqwgt")
 
 [node name="animation" type="Node" parent="." unique_id=764092827]
 script = ExtResource("2_47qcb")
@@ -183,10 +185,6 @@ script = ExtResource("17_p1n6j")
 to = NodePath("../../Move")
 delay_in_seconds = "0.5"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
-
-[node name="BackgroundColor" type="Sprite2D" parent="." unique_id=1648941992]
-position = Vector2(173, -49)
-texture = ExtResource("4_fj81o")
 
 [connection signal="state_physics_processing" from="StateChart/CompoundState/Move" to="movement" method="_on_move_physics_update"]
 [connection signal="state_physics_processing" from="StateChart/CompoundState/Interact" to="movement" method="_on_interact_physics_update"]

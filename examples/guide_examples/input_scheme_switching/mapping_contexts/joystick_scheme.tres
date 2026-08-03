@@ -5,33 +5,25 @@
 [ext_resource type="Script" uid="uid://mtx1unc2aqn7" path="res://addons/guide/guide_input_mapping.gd" id="3_6jy3p"]
 [ext_resource type="Script" uid="uid://c47lkb48itd6l" path="res://addons/guide/modifiers/guide_modifier_deadzone.gd" id="3_c1g58"]
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="4_ssubt"]
+[ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_adq6r"]
 [ext_resource type="Resource" uid="uid://c7htf8h44vbwi" path="res://examples/guide_examples/input_scheme_switching/mapping_contexts/actions/shoot.tres" id="5_pd4bb"]
 [ext_resource type="Script" uid="uid://rvttn472ix6v" path="res://addons/guide/inputs/guide_input_joy_button.gd" id="6_eieuy"]
 [ext_resource type="Script" uid="uid://b52rqq28tuqpg" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="7_0nn3e"]
+[ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="7_a1vrr"]
 [ext_resource type="Resource" uid="uid://b11rcmd3hse58" path="res://examples/guide_examples/input_scheme_switching/mapping_contexts/actions/switch_to_keyboard.tres" id="8_7nlt6"]
 [ext_resource type="Script" uid="uid://w3fbpe7r01n8" path="res://addons/guide/inputs/guide_input_any.gd" id="8_hdd7g"]
 [ext_resource type="Script" uid="uid://dsa1dnifd6w32" path="res://addons/guide/guide_mapping_context.gd" id="9_1vdw8"]
 
 [sub_resource type="Resource" id="Resource_7qyuq"]
 script = ExtResource("2_t6p7a")
-x = 0
-y = 1
-joy_index = -1
 
 [sub_resource type="Resource" id="Resource_8pjab"]
 script = ExtResource("3_c1g58")
-lower_threshold = 0.2
-upper_threshold = 1.0
 
 [sub_resource type="Resource" id="Resource_wxd67"]
 script = ExtResource("3_6jy3p")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_7qyuq")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_8pjab")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
+modifiers = Array[ExtResource("5_adq6r")]([SubResource("Resource_8pjab")])
 
 [sub_resource type="Resource" id="Resource_lomew"]
 script = ExtResource("4_ssubt")
@@ -41,22 +33,14 @@ metadata/_guide_input_mappings_collapsed = false
 
 [sub_resource type="Resource" id="Resource_guotu"]
 script = ExtResource("6_eieuy")
-button = 0
-joy_index = -1
 
 [sub_resource type="Resource" id="Resource_ws3e0"]
 script = ExtResource("7_0nn3e")
-actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_b21ub"]
 script = ExtResource("3_6jy3p")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_guotu")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_ws3e0")])
+triggers = Array[ExtResource("7_a1vrr")]([SubResource("Resource_ws3e0")])
 
 [sub_resource type="Resource" id="Resource_tmt5r"]
 script = ExtResource("4_ssubt")
@@ -65,26 +49,13 @@ input_mappings = Array[ExtResource("3_6jy3p")]([SubResource("Resource_b21ub")])
 
 [sub_resource type="Resource" id="Resource_41j1i"]
 script = ExtResource("8_hdd7g")
-mouse_buttons = false
-mouse_movement = false
-minimum_mouse_movement_distance = 1.0
-joy_buttons = false
-joy_axes = false
-minimum_joy_axis_actuation_strength = 0.2
 keyboard = true
-touch = false
 mouse = false
 joy = false
 
 [sub_resource type="Resource" id="Resource_ncpby"]
 script = ExtResource("3_6jy3p")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_41j1i")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
 
 [sub_resource type="Resource" id="Resource_28cwt"]
 script = ExtResource("4_ssubt")
@@ -93,5 +64,4 @@ input_mappings = Array[ExtResource("3_6jy3p")]([SubResource("Resource_ncpby")])
 
 [resource]
 script = ExtResource("9_1vdw8")
-display_name = ""
 mappings = Array[ExtResource("4_ssubt")]([SubResource("Resource_lomew"), SubResource("Resource_tmt5r"), SubResource("Resource_28cwt")])

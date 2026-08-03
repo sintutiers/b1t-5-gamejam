@@ -90,8 +90,6 @@ func _find_sibling_of_type(type: Script) -> Node:
 	return null
 
 func _physics_process(delta: float) -> void:
-	print("physics process running, move active: ", %Move.active)
-	print("move: ", %Move.active, " interact: ", %Interact.active, " launch: ", %Launch.active)
 	if %Move.active:
 		_on_move_physics_update(delta)
 	elif %Interact.active:

@@ -8,24 +8,25 @@
 [ext_resource type="Resource" uid="uid://bxmuoph07ha7w" path="res://examples/guide_examples/combine_contexts/mapping_contexts/move.tres" id="4_7en4c"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="7_1g1vo"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="8_qjb18"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="9_8fxfs"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="9_kwp4h"]
 
-[node name="CombineContexts" type="Node2D"]
+[node name="CombineContexts" type="Node2D" unique_id=1380648457]
 script = ExtResource("1_nxm54")
 keyboard_and_mouse = ExtResource("2_7en4c")
 controller = ExtResource("3_iacs2")
 
-[node name="Player" type="Node2D" parent="."]
+[node name="Player" type="Node2D" parent="." unique_id=103658889]
 position = Vector2(929, 695)
 script = ExtResource("3_w8aur")
 move_action = ExtResource("4_7en4c")
 
-[node name="GodotLogo" type="Sprite2D" parent="Player"]
+[node name="GodotLogo" type="Sprite2D" parent="Player" unique_id=99371406]
 texture = ExtResource("2_ug15u")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1365567782]
 
-[node name="InstructionsLabel" type="RichTextLabel" parent="UI"]
+[node name="InstructionsLabel" type="RichTextLabel" parent="UI" unique_id=277064527]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 1
@@ -44,9 +45,9 @@ script = ExtResource("9_kwp4h")
 instructions_text = "%s to move.
 
 Both keyboard and controller inputs work simultaneously!"
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("4_7en4c")])
+actions = Array[ExtResource("9_8fxfs")]([ExtResource("4_7en4c")])
 
-[node name="Debugger" type="CanvasLayer" parent="."]
+[node name="Debugger" type="CanvasLayer" parent="." unique_id=163457155]
 
-[node name="GuideDebugger" parent="Debugger" instance=ExtResource("7_1g1vo")]
+[node name="GuideDebugger" parent="Debugger" unique_id=2122251433 instance=ExtResource("7_1g1vo")]
 theme = ExtResource("8_qjb18")

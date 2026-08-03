@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bvlq6u3twn6x2" path="res://examples/guide_examples/shared/fireball/fireball.gd" id="1_jxcno"]
 [ext_resource type="Texture2D" uid="uid://buu21kg4kkhiw" path="res://examples/guide_examples/shared/fireball/fireball.svg" id="2_5ckxn"]
 
-[node name="Fireball" type="Node2D"]
+[node name="Fireball" type="Node2D" unique_id=1010002872]
 script = ExtResource("1_jxcno")
 
-[node name="Fireball" type="Sprite2D" parent="."]
+[node name="Fireball" type="Sprite2D" parent="." unique_id=1072671859]
 texture = ExtResource("2_5ckxn")

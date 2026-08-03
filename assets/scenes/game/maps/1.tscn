@@ -22,7 +22,8 @@ texture = ExtResource("1_f0fay")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1175696106]
 physics_interpolation_mode = 1
-position = Vector2(236, 233)
+top_level = true
+position = Vector2(80.113, 56.512)
 zoom = Vector2(2, 2)
 editor_draw_limits = true
 
@@ -33,13 +34,14 @@ script = ExtResource("3_4p6eu")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=384748085 node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(236, 233)
+position = Vector2(80.113, 56.512)
 script = ExtResource("4_hwoah")
 follow_mode = 1
 follow_target = NodePath("../player")
 zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_4p6eu")
 follow_damping = true
+follow_damping_value = Vector2(0.02, 0.02)
 draw_limits = true
 
 [node name="jumppadtest" type="Area2D" parent="." unique_id=884582300]
@@ -54,11 +56,4 @@ texture = ExtResource("6_5r203")
 shape = SubResource("RectangleShape2D_q1sf4")
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("2_der4t")]
-position = Vector2(236, 233)
-
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=580960527]
-offset_right = 189.0
-offset_bottom = 189.0
-
-[node name="MessagePanel" type="Label" parent="PanelContainer" unique_id=1644192633]
-layout_mode = 2
+position = Vector2(80.113, 56.512)

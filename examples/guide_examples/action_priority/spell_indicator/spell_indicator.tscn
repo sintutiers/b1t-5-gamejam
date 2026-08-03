@@ -59,21 +59,19 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h1go0"]
 _data = {
-"RESET": SubResource("Animation_j3vtt"),
-"run": SubResource("Animation_4iqo1")
+&"RESET": SubResource("Animation_j3vtt"),
+&"run": SubResource("Animation_4iqo1")
 }
 
-[node name="SpellIndicator" type="Node2D"]
+[node name="SpellIndicator" type="Node2D" unique_id=1504376727]
 script = ExtResource("1_hpegm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1406395945]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_7l2hh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1265645505]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_h1go0")
-}
+libraries/ = SubResource("AnimationLibrary_h1go0")

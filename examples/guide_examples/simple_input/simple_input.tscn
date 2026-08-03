@@ -11,12 +11,13 @@
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="8_tko8y"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="9_hqrkx"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="10_3ap6u"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="11_6aopp"]
 
-[node name="SimpleInput" type="Node"]
+[node name="SimpleInput" type="Node" unique_id=1024887222]
 script = ExtResource("1_cgpw0")
 mapping_context = ExtResource("3_2b24x")
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="." unique_id=2001106520]
 position = Vector2(546, 317)
 texture = ExtResource("1_t8vwd")
 script = ExtResource("2_o6vg3")
@@ -26,9 +27,9 @@ right_action = ExtResource("5_47yin")
 up_action = ExtResource("6_b7h5t")
 down_action = ExtResource("7_4pdc5")
 
-[node name="UI Layer" type="CanvasLayer" parent="."]
+[node name="UI Layer" type="CanvasLayer" parent="." unique_id=2026878772]
 
-[node name="Instructions Label" type="RichTextLabel" parent="UI Layer"]
+[node name="Instructions Label" type="RichTextLabel" parent="UI Layer" unique_id=1334740347]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -43,11 +44,11 @@ instructions_text = "%s to move left.
 %s to move right.
 %s to move up.
 %s to move down."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("4_50on6"), ExtResource("5_47yin"), ExtResource("6_b7h5t"), ExtResource("7_4pdc5")])
+actions = Array[ExtResource("11_6aopp")]([ExtResource("4_50on6"), ExtResource("5_47yin"), ExtResource("6_b7h5t"), ExtResource("7_4pdc5")])
 metadata/_edit_use_anchors_ = true
 
-[node name="Debug Layer" type="CanvasLayer" parent="."]
+[node name="Debug Layer" type="CanvasLayer" parent="." unique_id=226308930]
 
-[node name="GuideDebugger" parent="Debug Layer" instance=ExtResource("10_3ap6u")]
+[node name="GuideDebugger" parent="Debug Layer" unique_id=1694654179 instance=ExtResource("10_3ap6u")]
 theme = ExtResource("8_tko8y")
 metadata/_edit_lock_ = true

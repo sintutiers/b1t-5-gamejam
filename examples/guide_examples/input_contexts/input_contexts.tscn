@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="12_jcoq7"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="12_u0g3a"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="14_ui0u7"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="15_xya61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w57h4"]
 size = Vector2(1972, 59)
@@ -44,61 +45,61 @@ size = Vector2(126, 130)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dt2nf"]
 radius = 141.891
 
-[node name="InputContexts" type="Node2D"]
+[node name="InputContexts" type="Node2D" unique_id=1812797190]
 script = ExtResource("1_386pq")
 starting_context = ExtResource("4_3xwjv")
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=1650528351]
 
-[node name="Sea" type="ColorRect" parent="World"]
+[node name="Sea" type="ColorRect" parent="World" unique_id=1142640440]
 offset_right = 2009.0
 offset_bottom = 1129.0
 color = Color(0.0440738, 0.000205037, 0.549847, 1)
 metadata/_edit_lock_ = true
 
-[node name="Land" type="Polygon2D" parent="World"]
+[node name="Land" type="Polygon2D" parent="World" unique_id=2146004050]
 color = Color(0.336331, 0.394587, 0.063959, 1)
 polygon = PackedVector2Array(55, -51, 259, -24, 398, 124, 356, 225, 279, 461, 394, 656, 412, 865, 342, 1085, -15, 1119, -22, -67)
 metadata/_edit_lock_ = true
 
-[node name="Jetty" type="ColorRect" parent="World/Land"]
+[node name="Jetty" type="ColorRect" parent="World/Land" unique_id=819346489]
 offset_left = 283.0
 offset_top = 144.0
 offset_right = 641.0
 offset_bottom = 280.0
 color = Color(0.243329, 0.15798, 7.21961e-08, 1)
 
-[node name="World Boundaries" type="StaticBody2D" parent="World"]
+[node name="World Boundaries" type="StaticBody2D" parent="World" unique_id=1492560003]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/World Boundaries"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/World Boundaries" unique_id=1427462945]
 position = Vector2(976, -19.5)
 shape = SubResource("RectangleShape2D_w57h4")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/World Boundaries"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/World Boundaries" unique_id=1058628282]
 position = Vector2(-10, 532)
 shape = SubResource("RectangleShape2D_r5hqg")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/World Boundaries"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/World Boundaries" unique_id=2055658754]
 position = Vector2(975.75, 1082.25)
 shape = SubResource("RectangleShape2D_ifvju")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="World/World Boundaries"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="World/World Boundaries" unique_id=230367151]
 position = Vector2(1940, 532.25)
 shape = SubResource("RectangleShape2D_qarqo")
 
-[node name="NoBoatZone" type="StaticBody2D" parent="World"]
+[node name="NoBoatZone" type="StaticBody2D" parent="World" unique_id=910376278]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/NoBoatZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/NoBoatZone" unique_id=1740210652]
 position = Vector2(210.75, 556.5)
 shape = SubResource("RectangleShape2D_la1oy")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/NoBoatZone"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/NoBoatZone" unique_id=545360829]
 position = Vector2(454, 211)
 shape = SubResource("RectangleShape2D_3q8sb")
 
-[node name="Boat" type="CharacterBody2D" parent="."]
+[node name="Boat" type="CharacterBody2D" parent="." unique_id=693914536]
 position = Vector2(744, 269)
 rotation = -1.44336
 collision_layer = 5
@@ -110,49 +111,49 @@ accelerate = ExtResource("3_8s4br")
 turn = ExtResource("4_w1gps")
 leave = ExtResource("5_typxl")
 
-[node name="Boat" type="Sprite2D" parent="Boat"]
+[node name="Boat" type="Sprite2D" parent="Boat" unique_id=1300095224]
 texture = ExtResource("1_yfaid")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat" unique_id=2027791949]
 position = Vector2(-13, 0)
 rotation = -1.57573
 shape = SubResource("CapsuleShape2D_54ta5")
 
-[node name="PlayerSpot" type="Node2D" parent="Boat"]
+[node name="PlayerSpot" type="Node2D" parent="Boat" unique_id=792798401]
 unique_name_in_owner = true
 rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 
-[node name="ExitSpot" type="Marker2D" parent="Boat"]
+[node name="ExitSpot" type="Marker2D" parent="Boat" unique_id=1359536798]
 unique_name_in_owner = true
 position = Vector2(-11.0732, -212.314)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1886439192]
 position = Vector2(205, 212)
 script = ExtResource("3_kn2qk")
 context = ExtResource("4_3xwjv")
 move = ExtResource("5_70jqj")
 use = ExtResource("6_aiqns")
 
-[node name="Icon" type="Sprite2D" parent="Player"]
+[node name="Icon" type="Sprite2D" parent="Player" unique_id=1650935212]
 texture = ExtResource("1_x61i0")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Player" unique_id=2142812710]
 unique_name_in_owner = true
 position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_3lf7l")
 
-[node name="DetectionArea" type="Area2D" parent="Player"]
+[node name="DetectionArea" type="Area2D" parent="Player" unique_id=1771192686]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/DetectionArea" unique_id=1902152798]
 shape = SubResource("CircleShape2D_dt2nf")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=228619681]
 
-[node name="Label" type="Label" parent="UILayer"]
+[node name="Label" type="Label" parent="UILayer" unique_id=2117532736]
 offset_left = 894.0
 offset_top = 24.0
 offset_right = 1872.0
@@ -162,7 +163,7 @@ text = "This demonstrates the use of multiple mapping contexts. We have one for 
 and one for the boat. When the player enters the boat, the boat mappings will
 become active and will become inactive once the player leaves. "
 
-[node name="BoatInstructions" type="RichTextLabel" parent="UILayer"]
+[node name="BoatInstructions" type="RichTextLabel" parent="UILayer" unique_id=1130763658]
 offset_left = 1316.0
 offset_top = 772.0
 offset_right = 1356.0
@@ -172,10 +173,10 @@ script = ExtResource("14_ui0u7")
 instructions_text = "%s to accelerate/break.
 %s to turn the boat.
 %s to leave the boat."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("3_8s4br"), ExtResource("4_w1gps"), ExtResource("5_typxl")])
+actions = Array[ExtResource("15_xya61")]([ExtResource("3_8s4br"), ExtResource("4_w1gps"), ExtResource("5_typxl")])
 limit_to_context = ExtResource("2_ha2ml")
 
-[node name="PlayerInstructions" type="RichTextLabel" parent="UILayer"]
+[node name="PlayerInstructions" type="RichTextLabel" parent="UILayer" unique_id=2107852252]
 offset_left = 1316.0
 offset_top = 772.0
 offset_right = 1356.0
@@ -185,10 +186,10 @@ script = ExtResource("14_ui0u7")
 instructions_text = "%s to move.
 %s to enter the boat.
 "
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("5_70jqj"), ExtResource("6_aiqns")])
+actions = Array[ExtResource("15_xya61")]([ExtResource("5_70jqj"), ExtResource("6_aiqns")])
 limit_to_context = ExtResource("4_3xwjv")
 
-[node name="DebugLayer" type="CanvasLayer" parent="."]
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1675327053]
 
-[node name="GuideDebugger" parent="DebugLayer" instance=ExtResource("12_jcoq7")]
+[node name="GuideDebugger" parent="DebugLayer" unique_id=510294372 instance=ExtResource("12_jcoq7")]
 theme = ExtResource("12_u0g3a")

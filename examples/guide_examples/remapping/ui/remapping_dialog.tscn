@@ -17,25 +17,22 @@
 [ext_resource type="Resource" uid="uid://cfrx54l1vmjey" path="res://examples/guide_examples/remapping/mapping_contexts/controller_actions/previous_tab.tres" id="11_uxwof"]
 [ext_resource type="Resource" uid="uid://dg1or0do0s1ad" path="res://examples/guide_examples/remapping/mapping_contexts/controller_actions/next_tab.tres" id="12_byojv"]
 [ext_resource type="Script" uid="uid://rvttn472ix6v" path="res://addons/guide/inputs/guide_input_joy_button.gd" id="12_hftpv"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="15_87cwp"]
+[ext_resource type="Script" uid="uid://ccvqqvfooyvn0" path="res://addons/guide/inputs/guide_input.gd" id="17_76s38"]
 
 [sub_resource type="Resource" id="Resource_f3bao"]
 script = ExtResource("11_e078a")
 key = 4194305
-shift = false
-control = false
-alt = false
-meta = false
 allow_additional_modifiers = false
 
 [sub_resource type="Resource" id="Resource_twrga"]
 script = ExtResource("12_hftpv")
 button = 4
-joy_index = -1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bagfg"]
 bg_color = Color(0.266575, 0.266575, 0.266575, 1)
 
-[node name="RemappingDialog" type="MarginContainer"]
+[node name="RemappingDialog" type="MarginContainer" unique_id=1486380703]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,39 +52,39 @@ next_tab = ExtResource("12_byojv")
 binding_row_scene = ExtResource("4_iojgu")
 binding_section_scene = ExtResource("5_8v80s")
 
-[node name="Blocker" type="ColorRect" parent="."]
+[node name="Blocker" type="ColorRect" parent="." unique_id=1694529748]
 layout_mode = 2
 color = Color(8.66354e-07, 0.331199, 0.634906, 0.352941)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2040466806]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=604160844]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=242909807]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=290522432]
 custom_minimum_size = Vector2(800, 600)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=738296814]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Input Rebinding"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1008757765]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=724658550]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -95,69 +92,71 @@ tab_alignment = 1
 current_tab = 1
 clip_tabs = false
 
-[node name="Keyboard" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer"]
+[node name="Keyboard" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer" unique_id=206363353]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard" unique_id=63420851]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard/MarginContainer" unique_id=80161626]
 layout_mode = 2
 
-[node name="KeyboardBindings" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard/MarginContainer/ScrollContainer"]
+[node name="KeyboardBindings" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Keyboard/MarginContainer/ScrollContainer" unique_id=1730142467]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Controller" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer"]
+[node name="Controller" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer" unique_id=502079996]
 layout_mode = 2
+metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller" unique_id=480215151]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer" unique_id=1648187064]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer" unique_id=975709268]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ControllerBindings" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ControllerBindings" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" unique_id=974861678]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Section" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8v80s")]
+[node name="Section" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" unique_id=54915069 instance=ExtResource("5_8v80s")]
 layout_mode = 2
 text = "Miscellaneous"
 
-[node name="ControllerInvertHorizontal" type="CheckBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ControllerInvertHorizontal" type="CheckBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2116557961]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Invert horizontal movement"
 
-[node name="ControllerInvertVertical" type="CheckBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ControllerInvertVertical" type="CheckBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1729820162]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Invert vertical movement"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" unique_id=230456348]
 layout_mode = 2
 
-[node name="DeadzoneLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="DeadzoneLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=77307230]
 layout_mode = 2
 text = "Deadzone"
 
-[node name="DeadzoneHSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="DeadzoneHSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1457070567]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
@@ -165,18 +164,18 @@ size_flags_vertical = 4
 max_value = 0.99
 step = 0.01
 
-[node name="DeadzoneSpinBox" type="SpinBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="DeadzoneSpinBox" type="SpinBox" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=808478316]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 max_value = 0.99
 step = 0.01
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=2018886757]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=945041446]
 layout_mode = 2
 mouse_filter = 2
 fit_content = true
@@ -184,14 +183,14 @@ scroll_active = false
 autowrap_mode = 0
 script = ExtResource("10_xsw70")
 instructions_text = "%s"
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("11_uxwof")])
+actions = Array[ExtResource("15_87cwp")]([ExtResource("11_uxwof")])
 
-[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=919106391]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1529195749]
 layout_mode = 2
 mouse_filter = 2
 fit_content = true
@@ -199,45 +198,45 @@ scroll_active = false
 autowrap_mode = 0
 script = ExtResource("10_xsw70")
 instructions_text = "%s"
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("12_byojv")])
+actions = Array[ExtResource("15_87cwp")]([ExtResource("12_byojv")])
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=332086794]
 layout_mode = 2
 alignment = 1
 
-[node name="ReturnToGame" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ReturnToGame" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1333982669]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Return to game"
 
-[node name="GUIDEInputDetector" type="Node" parent="."]
+[node name="GUIDEInputDetector" type="Node" parent="." unique_id=538943321]
 unique_name_in_owner = true
 editor_description = "This node has two inputs specified which count as abort for detection (Escape and Controller back button)."
 script = ExtResource("3_o0nvn")
 detection_countdown_seconds = 0.1
-abort_detection_on = Array[Resource("res://addons/guide/inputs/guide_input.gd")]([SubResource("Resource_f3bao"), SubResource("Resource_twrga")])
+abort_detection_on = Array[ExtResource("17_76s38")]([SubResource("Resource_f3bao"), SubResource("Resource_twrga")])
 
-[node name="PressPrompt" type="MarginContainer" parent="."]
+[node name="PressPrompt" type="MarginContainer" parent="." unique_id=616614943]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="PressPrompt"]
+[node name="CenterContainer" type="CenterContainer" parent="PressPrompt" unique_id=380219468]
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="PressPrompt/CenterContainer"]
+[node name="Panel" type="PanelContainer" parent="PressPrompt/CenterContainer" unique_id=1720776321]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bagfg")
 
-[node name="MarginContainer" type="MarginContainer" parent="PressPrompt/CenterContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="PressPrompt/CenterContainer/Panel" unique_id=1960700704]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="PressPrompt/CenterContainer/Panel/MarginContainer"]
+[node name="Label" type="Label" parent="PressPrompt/CenterContainer/Panel/MarginContainer" unique_id=1493883678]
 layout_mode = 2
 text = "Press new input..."
 

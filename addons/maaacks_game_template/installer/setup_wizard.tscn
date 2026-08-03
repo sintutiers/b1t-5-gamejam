@@ -6,7 +6,7 @@
 oversampling_override = 1.0
 title = "Setup Wizard"
 initial_position = 2
-size = Vector2i(576, 556)
+size = Vector2i(576, 540)
 visible = true
 ok_button_text = "Done"
 dialog_autowrap = true
@@ -22,7 +22,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -65.0
+offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -31,7 +31,7 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 0)
 layout_mode = 2
-text = "Maaack's Game Template v1.5.0"
+text = "Maaack's Game Template v1.5.1"
 autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1703792217]
@@ -64,7 +64,7 @@ text = "Run"
 [node name="CopyLabel" type="Label" parent="VBoxContainer/StepsContainer" unique_id=1894223639]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Copy Example Files"
+text = "Copy Example Files *"
 
 [node name="CopyCheckBox" type="CheckBox" parent="VBoxContainer/StepsContainer" unique_id=757403442]
 unique_name_in_owner = true
@@ -76,31 +76,28 @@ button_pressed = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Run"
 
 [node name="DeleteLabel" type="Label" parent="VBoxContainer/StepsContainer" unique_id=1855034900]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Delete Example Files"
+text = "Delete Example Files *"
 
 [node name="DeleteCheckBox" type="CheckBox" parent="VBoxContainer/StepsContainer" unique_id=952196576]
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
-button_pressed = true
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/StepsContainer" unique_id=391293741]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Run"
 
 [node name="UpdatePathsLabel" type="Label" parent="VBoxContainer/StepsContainer" unique_id=641573803]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Update Autoload Paths"
+text = "Update Autoload Paths *"
 
 [node name="UpdatePathsCheckBox" type="CheckBox" parent="VBoxContainer/StepsContainer" unique_id=818510729]
 unique_name_in_owner = true
@@ -123,7 +120,6 @@ text = "Set the Main Scene"
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
-button_pressed = true
 
 [node name="SetMainSceneButton" type="Button" parent="VBoxContainer/StepsContainer" unique_id=1575389523]
 unique_name_in_owner = true
@@ -157,7 +153,6 @@ text = "Add Input Prompt Icons"
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
-button_pressed = true
 
 [node name="AddInputIconsButton" type="Button" parent="VBoxContainer/StepsContainer" unique_id=1144416964]
 unique_name_in_owner = true

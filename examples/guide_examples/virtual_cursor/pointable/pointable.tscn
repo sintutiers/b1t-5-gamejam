@@ -6,12 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cccqq"]
 size = Vector2(128, 128)
 
-[node name="Pointable" type="Area2D"]
+[node name="Pointable" type="Area2D" unique_id=1697012818]
 monitoring = false
 script = ExtResource("1_dmsp0")
 
-[node name="GodotLogo" type="Sprite2D" parent="."]
+[node name="GodotLogo" type="Sprite2D" parent="." unique_id=1123219920]
 texture = ExtResource("2_eubij")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1844672788]
 shape = SubResource("RectangleShape2D_cccqq")

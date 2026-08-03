@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://bddhmoj1g5lv3" path="res://examples/godot_state_charts_examples/performance_test/hundred_state_charts.tscn" id="1_1oume"]
 
-[node name="thousand_state_charts" type="Node2D"]
+[node name="thousand_state_charts" type="Node2D" unique_id=928966255]
 
-[node name="hundred_state_charts" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts" parent="." unique_id=973779883 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts2" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts2" parent="." unique_id=759721018 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts3" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts3" parent="." unique_id=1920834835 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts4" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts4" parent="." unique_id=866007835 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts5" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts5" parent="." unique_id=1620688861 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts6" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts6" parent="." unique_id=1316092377 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts7" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts7" parent="." unique_id=1567867107 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts8" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts8" parent="." unique_id=835265972 instance=ExtResource("1_1oume")]
 
-[node name="hundred_state_charts9" parent="." instance=ExtResource("1_1oume")]
+[node name="hundred_state_charts9" parent="." unique_id=1630707733 instance=ExtResource("1_1oume")]

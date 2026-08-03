@@ -4,11 +4,11 @@
 [ext_resource type="Resource" uid="uid://iilpc2tjr5mx" path="res://examples/guide_examples/touch/mapping_contexts/actions/spawn.tres" id="2_grp35"]
 [ext_resource type="Texture2D" uid="uid://geq3rs2fxqs4" path="res://examples/guide_examples/touch/placement_indicator/radial_progress.png" id="2_slqs6"]
 
-[node name="PlacementIndicator" type="Node2D"]
+[node name="PlacementIndicator" type="Node2D" unique_id=433146294]
 script = ExtResource("1_gnpc8")
 spawn = ExtResource("2_grp35")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1685500801]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5

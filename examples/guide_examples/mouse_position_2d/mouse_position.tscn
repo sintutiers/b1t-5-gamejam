@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://by6w26jgvaitm" path="res://examples/guide_examples/mouse_position_2d/background.gd" id="7_4oihe"]
 [ext_resource type="Resource" uid="uid://6dm5j1sdhdp2" path="res://examples/guide_examples/mouse_position_2d/mapping_contexts/actions/camera_zoom.tres" id="8_6tg1h"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="9_y8piq"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="13_s1b5s"]
 
 [sub_resource type="Shader" id="Shader_v4pj1"]
 code = "shader_type canvas_item;
@@ -36,28 +37,28 @@ shader = SubResource("Shader_v4pj1")
 shader_parameter/scale = Vector2(1, 1)
 shader_parameter/offset = Vector2(0, 0)
 
-[node name="MousePosition" type="Node2D"]
+[node name="MousePosition" type="Node2D" unique_id=422855673]
 script = ExtResource("1_rkyn8")
 mapping_context = ExtResource("2_f4xly")
 spawn = ExtResource("3_e16oi")
 cursor = ExtResource("3_e2cui")
 godot_head_scene = ExtResource("5_6xobh")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=989242529]
 script = ExtResource("3_xpjlw")
 camera_movement = ExtResource("5_snwnm")
 camera_zoom = ExtResource("8_6tg1h")
 
-[node name="BG" type="Sprite2D" parent="."]
+[node name="BG" type="Sprite2D" parent="." unique_id=1528450797]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_1sa2x")
 texture = ExtResource("6_1tobk")
 centered = false
 script = ExtResource("7_4oihe")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1656597117]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UILayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer" unique_id=1490639487]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -71,9 +72,9 @@ script = ExtResource("9_y8piq")
 instructions_text = "%s to move the camera.
 %s to zoom the camera.
 %s to place a Godot head."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("5_snwnm"), ExtResource("8_6tg1h"), ExtResource("3_e16oi")])
+actions = Array[ExtResource("13_s1b5s")]([ExtResource("5_snwnm"), ExtResource("8_6tg1h"), ExtResource("3_e16oi")])
 
-[node name="DebuggerLayer" type="CanvasLayer" parent="."]
+[node name="DebuggerLayer" type="CanvasLayer" parent="." unique_id=571103560]
 
-[node name="GuideDebugger" parent="DebuggerLayer" instance=ExtResource("2_yylue")]
+[node name="GuideDebugger" parent="DebuggerLayer" unique_id=1502807144 instance=ExtResource("2_yylue")]
 theme = ExtResource("3_xcjwc")

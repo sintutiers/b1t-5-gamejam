@@ -13,10 +13,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl3ga"]
 size = Vector2(34.243, 33.536)
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" unique_id=1953682712]
 script = ExtResource("2_vphtk")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("2_fgw1q")]
+[node name="StateChartDebugger" parent="." unique_id=1297440469 instance=ExtResource("2_fgw1q")]
 offset_left = 280.0
 offset_top = 9.0
 offset_right = -12.0
@@ -24,64 +24,64 @@ offset_bottom = -190.0
 theme = ExtResource("8_najew")
 initial_node_to_watch = NodePath("../StateChart")
 
-[node name="Node2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Sprite2D" parent="." unique_id=1230544321]
 position = Vector2(145, 206)
 scale = Vector2(6.6875, 3.90625)
 texture = ExtResource("1_3v23e")
 
-[node name="Area2D" type="Area2D" parent="Node2D"]
+[node name="Area2D" type="Area2D" parent="Node2D" unique_id=786039132]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1952957630]
 position = Vector2(0.0747795, 3.8147e-06)
 shape = SubResource("RectangleShape2D_kl3ga")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=78342495]
 script = ExtResource("2_pqmip")
 track_in_editor = true
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=374366191]
 script = ExtResource("3_nsw2j")
 initial_state = NodePath("Red Or Blue")
 
-[node name="Red Or Blue" type="Node" parent="StateChart/Root"]
+[node name="Red Or Blue" type="Node" parent="StateChart/Root" unique_id=1640833014]
 script = ExtResource("3_nsw2j")
 initial_state = NodePath("Red")
 
-[node name="Resume" type="Node" parent="StateChart/Root/Red Or Blue"]
+[node name="Resume" type="Node" parent="StateChart/Root/Red Or Blue" unique_id=196840651]
 script = ExtResource("4_0qaqv")
 default_state = NodePath("../Red")
 
-[node name="Red" type="Node" parent="StateChart/Root/Red Or Blue"]
+[node name="Red" type="Node" parent="StateChart/Root/Red Or Blue" unique_id=415567481]
 script = ExtResource("5_lh5sp")
 
-[node name="To Blue" type="Node" parent="StateChart/Root/Red Or Blue/Red"]
+[node name="To Blue" type="Node" parent="StateChart/Root/Red Or Blue/Red" unique_id=2113985611]
 script = ExtResource("6_xvm5g")
 to = NodePath("../../Blue")
 delay_in_seconds = "3"
 
-[node name="Blue" type="Node" parent="StateChart/Root/Red Or Blue"]
+[node name="Blue" type="Node" parent="StateChart/Root/Red Or Blue" unique_id=343069807]
 script = ExtResource("5_lh5sp")
 
-[node name="To Red" type="Node" parent="StateChart/Root/Red Or Blue/Blue"]
+[node name="To Red" type="Node" parent="StateChart/Root/Red Or Blue/Blue" unique_id=1348370532]
 script = ExtResource("6_xvm5g")
 to = NodePath("../../Red")
 delay_in_seconds = "3"
 
-[node name="On Clicked To White" type="Node" parent="StateChart/Root/Red Or Blue"]
+[node name="On Clicked To White" type="Node" parent="StateChart/Root/Red Or Blue" unique_id=2041265888]
 script = ExtResource("6_xvm5g")
 to = NodePath("../../White")
 event = &"clicked"
 delay_in_seconds = "0.0"
 
-[node name="White" type="Node" parent="StateChart/Root"]
+[node name="White" type="Node" parent="StateChart/Root" unique_id=321003068]
 script = ExtResource("5_lh5sp")
 
-[node name="Resume" type="Node" parent="StateChart/Root/White"]
+[node name="Resume" type="Node" parent="StateChart/Root/White" unique_id=1593075520]
 script = ExtResource("6_xvm5g")
 to = NodePath("../../Red Or Blue/Resume")
 delay_in_seconds = "1"
 
-[node name="Label" type="RichTextLabel" parent="."]
+[node name="Label" type="RichTextLabel" parent="." unique_id=337684317]
 offset_left = 26.0
 offset_top = 318.0
 offset_right = 376.0

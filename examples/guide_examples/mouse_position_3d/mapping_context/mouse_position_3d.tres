@@ -11,11 +11,13 @@
 [ext_resource type="Script" uid="uid://ckggy40lm0vjc" path="res://addons/guide/modifiers/guide_modifier_negate.gd" id="4_mho8x"]
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="5_4hkur"]
 [ext_resource type="Script" uid="uid://bjm4myqxg4phm" path="res://addons/guide/modifiers/guide_modifier_scale.gd" id="5_b42iu"]
+[ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_bevin"]
 [ext_resource type="Script" uid="uid://brsxcrai2te83" path="res://addons/guide/triggers/guide_trigger_chorded_action.gd" id="5_qvvu8"]
 [ext_resource type="Script" uid="uid://vgjlx6p007lp" path="res://addons/guide/inputs/guide_input_mouse_button.gd" id="7_7w5i6"]
 [ext_resource type="Resource" uid="uid://bago2pmgvpepb" path="res://examples/guide_examples/mouse_position_3d/mapping_context/actions/camera_pitch.tres" id="7_swef3"]
 [ext_resource type="Script" uid="uid://b52rqq28tuqpg" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="8_5glyu"]
 [ext_resource type="Resource" uid="uid://2b0ncq7ogvv0" path="res://examples/guide_examples/mouse_position_3d/mapping_context/actions/cursor_3d.tres" id="9_rxgkr"]
+[ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="9_wukfy"]
 [ext_resource type="Resource" uid="uid://ceti1avx1l1qw" path="res://examples/guide_examples/mouse_position_3d/mapping_context/actions/camera_move.tres" id="12_v8r8p"]
 [ext_resource type="Resource" uid="uid://b2jb27062t2mh" path="res://examples/guide_examples/mouse_position_3d/mapping_context/actions/select.tres" id="12_wmpes"]
 [ext_resource type="Script" uid="uid://cw71o87tvdx3q" path="res://addons/guide/inputs/guide_input_key.gd" id="13_x2lbs"]
@@ -23,36 +25,26 @@
 
 [sub_resource type="Resource" id="Resource_46a3k"]
 script = ExtResource("2_qlocd")
-axis = 0
 
 [sub_resource type="Resource" id="Resource_0uhrt"]
 script = ExtResource("3_p61vs")
 
 [sub_resource type="Resource" id="Resource_eipue"]
 script = ExtResource("4_mho8x")
-x = true
-y = true
-z = true
 
 [sub_resource type="Resource" id="Resource_66vbo"]
 script = ExtResource("5_b42iu")
 scale = Vector3(6.28, 1, 1)
-apply_delta_time = false
 
 [sub_resource type="Resource" id="Resource_wvbgw"]
 script = ExtResource("5_qvvu8")
 action = ExtResource("4_jyoym")
-actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_aqfvw"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_46a3k")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_0uhrt"), SubResource("Resource_eipue"), SubResource("Resource_66vbo")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_wvbgw")])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_0uhrt"), SubResource("Resource_eipue"), SubResource("Resource_66vbo")])
+triggers = Array[ExtResource("9_wukfy")]([SubResource("Resource_wvbgw")])
 
 [sub_resource type="Resource" id="Resource_g62j8"]
 script = ExtResource("5_4hkur")
@@ -68,29 +60,20 @@ script = ExtResource("3_p61vs")
 
 [sub_resource type="Resource" id="Resource_f41et"]
 script = ExtResource("4_mho8x")
-x = true
-y = true
-z = true
 
 [sub_resource type="Resource" id="Resource_os02k"]
 script = ExtResource("5_b42iu")
 scale = Vector3(6.28, 1, 1)
-apply_delta_time = false
 
 [sub_resource type="Resource" id="Resource_t4dub"]
 script = ExtResource("5_qvvu8")
 action = ExtResource("4_jyoym")
-actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_jsmry"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_jyaeo")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_lo1xm"), SubResource("Resource_f41et"), SubResource("Resource_os02k")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_t4dub")])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_lo1xm"), SubResource("Resource_f41et"), SubResource("Resource_os02k")])
+triggers = Array[ExtResource("9_wukfy")]([SubResource("Resource_t4dub")])
 
 [sub_resource type="Resource" id="Resource_4sqcw"]
 script = ExtResource("5_4hkur")
@@ -103,13 +86,7 @@ button = 2
 
 [sub_resource type="Resource" id="Resource_djtqh"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_ki4s5")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
 
 [sub_resource type="Resource" id="Resource_nyq6u"]
 script = ExtResource("5_4hkur")
@@ -119,11 +96,6 @@ input_mappings = Array[ExtResource("4_6a0qh")]([SubResource("Resource_djtqh")])
 [sub_resource type="Resource" id="Resource_20kay"]
 script = ExtResource("13_x2lbs")
 key = 87
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_0syad"]
 script = ExtResource("14_2r6td")
@@ -131,28 +103,15 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_0bn66"]
 script = ExtResource("4_mho8x")
-x = true
-y = true
-z = true
 
 [sub_resource type="Resource" id="Resource_7gp34"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_20kay")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_0syad"), SubResource("Resource_0bn66")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_0syad"), SubResource("Resource_0bn66")])
 
 [sub_resource type="Resource" id="Resource_v2uh1"]
 script = ExtResource("13_x2lbs")
 key = 83
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_axfl8"]
 script = ExtResource("14_2r6td")
@@ -160,57 +119,28 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_vij8n"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_v2uh1")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_axfl8")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_axfl8")])
 
 [sub_resource type="Resource" id="Resource_rauax"]
 script = ExtResource("13_x2lbs")
 key = 65
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_8xh6c"]
 script = ExtResource("4_mho8x")
-x = true
-y = true
-z = true
 
 [sub_resource type="Resource" id="Resource_8urnd"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_rauax")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_8xh6c")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_8xh6c")])
 
 [sub_resource type="Resource" id="Resource_utvoa"]
 script = ExtResource("13_x2lbs")
 key = 68
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
 
 [sub_resource type="Resource" id="Resource_tj7qw"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_utvoa")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
 
 [sub_resource type="Resource" id="Resource_mlu0g"]
 script = ExtResource("5_4hkur")
@@ -222,19 +152,12 @@ script = ExtResource("2_nomn0")
 
 [sub_resource type="Resource" id="Resource_nkih0"]
 script = ExtResource("3_uds3g")
-max_depth = 1000.0
-collide_with_areas = false
 collision_mask = 1
 
 [sub_resource type="Resource" id="Resource_wvei4"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_hh3gq")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([SubResource("Resource_nkih0")])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([])
+modifiers = Array[ExtResource("5_bevin")]([SubResource("Resource_nkih0")])
 
 [sub_resource type="Resource" id="Resource_6b6vt"]
 script = ExtResource("5_4hkur")
@@ -243,21 +166,14 @@ input_mappings = Array[ExtResource("4_6a0qh")]([SubResource("Resource_wvei4")])
 
 [sub_resource type="Resource" id="Resource_lawue"]
 script = ExtResource("7_7w5i6")
-button = 1
 
 [sub_resource type="Resource" id="Resource_tvue7"]
 script = ExtResource("8_5glyu")
-actuation_threshold = 0.5
 
 [sub_resource type="Resource" id="Resource_m30sl"]
 script = ExtResource("4_6a0qh")
-override_action_settings = false
-is_remappable = false
-display_name = ""
-display_category = ""
 input = SubResource("Resource_lawue")
-modifiers = Array[Resource("res://addons/guide/modifiers/guide_modifier.gd")]([])
-triggers = Array[Resource("res://addons/guide/triggers/guide_trigger.gd")]([SubResource("Resource_tvue7")])
+triggers = Array[ExtResource("9_wukfy")]([SubResource("Resource_tvue7")])
 
 [sub_resource type="Resource" id="Resource_8y4cb"]
 script = ExtResource("5_4hkur")
@@ -266,5 +182,4 @@ input_mappings = Array[ExtResource("4_6a0qh")]([SubResource("Resource_m30sl")])
 
 [resource]
 script = ExtResource("1_rde8c")
-display_name = ""
 mappings = Array[ExtResource("5_4hkur")]([SubResource("Resource_g62j8"), SubResource("Resource_4sqcw"), SubResource("Resource_nyq6u"), SubResource("Resource_mlu0g"), SubResource("Resource_6b6vt"), SubResource("Resource_8y4cb")])

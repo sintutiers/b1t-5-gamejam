@@ -4,7 +4,7 @@
 oversampling_override = 1.0
 title = "Delete Source Examples"
 initial_position = 2
-size = Vector2i(1024, 262)
+size = Vector2i(1024, 256)
 visible = true
 ok_button_text = "Yes"
 dialog_text = "If the copied scenes work as expected, you may delete the source examples folder. This avoids confusing both developers and the Godot editor.

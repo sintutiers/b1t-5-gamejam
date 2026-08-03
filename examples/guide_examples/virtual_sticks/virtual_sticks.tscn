@@ -15,11 +15,11 @@
 [ext_resource type="Script" uid="uid://cnsqwchlb1blg" path="res://addons/guide/ui/virtual_joy/virtual_button/texture_renderer/guide_virtual_button_texture_renderer.gd" id="11_hg28x"]
 [ext_resource type="PackedScene" uid="uid://dd5ociyaxqae3" path="res://examples/guide_examples/virtual_sticks/projectile/projectile.tscn" id="13_proj"]
 
-[node name="VirtualSticks" type="Node"]
+[node name="VirtualSticks" type="Node" unique_id=86816902]
 script = ExtResource("1_naqqt")
 mapping_context = ExtResource("2_xu2j8")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1466639650]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,7 +28,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0305977, 3.65854e-05, 0.0974683, 1)
 
-[node name="Ship" parent="." instance=ExtResource("3_scjee")]
+[node name="Ship" parent="." unique_id=549108472 instance=ExtResource("3_scjee")]
 position = Vector2(867, 425)
 rotation = -1.5708
 move_ship = ExtResource("4_1f0iq")
@@ -36,14 +36,14 @@ rotate_ship = ExtResource("5_h0yu2")
 fire_projectile = ExtResource("6_j3ftr")
 projectile_scene = ExtResource("13_proj")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2057717044]
 
-[node name="GuideDebugger" parent="CanvasLayer2" instance=ExtResource("1_yjipb")]
+[node name="GuideDebugger" parent="CanvasLayer2" unique_id=1622040683 instance=ExtResource("1_yjipb")]
 theme = ExtResource("9_5tbf1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=927082129]
 
-[node name="LeftStick" type="CenterContainer" parent="CanvasLayer"]
+[node name="LeftStick" type="CenterContainer" parent="CanvasLayer" unique_id=522697247]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -58,12 +58,12 @@ script = ExtResource("1_8y7sk")
 position_mode = 1
 input_mode = 2
 
-[node name="CustomStickRenderer" type="Control" parent="CanvasLayer/LeftStick"]
+[node name="CustomStickRenderer" type="Control" parent="CanvasLayer/LeftStick" unique_id=1716014702]
 layout_mode = 2
 script = ExtResource("8_mux4w")
 outline_thickness = 0.021
 
-[node name="RightStick" type="CenterContainer" parent="CanvasLayer"]
+[node name="RightStick" type="CenterContainer" parent="CanvasLayer" unique_id=1790955929]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -81,11 +81,11 @@ script = ExtResource("1_8y7sk")
 stick_position = 1
 input_mode = 2
 
-[node name="TextureStickRenderer" type="Control" parent="CanvasLayer/RightStick"]
+[node name="TextureStickRenderer" type="Control" parent="CanvasLayer/RightStick" unique_id=764372021]
 layout_mode = 2
 script = ExtResource("5_ejjjy")
 
-[node name="GUIDEVirtualButton" type="CenterContainer" parent="CanvasLayer"]
+[node name="GUIDEVirtualButton" type="CenterContainer" parent="CanvasLayer" unique_id=1232755435]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -102,6 +102,6 @@ use_top_left = true
 script = ExtResource("9_67dlh")
 input_mode = 2
 
-[node name="TextureButtonRenderer" type="Control" parent="CanvasLayer/GUIDEVirtualButton"]
+[node name="TextureButtonRenderer" type="Control" parent="CanvasLayer/GUIDEVirtualButton" unique_id=682721289]
 layout_mode = 2
 script = ExtResource("11_hg28x")

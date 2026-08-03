@@ -7,4 +7,3 @@ script = ExtResource("1_o0k5w")
 main_menu_scene_path = "uid://cfx76eix10ayh"
 game_scene_path = "uid://cpmb5cfcuq6a2"
 ending_scene_path = "uid://bjsumd3epogpb"
-metadata/_edit_vertical_guides_ = [197.0]

@@ -18,41 +18,41 @@ load_path = "res://.godot/imported/pointer.svg-2068835178847b731dd1d6754048fd27.
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltt1b"]
 radius = 32.95
 
-[node name="VirtualCursor" type="Node2D"]
+[node name="VirtualCursor" type="Node2D" unique_id=1271890225]
 script = ExtResource("1_2rp0j")
 keyboard_and_mouse = ExtResource("2_tqdti")
 controller = ExtResource("3_xcoq2")
 switch_to_controller = ExtResource("4_ofxlp")
 switch_to_keyboard_and_mouse = ExtResource("5_pahhr")
 
-[node name="Pointable" parent="." instance=ExtResource("7_rhw28")]
+[node name="Pointable" parent="." unique_id=873934294 instance=ExtResource("7_rhw28")]
 position = Vector2(300, 271)
 
-[node name="Pointable2" parent="." instance=ExtResource("7_rhw28")]
+[node name="Pointable2" parent="." unique_id=728002423 instance=ExtResource("7_rhw28")]
 position = Vector2(1248, 311)
 
-[node name="Pointable3" parent="." instance=ExtResource("7_rhw28")]
+[node name="Pointable3" parent="." unique_id=1859322079 instance=ExtResource("7_rhw28")]
 position = Vector2(672, 835)
 
-[node name="Pointer" type="Area2D" parent="."]
+[node name="Pointer" type="Area2D" parent="." unique_id=1533602485]
 position = Vector2(813, 485)
 script = ExtResource("2_h1nim")
 cursor_2d = ExtResource("7_18ein")
 click = ExtResource("8_sx06i")
 
-[node name="PointerVisual" type="Sprite2D" parent="Pointer"]
+[node name="PointerVisual" type="Sprite2D" parent="Pointer" unique_id=554007185]
 texture = SubResource("CompressedTexture2D_7n6hb")
 centered = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointer" unique_id=2067312706]
 shape = SubResource("CircleShape2D_ltt1b")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2092042456]
 
-[node name="GuideDebugger" parent="CanvasLayer" instance=ExtResource("8_f1dtb")]
+[node name="GuideDebugger" parent="CanvasLayer" unique_id=1238024766 instance=ExtResource("8_f1dtb")]
 theme = ExtResource("9_ra860")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1157999080]
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 3
 anchor_left = 1.0

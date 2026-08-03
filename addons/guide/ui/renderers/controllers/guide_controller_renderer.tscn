@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsaylcb5ixjxk"]
+[gd_scene format=3 uid="uid://bsaylcb5ixjxk"]
 
-[ext_resource type="Script" path="res://addons/guide/ui/renderers/controllers/guide_controller_renderer.gd" id="1_0s5v7"]
+[ext_resource type="Script" uid="uid://1mjwnhjr65w4" path="res://addons/guide/ui/renderers/controllers/guide_controller_renderer.gd" id="1_0s5v7"]
 [ext_resource type="Texture2D" uid="uid://bmgxqbypegjxh" path="res://addons/guide/ui/renderers/textures/arrow_horizontal.svg" id="2_vkejn"]
 [ext_resource type="Texture2D" uid="uid://1swh072gtbb4" path="res://addons/guide/ui/renderers/textures/arrow_left.svg" id="3_7omjs"]
 [ext_resource type="Texture2D" uid="uid://bu5nlug6uf03w" path="res://addons/guide/ui/renderers/textures/arrow_vertical.svg" id="3_wqne5"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ni6lsbx1d2hf" path="res://addons/guide/ui/renderers/textures/arrow_up.svg" id="5_mvu7p"]
 [ext_resource type="Texture2D" uid="uid://oq2vvwgbdsh7" path="res://addons/guide/ui/renderers/textures/arrow_down.svg" id="6_q4gox"]
 
-[node name="ControllerRenderer" type="MarginContainer"]
+[node name="ControllerRenderer" type="MarginContainer" unique_id=770674473]
 process_mode = 3
 custom_minimum_size = Vector2(128, 128)
 offset_right = 100.0
@@ -17,7 +17,7 @@ size_flags_horizontal = 0
 script = ExtResource("1_0s5v7")
 priority = -1
 
-[node name="Controls" type="MarginContainer" parent="."]
+[node name="Controls" type="MarginContainer" parent="." unique_id=582277302]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 14
@@ -25,146 +25,146 @@ theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 14
 
-[node name="AButton" type="TextureRect" parent="Controls"]
+[node name="AButton" type="TextureRect" parent="Controls" unique_id=1622345585]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="BButton" type="TextureRect" parent="Controls"]
+[node name="BButton" type="TextureRect" parent="Controls" unique_id=744855834]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="XButton" type="TextureRect" parent="Controls"]
+[node name="XButton" type="TextureRect" parent="Controls" unique_id=1229672272]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="YButton" type="TextureRect" parent="Controls"]
+[node name="YButton" type="TextureRect" parent="Controls" unique_id=2100743156]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="LeftStick" type="TextureRect" parent="Controls"]
+[node name="LeftStick" type="TextureRect" parent="Controls" unique_id=524189122]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="LeftStickClick" type="TextureRect" parent="Controls"]
+[node name="LeftStickClick" type="TextureRect" parent="Controls" unique_id=1376904711]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="RightStick" type="TextureRect" parent="Controls"]
+[node name="RightStick" type="TextureRect" parent="Controls" unique_id=32489034]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="RightStickClick" type="TextureRect" parent="Controls"]
+[node name="RightStickClick" type="TextureRect" parent="Controls" unique_id=1822261162]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="LeftBumper" type="TextureRect" parent="Controls"]
+[node name="LeftBumper" type="TextureRect" parent="Controls" unique_id=318171287]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="RightBumper" type="TextureRect" parent="Controls"]
+[node name="RightBumper" type="TextureRect" parent="Controls" unique_id=1073397207]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="LeftTrigger" type="TextureRect" parent="Controls"]
+[node name="LeftTrigger" type="TextureRect" parent="Controls" unique_id=1684693042]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="RightTrigger" type="TextureRect" parent="Controls"]
+[node name="RightTrigger" type="TextureRect" parent="Controls" unique_id=1039867425]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="DpadUp" type="TextureRect" parent="Controls"]
+[node name="DpadUp" type="TextureRect" parent="Controls" unique_id=1513564619]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="DpadLeft" type="TextureRect" parent="Controls"]
+[node name="DpadLeft" type="TextureRect" parent="Controls" unique_id=1188335653]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="DpadRight" type="TextureRect" parent="Controls"]
+[node name="DpadRight" type="TextureRect" parent="Controls" unique_id=1009636448]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="DpadDown" type="TextureRect" parent="Controls"]
+[node name="DpadDown" type="TextureRect" parent="Controls" unique_id=1928133976]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Start" type="TextureRect" parent="Controls"]
+[node name="Start" type="TextureRect" parent="Controls" unique_id=68991121]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Misc1" type="TextureRect" parent="Controls"]
+[node name="Misc1" type="TextureRect" parent="Controls" unique_id=416457075]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Back" type="TextureRect" parent="Controls"]
+[node name="Back" type="TextureRect" parent="Controls" unique_id=1784268993]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="TouchPad" type="TextureRect" parent="Controls"]
+[node name="TouchPad" type="TextureRect" parent="Controls" unique_id=502873937]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Directions" type="MarginContainer" parent="."]
+[node name="Directions" type="MarginContainer" parent="." unique_id=1686342225]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LeftRight" type="TextureRect" parent="Directions"]
+[node name="LeftRight" type="TextureRect" parent="Directions" unique_id=927570094]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("2_vkejn")
 stretch_mode = 5
 
-[node name="Left" type="TextureRect" parent="Directions"]
+[node name="Left" type="TextureRect" parent="Directions" unique_id=530542333]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("3_7omjs")
 stretch_mode = 5
 
-[node name="Right" type="TextureRect" parent="Directions"]
+[node name="Right" type="TextureRect" parent="Directions" unique_id=1327551958]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("4_80sfk")
 stretch_mode = 5
 
-[node name="Up" type="TextureRect" parent="Directions"]
+[node name="Up" type="TextureRect" parent="Directions" unique_id=297547558]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("5_mvu7p")
 stretch_mode = 5
 
-[node name="Down" type="TextureRect" parent="Directions"]
+[node name="Down" type="TextureRect" parent="Directions" unique_id=2118712808]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("6_q4gox")
 stretch_mode = 5
 
-[node name="UpDown" type="TextureRect" parent="Directions"]
+[node name="UpDown" type="TextureRect" parent="Directions" unique_id=652066695]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

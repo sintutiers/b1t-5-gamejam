@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://dpu1f4xeigqdr" path="res://examples/guide_examples/touch/mapping_contexts/actions/camera_rotation.tres" id="13_lmkyb"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="13_n0vwi"]
 [ext_resource type="Resource" uid="uid://dhtj0p55ylhcu" path="res://examples/guide_examples/touch/mapping_contexts/actions/camera_reset.tres" id="14_bfrfr"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="15_haid4"]
 
 [sub_resource type="Shader" id="Shader_v4pj1"]
 code = "shader_type canvas_item;
@@ -38,13 +39,13 @@ shader = SubResource("Shader_v4pj1")
 shader_parameter/scale = Vector2(1, 1)
 shader_parameter/offset = Vector2(0, 0)
 
-[node name="Touch" type="Node2D"]
+[node name="Touch" type="Node2D" unique_id=808734452]
 script = ExtResource("1_gq4pr")
 mapping_context = ExtResource("2_btyg8")
 spawn = ExtResource("3_nwdqb")
 godot_head_scene = ExtResource("5_mimge")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1411512155]
 ignore_rotation = false
 script = ExtResource("5_k0qyy")
 camera_movement = ExtResource("7_hbc7d")
@@ -52,18 +53,18 @@ camera_zoom = ExtResource("8_t7xto")
 camera_rotation = ExtResource("13_lmkyb")
 camera_reset = ExtResource("14_bfrfr")
 
-[node name="BG" type="Sprite2D" parent="."]
+[node name="BG" type="Sprite2D" parent="." unique_id=633881641]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_1sa2x")
 texture = ExtResource("9_0mhj2")
 centered = false
 script = ExtResource("10_7apxo")
 
-[node name="PlacementIndicator" parent="." instance=ExtResource("12_e3xb3")]
+[node name="PlacementIndicator" parent="." unique_id=1432632755 instance=ExtResource("12_e3xb3")]
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=489704226]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UILayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer" unique_id=1686135061]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -80,9 +81,9 @@ instructions_text = "%s to move the camera.
 %s to reset the camera zoom and rotation.
 %s to place a Godot head.
 "
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("7_hbc7d"), ExtResource("8_t7xto"), ExtResource("13_lmkyb"), ExtResource("14_bfrfr"), ExtResource("3_nwdqb")])
+actions = Array[ExtResource("15_haid4")]([ExtResource("7_hbc7d"), ExtResource("8_t7xto"), ExtResource("13_lmkyb"), ExtResource("14_bfrfr"), ExtResource("3_nwdqb")])
 
-[node name="DebuggerLayer" type="CanvasLayer" parent="."]
+[node name="DebuggerLayer" type="CanvasLayer" parent="." unique_id=188999827]
 
-[node name="GuideDebugger" parent="DebuggerLayer" instance=ExtResource("13_n0vwi")]
+[node name="GuideDebugger" parent="DebuggerLayer" unique_id=2115969790 instance=ExtResource("13_n0vwi")]
 theme = ExtResource("11_bclaf")

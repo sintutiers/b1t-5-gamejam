@@ -4,4 +4,3 @@ extends Node2D
 
 func _ready() -> void:
 	GUIDE.enable_mapping_context(mapping_context)
-

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy1l6tyadc4s3"]
+[gd_scene format=3 uid="uid://cy1l6tyadc4s3"]
 
 [ext_resource type="Theme" uid="uid://dud4fe6fsicvm" path="res://addons/rmsmartshape/assets/gui_theme.res" id="1_pwu3l"]
 [ext_resource type="Script" uid="uid://q7ib6381dxe8" path="res://addons/rmsmartshape/scenes/GUI_Edge_InfoPanel.gd" id="2"]
 
-[node name="GUI_Edge_InfoPanel" type="PanelContainer"]
+[node name="GUI_Edge_InfoPanel" type="PanelContainer" unique_id=308863123]
 anchors_preset = -1
 anchor_right = 0.203125
 anchor_bottom = 0.345679
@@ -15,86 +15,86 @@ theme = ExtResource("1_pwu3l")
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=23482282]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Container" type="VBoxContainer" parent="."]
+[node name="Container" type="VBoxContainer" parent="." unique_id=1659997468]
 layout_mode = 2
 
-[node name="Properties" type="VBoxContainer" parent="Container"]
+[node name="Properties" type="VBoxContainer" parent="Container" unique_id=447153990]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IDX" type="Label" parent="Container/Properties"]
+[node name="IDX" type="Label" parent="Container/Properties" unique_id=1340825091]
 unique_name_in_owner = true
 layout_mode = 2
 text = "IDX: [1,2]"
 
-[node name="Functions" type="VBoxContainer" parent="Container"]
+[node name="Functions" type="VBoxContainer" parent="Container" unique_id=1629311354]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Make Inner Curve" type="Button" parent="Container/Functions"]
+[node name="Make Inner Curve" type="Button" parent="Container/Functions" unique_id=621680298]
 visible = false
 layout_mode = 2
 text = "Make Inner Curve"
 
-[node name="Make Outer Curve" type="Button" parent="Container/Functions"]
+[node name="Make Outer Curve" type="Button" parent="Container/Functions" unique_id=611046344]
 visible = false
 layout_mode = 2
 text = "Make Outer Curve"
 
-[node name="MaterialOverride" type="Button" parent="Container/Functions"]
+[node name="MaterialOverride" type="Button" parent="Container/Functions" unique_id=1999883103]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 text = "Material Override"
 
-[node name="OverrideContainer" type="VBoxContainer" parent="Container"]
+[node name="OverrideContainer" type="VBoxContainer" parent="Container" unique_id=1003245412]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="Container/OverrideContainer"]
+[node name="HSeparator" type="HSeparator" parent="Container/OverrideContainer" unique_id=342060389]
 layout_mode = 2
 
-[node name="Render" type="CheckBox" parent="Container/OverrideContainer"]
+[node name="Render" type="CheckBox" parent="Container/OverrideContainer" unique_id=624219109]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Render"
 
-[node name="Weld" type="CheckBox" parent="Container/OverrideContainer"]
+[node name="Weld" type="CheckBox" parent="Container/OverrideContainer" unique_id=1415868270]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Weld"
 
-[node name="ZIndexSection" type="HBoxContainer" parent="Container/OverrideContainer"]
+[node name="ZIndexSection" type="HBoxContainer" parent="Container/OverrideContainer" unique_id=1341998347]
 visible = false
 layout_mode = 2
 
-[node name="lbl" type="Label" parent="Container/OverrideContainer/ZIndexSection"]
+[node name="lbl" type="Label" parent="Container/OverrideContainer/ZIndexSection" unique_id=1297445078]
 layout_mode = 2
 text = "Z:"
 
-[node name="ZIndex" type="SpinBox" parent="Container/OverrideContainer/ZIndexSection"]
+[node name="ZIndex" type="SpinBox" parent="Container/OverrideContainer/ZIndexSection" unique_id=1852735620]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = -100.0
 
-[node name="SetMaterial" type="Button" parent="Container/OverrideContainer"]
+[node name="SetMaterial" type="Button" parent="Container/OverrideContainer" unique_id=1700330716]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Set Material"
 
-[node name="ClearMaterial" type="Button" parent="Container/OverrideContainer"]
+[node name="ClearMaterial" type="Button" parent="Container/OverrideContainer" unique_id=1381333306]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Clear Material"
 
-[node name="MaterialStatus" type="Label" parent="Container/OverrideContainer"]
+[node name="MaterialStatus" type="Label" parent="Container/OverrideContainer" unique_id=1755756851]
 unique_name_in_owner = true
 layout_mode = 2
 text = "[No Material]"

@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="11_obfhv"]
 [ext_resource type="Resource" uid="uid://bqiryilvj5mqv" path="res://examples/guide_examples/combos/mapping_contexts/basic_actions/move_left.tres" id="12_0mhlm"]
 [ext_resource type="PackedScene" uid="uid://c36cnvgv2ur60" path="res://examples/guide_examples/shared/fireball/fireball.tscn" id="12_fl88r"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="13_jk6sk"]
 [ext_resource type="Resource" uid="uid://bk54ofxos3xxg" path="res://examples/guide_examples/combos/mapping_contexts/basic_actions/move_right.tres" id="13_xn6qb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kkfa"]
@@ -21,11 +22,11 @@ size = Vector2(137, 138)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0s5wn"]
 
-[node name="Combos" type="Node2D"]
+[node name="Combos" type="Node2D" unique_id=2000506467]
 script = ExtResource("1_kdeb4")
 mapping_context = ExtResource("2_ahmv3")
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1089763525]
 position = Vector2(902, 841)
 script = ExtResource("3_kulxp")
 dash_speed_bonus = 400.0
@@ -36,29 +37,29 @@ fireball_left = ExtResource("4_uvwd5")
 fireball_right = ExtResource("11_n707x")
 fireball_scene = ExtResource("12_fl88r")
 
-[node name="Sprite" type="Sprite2D" parent="Player"]
+[node name="Sprite" type="Sprite2D" parent="Player" unique_id=1570202644]
 texture = ExtResource("4_uej32")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=479047469]
 position = Vector2(1.5, 1)
 shape = SubResource("RectangleShape2D_8kkfa")
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1164248860]
 position = Vector2(-44, 954)
 
-[node name="ColorRect" type="ColorRect" parent="Ground"]
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=877497701]
 offset_left = -427.0
 offset_right = 2555.0
 offset_bottom = 150.0
 color = Color(0.285871, 0.0915713, 0.0208481, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1008337652]
 position = Vector2(869, 1)
 shape = SubResource("WorldBoundaryShape2D_0s5wn")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1566486417]
 
-[node name="InstructionsLabel" type="RichTextLabel" parent="UILayer"]
+[node name="InstructionsLabel" type="RichTextLabel" parent="UILayer" unique_id=675830040]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -78,10 +79,10 @@ Press %s to dash left.
 Press %s to dash right.
 Press %s shoot a fireball to the left.
 Press %s to shoot a fireball to the right."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("12_0mhlm"), ExtResource("13_xn6qb"), ExtResource("5_s5wpr"), ExtResource("6_vd0bg"), ExtResource("4_uvwd5"), ExtResource("11_n707x")])
+actions = Array[ExtResource("13_jk6sk")]([ExtResource("12_0mhlm"), ExtResource("13_xn6qb"), ExtResource("5_s5wpr"), ExtResource("6_vd0bg"), ExtResource("4_uvwd5"), ExtResource("11_n707x")])
 
-[node name="DebuggerLayer" type="CanvasLayer" parent="."]
+[node name="DebuggerLayer" type="CanvasLayer" parent="." unique_id=77728327]
 
-[node name="GuideDebugger" parent="DebuggerLayer" instance=ExtResource("1_eyn1y")]
+[node name="GuideDebugger" parent="DebuggerLayer" unique_id=182538820 instance=ExtResource("1_eyn1y")]
 theme = ExtResource("11_i5q2v")
 metadata/_edit_lock_ = true

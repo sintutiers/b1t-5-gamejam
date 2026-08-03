@@ -15,4 +15,3 @@ func _process(delta: float) -> void:
 	_age += delta
 	if _age >= lifetime:
 		queue_free()
-

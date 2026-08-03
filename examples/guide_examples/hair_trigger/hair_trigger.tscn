@@ -7,14 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="5"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="5_unec5"]
 
-[node name="HairTrigger" type="Node"]
+[node name="HairTrigger" type="Node" unique_id=1072855333]
 script = ExtResource("1")
 mapping_context = ExtResource("2")
 fire_action = ExtResource("4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1722596850]
 
-[node name="TriggerVisualizer" type="Control" parent="CanvasLayer"]
+[node name="TriggerVisualizer" type="Control" parent="CanvasLayer" unique_id=1139372852]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 8
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3")
 
-[node name="Instructions" type="Label" parent="CanvasLayer"]
+[node name="Instructions" type="Label" parent="CanvasLayer" unique_id=1309619890]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 80.0
@@ -43,5 +43,5 @@ Releases when dropping by threshold from peak."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GuideDebugger" parent="CanvasLayer" instance=ExtResource("5")]
+[node name="GuideDebugger" parent="CanvasLayer" unique_id=742420116 instance=ExtResource("5")]
 theme = ExtResource("5_unec5")

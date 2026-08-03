@@ -295,5 +295,3 @@ func _on_action_mapping_duplicate_requested(index:int) -> void:
 
 func _on_action_mappings_collapse_state_changed(new_state:bool) -> void:
 	_current_context.set_meta("_guide_action_mappings_collapsed", new_state)
-
-
