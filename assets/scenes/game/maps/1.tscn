@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb63f0lorb008"]
 
 [ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="1_f0fay"]
+[ext_resource type="Script" uid="uid://dfyqa3nhblwt4" path="res://assets/scenes/game/maps/1.gd" id="1_ux65l"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="2_der4t"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_4p6eu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
@@ -14,6 +15,7 @@ script = ExtResource("5_5r203")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
 
 [node name="1" type="Node2D" unique_id=1401155993]
+script = ExtResource("1_ux65l")
 
 [node name="BackgroundColor2" type="Sprite2D" parent="." unique_id=248604076]
 position = Vector2(11.9999695, -311.00006)

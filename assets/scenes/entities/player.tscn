@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bhjfbnptlsrpn" path="res://assets/scenes/entities/player.gd" id="1_p1n6j"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
-[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="2_502cd"]
 [ext_resource type="Texture2D" uid="uid://bc1brx5ex756u" path="res://assets/art/controlableSprites/playerSprite(notDone)(front) _0000.png" id="2_fj81o"]
 [ext_resource type="Texture2D" uid="uid://dokfbtuqkb3rc" path="res://assets/art/interactableSprites/jumpTiles(jumpTileDown) _0003.png" id="2_s1a5k"]
 [ext_resource type="Texture2D" uid="uid://dto5e4ieyoytf" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="3_fj81o"]
@@ -14,14 +13,17 @@
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
 [ext_resource type="Texture2D" uid="uid://dtdvby7d5x67r" path="res://assets/art/interactableSprites/jumpTiles(jumpTileLeft) _0000.png" id="6_u63s7"]
 [ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="9_uyujk"]
+[ext_resource type="Resource" uid="uid://ch070wegl722t" path="res://input/move.tres" id="13_3v5l0"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="14_bfnip"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="15_p1n6j"]
+[ext_resource type="Script" uid="uid://ceslyxa3le6hb" path="res://scripts/components/combat_component.gd" id="15_tqwgt"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="16_502cd"]
+[ext_resource type="Resource" uid="uid://vpsh1myp67ws" path="res://input/look_relative.tres" id="16_i5qhp"]
+[ext_resource type="Resource" uid="uid://c4tpipfhludsi" path="res://input/look_absolute.tres" id="17_3v5l0"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="17_p1n6j"]
-
-[sub_resource type="Resource" id="Resource_tqwgt"]
-script = ExtResource("2_502cd")
-action_value_type = 2
+[ext_resource type="Resource" uid="uid://coktqyup12g3w" path="res://input/fire.tres" id="18_3v5l0"]
+[ext_resource type="PackedScene" uid="uid://c0fqv8e3tljmp" path="res://input/top_down_shooter/bolt.tscn" id="19_u8sbn"]
+[ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="20_oa2pr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p1n6j"]
 radius = 40.0
@@ -101,12 +103,15 @@ animations = [{
 
 [node name="player" type="CharacterBody2D" unique_id=2042953629]
 script = ExtResource("1_p1n6j")
-move_action = SubResource("Resource_tqwgt")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 
 [node name="RapierArea2D" type="Area2D" parent="." unique_id=292023860]
 script = ExtResource("6_iphvx")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CenterHand" type="Marker2D" parent="RapierArea2D" unique_id=1583490133]
+unique_name_in_owner = true
+position = Vector2(25, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RapierArea2D" unique_id=1857630629]
 shape = SubResource("CircleShape2D_p1n6j")
@@ -121,6 +126,7 @@ shape = SubResource("CapsuleShape2D_q1sf4")
 
 [node name="movement" type="Node" parent="." unique_id=1232315220]
 script = ExtResource("2_3irjl")
+move = ExtResource("13_3v5l0")
 
 [node name="animation" type="Node" parent="." unique_id=764092827]
 script = ExtResource("2_47qcb")
@@ -129,6 +135,13 @@ script = ExtResource("2_47qcb")
 unique_name_in_owner = true
 script = ExtResource("5_jyv41")
 
+[node name="combat" type="Node" parent="." unique_id=381484516]
+script = ExtResource("15_tqwgt")
+look_relative = ExtResource("16_i5qhp")
+look_absolute = ExtResource("17_3v5l0")
+fire = ExtResource("18_3v5l0")
+bolt = ExtResource("19_u8sbn")
+
 [node name="InteractAreaPlayer" type="Area2D" parent="." unique_id=569756058]
 unique_name_in_owner = true
 script = ExtResource("6_iphvx")
@@ -136,6 +149,10 @@ metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractAreaPlayer" unique_id=1988242562]
 shape = SubResource("RectangleShape2D_q1sf4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1696703124]
+
+[node name="GuideDebugger" parent="CanvasLayer" unique_id=1902510748 instance=ExtResource("20_oa2pr")]
 
 [node name="StateChart" type="Node" parent="." unique_id=944945574]
 unique_name_in_owner = true

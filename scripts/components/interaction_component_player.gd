@@ -59,10 +59,10 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 func _find_sibling_of_type(type: Script) -> Node:
 	var parent: Node = get_parent()
 	if not parent:
-		push_error("Parent not found.")
+		push_error("no Parent.")
 		return null
 	for child: Node in parent.get_children():
 		if is_instance_of(child, type):
 			return child
-	push_warning("Sibling not found.")
+	push_warning("no Sibling.")
 	return null

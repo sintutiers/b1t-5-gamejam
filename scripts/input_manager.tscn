@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cphxwf4b0om4v"]
+
+[ext_resource type="Script" uid="uid://dvxdt8cer67ic" path="res://scripts/input_manager.gd" id="1_v1d4p"]
+[ext_resource type="Resource" uid="uid://dhp7nup127wxw" path="res://input/keyboard_and_mouse.tres" id="2_eitiw"]
+[ext_resource type="Resource" uid="uid://dysrgn1ubf15g" path="res://input/controller.tres" id="3_ny102"]
+[ext_resource type="Resource" uid="uid://byu565ktximg2" path="res://input/switch_to_controller.tres" id="4_tutwt"]
+[ext_resource type="Resource" uid="uid://bnd2jguy7tfti" path="res://input/switch_to_keyboard_and_mouse.tres" id="5_1lw5c"]
+
+[node name="InputManager" type="Node" unique_id=1025128877]
+script = ExtResource("1_v1d4p")
+keyboard_and_mouse = ExtResource("2_eitiw")
+controller = ExtResource("3_ny102")
+switch_to_controller = ExtResource("4_tutwt")
+switch_to_keyboard_and_mouse = ExtResource("5_1lw5c")

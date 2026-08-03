@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c0fqv8e3tljmp"]
+
+[ext_resource type="Texture2D" uid="uid://dto5e4ieyoytf" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="1_eceml"]
+[ext_resource type="Script" uid="uid://w7nan374op8" path="res://input/top_down_shooter/bolt.gd" id="2_o61jt"]
+
+[node name="Bolt" type="Sprite2D" unique_id=1318303708]
+texture = ExtResource("1_eceml")
+script = ExtResource("2_o61jt")
+speed = 1000.0
+lifetime = 2.0

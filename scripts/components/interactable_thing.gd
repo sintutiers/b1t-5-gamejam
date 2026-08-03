@@ -12,7 +12,7 @@ signal interacted(by: RapierArea2D)
 func _ready() -> void:
 	add_to_group(&"interactable")
 	if animate_on_interact and not sprite:
-		push_warning("No sprite assigned.")
+		push_warning("No sprite.")
 	if animate_on_interact and sprite:
 		sprite.pause()
 
