@@ -35,6 +35,7 @@ ProjectMusicController="*uid://r5t485lr3p7t"
 ProjectUISoundController="*uid://cc37235kj4384"
 DebugMenu="*uid://cggqb75a8w8r"
 DialogueManager="*uid://c3rodes2l3gxb"
+GUIDE="*uid://p2jwrgjcbexr"
 
 [debug]
 
@@ -54,7 +55,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/health_hitbox_hurtbox/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/guide/plugin.cfg", "res://addons/health_hitbox_hurtbox/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 
@@ -64,7 +65,7 @@ folder_colors={
 
 [gui]
 
-theme/custom="uid://lkdb7ln8gmaa"
+theme/custom="uid://d1s1xd38gtks2"
 
 [input]
 
@@ -139,3 +140,4 @@ rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.078431375, 0.1254902, 0.22352941, 1)

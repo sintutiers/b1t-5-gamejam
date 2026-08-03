@@ -15,19 +15,13 @@ script = ExtResource("5_5r203")
 
 [node name="1" type="Node2D" unique_id=1401155993]
 
-[node name="BackgroundColor" type="Sprite2D" parent="." unique_id=377731885]
-position = Vector2(288, 387)
-scale = Vector2(7.875, 4.109375)
-texture = ExtResource("1_f0fay")
-
-[node name="BackgroundColor" type="Sprite2D" parent="BackgroundColor" unique_id=248604076]
-position = Vector2(-35.047623, -169.85553)
-scale = Vector2(0.6041667, 0.31526953)
+[node name="BackgroundColor2" type="Sprite2D" parent="." unique_id=248604076]
+position = Vector2(11.9999695, -311.00006)
+scale = Vector2(4.7578125, 1.2955607)
 texture = ExtResource("1_f0fay")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1175696106]
 physics_interpolation_mode = 1
-top_level = true
 position = Vector2(236, 233)
 zoom = Vector2(2, 2)
 editor_draw_limits = true
@@ -41,10 +35,11 @@ script = ExtResource("3_4p6eu")
 top_level = true
 position = Vector2(236, 233)
 script = ExtResource("4_hwoah")
-follow_mode = 2
+follow_mode = 1
 follow_target = NodePath("../player")
 zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_4p6eu")
+follow_damping = true
 draw_limits = true
 
 [node name="jumppadtest" type="Area2D" parent="." unique_id=884582300]
@@ -60,3 +55,10 @@ shape = SubResource("RectangleShape2D_q1sf4")
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("2_der4t")]
 position = Vector2(236, 233)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=580960527]
+offset_right = 189.0
+offset_bottom = 189.0
+
+[node name="MessagePanel" type="Label" parent="PanelContainer" unique_id=1644192633]
+layout_mode = 2
