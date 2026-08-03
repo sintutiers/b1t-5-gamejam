@@ -1,6 +1,11 @@
 # b1t-5-gamejam
 our cool gamejam project
 
+- contributors
+- Dean (https://github.com/DeanLemans)
+- Chiel (https://github.com/Chielekkuuuh)
+- Erin (https://github.com/WallErin)
+
 code is under [GPL2+](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE)
 assets is under [CC-BY-SA-4.0](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE-ASSETS)
 > Do not go gentle into that good night,
