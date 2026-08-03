@@ -7,7 +7,8 @@
 	],
 	"disabled_editors": [],
 	"disabled_features": [
-		"3d"
+		"3d",
+		"node_dock"
 	],
 	"disabled_properties": [],
 	"type": "feature_profile"
