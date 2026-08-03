@@ -13,7 +13,7 @@ var current_facing: MovementComponent.Direction = MovementComponent.DEFAULT_DIRE
 
 
 func _ready() -> void:
-	assert(sprite, "AnimationComponent: sprite not assigned")
+	assert(sprite, "Sprite node not found.")
 	
 	sprite.play("start")
 

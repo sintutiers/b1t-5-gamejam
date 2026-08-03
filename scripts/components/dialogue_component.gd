@@ -9,11 +9,9 @@ extends Node
 
 
 func _ready() -> void:
-	if not interactable:
-		push_error("DialogueComponent: expects parent to be Interactable. Disabling.")
-		return
+	assert(interactable, "Parent must be an Interactable node.")
 	if not dialogue_resource:
-		push_warning("DialogueComponent (%s): no dialogue_resource assigned." % name)
+		push_warning("No DialogueResource assigned.")
 	interactable.interacted.connect(_on_interacted)
 
 
