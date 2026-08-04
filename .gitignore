@@ -15,3 +15,5 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+project_time_traker.json

@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dtdvby7d5x67r" path="res://assets/art/interactableSprites/jumpTiles(jumpTileLeft) _0000.png" id="6_u63s7"]
 [ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="9_uyujk"]
 [ext_resource type="Resource" uid="uid://ch070wegl722t" path="res://input/move.tres" id="13_3v5l0"]
+[ext_resource type="AudioStream" uid="uid://cxlxyiqx4ek4j" path="res://assets/sounds/deathSound.mp3" id="13_uylfy"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="14_bfnip"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="15_p1n6j"]
 [ext_resource type="Script" uid="uid://ceslyxa3le6hb" path="res://scripts/components/combat_component.gd" id="15_tqwgt"]
@@ -123,6 +124,16 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
 shape = SubResource("CapsuleShape2D_q1sf4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1539307804]
+unique_name_in_owner = true
+
+[node name="audio" type="Node" parent="." unique_id=1181466038]
+script = ExtResource("11_ejv5b")
+footstep_sounds = Array[AudioStream]([ExtResource("12_uylfy")])
+fire_sound = ExtResource("13_uylfy")
+footstep_cooldown = 0.0
+footstep_buffer_duration = 5.0
 
 [node name="movement" type="Node" parent="." unique_id=1232315220]
 script = ExtResource("2_3irjl")

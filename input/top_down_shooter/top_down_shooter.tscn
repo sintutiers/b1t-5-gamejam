@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dysrgn1ubf15g" path="res://input/controller.tres" id="3_x6vbn"]
 [ext_resource type="Resource" uid="uid://byu565ktximg2" path="res://input/switch_to_controller.tres" id="4_po4nb"]
 [ext_resource type="Resource" uid="uid://bnd2jguy7tfti" path="res://input/switch_to_keyboard_and_mouse.tres" id="5_vrof7"]
-[ext_resource type="Script" uid="uid://blx1seoclt48w" path="res://input/top_down_shooter/player/player.gd" id="6_iws0p"]
+[ext_resource type="Script" uid="uid://blx1seoclt48w" path="res://input/top_down_shooter/player.gd" id="6_iws0p"]
 [ext_resource type="Resource" uid="uid://vpsh1myp67ws" path="res://input/look_relative.tres" id="7_ylby2"]
 [ext_resource type="Resource" uid="uid://c4tpipfhludsi" path="res://input/look_absolute.tres" id="8_hkj3s"]
 [ext_resource type="Resource" uid="uid://ch070wegl722t" path="res://input/move.tres" id="9_jrn14"]
@@ -61,6 +61,7 @@ metadata/_edit_lock_ = true
 theme = ExtResource("14_5qhti")
 
 [node name="UI Layer" type="CanvasLayer" parent="." unique_id=867187332]
+visible = false
 
 [node name="Instructions Label Controller" type="RichTextLabel" parent="UI Layer" unique_id=1798643945]
 anchors_preset = 1

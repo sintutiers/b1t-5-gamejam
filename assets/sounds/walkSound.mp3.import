@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/walkSound.mp3-9e7cfa4dfddf11e7feb64d0a0e46ff2
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
