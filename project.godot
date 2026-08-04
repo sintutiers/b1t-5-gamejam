@@ -37,6 +37,7 @@ DebugMenu="*uid://cggqb75a8w8r"
 DialogueManager="*uid://c3rodes2l3gxb"
 GUIDE="*uid://p2jwrgjcbexr"
 InputManager="*uid://cphxwf4b0om4v"
+LightManager="*uid://lnayhbjd18wf"
 
 [debug]
 

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bhjfbnptlsrpn" path="res://assets/scenes/entities/player.gd" id="1_p1n6j"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
-[ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="4_fj81o"]
 [ext_resource type="Texture2D" uid="uid://eu0i8c1pv778" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
 [ext_resource type="Texture2D" uid="uid://ccixg3cmedwmv" path="res://assets/art/controlableSprites/erinplayablesprite.png" id="5_3v5l0"]
 [ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://scripts/components/interaction_component_player.gd" id="5_jyv41"]
@@ -23,8 +22,21 @@
 [ext_resource type="PackedScene" uid="uid://c0fqv8e3tljmp" path="res://input/top_down_shooter/bolt.tscn" id="19_u8sbn"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="20_oa2pr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p1n6j"]
-radius = 40.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5qhp"]
+atlas = ExtResource("5_3v5l0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v5l0"]
+atlas = ExtResource("5_3v5l0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yn3y"]
+atlas = ExtResource("5_3v5l0")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxwp2"]
+atlas = ExtResource("5_3v5l0")
+region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8sbn"]
 atlas = ExtResource("5_3v5l0")
@@ -62,14 +74,20 @@ region = Rect2(32, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_vy3dg")
+"texture": SubResource("AtlasTexture_i5qhp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_fj81o")
+"texture": SubResource("AtlasTexture_3v5l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yn3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxwp2")
 }],
 "loop": 0,
 "name": &"idle",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -133,21 +151,14 @@ script = ExtResource("1_p1n6j")
 metadata/_custom_type_script = "uid://c5qpdmvd63ugb"
 metadata/_edit_vertical_guides_ = [-208.0]
 
-[node name="RapierArea2D" type="Area2D" parent="." unique_id=292023860]
-script = ExtResource("6_iphvx")
-metadata/_custom_type_script = "uid://cburu6b4ckehs"
-
-[node name="CenterHand" type="Marker2D" parent="RapierArea2D" unique_id=1583490133]
+[node name="CenterHand" type="Marker2D" parent="." unique_id=1583490133]
 unique_name_in_owner = true
 position = Vector2(25, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RapierArea2D" unique_id=1857630629]
-shape = SubResource("CircleShape2D_p1n6j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=360970681]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_q1sf4")
-animation = &"start"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917745524]
 shape = SubResource("CapsuleShape2D_q1sf4")
@@ -167,6 +178,7 @@ move = ExtResource("13_3v5l0")
 
 [node name="animation" type="Node" parent="." unique_id=764092827]
 script = ExtResource("2_47qcb")
+idle_delay = 10.0
 
 [node name="interaction" type="Node" parent="." unique_id=1388805479]
 unique_name_in_owner = true

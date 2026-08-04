@@ -1,5 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://bac1khm2nmjl3"]
 
+[ext_resource type="FontFile" uid="uid://coisyh8l6rcuc" path="res://assets/art/themes/pixelated-elegance-font/PixelatedEleganceRegular-ovawB.ttf" id="1_iia7y"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rtxy"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -468,7 +470,7 @@ corner_radius_bottom_left = 4
 
 [resource]
 BoldLabel/base_type = &"Label"
-BoldLabel/fonts/font = null
+BoldLabel/fonts/font = ExtResource("1_iia7y")
 Button/colors/font_color = Color(0.078431375, 0.1254902, 0.22352941, 1)
 Button/colors/font_disabled_color = Color(0.698039, 0.133333, 0.203922, 1)
 Button/colors/font_focus_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
@@ -482,7 +484,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_bjb6u")
 DisabledLabel/base_type = &"Label"
 DisabledLabel/colors/font_color = Color(0.078431375, 0.1254902, 0.22352941, 1)
 DisabledLabel/font_sizes/font_size = 24
-DisabledLabel/fonts/font = null
+DisabledLabel/fonts/font = ExtResource("1_iia7y")
 DisabledLabel/styles/normal = SubResource("StyleBoxFlat_wv8md")
 HScrollBar/styles/grabber = SubResource("StyleBoxFlat_s1fdf")
 HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_tieq2")
@@ -493,10 +495,10 @@ HSeparator/styles/separator = SubResource("StyleBoxFlat_hq6eh")
 LocationName/base_type = &"Label"
 LocationName/colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
 LocationName/font_sizes/font_size = 22
-LocationName/fonts/font = null
+LocationName/fonts/font = ExtResource("1_iia7y")
 LocationType/base_type = &"Label"
 LocationType/colors/font_color = Color(0.078431375, 0.1254902, 0.22352941, 1)
-LocationType/fonts/font = null
+LocationType/fonts/font = ExtResource("1_iia7y")
 Panel/styles/panel = SubResource("StyleBoxFlat_fgisk")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_5e2ta")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_7e08u")
@@ -511,13 +513,13 @@ ProgressBarDelayHovered/styles/background = SubResource("StyleBoxEmpty_wv8md")
 ProgressBarDelayHovered/styles/fill = SubResource("StyleBoxFlat_c4ulf")
 ProgressBarGood/base_type = &"ProgressBar"
 ProgressBarGood/styles/fill = SubResource("StyleBoxFlat_8723n")
-RichTextLabel/fonts/bold_font = null
-RichTextLabel/fonts/bold_italics_font = null
-RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/bold_font = ExtResource("1_iia7y")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_iia7y")
+RichTextLabel/fonts/italics_font = ExtResource("1_iia7y")
 SelectedLabel/base_type = &"Label"
 SelectedLabel/colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
 SelectedLabel/font_sizes/font_size = 24
-SelectedLabel/fonts/font = null
+SelectedLabel/fonts/font = ExtResource("1_iia7y")
 SelectedLabel/styles/normal = SubResource("StyleBoxFlat_opsya")
 TabContainer/colors/font_disabled_color = Color(0.078431375, 0.1254902, 0.22352941, 1)
 TabContainer/colors/font_hovered_color = Color(0.078431375, 0.1254902, 0.22352941, 1)

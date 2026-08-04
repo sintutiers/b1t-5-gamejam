@@ -17,10 +17,14 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1518718342]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 text = "G.U.I.D.E - Debugger"
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=1324747187]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 text = "Actions"
 
 [node name="Actions" type="VFlowContainer" parent="VBoxContainer" unique_id=2024151647]
@@ -31,6 +35,8 @@ mouse_filter = 2
 
 [node name="Label3" type="Label" parent="VBoxContainer" unique_id=42886011]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 text = "Inputs"
 
 [node name="Inputs" type="VFlowContainer" parent="VBoxContainer" unique_id=48779449]
@@ -41,6 +47,7 @@ mouse_filter = 2
 
 [node name="Label4" type="Label" parent="VBoxContainer" unique_id=1571261342]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
 text = "Action Priority"
 
 [node name="Priorities" type="VFlowContainer" parent="VBoxContainer" unique_id=185307537]
