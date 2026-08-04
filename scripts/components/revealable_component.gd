@@ -1,3 +1,4 @@
+#revealable_component.gd
 class_name RevealableComponent
 extends Node
 
