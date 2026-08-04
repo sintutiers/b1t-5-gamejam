@@ -7,14 +7,14 @@ const ExpressionUtil = preload("expression_util.gd")
 const DebugUtil = preload("debug_util.gd")
 
 ## Flag indicating that this transition has been modified and needs to update its caches.
-var _dirty:bool = true
+var _dirty: bool = true
 
 ## Cached target state of this transition. Will be resolved when [method resolve_target] is called.
-var _target:StateChartState = null
+var _target: StateChartState = null
 
 ## The trigger types that are supported by this transition. This is a bit mask of the supported trigger types.
 ## The trigger types are defined in the [StateChart] class.
-var _supported_trigger_types:int = 0
+var _supported_trigger_types: int = 0
 
 ## Fired when this transition is taken. For delayed transitions, this signal
 ## will be fired when the transition is actually executed (e.g. when its delay
@@ -23,7 +23,7 @@ var _supported_trigger_types:int = 0
 signal taken()
 
 ## The target state to which the transition should switch
-@export_node_path("StateChartState") var to:NodePath:
+@export_node_path("StateChartState") var to: NodePath:
 	set(value):
 		to = value
 		_dirty = true
@@ -31,7 +31,7 @@ signal taken()
 
 ## The event that should trigger this transition, can be empty in which case
 ## the transition will immediately be tried when the state is entered
-@export var event:StringName = "":
+@export var event: StringName = "":
 	set(value):
 		event = value
 		_dirty = true
@@ -39,7 +39,7 @@ signal taken()
 
 ## An expression that must evaluate to true for the transition to be taken. Can be
 ## empty in which case the transition will always be taken
-@export var guard:Guard:
+@export var guard: Guard:
 	set(value):
 		guard = value
 		_dirty = true
@@ -49,7 +49,7 @@ signal taken()
 ## the transition will be taken immediately. The transition will only be taken
 ## if the state is still active when the delay has passed and has never been left.
 ## @deprecated: use the new delay_in_seconds property instead
-var delay_seconds:float = 0.0:
+var delay_seconds: float = 0.0:
 	set(value):
 		delay_in_seconds = str(value)
 		update_configuration_warnings()
@@ -64,29 +64,29 @@ var delay_seconds:float = 0.0:
 ## the delay will be 0. When the delay is 0, the transition will be taken immediately.
 ## The transition will only be taken if the state is still active when the delay has
 ## passed and has never been left.
-var delay_in_seconds:String = "0.0":
+var delay_in_seconds: String = "0.0":
 	set(value):
 		delay_in_seconds = value
 		update_configuration_warnings()
 
-
 ## Read-only property that returns true if the transition has an event specified.
 ## @deprecated: this property is no longer needed. It will be removed in a future version.
-var has_event:bool:
+var has_event: bool:
 	get:
 		return event != null and event.length() > 0
 
 
 ## Returns true if this transition is potentially triggered by the given trigger type.
-func is_triggered_by(trigger_type:StateChart.TriggerType) -> bool:
+func is_triggered_by(trigger_type: StateChart.TriggerType) -> bool:
 	if _dirty:
 		_refresh_caches()
 	return (_supported_trigger_types & trigger_type) != 0
 
+
 ## Takes this transition immediately or with a delay if defined
 ## Note: if there is a delay on this transition and immediately param is true, it forces the transition to be taken without the delay
-func take(immediately:bool = true) -> void:
-	var parent_state:StateChartState = get_parent() as StateChartState
+func take(immediately: bool = true) -> void:
+	var parent_state: StateChartState = get_parent() as StateChartState
 	if parent_state == null:
 		push_error("Transitions must be children of states.")
 		return
@@ -97,13 +97,14 @@ func take(immediately:bool = true) -> void:
 
 	parent_state._run_transition(self, immediately)
 
+
 ## Evaluates the guard expression and returns true if the transition should be taken.
 ## If no guard expression is specified, this function will always return true.
 func evaluate_guard() -> bool:
 	if guard == null:
 		return true
 
-	var parent_state:StateChartState = get_parent() as StateChartState
+	var parent_state: StateChartState = get_parent() as StateChartState
 	if parent_state == null:
 		push_error("Transitions must be children of states.")
 		return false
@@ -119,17 +120,18 @@ func evaluate_delay() -> float:
 		return float(delay_in_seconds)
 
 	# evaluate the expression
-	var parent_state:StateChartState = get_parent() as StateChartState
+	var parent_state: StateChartState = get_parent() as StateChartState
 	if parent_state == null:
 		push_error("Transitions must be children of states.")
 		return 0.0
 
 	var result = ExpressionUtil.evaluate_expression("delay of " + DebugUtil.path_of(self), parent_state._chart, delay_in_seconds, 0.0)
 	if typeof(result) != TYPE_FLOAT:
-		push_error("Expression: ", delay_in_seconds ," result: ", result,  " is not a float. Returning 0.0.")
+		push_error("Expression: ", delay_in_seconds, " result: ", result, " is not a float. Returning 0.0.")
 		return 0.0
 
 	return result
+
 
 ## Resolves the target state and returns it. If the target state is not found,
 ## this function will return null.
@@ -138,8 +140,9 @@ func resolve_target() -> StateChartState:
 		_refresh_caches()
 	return _target
 
+
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings:Array = []
+	var warnings: Array = []
 	if get_child_count() > 0:
 		warnings.append("Transitions should not have children")
 
@@ -156,31 +159,36 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 	return warnings
 
+
 func _get_property_list() -> Array[Dictionary]:
-	var properties:Array[Dictionary] = []
-	properties.append({
-		"name": "delay_in_seconds",
-		"type": TYPE_STRING,
-		"usage": PROPERTY_USAGE_DEFAULT,
-		"hint": PROPERTY_HINT_EXPRESSION
-	})
+	var properties: Array[Dictionary] = []
+	properties.append(
+		{
+			"name": "delay_in_seconds",
+			"type": TYPE_STRING,
+			"usage": PROPERTY_USAGE_DEFAULT,
+			"hint": PROPERTY_HINT_EXPRESSION,
+		},
+	)
 
 	# hide the old delay_seconds property
-	properties.append({
-		"name": "delay_seconds",
-		"type": TYPE_FLOAT,
-		"usage": PROPERTY_USAGE_NONE
-	})
+	properties.append(
+		{
+			"name": "delay_seconds",
+			"type": TYPE_FLOAT,
+			"usage": PROPERTY_USAGE_NONE,
+		},
+	)
 
 	return properties
 
 
 func _refresh_caches() -> void:
 	_dirty = false
-	var is_automatic:bool = (event == null or event.length() == 0)
+	var is_automatic: bool = (event == null or event.length() == 0)
 
 	if to != null and not to.is_empty():
-		var result:Node = get_node_or_null(to)
+		var result: Node = get_node_or_null(to)
 		if result is StateChartState:
 			_target = result
 

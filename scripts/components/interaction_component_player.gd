@@ -33,7 +33,9 @@ func interact() -> void:
 		var interactable: Interactable = _find_interactable(node)
 		if not interactable:
 			continue
-		var dist_sq: float = movement.get_global_position().distance_squared_to(interactable.global_position)
+		var dist_sq: float = movement.get_global_position().distance_squared_to(
+			interactable.global_position,
+		)
 		if dist_sq < closest_dist_sq:
 			closest_dist_sq = dist_sq
 			closest = interactable

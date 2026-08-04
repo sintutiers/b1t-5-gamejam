@@ -1,8 +1,7 @@
 @tool
 extends HBoxContainer
 
-
-var sections : Dictionary = {}:
+var sections: Dictionary = { }:
 	set(value):
 		sections = value
 		_update_sections()
@@ -11,16 +10,16 @@ var sections : Dictionary = {}:
 func _update_sections() -> void:
 	if (!is_inside_tree()):
 		return
-	
+
 	var total = 0.0
 	for section in sections:
 		if (section != "Editor"):
 			total += sections[section]
-	
+
 	for section in sections:
 		if (section == "Editor"):
 			continue
-		
+
 		if (get_node_or_null(section)):
 			get_node(section).size_flags_stretch_ratio = sections[section] / total
 		else:

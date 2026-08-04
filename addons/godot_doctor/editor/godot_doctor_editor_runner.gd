@@ -29,13 +29,15 @@ func _run_for_edited_scene_root() -> void:
 	var current_edited_scene_root: Node = EditorInterface.get_edited_scene_root()
 	if current_edited_scene_root == null:
 		GodotDoctorNotifier.print_debug(
-			"No current edited scene root. Skipping scene validation.", self
+			"No current edited scene root. Skipping scene validation.",
+			self,
 		)
 		return
 
 	if current_edited_scene_root.scene_file_path.is_empty():
 		GodotDoctorNotifier.print_debug(
-			"Currently edited scene has not been saved to a file. Skipping scene validation.", self
+			"Currently edited scene has not been saved to a file. Skipping scene validation.",
+			self,
 		)
 		return
 
@@ -44,7 +46,7 @@ func _run_for_edited_scene_root() -> void:
 	started_scene_collection.emit()
 
 	var current_edited_scene_res_path: String = GodotDoctorResourceHelper.to_res_path(
-		current_edited_scene_root.scene_file_path
+		current_edited_scene_root.scene_file_path,
 	)
 	started_run_for_scene_res_path.emit(current_edited_scene_res_path)
 
@@ -68,7 +70,7 @@ func _run_for_edited_resource() -> void:
 	if not edited_object is Resource:
 		GodotDoctorNotifier.print_debug(
 			"Edited object %s is not a Resource. Skipping resource validation." % edited_object,
-			self
+			self,
 		)
 		return
 	var edited_resource: Resource = edited_object as Resource
@@ -76,17 +78,17 @@ func _run_for_edited_resource() -> void:
 	if edited_resource_script == null:
 		GodotDoctorNotifier.print_debug(
 			"Edited resource %s has no script. Skipping resource validation." % edited_resource,
-			self
+			self,
 		)
 		return
 
 	if edited_resource.resource_path.is_empty():
 		GodotDoctorNotifier.print_debug(
 			(
-				"Edited resource %s has not been saved to a file. Skipping resource validation."
-				% edited_resource
+					"Edited resource %s has not been saved to a file. Skipping resource validation."
+					% edited_resource
 			),
-			self
+			self,
 		)
 		return
 

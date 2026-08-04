@@ -4,10 +4,12 @@ extends CodeEdit
 
 var last_v_scroll: float
 
+
 func _ready() -> void:
 	editable = false
 	caret_draw_when_editable_disabled = true
 	set_v_scroll.call_deferred(last_v_scroll)
+
 
 static func new_from(from_code_edit: CodeEdit) -> CodeEdit:
 	var new_code_edit: CodeEdit = new()

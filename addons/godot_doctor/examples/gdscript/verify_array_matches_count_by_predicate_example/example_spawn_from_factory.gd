@@ -22,7 +22,7 @@ func _get_validation_conditions() -> Array[ValidationCondition]:
 			func(factory: ExampleFactory) -> bool:
 				return factory.type_to_spawn == ExampleProductBase.Type.A,
 			"factories",
-			"type_to_spawn is Type A"
+			"type_to_spawn is Type A",
 		),
 		ValidationCondition.array_matches_count_by_predicate(
 			factories,
@@ -30,6 +30,6 @@ func _get_validation_conditions() -> Array[ValidationCondition]:
 			func(factory: ExampleFactory) -> bool:
 				return factory.type_to_spawn == ExampleProductBase.Type.B,
 			"factories",
-			"type_to_spawn is Type B"
+			"type_to_spawn is Type B",
 		),
 	]

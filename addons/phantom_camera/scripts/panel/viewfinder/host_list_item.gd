@@ -10,7 +10,8 @@ const _constants = preload("res://addons/phantom_camera/scripts/phantom_camera/p
 var pcam_host: PhantomCameraHost:
 	set(value):
 		pcam_host = value
-		if not is_instance_valid(value): return
+		if not is_instance_valid(value):
+			return
 		if not pcam_host.renamed.is_connected(_rename_pcam_host):
 			pcam_host.renamed.connect(_rename_pcam_host)
 			pcam_host.has_error.connect(_pcam_host_has_error)
@@ -26,7 +27,8 @@ func _ready() -> void:
 	select_pcam_host.pressed.connect(_select_pcam)
 	switch_pcam_host.pressed.connect(_switch_pcam_host)
 
-	if not is_instance_valid(pcam_host): return
+	if not is_instance_valid(pcam_host):
+		return
 	switch_pcam_host.text = pcam_host.name
 
 	_pcam_host_has_error()
@@ -49,7 +51,8 @@ func _select_pcam() -> void:
 
 
 func _switch_pcam_host() -> void:
-	if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME): return
+	if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME):
+		return
 	if not is_instance_valid(_pcam_manager):
 		_pcam_manager = Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME)
 

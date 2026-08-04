@@ -14,7 +14,8 @@ extends Node
 func _get_validation_conditions() -> Array[ValidationCondition]:
 	var warnings: Array[ValidationCondition] = [
 		ValidationCondition.simple(
-			initial_health <= max_health, "Initial health should not be greater than max health."
-		)
+			initial_health <= max_health,
+			"Initial health should not be greater than max health.",
+		),
 	]
 	return warnings

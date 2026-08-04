@@ -2,7 +2,6 @@
 @icon("res://addons/phantom_camera/icons/phantom_camera_camera_3d_resource.svg")
 class_name Camera3DResource
 extends Resource
-
 ## Resource for [PhantomCamera3D] to override various [Camera3D] properties.
 ##
 ## The overrides defined here will be applied to the [Camera3D] upon the
@@ -14,9 +13,9 @@ enum KeepAspect {
 }
 
 enum ProjectionType {
-	PERSPECTIVE = 	0, ## Perspective projection. Objects on the screen becomes smaller when they are far away.
-	ORTHOGONAL = 	1, ## Orthogonal projection, also known as orthographic projection. Objects remain the same size on the screen no matter how far away they are.
-	FRUSTUM = 		2, ## Frustum projection. This mode allows adjusting frustum_offset to create "tilted frustum" effects.
+	PERSPECTIVE = 0, ## Perspective projection. Objects on the screen becomes smaller when they are far away.
+	ORTHOGONAL = 1, ## Orthogonal projection, also known as orthographic projection. Objects remain the same size on the screen no matter how far away they are.
+	FRUSTUM = 2, ## Frustum projection. This mode allows adjusting frustum_offset to create "tilted frustum" effects.
 }
 
 ## Overrides [member Camera3D.keep_aspect].
@@ -91,7 +90,7 @@ enum ProjectionType {
 		return near
 
 ## Overrides [member Camera3D.far].
-@export_range(0.01, 4000.0, 0.001, "suffix:m","or_greater") var far: float = 4000.0:
+@export_range(0.01, 4000.0, 0.001, "suffix:m", "or_greater") var far: float = 4000.0:
 	set(value):
 		far = value
 		emit_changed()

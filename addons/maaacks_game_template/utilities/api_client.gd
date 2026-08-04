@@ -16,35 +16,36 @@ const URL_NOT_SET = "URL parameter is not set"
 const PARSE_FAILED = "Parsing failed"
 
 ## Location of the API endpoint.
-@export var api_url : String
+@export var api_url: String
 ## HTTP request method to use. Typically GET or POST.
-@export var request_method : HTTPClient.Method = HTTPClient.METHOD_POST
+@export var request_method: HTTPClient.Method = HTTPClient.METHOD_POST
 @export_group("Advanced")
 ## Location of an API key file, if authorization is required by the endpoint.
-@export_file("*.txt") var api_key_file : String
+@export_file("*.txt") var api_key_file: String
 ## Time in seconds before the request fails due to timeout.
-@export var request_timeout : float = 0.0
+@export var request_timeout: float = 0.0
 ## If true, test sending a request.
 ## Replace with @export_tool_button for Godot 4.4+
-@export var _send_request_action : bool = false :
+@export var _send_request_action: bool = false:
 	set(value):
 		if value and Engine.is_editor_hint():
 			request()
 # For Godot 4.4+
 # @export_tool_button("Send Request") var _send_request_action = request
 
-
-@onready var _http_request : HTTPRequest = $HTTPRequest
-@onready var _timeout_timer : Timer= $TimeoutTimer
+@onready var _http_request: HTTPRequest = $HTTPRequest
+@onready var _timeout_timer: Timer = $TimeoutTimer
 
 ## State flag for whether the connection has timed out on the client-side.
-var timed_out : bool = false
+var timed_out: bool = false
+
 
 func get_http_request() -> HTTPRequest:
 	return _http_request
 
+
 func get_api_key() -> String:
-	if api_key_file.is_empty(): 
+	if api_key_file.is_empty():
 		return ""
 	var file := FileAccess.open(api_key_file, FileAccess.READ)
 	var error := FileAccess.get_open_error()
@@ -55,25 +56,30 @@ func get_api_key() -> String:
 	file.close()
 	return content
 
+
 func get_api_url() -> String:
 	return api_url
+
 
 func get_api_method() -> int:
 	return request_method
 
+
 func mock_empty_body() -> String:
-	var form : Dictionary = {}
+	var form: Dictionary = { }
 	return JSON.stringify(form)
 
-func mock_request(body : String):
-	await(get_tree().create_timer(10.0).timeout)
+
+func mock_request(body: String):
+	await (get_tree().create_timer(10.0).timeout)
 	_on_request_completed(HTTPRequest.RESULT_SUCCESS, "200", [], body)
 
-func request(body : String = "", request_headers : Array = []) -> void:
-	var local_http_request : HTTPRequest = get_http_request()
-	var key : String = get_api_key()
-	var url : String = get_api_url()
-	var method : int = get_api_method()
+
+func request(body: String = "", request_headers: Array = []) -> void:
+	var local_http_request: HTTPRequest = get_http_request()
+	var key: String = get_api_key()
+	var url: String = get_api_url()
+	var method: int = get_api_method()
 	if url.is_empty():
 		request_failed.emit(URL_NOT_SET)
 		push_error(URL_NOT_SET)
@@ -91,11 +97,12 @@ func request(body : String = "", request_headers : Array = []) -> void:
 	if request_timeout > 0.0:
 		_timeout_timer.start(request_timeout + 1.0)
 
-func request_raw(data : PackedByteArray = [], request_headers : Array = []) -> void:
-	var local_http_request : HTTPRequest = get_http_request()
-	var key : String = get_api_key()
-	var url : String = get_api_url()
-	var method : int = get_api_method()
+
+func request_raw(data: PackedByteArray = [], request_headers: Array = []) -> void:
+	var local_http_request: HTTPRequest = get_http_request()
+	var key: String = get_api_key()
+	var url: String = get_api_url()
+	var method: int = get_api_method()
 	if url.is_empty():
 		request_failed.emit(URL_NOT_SET)
 		push_error(URL_NOT_SET)
@@ -113,12 +120,14 @@ func request_raw(data : PackedByteArray = [], request_headers : Array = []) -> v
 	if request_timeout > 0.0:
 		_timeout_timer.start(request_timeout + 1.0)
 
+
 func _on_request_completed(result, response_code, headers, body) -> void:
 	# If already timed out on client-side, then return.
-	if timed_out: return
+	if timed_out:
+		return
 	_timeout_timer.stop()
 	if result == HTTPRequest.RESULT_SUCCESS:
-		var body_string : String
+		var body_string: String
 		if body is PackedByteArray:
 			body_string = body.get_string_from_utf8()
 		elif body is String:
@@ -132,8 +141,8 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 		var parsed_data = json.data
 		response_received.emit(json.data)
 	else:
-		var error_message : String
-		match(result):
+		var error_message: String
+		match (result):
 			HTTPRequest.RESULT_CANT_CONNECT:
 				error_message = RESULT_CANT_CONNECT
 			HTTPRequest.RESULT_CANT_RESOLVE:
@@ -147,8 +156,10 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 		request_failed.emit(error_message)
 		push_error("HTTP Result error: %d" % result)
 
+
 func _on_http_request_request_completed(result, response_code, headers, body) -> void:
 	_on_request_completed(result, response_code, headers, body)
+
 
 func _on_timeout_timer_timeout() -> void:
 	timed_out = true

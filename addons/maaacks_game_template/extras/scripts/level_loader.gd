@@ -8,23 +8,26 @@ signal level_loaded
 signal level_ready
 
 ## Container where the level instance will be added.
-@export var level_container : Node
+@export var level_container: Node
 ## Optional reference to a loading screen in the scene.
-@export var level_loading_screen : LoadingScreen
+@export var level_loading_screen: LoadingScreen
 @export_group("Debugging")
-@export var current_level : Node
+@export var current_level: Node
 
-var current_level_path : String
-var is_loading : bool = false
+var current_level_path: String
+var is_loading: bool = false
 
-func _attach_level(level_resource : Resource):
+
+func _attach_level(level_resource: Resource):
 	assert(level_container != null, "level_container is null")
 	var instance = level_resource.instantiate()
 	level_container.call_deferred("add_child", instance)
 	return instance
 
-func load_level(level_path : String):
-	if is_loading : return
+
+func load_level(level_path: String):
+	if is_loading:
+		return
 	if is_instance_valid(current_level):
 		current_level.queue_free()
 		await current_level.tree_exited

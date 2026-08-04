@@ -29,10 +29,10 @@ var epsilon: float = EPSILON_DEFAULT
 ## GodotDoctorRangeFloat.new(1.0, 10.0, true)  # contains [1 ... 10 +/- epsilon]
 ## [/codeblock]
 func _init(
-	start: float = 0.0,
-	end: float = 0.0,
-	inclusive_end: bool = false,
-	epsilon: float = EPSILON_DEFAULT
+		start: float = 0.0,
+		end: float = 0.0,
+		inclusive_end: bool = false,
+		epsilon: float = EPSILON_DEFAULT,
 ) -> void:
 	if start > end:
 		push_error("End of GodotDoctorRangeFloat must be greater than or equal to start.")

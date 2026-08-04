@@ -5,8 +5,9 @@ extends EditorPlugin
 const WINDOW = preload("res://addons/godotresourcecleaner/window.tscn")
 const ICON = preload("res://addons/godotresourcecleaner/icon.svg")
 
-var button : Button
-var window : Window
+var button: Button
+var window: Window
+
 
 func _enter_tree() -> void:
 	# Add toolbar button
@@ -21,9 +22,11 @@ func _enter_tree() -> void:
 	window.visible = false
 	EditorInterface.get_base_control().add_child(window)
 
+
 func _on_button_pressed() -> void:
 	window.popup_centered()
 	window.grab_focus()
+
 
 func _exit_tree() -> void:
 	# Clean up plugin

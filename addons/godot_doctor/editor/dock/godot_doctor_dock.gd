@@ -45,7 +45,8 @@ var _current_messages: Array[GodotDoctorValidationMessage] = []
 ## Connects the validate-now button signal when the dock enters the scene tree.
 func _enter_tree() -> void:
 	GodotDoctorNotifier.print_debug(
-		"Entering scene tree. Connecting signals and adding dock to editor.", self
+		"Entering scene tree. Connecting signals and adding dock to editor.",
+		self,
 	)
 	_validate_now_button.pressed.connect(_on_validate_now_button_pressed)
 
@@ -56,7 +57,8 @@ func _enter_tree() -> void:
 ## Disconnects the validate-now button signal when the dock exits the scene tree.
 func _exit_tree() -> void:
 	GodotDoctorNotifier.print_debug(
-		"Exiting scene tree. Disconnecting signals and removing dock from editor.", self
+		"Exiting scene tree. Disconnecting signals and removing dock from editor.",
+		self,
 	)
 	if _validate_now_button.pressed.is_connected(_on_validate_now_button_pressed):
 		_validate_now_button.pressed.disconnect(_on_validate_now_button_pressed)
@@ -72,17 +74,18 @@ func _on_validate_now_button_pressed() -> void:
 ## Displays [param validation_message] with the appropriate severity icon.
 ## Clicking the entry selects [param origin_node] in the scene tree.
 func add_node_validation_message(
-	node_ancestor_path: String, validation_message: GodotDoctorValidationMessage
+		node_ancestor_path: String,
+		validation_message: GodotDoctorValidationMessage,
 ) -> void:
 	GodotDoctorNotifier.print_debug(
 		(
-			"Adding node warning to dock for node: %s, message: %s"
-			% [node_ancestor_path, validation_message.message]
-		)
+				"Adding node warning to dock for node: %s, message: %s"
+				% [node_ancestor_path, validation_message.message]
+		),
 	)
 	_current_messages.append(validation_message)
 	var warning_instance: GodotDoctorNodeValidationWarning = (
-		load(NODE_WARNING_SCENE_PATH).instantiate() as GodotDoctorNodeValidationWarning
+			load(NODE_WARNING_SCENE_PATH).instantiate() as GodotDoctorNodeValidationWarning
 	)
 	var icon_path: String = _get_warning_icon_path_for_severity(validation_message.severity_level)
 	warning_instance.icon.texture = load(icon_path) as Texture2D
@@ -95,9 +98,9 @@ func add_node_validation_message(
 	var relative_path = current_path.trim_suffix("/")
 
 	warning_instance.origin_node = (
-		scene_root_for_validations
-		if relative_path.is_empty()
-		else scene_root_for_validations.get_node(relative_path)
+			scene_root_for_validations
+			if relative_path.is_empty()
+			else scene_root_for_validations.get_node(relative_path)
 	)
 	warning_instance.origin_node_root = scene_root_for_validations
 	warning_instance.label.text = validation_message.message
@@ -109,17 +112,18 @@ func add_node_validation_message(
 ## Displays [param validation_message] with the appropriate severity icon.
 ## Clicking the entry opens [param origin_resource] in the inspector.
 func add_resource_validation_message(
-	resource_path: String, validation_message: GodotDoctorValidationMessage
+		resource_path: String,
+		validation_message: GodotDoctorValidationMessage,
 ) -> void:
 	GodotDoctorNotifier.print_debug(
 		(
-			"Adding resource warning to dock for resource: %s, message: %s"
-			% [resource_path, validation_message.message]
-		)
+				"Adding resource warning to dock for resource: %s, message: %s"
+				% [resource_path, validation_message.message]
+		),
 	)
 	_current_messages.append(validation_message)
 	var warning_instance: GodotDoctorResourceValidationWarning = (
-		load(RESOURCE_WARNING_SCENE_PATH).instantiate() as GodotDoctorResourceValidationWarning
+			load(RESOURCE_WARNING_SCENE_PATH).instantiate() as GodotDoctorResourceValidationWarning
 	)
 	var icon_path: String = _get_warning_icon_path_for_severity(validation_message.severity_level)
 	warning_instance.icon.texture = load(icon_path) as Texture2D
@@ -156,19 +160,21 @@ func _update_title() -> void:
 	var editor_dock := get_parent() as EditorDock
 	if not editor_dock:
 		GodotDoctorNotifier.print_debug(
-			"Could not find parent EditorDock for new_title update.", self
+			"Could not find parent EditorDock for new_title update.",
+			self,
 		)
 		return
 	var tab_container := editor_dock.get_parent() as TabContainer
 	if not tab_container:
 		GodotDoctorNotifier.print_debug(
-			"Could not find parent TabContainer for new_title update.", self
+			"Could not find parent TabContainer for new_title update.",
+			self,
 		)
 		return
 	var tab_index: int = tab_container.get_tab_idx_from_control(editor_dock)
 
 	var new_title: String = (
-		"%s %s (%s)" % [_get_indicator_glyph(), DOCK_TITLE, _current_messages.size()]
+			"%s %s (%s)" % [_get_indicator_glyph(), DOCK_TITLE, _current_messages.size()]
 	)
 	tab_container.set_tab_title(tab_index, new_title)
 	_title_is_dirty = false
@@ -184,8 +190,8 @@ func _get_indicator_glyph() -> String:
 		return "✅"
 
 	var promoted_severity_levels: Array[ValidationCondition.Severity] = (
-		GodotDoctorValidationMessage
-		. map_to_promoted_severity_levels(settings.treat_warnings_as_errors, _current_messages)
+			GodotDoctorValidationMessage
+			.map_to_promoted_severity_levels(settings.treat_warnings_as_errors, _current_messages)
 	)
 	var highest_severity_level: int = promoted_severity_levels.max()
 	match highest_severity_level:
@@ -198,16 +204,16 @@ func _get_indicator_glyph() -> String:
 		_:
 			push_error(
 				(
-					"No indicator glyph defined for severity level: "
-					+ ValidationCondition.Severity.keys()[highest_severity_level]
-				)
+						"No indicator glyph defined for severity level: "
+						+ ValidationCondition.Severity.keys()[highest_severity_level]
+				),
 			)
 			return ""
 
 
 ## Returns the icon asset path corresponding to [param severity_level].
 func _get_warning_icon_path_for_severity(
-	severity_level: ValidationCondition.Severity
+		severity_level: ValidationCondition.Severity,
 ) -> StringName:
 	match severity_level:
 		ValidationCondition.Severity.INFO:
@@ -221,8 +227,8 @@ func _get_warning_icon_path_for_severity(
 		_:
 			push_error(
 				(
-					"No scene defined for node warning with severity level: "
-					+ ValidationCondition.Severity.keys()[severity_level]
-				)
+						"No scene defined for node warning with severity level: "
+						+ ValidationCondition.Severity.keys()[severity_level]
+				),
 			)
 			return ""

@@ -4,7 +4,7 @@ extends Node2D
 @onready var pcam_room_centre: PhantomCamera2D = %RoomCentrePhantomCamera2D
 @onready var pcam_room_right: PhantomCamera2D = %RoomRightPhantomCamera2D
 
-@onready var player: Node2D = %CharacterBody2D/%PlayerVisuals
+@onready var player: Node2D = %CharacterBody2D/ % PlayerVisuals
 
 @onready var area_2d_room_left: Area2D = %RoomLeftArea2D
 @onready var area_2d_room_centre: Area2D = %RoomCentreArea2D

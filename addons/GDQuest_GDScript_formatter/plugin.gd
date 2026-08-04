@@ -126,7 +126,7 @@ func register_format_mode_setting() -> void:
 			"type": TYPE_INT,
 			"hint": PROPERTY_HINT_ENUM,
 			"hint_string": "Normal,Reorder code,Verify structure",
-		}
+		},
 	)
 	editor_settings.set_initial_value(setting_name, DEFAULT_SETTINGS[SETTING_FORMAT_MODE], false)
 
@@ -151,8 +151,8 @@ func migrate_format_mode_setting() -> void:
 		if has_editor_setting(SETTING_SAFE_MODE) and get_editor_setting(SETTING_SAFE_MODE) as bool:
 			format_mode = FormatMode.VERIFY_STRUCTURE
 		elif (
-			has_editor_setting(SETTING_REORDER_CODE)
-			and get_editor_setting(SETTING_REORDER_CODE) as bool
+				has_editor_setting(SETTING_REORDER_CODE)
+				and get_editor_setting(SETTING_REORDER_CODE) as bool
 		):
 			format_mode = FormatMode.REORDER_CODE
 
@@ -172,12 +172,12 @@ func _enter_tree() -> void:
 	installer = FormatterInstaller.new(formatter_cache_dir)
 	add_child(installer)
 	installer.installation_completed.connect(
-		func _on_installation_completed (binary_path: String) -> void:
+		func _on_installation_completed(binary_path: String) -> void:
 			set_editor_setting(SETTING_FORMATTER_PATH, binary_path)
 			_has_formatter_command = has_command(binary_path)
 			if not _has_formatter_command:
 				push_error(
-					"GDScript Formatter: Installed binary cannot be executed: " + binary_path
+					"GDScript Formatter: Installed binary cannot be executed: " + binary_path,
 				)
 				return
 			add_format_command()
@@ -187,7 +187,7 @@ func _enter_tree() -> void:
 				menu.update_menu(true),
 	)
 	installer.installation_failed.connect(
-		func _on_installation_failed (error_message: String) -> void:
+		func _on_installation_failed(error_message: String) -> void:
 			push_error("Formatter installation failed: ", error_message),
 	)
 
@@ -312,11 +312,11 @@ func _on_resource_saved(saved_resource: Resource) -> void:
 		do_format_on_save = editorconfig_format_on_save as bool
 	var lint_on_save := get_editor_setting(SETTING_LINT_ON_SAVE) as bool
 	if (
-		do_format_on_save and get_format_mode() == FormatMode.REORDER_CODE
-		and not _already_warned_about_reorder_on_save
+			do_format_on_save and get_format_mode() == FormatMode.REORDER_CODE
+			and not _already_warned_about_reorder_on_save
 	):
 		push_warning(
-			"GDScript Formatter: Reorder code is enabled for format on save. It is usually better used manually."
+			"GDScript Formatter: Reorder code is enabled for format on save. It is usually better used manually.",
 		)
 		_already_warned_about_reorder_on_save = true
 
@@ -378,7 +378,7 @@ func _on_resource_saved(saved_resource: Resource) -> void:
 					return
 		else:
 			push_error(
-				"GDScript Formatter error: Unknown situation, can't reload code editor in Editor. Please report this issue."
+				"GDScript Formatter error: Unknown situation, can't reload code editor in Editor. Please report this issue.",
 			)
 
 	if lint_on_save:
@@ -421,7 +421,7 @@ func remove_format_command() -> void:
 	if not _has_format_command:
 		return
 	EditorInterface.get_command_palette().remove_command(
-		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_FORMAT_SCRIPT
+		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_FORMAT_SCRIPT,
 	)
 	_has_format_command = false
 
@@ -457,7 +457,7 @@ func add_install_update_command() -> void:
 
 func remove_install_update_command() -> void:
 	EditorInterface.get_command_palette().remove_command(
-		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_INSTALL_UPDATE
+		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_INSTALL_UPDATE,
 	)
 
 
@@ -475,7 +475,7 @@ func remove_uninstall_command() -> void:
 	if not _has_uninstall_command:
 		return
 	EditorInterface.get_command_palette().remove_command(
-		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_UNINSTALL
+		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_UNINSTALL,
 	)
 	_has_uninstall_command = false
 
@@ -490,7 +490,7 @@ func add_report_issue_command() -> void:
 
 func remove_report_issue_command() -> void:
 	EditorInterface.get_command_palette().remove_command(
-		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_REPORT_ISSUE
+		COMMAND_PALETTE_CATEGORY + COMMAND_PALETTE_REPORT_ISSUE,
 	)
 
 
@@ -670,11 +670,11 @@ func load_editorconfig_format_on_save_rules(editorconfig_path: String) -> void:
 		match key_and_value[1].strip_edges().to_lower():
 			"true":
 				_editorconfig_format_on_save_rules.append(
-					{ "pattern": pattern, "format_on_save": true }
+					{ "pattern": pattern, "format_on_save": true },
 				)
 			"false":
 				_editorconfig_format_on_save_rules.append(
-					{ "pattern": pattern, "format_on_save": false }
+					{ "pattern": pattern, "format_on_save": false },
 				)
 
 	editorconfig_file.close()
@@ -740,7 +740,7 @@ func format_code(script: GDScript, force_reorder := false, source_content: Varia
 		source_file.close()
 
 	var path_temporary_file := OS.get_temp_dir().path_join(
-		"gdscript_formatter_%d.gd" % Time.get_ticks_msec()
+		"gdscript_formatter_%d.gd" % Time.get_ticks_msec(),
 	)
 	var temporary_file := FileAccess.open(path_temporary_file, FileAccess.WRITE)
 	if temporary_file == null:
@@ -787,14 +787,14 @@ func format_code(script: GDScript, force_reorder := false, source_content: Varia
 	else:
 		push_error(
 			"Format GDScript failed: "
-			+ (script_path if not script_path.is_empty() else "unsaved script")
+			+ (script_path if not script_path.is_empty() else "unsaved script"),
 		)
 		push_error(
 			"\tExit code: " + str(exit_code) + " Output: "
 			+ (output[0].strip_edges() if output.size() > 0 else "No output"),
 		)
 		push_error(
-			'\tIf your script does not have any syntax errors, this might be a formatter bug.'
+			'\tIf your script does not have any syntax errors, this might be a formatter bug.',
 		)
 
 	if FileAccess.file_exists(path_temporary_file):
@@ -848,7 +848,7 @@ func lint_code(script: GDScript) -> Array:
 	push_error("Lint GDScript failed: " + script_path)
 	push_error(
 		"\tExit code: " + str(exit_code) + " Output: "
-		+ (output.front().strip_edges() if output.size() > 0 else "No output")
+		+ (output.front().strip_edges() if output.size() > 0 else "No output"),
 	)
 	return []
 
@@ -990,9 +990,9 @@ class CodeEditState:
 	##
 	## Big thanks to https://github.com/Daylily-Zeleen/GDScript-Formatter for this approach.
 	func _restore_line_features(
-		stored_features: Dictionary,
-		set_line_func: Callable,
-		new_line_count: int,
+			stored_features: Dictionary,
+			set_line_func: Callable,
+			new_line_count: int,
 	) -> void:
 		var stored_lines := PackedInt64Array(stored_features.keys())
 		for line_index in range(stored_lines.size()):
@@ -1006,8 +1006,8 @@ class CodeEditState:
 			# This should be sufficient for most cases, but might need adjustment for edge cases.
 			# If no match is found, we skip restoring this feature
 			if (
-				original_line < new_line_count
-				and code_edit.get_line(original_line).similarity(original_text) > 0.9
+					original_line < new_line_count
+					and code_edit.get_line(original_line).similarity(original_text) > 0.9
 			):
 				set_line_func.call(original_line, true)
 				continue
@@ -1016,8 +1016,8 @@ class CodeEditState:
 			var line_below := original_line + 1
 			while line_above >= 0 or line_below < new_line_count:
 				if line_below < new_line_count and code_edit.get_line(line_below).similarity(
-						original_text
-					) > 0.9:
+					original_text,
+				) > 0.9:
 					set_line_func.call(line_below, true)
 					break
 				if line_above >= 0 and code_edit.get_line(line_above).similarity(original_text) > 0.9:

@@ -23,15 +23,17 @@ func _get_validation_conditions() -> Array[ValidationCondition]:
 		# which does the exact same thing, but standardizes the error message.
 		ValidationCondition.simple(
 			my_int >= my_min_int and my_int <= my_max_int,
-			"my_int must be between %d and %d, but is %s." % [my_min_int, my_max_int, my_int]
+			"my_int must be between %d and %d, but is %s." % [my_min_int, my_max_int, my_int],
 		),
 		ValidationCondition.simple(my_string != "", "my_string must not be empty."),
 		ValidationCondition.simple(
-			my_max_int >= my_min_int, "my_max_int must be greater than or equal to my_min_int."
+			my_max_int >= my_min_int,
+			"my_max_int must be greater than or equal to my_min_int.",
 		),
 		ValidationCondition.simple(
-			my_min_int <= my_max_int, "my_min_int must be less than or equal to my_max_int."
-		)
+			my_min_int <= my_max_int,
+			"my_min_int must be less than or equal to my_max_int.",
+		),
 	]
 	return conditions
 

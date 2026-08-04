@@ -7,7 +7,7 @@ signal run_completed
 ## Sent when a response is received from the server.
 signal response_received(response_body)
 ## Sent when the run has failed or exited early for any reason.
-signal run_failed(error : String)
+signal run_failed(error: String)
 ## Sent when the zip file has finished saving.
 signal zip_saved
 
@@ -28,7 +28,7 @@ const FAILED_TO_READ_ZIP_FILE = "Failed to read the zip file"
 const DOWNLOADED_ZIP_FILE_DOESNT_EXIST = "The downloaded ZIP file doesn't exist"
 const URL_NOT_SET = "URL parameter is not set"
 
-enum DownloadAndExtractStage{
+enum DownloadAndExtractStage {
 	NONE,
 	DOWNLOAD,
 	SAVE,
@@ -37,64 +37,68 @@ enum DownloadAndExtractStage{
 }
 
 ## Location of the zip file to be downloaded.
-@export var zip_url : String
+@export var zip_url: String
 ## Path where the zipped files are to be extracted.
-@export_dir var extract_path : String
+@export_dir var extract_path: String
 @export_group("Advanced")
 ## If not empty, zipped file paths that do not contain a match to the string will be ignored.
-@export var path_match_string : String = ""
+@export var path_match_string: String = ""
 ## Assuming zip file contains a single base directory, the flag copies all of the contents,
 ## as if they were at the base of the zip file. It never makes the base directory locally. 
-@export var skip_base_zip_dir : bool = false
+@export var skip_base_zip_dir: bool = false
 ## Forces a download and extraction even if the files already exist.
-@export var force : bool = false
+@export var force: bool = false
 ## Path where the zip file will be stored.
-@export var zip_file_path : String = TEMPORARY_ZIP_PATH
+@export var zip_file_path: String = TEMPORARY_ZIP_PATH
 ## If true, delete a downloaded zip file after the contents are extracted.
-@export var delete_zip_file : bool = true
+@export var delete_zip_file: bool = true
 ## Ratio of processing time that should be spent on extracting files.
-@export_range(0.0, 1.0) var process_time_ratio : float = 0.75
+@export_range(0.0, 1.0) var process_time_ratio: float = 0.75
 ## Seconds of delay added between saving the zip file and extracting it.
-@export_range(0.0, 3.0) var extraction_delay : float = 0.25
+@export_range(0.0, 3.0) var extraction_delay: float = 0.25
 ## Duration to wait before the request times out.
-@export var request_timeout : float = 0.0
-@export var _start_run_action : bool = false :
+@export var request_timeout: float = 0.0
+@export var _start_run_action: bool = false:
 	set(value):
 		if value and Engine.is_editor_hint():
 			run()
 # For Godot 4.4
 # @export_tool_button("Download & Extract") var _start_run_action = run
 
-
-@onready var _http_request : HTTPRequest = $HTTPRequest
-@onready var _timeout_timer : Timer= $TimeoutTimer
+@onready var _http_request: HTTPRequest = $HTTPRequest
+@onready var _timeout_timer: Timer = $TimeoutTimer
 
 ## State flag for whether the connection has timed out on the client-side.
-var timed_out : bool = false
+var timed_out: bool = false
 ## Current stage of the download and extract process.
-var stage : DownloadAndExtractStage = DownloadAndExtractStage.NONE
-var zip_reader : ZIPReader = ZIPReader.new()
-var zipped_file_paths : PackedStringArray = []
-var extracted_file_paths : Array[String] = []
-var skipped_file_paths : Array[String] = []
-var downloaded_zip_file : bool = false
-var base_zip_path : String = ""
-var _save_progress : float = 0.0
+var stage: DownloadAndExtractStage = DownloadAndExtractStage.NONE
+var zip_reader: ZIPReader = ZIPReader.new()
+var zipped_file_paths: PackedStringArray = []
+var extracted_file_paths: Array[String] = []
+var skipped_file_paths: Array[String] = []
+var downloaded_zip_file: bool = false
+var base_zip_path: String = ""
+var _save_progress: float = 0.0
+
 
 func get_http_request() -> HTTPRequest:
 	return _http_request
 
+
 func get_zip_url() -> String:
 	return zip_url
+
 
 func _zip_exists() -> bool:
 	return FileAccess.file_exists(zip_file_path)
 
+
 func get_request_method() -> int:
 	return HTTPClient.METHOD_GET
 
+
 ## Sends the request to download the target zip file, and then extracts the contents.
-func run(request_headers : Array = []) -> void:
+func run(request_headers: Array = []) -> void:
 	if stage == DownloadAndExtractStage.DOWNLOAD:
 		run_failed.emit(DOWNLOAD_IN_PROGRESS)
 		push_warning(DOWNLOAD_IN_PROGRESS)
@@ -102,9 +106,9 @@ func run(request_headers : Array = []) -> void:
 	if _zip_exists() and not force:
 		_extract_files.call_deferred()
 		return
-	var local_http_request : HTTPRequest = get_http_request()
-	var url : String = get_zip_url()
-	var method : int = get_request_method()
+	var local_http_request: HTTPRequest = get_http_request()
+	var url: String = get_zip_url()
+	var method: int = get_request_method()
 	if url.is_empty():
 		run_failed.emit(URL_NOT_SET)
 		push_error(URL_NOT_SET)
@@ -120,8 +124,10 @@ func run(request_headers : Array = []) -> void:
 		_timeout_timer.start(request_timeout + 1.0)
 	stage = DownloadAndExtractStage.DOWNLOAD
 
+
 func _delete_zip_file() -> void:
-	if not delete_zip_file or not downloaded_zip_file: return
+	if not delete_zip_file or not downloaded_zip_file:
+		return
 	if stage == DownloadAndExtractStage.DELETE:
 		run_failed.emit(DELETE_IN_PROGRESS)
 		push_warning(DELETE_IN_PROGRESS)
@@ -130,7 +136,8 @@ func _delete_zip_file() -> void:
 	DirAccess.remove_absolute(zip_file_path)
 	downloaded_zip_file = false
 
-func _save_zip_file(body : PackedByteArray) -> void:
+
+func _save_zip_file(body: PackedByteArray) -> void:
 	stage = DownloadAndExtractStage.SAVE
 	var file = FileAccess.open(zip_file_path, FileAccess.WRITE)
 	if not file:
@@ -142,14 +149,17 @@ func _save_zip_file(body : PackedByteArray) -> void:
 	downloaded_zip_file = true
 	zip_saved.emit()
 
+
 func extract_path_exists() -> bool:
 	return DirAccess.dir_exists_absolute(extract_path)
+
 
 func _make_extract_path() -> void:
 	var err := DirAccess.make_dir_recursive_absolute(extract_path)
 	if err != OK:
 		run_failed.emit(FAILED_TO_MAKE_EXTRACT_DIR)
 		push_error(FAILED_TO_MAKE_EXTRACT_DIR)
+
 
 func _extract_files() -> void:
 	if stage == DownloadAndExtractStage.EXTRACT:
@@ -161,7 +171,8 @@ func _extract_files() -> void:
 		run_failed.emit(DOWNLOADED_ZIP_FILE_DOESNT_EXIST)
 		push_error(DOWNLOADED_ZIP_FILE_DOESNT_EXIST)
 		return
-	if not extract_path_exists(): _make_extract_path()
+	if not extract_path_exists():
+		_make_extract_path()
 	var error = zip_reader.open(zip_file_path)
 	if error != OK:
 		run_failed.emit(FAILED_TO_READ_ZIP_FILE)
@@ -174,11 +185,14 @@ func _extract_files() -> void:
 			push_warning("Skipping extracting base path, but it is not a directory.")
 		zipped_file_paths.remove_at(0)
 
+
 func _on_request_completed(result, response_code, headers, body) -> void:
 	# If already timed out on client-side, then return.
-	if timed_out: return
+	if timed_out:
+		return
 	_timeout_timer.stop()
-	if _zip_exists(): _delete_zip_file()
+	if _zip_exists():
+		_delete_zip_file()
 	if result == HTTPRequest.RESULT_SUCCESS:
 		if body is PackedByteArray:
 			response_received.emit(body)
@@ -189,8 +203,8 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 			await tween.finished
 			_extract_files.call_deferred()
 	else:
-		var error_message : String
-		match(result):
+		var error_message: String
+		match (result):
 			HTTPRequest.RESULT_CANT_CONNECT:
 				error_message = RESULT_CANT_CONNECT
 			HTTPRequest.RESULT_CANT_RESOLVE:
@@ -204,13 +218,16 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 		run_failed.emit(error_message)
 		push_error("HTTP Result error: %d" % result)
 
+
 func _on_http_request_request_completed(result, response_code, headers, body) -> void:
 	_on_request_completed(result, response_code, headers, body)
+
 
 func _on_timeout_timer_timeout() -> void:
 	timed_out = true
 	run_failed.emit(REQUEST_TIMEOUT)
 	push_warning(REQUEST_TIMEOUT)
+
 
 func get_progress() -> float:
 	if stage == DownloadAndExtractStage.DOWNLOAD:
@@ -221,21 +238,27 @@ func get_progress() -> float:
 		return get_extraction_progress()
 	return 0.0
 
+
 func get_save_progress() -> float:
 	return _save_progress
+
 
 func get_extraction_progress() -> float:
 	if zipped_file_paths.size() == 0:
 		return 0.0
 	return float(extracted_file_paths.size()) / float(zipped_file_paths.size())
 
+
 func get_download_progress() -> float:
 	var body_size := _http_request.get_body_size()
-	if body_size < 1: return 0.0
+	if body_size < 1:
+		return 0.0
 	return float(_http_request.get_downloaded_bytes()) / float(body_size)
+
 
 func _zipped_files_remaining() -> int:
 	return zipped_file_paths.size() - (extracted_file_paths.size() + skipped_file_paths.size())
+
 
 func _extract_next_zipped_file() -> void:
 	var path_index = extracted_file_paths.size() + skipped_file_paths.size()
@@ -246,7 +269,7 @@ func _extract_next_zipped_file() -> void:
 	var extract_path_dir := extract_path
 	if not extract_path_dir.ends_with("/"):
 		extract_path_dir += "/"
-	var full_path := extract_path_dir 
+	var full_path := extract_path_dir
 	if skip_base_zip_dir:
 		full_path += zipped_file_path.replace(base_zip_path, "")
 	else:
@@ -266,16 +289,18 @@ func _extract_next_zipped_file() -> void:
 			file_access.close()
 	extracted_file_paths.append(full_path)
 
+
 func _finish_extraction() -> void:
 	zip_reader.close()
 	_delete_zip_file()
 	stage = DownloadAndExtractStage.NONE
 	run_completed.emit()
 
-func _process(delta : float) -> void:
+
+func _process(delta: float) -> void:
 	if stage == DownloadAndExtractStage.EXTRACT:
-		var frame_start_time : float = Time.get_unix_time_from_system()
-		var frame_time : float = 0.0
+		var frame_start_time: float = Time.get_unix_time_from_system()
+		var frame_time: float = 0.0
 		while (frame_time < delta * process_time_ratio):
 			if _zipped_files_remaining() == 0:
 				_finish_extraction()

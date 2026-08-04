@@ -103,10 +103,10 @@ func _collect_files(extensions: Array[String], files_to_exclude: Array[String]) 
 ## excluding any files in [param files_to_exclude] or in any [member directories_to_exclude],
 ## and appends them to [param result].
 func _collect_files_recursive(
-	dir_path: String,
-	extensions: Array[String],
-	files_to_exclude: Array[String],
-	result: Array[String]
+		dir_path: String,
+		extensions: Array[String],
+		files_to_exclude: Array[String],
+		result: Array[String],
 ) -> void:
 	if directories_to_exclude.any(func(excluded): return dir_path.begins_with(excluded)):
 		return
@@ -144,19 +144,19 @@ func _resource_has_script(path: String) -> bool:
 func _validate_property(property: Dictionary) -> void:
 	var property_name: String = property.name
 	var is_generate_filter_property: bool = (
-		property_name
-		in [
-			"directories_to_include",
-			"directories_to_exclude",
-			"scenes_to_exclude",
-			"resources_to_exclude"
-		]
+			property_name
+			in [
+				"directories_to_include",
+				"directories_to_exclude",
+				"scenes_to_exclude",
+				"resources_to_exclude",
+			]
 	)
 	var is_suite_contents_property: bool = property_name in ["_scenes", "_resources"]
 
 	var should_disable: bool = (
-		(is_generate_filter_property and not generate_suite_contents)
-		or (is_suite_contents_property and generate_suite_contents)
+			(is_generate_filter_property and not generate_suite_contents)
+			or (is_suite_contents_property and generate_suite_contents)
 	)
 
 	if should_disable:

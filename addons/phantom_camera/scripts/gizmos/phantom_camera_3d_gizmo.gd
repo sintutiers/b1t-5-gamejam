@@ -3,6 +3,7 @@ extends EditorNode3DGizmo
 
 var pcam_3d: PhantomCamera3D
 
+
 func _redraw() -> void:
 	clear()
 
@@ -14,14 +15,15 @@ func _redraw() -> void:
 	if pcam_3d.is_following() and pcam_3d.draw_follow_gizmo_line():
 		_draw_target(pcam_3d.get_follow_target_position(), "follow_target")
 	if pcam_3d.is_looking() and pcam_3d.draw_look_at_gizmo_line():
-		_draw_target(pcam_3d.get_look_at_target_position(),"look_at_target")
+		_draw_target(pcam_3d.get_look_at_target_position(), "look_at_target")
 
-	if pcam_3d.is_active(): return
+	if pcam_3d.is_active():
+		return
 
 	var frustum_lines: PackedVector3Array = PackedVector3Array()
-	var height: float                     = 0.25
-	var width: float                      = height * 1.25
-	var forward: float                    = height * -1.5
+	var height: float = 0.25
+	var width: float = height * 1.25
+	var forward: float = height * -1.5
 
 	# Trapezoid
 	frustum_lines.push_back(Vector3.ZERO)

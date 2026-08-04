@@ -9,6 +9,7 @@ enum Direction {
 	RIGHT,
 	CUSTOM,
 }
+
 const DIRECTION_VECTORS: Dictionary[Direction, Vector2] = {
 	Direction.UP: Vector2.UP,
 	Direction.DOWN: Vector2.DOWN,
@@ -22,10 +23,12 @@ const DIRECTION_VECTORS: Dictionary[Direction, Vector2] = {
 @export var additive: bool = false
 @export var cooldown: float = 0.5
 
-var _cooldowns: Dictionary[Node, float] = {}
+var _cooldowns: Dictionary[Node, float] = { }
+
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+
 
 func _physics_process(delta: float) -> void:
 	if _cooldowns.is_empty():
@@ -38,10 +41,12 @@ func _physics_process(delta: float) -> void:
 	for body: Node in to_remove:
 		_cooldowns.erase(body)
 
+
 func get_launch_direction() -> Vector2:
 	if direction == Direction.CUSTOM:
 		return custom_direction
 	return DIRECTION_VECTORS.get(direction, Vector2.ZERO)
+
 
 func _on_body_entered(body: Node2D) -> void:
 	if _cooldowns.has(body):
@@ -53,6 +58,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if cooldown > 0.0:
 		_cooldowns[body] = cooldown
 
+
 func _launch(movement: MovementComponent) -> void:
 	var dir: Vector2 = get_launch_direction()
 	if dir == Vector2.ZERO:
@@ -62,6 +68,7 @@ func _launch(movement: MovementComponent) -> void:
 	if additive:
 		new_velocity += movement.body.velocity
 	movement.launch(new_velocity)
+
 
 func _find_child_of_type(node: Node, type: Script) -> Node:
 	for child: Node in node.get_children():

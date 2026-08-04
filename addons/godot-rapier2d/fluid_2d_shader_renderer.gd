@@ -34,7 +34,7 @@ func _create_subviewport_container():
 	sub_viewport_container.material = water_material
 	sub_viewport_container.size = Vector2(
 		ProjectSettings.get("display/window/size/viewport_width"),
-		ProjectSettings.get("display/window/size/viewport_height")
+		ProjectSettings.get("display/window/size/viewport_height"),
 	)
 
 

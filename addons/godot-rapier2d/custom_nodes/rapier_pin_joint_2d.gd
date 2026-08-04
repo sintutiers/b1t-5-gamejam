@@ -39,7 +39,6 @@ extends PinJoint2D
 		ik_max_iterations = value
 		_update_ik_options()
 
-
 @export_group("Motor Position", "motor_position_")
 ## Motor Position Targeting acts like a spring to pull the joint
 ## back to the target angle
@@ -63,7 +62,7 @@ extends PinJoint2D
 		motor_position_damping = value
 		_update_motor_position_options()
 
-@export_group("","")
+@export_group("", "")
 
 var _ik_constrained_axes: int = 3
 
@@ -71,18 +70,21 @@ var _ik_constrained_axes: int = 3
 func _init() -> void:
 	set_joint_type(joint_type)
 
+
 func _ready() -> void:
 	_update_constrained_axes()
 	_update_ik_options()
 	_update_motor_position_options()
 
+
 func _physics_process(delta: float) -> void:
 	_solve_ik_for_target()
+
 
 func _solve_ik_for_target() -> void:
 	if not is_inside_tree() or ik_target == null:
 		return
-	
+
 	if joint_type != 1 and joint_type != 2:
 		return
 
@@ -91,18 +93,20 @@ func _solve_ik_for_target() -> void:
 
 	solve_ik(ik_target.global_transform)
 
+
 func _has_valid_joint_nodes() -> bool:
 	return get_node_or_null(node_a) != null and get_node_or_null(node_b) != null
+
 
 func _update_ik_options() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	var joint_rid := get_rid()
 	if not joint_rid.is_valid():
 		push_error("Invalid joint rid")
 		return
-	
+
 	RapierPhysicsServer2D.joint_set_ik_options(
 		joint_rid,
 		ik_damping,
@@ -116,12 +120,12 @@ func _update_ik_options() -> void:
 func _update_motor_position_options() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	var joint_rid := get_rid()
 	if not joint_rid.is_valid():
 		push_error("Invalid joint rid")
 		return
-		
+
 	# workaround what seems like a rapier issue
 	# stiffness of 0.0 behaves strangely
 	# expected behaviour is for joint to hang freely
@@ -144,7 +148,7 @@ func _update_constrained_axes() -> void:
 		_ik_constrained_axes |= 2
 	if ik_constrain_rotation:
 		_ik_constrained_axes |= 4
-	
+
 	if is_inside_tree():
 		_update_ik_options()
 
@@ -152,10 +156,11 @@ func _update_constrained_axes() -> void:
 func set_joint_type(type: int) -> void:
 	RapierPhysicsServer2D.joint_set_extra_param(get_rid(), RapierPhysicsServer2D.JOINT_TYPE, type)
 
+
 func solve_ik(target_transform: Transform2D) -> void:
 	if not is_inside_tree():
 		return
-	
+
 	var joint_rid := get_rid()
 	if not joint_rid.is_valid():
 		return

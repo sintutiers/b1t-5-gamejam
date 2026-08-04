@@ -26,6 +26,7 @@ extends AtomicState
 
 var _animation_player: AnimationPlayer
 
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -36,7 +37,8 @@ func _ready() -> void:
 	if not is_instance_valid(_animation_player):
 		push_error("The animation player is invalid. This node will not work.")
 
-func _state_enter(transition_target:StateChartState) -> void:
+
+func _state_enter(transition_target: StateChartState) -> void:
 	super._state_enter(transition_target)
 
 	if not is_instance_valid(_animation_player):
@@ -50,6 +52,7 @@ func _state_enter(transition_target:StateChartState) -> void:
 		return
 
 	_animation_player.play(target_animation, custom_blend, custom_speed, from_end)
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := super._get_configuration_warnings()

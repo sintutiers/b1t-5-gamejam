@@ -1,6 +1,6 @@
-class_name Health extends Node
+class_name Health
+extends Node
 ## Health is used to track an entity's health, death, and revival.
-
 
 ## Affect an action will have on [Health].
 enum Affect { NONE, DAMAGE, HEAL }
@@ -18,7 +18,6 @@ signal revived(entity: Node)
 ## Emitted after damage or healing is applied.
 signal action_applied(action: HealthModifiedAction, applied: int)
 
-
 ## Emitted when damaged and entity had full health.
 signal first_hit(entity: Node)
 ## Emitted when trying to damage an entity that is not damageable.
@@ -27,7 +26,6 @@ signal not_damageable(entity: Node)
 signal already_dead(entity: Node)
 ## Emitted when trying to apply enough damage to an enemy to kill them and they cannot be.
 signal not_killable(entity: Node)
-
 
 ## Emitted when trying to heal and entity is not healable.
 signal not_healable(entity: Node)
@@ -66,7 +64,6 @@ const DEFAULT_MAX = 100
 ## Enable if entity is able to be revived from death.
 @export var revivable: bool = true
 
-
 @export_group("Advanced")
 ## The entity this component is tracking health for,
 ## sent in signals for association.[br][br]
@@ -76,7 +73,7 @@ const DEFAULT_MAX = 100
 		return entity if entity else owner
 
 ## Additional [Modifer] applied to [HealthActionType.Enum].
-@export var modifiers: Dictionary[HealthActionType.Enum, HealthModifier] = {}
+@export var modifiers: Dictionary[HealthActionType.Enum, HealthModifier] = { }
 
 
 ## Returns [color=orange]true[/color] when not alive.
@@ -174,12 +171,12 @@ func _damage(mod_ac: HealthModifiedAction) -> void:
 		print_debug("%s cannot be damaged" % entity)
 		not_damageable.emit(entity)
 		return
-	
+
 	if is_dead():
 		print_debug("%s is already dead" % entity)
 		already_dead.emit(entity)
 		return
-	
+
 	var applied := clampi(roundi((mod_ac.amount + mod_ac.incrementer) * mod_ac.multiplier), 0, current)
 	if applied == current and not killable:
 		print_debug("%s is not killable" % entity)
@@ -190,15 +187,15 @@ func _damage(mod_ac: HealthModifiedAction) -> void:
 	current -= applied
 	print_debug(
 		"%s affect=%s type=%s amount=%d incrementer=%d multiplier=%0.4f applied=%d current=%d"
-		% [entity, Affect.find_key(mod_ac.affect), HealthActionType.Enum.find_key(mod_ac.type), mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied, current]
+		% [entity, Affect.find_key(mod_ac.affect), HealthActionType.Enum.find_key(mod_ac.type), mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied, current],
 	)
 	damaged.emit(entity, mod_ac.type, mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied)
 	action_applied.emit(mod_ac, applied)
-	
+
 	if is_first_hit:
 		print_debug("%s first hit" % entity)
 		first_hit.emit(entity)
-	
+
 	if is_dead():
 		print_debug("%s died" % entity)
 		died.emit(entity)
@@ -210,32 +207,32 @@ func _heal(mod_ac: HealthModifiedAction) -> void:
 		print_debug("%s is not healable" % entity)
 		not_healable.emit(entity)
 		return
-	
+
 	if is_full():
 		print_debug("%s already has full health" % entity)
 		already_full.emit(entity)
 		return
-	
+
 	if is_dead() and not revivable:
 		print_debug("%s cannot be revived" % entity)
 		not_revivable.emit(entity)
 		return
-	
+
 	var notify_revived := is_dead() and mod_ac.amount > 0
-	
+
 	var applied := clampi(roundi((mod_ac.amount + mod_ac.incrementer) * mod_ac.multiplier), 0, max - current)
 	current += applied
 	print_debug(
 		"%s affect=%s type=%s amount=%d incrementer=%d multiplier=%0.4f applied=%d current=%d"
-		% [entity, Affect.find_key(mod_ac.affect), HealthActionType.Enum.find_key(mod_ac.type), mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied, current]
+		% [entity, Affect.find_key(mod_ac.affect), HealthActionType.Enum.find_key(mod_ac.type), mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied, current],
 	)
 	healed.emit(entity, mod_ac.type, mod_ac.amount, mod_ac.incrementer, mod_ac.multiplier, applied)
 	action_applied.emit(mod_ac, applied)
-	
+
 	if current == max and applied > 0:
 		print_debug("%s has full health" % entity)
 		full.emit(entity)
-	
+
 	if notify_revived:
 		print_debug("%s revived" % entity)
 		revived.emit(entity)

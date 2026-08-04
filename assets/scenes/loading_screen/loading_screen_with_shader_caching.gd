@@ -2,22 +2,22 @@ extends LoadingScreen
 ## Loading Screen extension that pre-loads shaders before opening the next scene.
 
 ## Path to directory with the material shaders that should be pre-loaded.
-@export_dir var _spatial_shader_material_dir : String
+@export_dir var _spatial_shader_material_dir: String
 ## Path to the scene that should trigger a shader pre-loading.
-@export_file("*.tscn") var _cache_shaders_scene : String
+@export_file("*.tscn") var _cache_shaders_scene: String
 ## Mesh object that the material shaders should be applied to.
-@export var _mesh : Mesh
+@export var _mesh: Mesh
 @export_group("Advanced")
 ## Includes material scenes with extensions that match the strings.
-@export var _matching_extensions : Array[String] = [".tres", ".material", ".res"]
+@export var _matching_extensions: Array[String] = [".tres", ".material", ".res"]
 ## Excludes subfolders that match the strings.
-@export var _ignore_subfolders : Array[String] = [".", ".."]
+@export var _ignore_subfolders: Array[String] = [".", ".."]
 ## Delay between loading each shader onto the mesh.
-@export var _shader_delay_timer : float = 0.1
+@export var _shader_delay_timer: float = 0.1
 
-var _loading_shader_cache : bool = false
+var _loading_shader_cache: bool = false
 
-var _caching_progress : float = 0.0 :
+var _caching_progress: float = 0.0:
 	set(value):
 		if value <= _caching_progress:
 			return
@@ -25,10 +25,12 @@ var _caching_progress : float = 0.0 :
 		update_total_loading_progress()
 		_reset_loading_stage()
 
+
 func can_load_shader_cache() -> bool:
 	return not _spatial_shader_material_dir.is_empty() and \
-	not _cache_shaders_scene.is_empty() and \
-	SceneLoader.is_loading_scene(_cache_shaders_scene)
+			not _cache_shaders_scene.is_empty() and \
+			SceneLoader.is_loading_scene(_cache_shaders_scene)
+
 
 func update_total_loading_progress() -> void:
 	var partial_total := _scene_loading_progress
@@ -36,6 +38,7 @@ func update_total_loading_progress() -> void:
 		partial_total += _caching_progress
 		partial_total /= 2
 	_total_loading_progress = partial_total
+
 
 func _set_scene_loading_complete() -> void:
 	super._set_scene_loading_complete()
@@ -47,6 +50,7 @@ func _set_scene_loading_complete() -> void:
 	SceneLoader._background_loading = false
 	SceneLoader.set_process(true)
 
+
 func _show_all_draw_passes_once() -> void:
 	var all_materials := _traverse_folders(_spatial_shader_material_dir)
 	var total_material_count := all_materials.size()
@@ -56,10 +60,11 @@ func _show_all_draw_passes_once() -> void:
 		cached_material_count += 1
 		_caching_progress = float(cached_material_count) / total_material_count
 		if _shader_delay_timer > 0:
-			await(get_tree().create_timer(_shader_delay_timer).timeout)
+			await (get_tree().create_timer(_shader_delay_timer).timeout)
 
-func _traverse_folders(dir_path:String) -> PackedStringArray:
-	var material_list:PackedStringArray = []
+
+func _traverse_folders(dir_path: String) -> PackedStringArray:
+	var material_list: PackedStringArray = []
 	if not dir_path.ends_with("/"):
 		dir_path += "/"
 	var dir := DirAccess.open(dir_path)
@@ -72,7 +77,7 @@ func _traverse_folders(dir_path:String) -> PackedStringArray:
 	var file_name := dir.get_next()
 	while file_name != "":
 		if not dir.current_is_dir():
-			var matches : bool = false
+			var matches: bool = false
 			for extension in _matching_extensions:
 				if file_name.ends_with(extension):
 					matches = true
@@ -84,15 +89,17 @@ func _traverse_folders(dir_path:String) -> PackedStringArray:
 			if not subfolder_name in _ignore_subfolders:
 				material_list.append_array(_traverse_folders(dir_path + subfolder_name))
 		file_name = dir.get_next()
-	
+
 	return material_list
 
-func _load_material(path:String) -> void:
+
+func _load_material(path: String) -> void:
 	var material_shower := MeshInstance3D.new()
 	material_shower.mesh = _mesh
 	var material := ResourceLoader.load(path) as Material
 	material_shower.set_surface_override_material(0, material)
 	%SpatialShaderTypeCaches.add_child(material_shower)
+
 
 func _ready() -> void:
 	SceneLoader._background_loading = true

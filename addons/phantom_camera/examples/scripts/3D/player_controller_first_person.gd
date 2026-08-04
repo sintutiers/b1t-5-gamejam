@@ -14,6 +14,7 @@ extends "player_controller.gd"
 
 @export var run_noise: PhantomCameraNoise3D
 
+
 func _ready() -> void:
 	super()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

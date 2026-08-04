@@ -1,22 +1,21 @@
 @tool
 extends Control
 
-
 # Node references
 @onready var icon_texture: TextureRect = $Margin/Layout/Status/IconTexture
 @onready var dhms_value: Label = $Margin/Layout/Status/DHMSValue
 @onready var hours_value: Label = $Margin/Layout/Status/HoursValue
-@onready var resume_button : Button = $Margin/Layout/Status/ResumeButton
-@onready var pause_button : Button = $Margin/Layout/Status/PauseButton
-@onready var clear_button : Button = $Margin/Layout/Status/ClearButton
+@onready var resume_button: Button = $Margin/Layout/Status/ResumeButton
+@onready var pause_button: Button = $Margin/Layout/Status/PauseButton
+@onready var clear_button: Button = $Margin/Layout/Status/ClearButton
 @onready var edit_button: Button = $Margin/Layout/Status/EditButton
 @onready var h_separator: HSeparator = $Margin/Layout/HSeparator
-@onready var section_list : Control = $Margin/Layout/SectionList
-@onready var section_graph : Control = $Margin/Layout/SectionGraph
-@onready var clear_confirm_dialog : ConfirmationDialog = $ClearConfirmDialog
-@onready var clear_section_confirm_dialog : ConfirmationDialog = $ClearSectionConfirmDialog
+@onready var section_list: Control = $Margin/Layout/SectionList
+@onready var section_graph: Control = $Margin/Layout/SectionGraph
+@onready var clear_confirm_dialog: ConfirmationDialog = $ClearConfirmDialog
+@onready var clear_section_confirm_dialog: ConfirmationDialog = $ClearSectionConfirmDialog
 @onready var edit_section_window: Window = $EditSectionWindow
-@onready var timer_update : Timer = $TimerUpdate
+@onready var timer_update: Timer = $TimerUpdate
 
 @onready var title_label: Label = $EditSectionWindow/PanelContainer/VBoxContainer/TitleLabel
 @onready var days_spin_box: SpinBox = $EditSectionWindow/PanelContainer/VBoxContainer/SpinBoxHBoxContainer/DaysHBoxContainer/DaysSpinBox
@@ -26,18 +25,16 @@ extends Control
 @onready var ok_button: Button = $EditSectionWindow/PanelContainer/VBoxContainer/ButtonsHBoxContainer/OKButton
 @onready var cancel_button: Button = $EditSectionWindow/PanelContainer/VBoxContainer/ButtonsHBoxContainer/CancelButton
 
-
 # Private properties
-var _active_tracking : bool = false
-var _tracker_started : float = 0.0
-var _tracker_main_view : String = ""
-var _tracker_sections : Dictionary = {}
-var _section_to_remove : String = ""
-var _show_sections : bool = true
-var _show_graphs : bool = true
+var _active_tracking: bool = false
+var _tracker_started: float = 0.0
+var _tracker_main_view: String = ""
+var _tracker_sections: Dictionary = { }
+var _section_to_remove: String = ""
+var _show_sections: bool = true
+var _show_graphs: bool = true
 
-
-var _section_icons : Dictionary = {
+var _section_icons: Dictionary = {
 	"2D": "2D",
 	"3D": "3D",
 	"Script": "Script",
@@ -45,9 +42,8 @@ var _section_icons : Dictionary = {
 	"AssetLib": "AssetLib",
 	"External": "Window",
 	"AFK": "ViewportSpeed",
-	"default": "Node"
+	"default": "Node",
 }
-
 
 # Scene references
 @onready var section_scene = preload("res://addons/project-time-tracker/TrackerSection.tscn")
@@ -58,15 +54,15 @@ func _ready() -> void:
 		func():
 			_show_sections = ProjectSettings.get_setting("project_time_traker/sections/show_sections", true)
 			_show_graphs = ProjectSettings.get_setting("project_time_traker/sections/show_graphs", true)
-			
+
 			for section in _tracker_sections:
 				var node = section_list.get_node_or_null(section)
 				if (node):
 					node.section_color = ProjectSettings.get_setting("project_time_traker/sections/colors/" + section, ProjectSettings.get_setting("project_time_traker/sections/colors/other", Color.WHITE))
 	)
-	
+
 	_update_theme()
-	
+
 	pause_button.pressed.connect(_pause_tracking)
 	resume_button.pressed.connect(_resume_tracking)
 	clear_button.pressed.connect(_on_clear_records_requested)
@@ -76,11 +72,11 @@ func _ready() -> void:
 	timer_update.timeout.connect(_on_timer_update_timeout)
 	ok_button.pressed.connect(_on_ok_requested)
 	cancel_button.pressed.connect(_on_cancel_requested)
-	
+
 	_tracker_started = Time.get_unix_time_from_system()
-	
+
 	_set_active_tracking(true)
-	
+
 	timer_update.start()
 
 
@@ -88,24 +84,24 @@ func _process(delta: float) -> void:
 	section_list.visible = _show_sections
 	section_graph.visible = _show_graphs
 	h_separator.visible = (_show_sections or _show_graphs)
-	
+
 	# _tracker_main_view is empty half the time! WTF???
 	if not _tracker_main_view.is_empty():
 		icon_texture.self_modulate = ProjectSettings.get_setting("project_time_traker/sections/colors/" + _tracker_main_view, ProjectSettings.get_setting("project_time_traker/sections/colors/other", Color.WHITE))
-		
+
 		if _section_icons.has(_tracker_main_view):
 			icon_texture.texture = get_theme_icon(_section_icons[_tracker_main_view], "EditorIcons")
 		else:
 			icon_texture.texture = get_theme_icon(_section_icons["default"], "EditorIcons")
-		
+
 	if (!_active_tracking):
 		return
-	
+
 	var time_elapsed = 0.0
 	for section in _tracker_sections:
 		if section != "Editor" and section != "AFK":
 			time_elapsed += _tracker_sections[section]
-	
+
 	_tracker_sections["Editor"] = time_elapsed
 	_update_values()
 
@@ -114,32 +110,31 @@ func _process(delta: float) -> void:
 func _update_values():
 	var dhms = floori(_tracker_sections["Editor"]) / 60 / 60 / 24
 	dhms_value.text = str(dhms) + "d - " + Time.get_time_string_from_unix_time(_tracker_sections["Editor"])
-	
+
 	var hours = floori(_tracker_sections["Editor"]) / 60 / 60
 	hours_value.text = "(" + str(hours) + "h)"
-	
 
 
 func _update_theme() -> void:
 	if (!Engine.is_editor_hint || !is_inside_tree()):
 		return
-	
+
 	pause_button.icon = get_theme_icon("Pause", "EditorIcons")
 	resume_button.icon = get_theme_icon("Play", "EditorIcons")
 	clear_button.icon = get_theme_icon("Remove", "EditorIcons")
-	edit_button.icon = get_theme_icon("Modifiers", "EditorIcons") 
+	edit_button.icon = get_theme_icon("Modifiers", "EditorIcons")
 
 
 func _create_section(section_name: String) -> bool:
 	if (!Engine.is_editor_hint || !is_inside_tree()):
 		return false
-	
+
 	if (section_name.is_empty()):
 		return false
-	
+
 	if section_list.get_node_or_null(section_name):
 		return true
-	
+
 	var new_section = section_scene.instantiate()
 	new_section.name = section_name
 	new_section.section_name = section_name
@@ -151,11 +146,11 @@ func _create_section(section_name: String) -> bool:
 		new_section.section_icon = _section_icons[section_name]
 	else:
 		new_section.section_icon = _section_icons["default"]
-		
+
 	section_list.add_child(new_section)
-	
+
 	_tracker_sections[section_name] = 0
-		
+
 	return true
 
 
@@ -167,7 +162,7 @@ func _update_sections() -> void:
 		var node = section_list.get_node_or_null(section)
 		if (node):
 			node.elapsed_time = _tracker_sections[section]
-	
+
 	section_graph.sections = _tracker_sections
 
 
@@ -175,6 +170,7 @@ func _update_sections() -> void:
 func _resume_tracking() -> void:
 	_set_active_tracking(true)
 	_tracker_started = Time.get_unix_time_from_system()
+
 
 func _pause_tracking() -> void:
 	_set_active_tracking(false)
@@ -185,7 +181,8 @@ func resume_tracking() -> void:
 	if not _active_tracking and pause_button.visible:
 		_active_tracking = true
 		_tracker_started = Time.get_unix_time_from_system()
-	
+
+
 func pause_tracking() -> void:
 	if _active_tracking:
 		_active_tracking = false
@@ -195,7 +192,7 @@ func pause_tracking() -> void:
 func _disable_tracking() -> void:
 	if (_create_section(_tracker_main_view)):
 		var elapsed_time = Time.get_unix_time_from_system() - _tracker_started
-		_tracker_sections[_tracker_main_view] += elapsed_time	
+		_tracker_sections[_tracker_main_view] += elapsed_time
 		_update_values()
 
 
@@ -203,15 +200,16 @@ func _disable_tracking() -> void:
 func set_main_view(view_name: String) -> void:
 	if (_tracker_main_view == view_name):
 		return
-		
+
 	#Save only for an minimum elasped time
 	var elapsed_time = Time.get_unix_time_from_system() - _tracker_started
 
 	if (_active_tracking and elapsed_time >= 1 and _create_section(_tracker_main_view)):
 		_tracker_sections[_tracker_main_view] += elapsed_time
 		_tracker_started = Time.get_unix_time_from_system()
-	
+
 	_tracker_main_view = view_name
+
 
 func get_main_view() -> String:
 	return _tracker_main_view
@@ -219,7 +217,7 @@ func get_main_view() -> String:
 
 func _set_active_tracking(tracking: bool) -> void:
 	_active_tracking = tracking
-	
+
 	if (_active_tracking):
 		pause_button.visible = true
 		resume_button.visible = false
@@ -228,7 +226,7 @@ func _set_active_tracking(tracking: bool) -> void:
 		resume_button.visible = true
 
 
-func restore_tracked_sections(sections : Dictionary) -> void:
+func restore_tracked_sections(sections: Dictionary) -> void:
 	for section in sections:
 		if (section != "Editor"):
 			_create_section(section)
@@ -276,14 +274,14 @@ func _on_clear_section_requested(section_name):
 
 func _on_clear_section_confirmed():
 	_tracker_sections.erase(_section_to_remove)
-	
+
 	if (_tracker_main_view == _section_to_remove):
 		_tracker_started = Time.get_unix_time_from_system()
 
 	var child_node = section_list.get_node(_section_to_remove)
 	section_list.remove_child(child_node)
 	child_node.queue_free()
-	
+
 	edit_button.button_pressed = false
 	_section_to_remove = ""
 	section_graph.clear()
@@ -292,15 +290,15 @@ func _on_clear_section_confirmed():
 
 func _on_edit_section_requested(section_name):
 	var time = Time.get_time_dict_from_unix_time(_tracker_sections[section_name])
-	
+
 	title_label.text = section_name
 	days_spin_box.value = floori(_tracker_sections[section_name]) / 60 / 60 / 24
 	hour_spin_box.value = floori(time["hour"] % 24)
 	minutes_spin_box.value = time["minute"]
 	seconds_spin_box.value = time["second"]
-	
+
 	edit_section_window.show()
-	
+
 
 func _on_ok_requested():
 	var time = 0.0
@@ -309,12 +307,11 @@ func _on_ok_requested():
 	time += minutes_spin_box.value * 60
 	time += seconds_spin_box.value
 	_tracker_sections[title_label.text] = time
-	
+
 	edit_button.button_pressed = false
 	edit_section_window.hide()
-	
-	
+
+
 func _on_cancel_requested():
 	edit_button.button_pressed = false
 	edit_section_window.hide()
-	

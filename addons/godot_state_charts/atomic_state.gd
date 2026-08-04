@@ -4,7 +4,7 @@
 class_name AtomicState
 extends StateChartState
 
-func _handle_transition(transition:Transition, source:StateChartState) -> void:
+func _handle_transition(transition: Transition, source: StateChartState) -> void:
 	# resolve the target state
 	var target := transition.resolve_target()
 	if target == null:

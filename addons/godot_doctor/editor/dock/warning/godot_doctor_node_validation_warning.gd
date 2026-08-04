@@ -16,10 +16,11 @@ var origin_node_root: Node
 func _select_origin() -> void:
 	if origin_node == null:
 		GodotDoctorNotifier.print_debug(
-			"Cannot select origin node for validation warning because origin_node is null.", self
+			"Cannot select origin node for validation warning because origin_node is null.",
+			self,
 		)
 		push_warning(
-			"Cannot select origin node for validation warning because origin_node is null."
+			"Cannot select origin node for validation warning because origin_node is null.",
 		)
 		return
 	EditorInterface.open_scene_from_path(origin_node_root.scene_file_path)
