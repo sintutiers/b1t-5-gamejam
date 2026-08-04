@@ -12,16 +12,13 @@ const STRUCTURE_END: StringName = &")"
 const ORDER: Dictionary[StringName, int] = {
 	&"PackedScene": 0,
 	&"GDScript": 1,
-	&"Object": 2,
+	&"Object": 2
 }
 
 const Plugin := preload("uid://bc0b5v66xdidn")
 
 enum Category {
-	ALL = 0,
-	SCENES = 1,
-	GDSCRIPTS = 2,
-	RESOURCES = 3,
+	ALL = 0, SCENES = 1, GDSCRIPTS = 2, RESOURCES = 3
 }
 
 #region UI
@@ -58,7 +55,6 @@ func _ready() -> void:
 
 	filter_txt.gui_input.connect(navigate_in_files_list)
 
-
 func _shortcut_input(event: InputEvent) -> void:
 	if (!event.is_pressed() || event.is_echo()):
 		return
@@ -82,7 +78,6 @@ func _shortcut_input(event: InputEvent) -> void:
 func navigate_in_files_list(event: InputEvent):
 	plugin.navigate_on_list(event, files_list, open_file)
 
-
 func set_category(category: Category):
 	var old_tab: int = filter_bar.current_tab
 	filter_bar.current_tab = category
@@ -92,7 +87,6 @@ func set_category(category: Category):
 		fill_files_list()
 
 	focus_and_select_first()
-
 
 func open_file(index: int):
 	var file: String = files_list.get_item_metadata(index)
@@ -126,10 +120,8 @@ func open_file(index: int):
 	# 100% Engine bug or at least weird behavior.
 	hide.call_deferred()
 
-
 func schedule_rebuild():
 	is_rebuild_cache = true
-
 
 func on_show():
 	if (search_option_btn.selected != 0):
@@ -142,7 +134,6 @@ func on_show():
 
 	filter_txt.select_all()
 
-
 func rebuild_cache():
 	is_rebuild_cache = false
 
@@ -154,20 +145,17 @@ func rebuild_cache():
 
 	build_file_cache()
 
-
 func rebuild_cache_and_ui():
 	rebuild_cache()
 	fill_files_list()
 
 	focus_and_select_first()
 
-
 func focus_and_select_first():
 	filter_txt.grab_focus()
 
 	if (files_list.item_count > 0):
 		files_list.select(0)
-
 
 func build_file_cache():
 	var dir: EditorFileSystemDirectory = EditorInterface.get_resource_filesystem().get_filesystem()
@@ -182,7 +170,6 @@ func build_file_cache():
 	all_files.append_array(scripts)
 	all_files.append_array(resources)
 	all_files.append_array(others)
-
 
 func build_file_cache_dir(dir: EditorFileSystemDirectory):
 	for index: int in dir.get_subdir_count():
@@ -211,23 +198,16 @@ func build_file_cache_dir(dir: EditorFileSystemDirectory):
 			file_data.file_type = &"Object"
 
 		match (file.get_extension()):
-			&"tscn":
-				scenes.append(file_data)
-			&"gd":
-				scripts.append(file_data)
-			&"tres":
-				resources.append(file_data)
-			&"gdshader":
-				resources.append(file_data)
-			_:
-				others.append(file_data)
-
+			&"tscn": scenes.append(file_data)
+			&"gd": scripts.append(file_data)
+			&"tres": resources.append(file_data)
+			&"gdshader": resources.append(file_data)
+			_: others.append(file_data)
 
 func change_fill_files_list():
 	fill_files_list()
 
 	focus_and_select_first()
-
 
 func fill_files_list():
 	files_list.clear()
@@ -242,7 +222,6 @@ func fill_files_list():
 		fill_files_list_with(resources, sort_by_filter)
 	elif (filter_bar.current_tab == 4):
 		fill_files_list_with(others, sort_by_filter)
-
 
 func fill_files_list_with(files: Array[FileData], comparator: Callable):
 	var filter_text: String = filter_txt.text
@@ -259,7 +238,6 @@ func fill_files_list_with(files: Array[FileData], comparator: Callable):
 			files_list.set_item_metadata(files_list.item_count - 1, file)
 			files_list.set_item_tooltip(files_list.item_count - 1, file)
 
-
 func sort_by_order_filter(file_data1: FileData, file_data2: FileData) -> bool:
 	var order1: int = ORDER.get(file_data1.file_type, ORDER.size())
 	var order2: int = ORDER.get(file_data2.file_type, ORDER.size())
@@ -268,7 +246,6 @@ func sort_by_order_filter(file_data1: FileData, file_data2: FileData) -> bool:
 		return order1 < order2
 
 	return sort_by_filter(file_data1, file_data2)
-
 
 func sort_by_filter(file_data1: FileData, file_data2: FileData) -> bool:
 	var filter_text: String = filter_txt.text
@@ -297,7 +274,6 @@ func sort_by_filter(file_data1: FileData, file_data2: FileData) -> bool:
 			return false
 
 	return name1 < name2
-
 
 class FileData:
 	var file: String

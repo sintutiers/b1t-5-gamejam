@@ -17,9 +17,8 @@ var plugin: Plugin
 
 var outline_container: OutlineContainer
 
-var selections: Dictionary[String, bool] = { } # Used as Set.
+var selections: Dictionary[String, bool] = {} # Used as Set.
 var class_to_functions: Dictionary[StringName, PackedStringArray]
-
 
 func _ready() -> void:
 	filter_txt.text_changed.connect(update_tree_filter.unbind(1))
@@ -33,7 +32,6 @@ func _ready() -> void:
 	about_to_popup.connect(on_show)
 
 	filter_txt.gui_input.connect(navigate_on_tree)
-
 
 func navigate_on_tree(event: InputEvent):
 	if (event.is_action_pressed(&"ui_select", true)):
@@ -111,13 +109,11 @@ func navigate_on_tree(event: InputEvent):
 
 		focus_tree_item(item)
 
-
 func get_selected_tree_item() -> TreeItem:
 	var selected: TreeItem = class_func_tree.get_selected()
 	if (selected == null):
 		selected = class_func_tree.get_root()
 	return selected
-
 
 func focus_tree_item(item: TreeItem):
 	var was_selected: bool = item.is_selected(0)
@@ -129,10 +125,8 @@ func focus_tree_item(item: TreeItem):
 	class_func_tree.ensure_cursor_is_visible()
 	class_func_tree.accept_event()
 
-
 func update_tree_filter():
 	update_tree()
-
 
 func save_selection(selected: bool, item: TreeItem):
 	if (selected):
@@ -141,7 +135,6 @@ func save_selection(selected: bool, item: TreeItem):
 		selections.erase(item.get_text(0))
 
 	ok_btn.disabled = selections.size() == 0
-
 
 func on_show():
 	class_func_tree.clear()
@@ -156,7 +149,6 @@ func on_show():
 
 	update_tree()
 	filter_txt.grab_focus()
-
 
 func update_tree():
 	class_func_tree.clear()
@@ -182,9 +174,8 @@ func update_tree():
 				if (is_preselected):
 					func_item.select(0)
 
-
 func collect_all_class_functions(script: Script) -> Dictionary[StringName, PackedStringArray]:
-	var existing_funcs: Dictionary[String, bool] = { } # Used as Set.
+	var existing_funcs: Dictionary[String, bool] = {} # Used as Set.
 	for func_str: String in outline_container.outline_cache.engine_funcs:
 		existing_funcs[func_str] = true
 	for func_str: String in outline_container.outline_cache.funcs:
@@ -195,7 +186,6 @@ func collect_all_class_functions(script: Script) -> Dictionary[StringName, Packe
 
 	return native_class_to_functions.merged(class_to_functions)
 
-
 func collect_super_class_functions(base_script: Script, existing_funcs: Dictionary[String, bool]) -> Dictionary[StringName, PackedStringArray]:
 	var super_classes: Array[Script] = []
 	while (base_script != null):
@@ -203,7 +193,7 @@ func collect_super_class_functions(base_script: Script, existing_funcs: Dictiona
 
 		base_script = base_script.get_base_script()
 
-	var class_to_functions: Dictionary[StringName, PackedStringArray] = { }
+	var class_to_functions: Dictionary[StringName, PackedStringArray] = {}
 	for super_class: Script in super_classes:
 		var functions: PackedStringArray = collect_script_functions(super_class, existing_funcs)
 		if (functions.is_empty()):
@@ -213,7 +203,6 @@ func collect_super_class_functions(base_script: Script, existing_funcs: Dictiona
 
 	return class_to_functions
 
-
 func collect_native_class_functions(native_class: StringName, existing_funcs: Dictionary[String, bool]) -> Dictionary[StringName, PackedStringArray]:
 	var super_native_classes: Array[StringName] = []
 	while (native_class != &""):
@@ -221,7 +210,7 @@ func collect_native_class_functions(native_class: StringName, existing_funcs: Di
 
 		native_class = ClassDB.get_parent_class(native_class)
 
-	var class_to_functions: Dictionary[StringName, PackedStringArray] = { }
+	var class_to_functions: Dictionary[StringName, PackedStringArray] = {}
 	for super_native_class: StringName in super_native_classes:
 		var functions: PackedStringArray = collect_class_functions(super_native_class, existing_funcs)
 		if (functions.is_empty()):
@@ -230,7 +219,6 @@ func collect_native_class_functions(native_class: StringName, existing_funcs: Di
 		class_to_functions[super_native_class] = functions
 
 	return class_to_functions
-
 
 func collect_class_functions(native_class: StringName, existing_funcs: Dictionary[String, bool]) -> PackedStringArray:
 	var functions: PackedStringArray = []
@@ -248,7 +236,6 @@ func collect_class_functions(native_class: StringName, existing_funcs: Dictionar
 
 	return functions
 
-
 func collect_script_functions(super_class: Script, existing_funcs: Dictionary[String, bool]) -> PackedStringArray:
 	var functions: PackedStringArray = []
 
@@ -263,7 +250,6 @@ func collect_script_functions(super_class: Script, existing_funcs: Dictionary[St
 		functions.append(func_name)
 
 	return functions
-
 
 func generate_functions():
 	if (selections.size() == 0):

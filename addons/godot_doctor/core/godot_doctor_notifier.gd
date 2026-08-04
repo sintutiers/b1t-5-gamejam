@@ -2,6 +2,7 @@
 ## All methods are static; this class is not meant to be instantiated.
 class_name GodotDoctorNotifier
 
+
 ## Prints [param message] to the output console, prefixed with [code][GODOT_DOCTOR][/code]
 ## (or [code][GODOT_DOCTOR->ClassName][/code] when [param caller] is provided),
 ## if [member GodotDoctorSettings.show_debug_prints] is enabled in the plugin settings.
@@ -48,6 +49,6 @@ static func _resolve_prefix(caller: Variant) -> String:
 ## or [code][GODOT_DOCTOR->class_prefix][/code] if [param class_prefix] is not empty.
 static func _prefix_message(message: String, class_prefix: String) -> String:
 	var prefix = (
-			"[GODOT_DOCTOR]" if class_prefix.is_empty() else "[GODOT_DOCTOR->%s]" % class_prefix
+		"[GODOT_DOCTOR]" if class_prefix.is_empty() else "[GODOT_DOCTOR->%s]" % class_prefix
 	)
 	return "%s: %s" % [prefix, message]

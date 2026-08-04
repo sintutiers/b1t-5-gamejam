@@ -6,8 +6,7 @@ class_name ParallelState
 extends StateChartState
 
 # all children of the state
-var _sub_states: Array[StateChartState] = []
-
+var _sub_states:Array[StateChartState] = []
 
 func _state_init() -> void:
 	super._state_init()
@@ -21,7 +20,7 @@ func _state_init() -> void:
 	# subscribe to events from our children
 
 
-func _handle_transition(transition: Transition, source: StateChartState) -> void:
+func _handle_transition(transition:Transition, source:StateChartState) -> void:
 	# resolve the target state
 	var target := transition.resolve_target()
 	if target == null:
@@ -62,13 +61,11 @@ func _handle_transition(transition: Transition, source: StateChartState) -> void
 	# ask the parent
 	get_parent()._handle_transition(transition, source)
 
-
-func _state_enter(transition_target: StateChartState) -> void:
+func _state_enter(transition_target:StateChartState) -> void:
 	super._state_enter(transition_target)
 	# enter all children
 	for child in _sub_states:
 		child._state_enter(transition_target)
-
 
 func _state_exit() -> void:
 	# exit all children
@@ -77,14 +74,12 @@ func _state_exit() -> void:
 
 	super._state_exit()
 
-
 func _state_step() -> void:
 	super._state_step()
 	for child in _sub_states:
 		child._state_step()
 
-
-func _process_transitions(trigger_type: StateChart.TriggerType, event: StringName = "") -> bool:
+func _process_transitions(trigger_type:StateChart.TriggerType, event:StringName = "") -> bool:
 	if not active:
 		return false
 
@@ -105,7 +100,6 @@ func _process_transitions(trigger_type: StateChart.TriggerType, event: StringNam
 	# otherwise handle it ourselves
 	# defer to the base class
 	return super._process_transitions(trigger_type, event)
-
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := super._get_configuration_warnings()

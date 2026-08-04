@@ -2,6 +2,7 @@
 ## Provides shared utilities for counting and filtering validation messages by severity.
 class_name GodotDoctorReport
 
+
 ## Returns the number of [constant ValidationCondition.Severity.INFO]-level messages from
 ## [param validation_messages].
 func _get_num_infos(validation_messages: Array[GodotDoctorValidationMessage]) -> int:
@@ -12,7 +13,7 @@ func _get_num_infos(validation_messages: Array[GodotDoctorValidationMessage]) ->
 ## [param validation_messages].
 func _get_num_warnings(validation_messages: Array[GodotDoctorValidationMessage]) -> int:
 	return (
-			_filter_by_severity_level(validation_messages, ValidationCondition.Severity.WARNING).size()
+		_filter_by_severity_level(validation_messages, ValidationCondition.Severity.WARNING).size()
 	)
 
 
@@ -24,8 +25,7 @@ func _get_num_errors(validation_messages: Array[GodotDoctorValidationMessage]) -
 
 ## Returns messages from [param validation_messages] that match the given [param severity].
 func _filter_by_severity_level(
-		validation_messages: Array[GodotDoctorValidationMessage],
-		severity: int,
+	validation_messages: Array[GodotDoctorValidationMessage], severity: int
 ) -> Array[GodotDoctorValidationMessage]:
 	return validation_messages.filter(
 		func(message: GodotDoctorValidationMessage) -> bool:

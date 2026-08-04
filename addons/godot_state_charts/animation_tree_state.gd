@@ -3,8 +3,9 @@
 class_name AnimationTreeState
 extends AtomicState
 
+
 ## Animation tree that this state will use.
-@export_node_path("AnimationTree") var animation_tree: NodePath:
+@export_node_path("AnimationTree") var animation_tree:NodePath:
 	set(value):
 		animation_tree = value
 		update_configuration_warnings()
@@ -12,10 +13,10 @@ extends AtomicState
 ## The name of the state that should be activated in the animation tree
 ## when this state is entered. If this is empty, the name of this state
 ## will be used.
-@export var state_name: StringName = ""
+@export var state_name:StringName = ""
 
-var _animation_tree_state_machine: AnimationNodeStateMachinePlayback
 
+var _animation_tree_state_machine:AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -36,7 +37,7 @@ func _ready() -> void:
 		push_error("The animation tree is invalid. This node will not work.")
 
 
-func _state_enter(transition_target: StateChartState) -> void:
+func _state_enter(transition_target:StateChartState) -> void:
 	super._state_enter(transition_target)
 
 	if not is_instance_valid(_animation_tree_state_machine):

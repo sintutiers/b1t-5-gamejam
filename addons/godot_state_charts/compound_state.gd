@@ -12,40 +12,40 @@ signal child_state_entered()
 signal child_state_exited()
 
 ## The initial state which should be activated when this state is activated.
-@export_node_path("StateChartState") var initial_state: NodePath:
+@export_node_path("StateChartState") var initial_state:NodePath:
 	get:
 		return initial_state
 	set(value):
 		initial_state = value
 		update_configuration_warnings()
 
+
 ## The currently active substate.
-var _active_state: StateChartState = null
+var _active_state:StateChartState = null
 
 ## The initial state
-@onready var _initial_state: StateChartState = get_node_or_null(initial_state)
+@onready var _initial_state:StateChartState = get_node_or_null(initial_state)
 
 ## The history states of this compound state.
-var _history_states: Array[HistoryState] = []
+var _history_states:Array[HistoryState] = []
 ## Whether any of the history states needs a deep history.
-var _needs_deep_history: bool = false
-
+var _needs_deep_history:bool = false
 
 func _init() -> void:
 	# subscribe to the child_entered_tree signal in edit mode so we can
 	# automatically set the initial state when a new sub-state is added
 	if Engine.is_editor_hint():
 		child_entered_tree.connect(
-			func(child: Node):
-				# when a child is added in the editor and the child is a state
-				# and we don't have an initial state yet, set the initial state
-				# to the newly added child
-				if child is StateChartState and initial_state.is_empty():
-					# the newly added node may have a random name now,
-					# so we need to defer the call to build a node path
-					# to the next frame, so the editor has time to rename
-					# the node to its final name
-					(func(): initial_state = get_path_to(child)).call_deferred()
+			func(child:Node):
+			# when a child is added in the editor and the child is a state
+			# and we don't have an initial state yet, set the initial state
+			# to the newly added child
+			if child is StateChartState and initial_state.is_empty():
+				# the newly added node may have a random name now,
+				# so we need to defer the call to build a node path
+				# to the next frame, so the editor has time to rename
+				# the node to its final name
+				(func(): initial_state = get_path_to(child)).call_deferred()
 		)
 
 
@@ -55,7 +55,7 @@ func _state_init() -> void:
 	# check if we have any history states
 	for child in get_children():
 		if child is HistoryState:
-			var child_as_history_state: HistoryState = child as HistoryState
+			var child_as_history_state:HistoryState = child as HistoryState
 			_history_states.append(child_as_history_state)
 			# remember if any of the history states needs a deep history
 			_needs_deep_history = _needs_deep_history or child_as_history_state.deep
@@ -63,13 +63,12 @@ func _state_init() -> void:
 	# initialize all substates. find all children of type State and call _state_init on them.
 	for child in get_children():
 		if child is StateChartState:
-			var child_as_state: StateChartState = child as StateChartState
+			var child_as_state:StateChartState = child as StateChartState
 			child_as_state._state_init()
 			child_as_state.state_entered.connect(func(): child_state_entered.emit())
 			child_as_state.state_exited.connect(func(): child_state_exited.emit())
 
-
-func _state_enter(transition_target: StateChartState) -> void:
+func _state_enter(transition_target:StateChartState) -> void:
 	super._state_enter(transition_target)
 
 	# activate the initial state _unless_ one of these are true
@@ -90,14 +89,12 @@ func _state_enter(transition_target: StateChartState) -> void:
 		else:
 			push_error("No initial state set for state '" + name + "'.")
 
-
 func _state_step() -> void:
 	super._state_step()
 	if _active_state != null:
 		_active_state._state_step()
 
-
-func _state_save(saved_state: SavedState, child_levels: int = -1) -> void:
+func _state_save(saved_state:SavedState, child_levels:int = -1) -> void:
 	super._state_save(saved_state, child_levels)
 
 	# in addition save all history states, as they are never active and normally would not be saved
@@ -109,8 +106,7 @@ func _state_save(saved_state: SavedState, child_levels: int = -1) -> void:
 	for history_state in _history_states:
 		history_state._state_save(parent, child_levels)
 
-
-func _state_restore(saved_state: SavedState, child_levels: int = -1) -> void:
+func _state_restore(saved_state:SavedState, child_levels:int = -1) -> void:
 	super._state_restore(saved_state, child_levels)
 
 	# in addition check if we are now active and if so determine the current active state
@@ -120,7 +116,6 @@ func _state_restore(saved_state: SavedState, child_levels: int = -1) -> void:
 			if child is StateChartState and child.active:
 				_active_state = child
 				break
-
 
 func _state_exit() -> void:
 	# if we have any history states, we need to save the current active state
@@ -145,7 +140,7 @@ func _state_exit() -> void:
 	super._state_exit()
 
 
-func _process_transitions(trigger_type: StateChart.TriggerType, event: StringName = "") -> bool:
+func _process_transitions(trigger_type:StateChart.TriggerType, event:StringName = "") -> bool:
 	if not active:
 		return false
 
@@ -162,7 +157,7 @@ func _process_transitions(trigger_type: StateChart.TriggerType, event: StringNam
 	return super._process_transitions(trigger_type, event)
 
 
-func _handle_transition(transition: Transition, source: StateChartState) -> void:
+func _handle_transition(transition:Transition, source:StateChartState) -> void:
 	# print("CompoundState._handle_transition: " + name + " from " + source.name + " to " + str(transition.to))
 	# resolve the target state
 	var target := transition.resolve_target()
@@ -228,7 +223,7 @@ func _handle_transition(transition: Transition, source: StateChartState) -> void
 	get_parent()._handle_transition(transition, source)
 
 
-func _restore_history_state(target: HistoryState) -> void:
+func _restore_history_state(target:HistoryState) -> void:
 	# print("Target is history state, restoring saved state.")
 	var saved_state := target.history
 	if saved_state != null:

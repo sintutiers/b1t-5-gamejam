@@ -1,7 +1,7 @@
 @tool
-class_name HurtBox3D
-extends Area3D
+class_name HurtBox3D extends Area3D
 ## [HurtBox3D] enables collision detection by [HitBox3D] or [HitScan3D] and applies affects to [Health].
+
 
 ## The [Health] component to affect.
 @export var health: Health = null:
@@ -10,21 +10,22 @@ extends Area3D
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
 
+
 ## [Modifer] applied to [HealthActionType.Enum].
-@export var modifiers: Dictionary[HealthActionType.Enum, HealthModifier] = { }
+@export var modifiers: Dictionary[HealthActionType.Enum, HealthModifier] = {}
 
 
 func apply_all_actions(actions: Array[HealthAction]) -> void:
 	if not health:
 		push_error("%s is missing a 'Health' component" % self)
 		return
-
+	
 	var modified_actions: Array[HealthModifiedAction]
 	modified_actions.assign(
 		actions.filter(func(action: HealthAction) -> bool: return action != null)
-		.map(_map_modified_action),
+			.map(_map_modified_action)
 	)
-
+	
 	health.apply_all_modified_actions(modified_actions)
 
 
@@ -37,8 +38,8 @@ func _map_modified_action(action: HealthAction) -> HealthModifiedAction:
 # Warn users if values haven't been configured.
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
-
+	
 	if health is not Health:
 		warnings.append("This node requires a 'Health' component")
-
+	
 	return warnings

@@ -27,16 +27,14 @@ func _ready() -> void:
 	# and initialize the color
 	_switch_to(0)
 
-
 ## Called when this box should switch to red.
 func switch_to_red() -> void:
 	_switch_to(0)
 
-
+	
 ## Called when this box should switch to green.
 func switch_to_green() -> void:
 	_switch_to(1)
-
 
 ## Called when this box should switch to blue.
 func switch_to_blue() -> void:
@@ -49,13 +47,12 @@ func _switch_to(index: int) -> void:
 	_transition_time_label.text = ""
 	_time_in_state = 0
 
-
 ## Called every frame while a color change is pending
 func show_pending(_initial_delay: float, remaining_delay: float) -> void:
 	_transition_time_label.text = "Time Remaining: %.1f" % remaining_delay
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta:float) -> void:
 	_time_in_state += delta
 	_time_in_state_label.text = "Time in State: %.1f" % _time_in_state
 

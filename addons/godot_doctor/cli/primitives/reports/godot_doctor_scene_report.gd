@@ -21,7 +21,7 @@ func get_num_infos() -> int:
 	return _node_reports.reduce(
 		func(total: int, node_report: GodotDoctorNodeReport) -> int:
 			return total + node_report.get_num_infos(),
-		0,
+		0
 	)
 
 
@@ -31,7 +31,7 @@ func get_num_warnings() -> int:
 	return _node_reports.reduce(
 		func(total: int, node_report: GodotDoctorNodeReport) -> int:
 			return total + node_report.get_num_warnings(),
-		0,
+		0
 	)
 
 
@@ -41,7 +41,7 @@ func get_num_errors() -> int:
 	return _node_reports.reduce(
 		func(total: int, node_report: GodotDoctorNodeReport) -> int:
 			return total + node_report.get_num_errors(),
-		0,
+		0
 	)
 
 

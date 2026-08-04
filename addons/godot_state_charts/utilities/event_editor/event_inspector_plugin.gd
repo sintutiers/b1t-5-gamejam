@@ -3,10 +3,10 @@ extends EditorInspectorPlugin
 
 const EventEditor = preload("event_editor.gd")
 
-var _undo_redo: EditorUndoRedoManager
+var _undo_redo:EditorUndoRedoManager
 
 
-func setup(undo_redo: EditorUndoRedoManager) -> void:
+func setup(undo_redo:EditorUndoRedoManager) -> void:
 	_undo_redo = undo_redo
 
 

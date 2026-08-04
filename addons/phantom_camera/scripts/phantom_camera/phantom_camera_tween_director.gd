@@ -2,6 +2,7 @@
 @icon("res://addons/phantom_camera/icons/phantom_camera_tween_director.svg")
 class_name PhantomCameraTweenDirector
 extends Node
+
 ## Conditionally overrides [PhantomCameraTween] of [param PhantomCameras].
 ##
 ## Using the [TweenDirectorResource], this node allows for custom tweens between specific [param PhantomCameras] in a scene.[br][br]
@@ -14,19 +15,23 @@ const _constants = preload("res://addons/phantom_camera/scripts/phantom_camera/p
 
 #endregion
 
+
 #region Public Variables
 
 ## Override the [PhantomCameraTween] between specific [param PhantomCameras].
 @export var tween_director: Array[TweenDirectorResource] = []:
-	set = set_tween_director, get = get_tween_director
+	set = set_tween_director,
+	get = get_tween_director
 
 #endregion
+
 
 #region Private Variables
 
 var _pcam_manager: Node = null
 
 #endregion
+
 
 #region Private Functions
 
@@ -41,12 +46,12 @@ func _exit_tree() -> void:
 
 #endregion
 
+
 #region Public Functions
 
 ## Sets the [member tween_director] value.
 func set_tween_director(value: Array[TweenDirectorResource]) -> void:
 	tween_director = value
-
 
 ## Returns the [member tween_director] value.
 func get_tween_director() -> Array[TweenDirectorResource]:

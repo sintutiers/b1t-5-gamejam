@@ -91,19 +91,19 @@ func _has_validation_suites() -> bool:
 func _validate_property(property: Dictionary) -> void:
 	var property_name: String = property.name
 	if (
-			(
-					property_name
-					in [
-						"export_xml_report",
-						"fallback_cli_delay_before_start",
-						"fallback_cli_delay_before_quit",
-					]
-			)
-			and not _has_validation_suites()
+		(
+			property_name
+			in [
+				"export_xml_report",
+				"fallback_cli_delay_before_start",
+				"fallback_cli_delay_before_quit"
+			]
+		)
+		and not _has_validation_suites()
 	):
 		property.usage = property.usage | PROPERTY_USAGE_READ_ONLY
 	elif (
-			property_name in ["xml_report_filename", "xml_report_output_dir"] and not export_xml_report
+		property_name in ["xml_report_filename", "xml_report_output_dir"] and not export_xml_report
 	):
 		property.usage = property.usage | PROPERTY_USAGE_READ_ONLY
 	else:

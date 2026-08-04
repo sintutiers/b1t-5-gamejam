@@ -14,6 +14,7 @@ var current_facing: MovementComponent.Direction = MovementComponent.DEFAULT_DIRE
 
 func _ready() -> void:
 	assert(sprite, "no Sprite.")
+	
 	sprite.play("start")
 
 

@@ -1,5 +1,4 @@
-class_name HitBox2D
-extends Area2D
+class_name HitBox2D extends Area2D
 ## [HitBox2D] is associated with an object that can collide with a [HurtBox2D].
 
 ## emitted when collision with [HitBox2D] detected.
@@ -11,6 +10,7 @@ signal action_applied(hurt_box: HurtBox2D)
 ## emitted when collision with [Area2D] that isn't [HitBox2D] or [HurtBox2D].
 ## Can be using to detect things like environment.
 signal unknown_area_entered(area: Area2D)
+
 
 ## Ignore collisions when [color=orange]true[/color].[br]
 ## Set this to [color=orange]true[/color] after a collision is detected to avoid
@@ -31,11 +31,11 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if ignore_collisions:
 		return
-
+	
 	if area is HitBox2D:
 		hit_box_entered.emit(area)
 		return
-
+	
 	if area is not HurtBox2D:
 		unknown_area_entered.emit(area)
 		return
@@ -52,7 +52,7 @@ func _clone_actions() -> Array[HealthAction]:
 	dup.assign(
 		actions.map(
 			func(action: HealthAction) -> HealthAction: return action.clone()
-		),
+		)
 	)
 
 	return dup

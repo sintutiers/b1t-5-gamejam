@@ -81,7 +81,6 @@ func _enter_tree() -> void:
 	## TODO - When Godot 4.5 becomes min verison
 #	get_tree().scene_changed.connect(_scene_changed)
 
-
 func _exit_tree() -> void:
 	Engine.unregister_singleton(_CONSTANTS.PCAM_MANAGER_NODE_NAME)
 
@@ -90,23 +89,21 @@ func _ready() -> void:
 	# Setting default screensize
 	screen_size = Vector2i(
 		ProjectSettings.get_setting("display/window/size/viewport_width"),
-		ProjectSettings.get_setting("display/window/size/viewport_height"),
+		ProjectSettings.get_setting("display/window/size/viewport_height")
 	)
 
 	# For editor
 	if Engine.is_editor_hint():
-		ProjectSettings.settings_changed.connect(
-			func():
-				screen_size = Vector2i(
-					ProjectSettings.get_setting("display/window/size/viewport_width"),
-					ProjectSettings.get_setting("display/window/size/viewport_height"),
-				)
+		ProjectSettings.settings_changed.connect(func():
+			screen_size = Vector2i(
+				ProjectSettings.get_setting("display/window/size/viewport_width"),
+				ProjectSettings.get_setting("display/window/size/viewport_height")
+			)
 		)
 	# For runtime
 	else:
-		get_tree().get_root().size_changed.connect(
-			func():
-				screen_size = get_viewport().get_visible_rect().size
+		get_tree().get_root().size_changed.connect(func():
+			screen_size = get_viewport().get_visible_rect().size
 		)
 
 ## TODO - When Godot 4.5 becomes min verison
@@ -123,7 +120,6 @@ func pcam_host_added(caller: Node) -> void:
 		pcam_host_added_to_scene.emit(caller)
 	else:
 		printerr("This method can only be called from a PhantomCameraHost node")
-
 
 func pcam_host_removed(caller: Node) -> void:
 	if is_instance_of(caller, PhantomCameraHost):
@@ -143,7 +139,6 @@ func pcam_added(caller) -> void:
 	else:
 		printerr("This method can only be called from a PhantomCamera node")
 
-
 func pcam_removed(caller) -> void:
 	if is_instance_of(caller, PhantomCamera2D):
 		_phantom_camera_2d_list.erase(caller)
@@ -161,7 +156,6 @@ func pcam_tween_director_added(caller: Node) -> void:
 	else:
 		printerr("This function can only be called from a PhantomCameraTweenDirector node")
 
-
 func pcam_tween_director_removed(caller: Node) -> void:
 	if is_instance_of(caller, PhantomCameraTweenDirector):
 		_phantom_camera_tween_director_list.erase(caller)
@@ -172,14 +166,11 @@ func pcam_tween_director_removed(caller: Node) -> void:
 func get_phantom_camera_hosts() -> Array[PhantomCameraHost]:
 	return _phantom_camera_host_list
 
-
 func get_phantom_camera_2ds() -> Array[PhantomCamera2D]:
 	return _phantom_camera_2d_list
 
-
 func get_phantom_camera_3ds() -> Array: ## Note: To support disable_3d export templates for 2D projects, this is purposely not strongly typed.
 	return _phantom_camera_3d_list
-
 
 func set_viewfinder(caller: Node, value: Control) -> void:
 	if caller is PhantomCameraHost:
@@ -187,10 +178,8 @@ func set_viewfinder(caller: Node, value: Control) -> void:
 	else:
 		printerr("Viewfinder can only be set internally by the addon")
 
-
 func get_viewfinder() -> Control:
 	return _viewfinder
-
 
 func scene_changed() -> void:
 	_phantom_camera_2d_list.clear()

@@ -6,8 +6,7 @@ const PhantomCamera3DGizmo: Script = preload("res://addons/phantom_camera/script
 const _icon_texture: Texture2D = preload("res://addons/phantom_camera/icons/phantom_camera_gizmo.svg")
 var _gizmo_name: String = "PhantomCamera3D"
 
-var gizmo_name: String:
-	set = set_gizmo_name
+var gizmo_name: String: set = set_gizmo_name
 var _gizmo_icon: Texture2D
 var _gizmo_spatial_script: Script = PhantomCamera3DNode
 

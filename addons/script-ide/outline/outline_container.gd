@@ -57,14 +57,11 @@ var func_btn: Button
 var engine_func_btn: Button
 #endregion
 
-var is_hide_private_members: bool = false:
-	set = set_hide_private_members
-var outline_order: PackedStringArray:
-	set = set_outline_order
+var is_hide_private_members: bool = false : set = set_hide_private_members
+var outline_order: PackedStringArray : set = set_outline_order
 
 var outline_type_order: Array[OutlineType] = []
 var outline_cache: OutlineCache
-
 
 func _ready() -> void:
 	init_icons()
@@ -82,18 +79,15 @@ func _ready() -> void:
 	class_btn = create_filter_btn(class_icon, CLASSES)
 	constant_btn = create_filter_btn(constant_icon, CONSTANTS)
 
-
 func update():
 	update_outline_cache()
 	update_outline()
-
 
 func tab_changed():
 	var is_script: bool = get_current_script() != null
 	visible = is_script
 
 	update()
-
 
 func find_in_outline_and_goto(selected_idx: int):
 	var script: Script = get_current_script()
@@ -138,7 +132,6 @@ func find_in_outline_and_goto(selected_idx: int):
 
 	push_error(type_with_text + " or " + modifier + " not found in source code")
 
-
 ## Initializes all plugin icons, while respecting the editor settings.
 func init_icons():
 	engine_func_icon = create_editor_texture(load_rel("icon/engine_func.svg"))
@@ -150,7 +143,6 @@ func init_icons():
 	signal_icon = create_editor_texture(load_rel("icon/signal.svg"))
 	constant_icon = create_editor_texture(load_rel("icon/constant.svg"))
 	class_icon = create_editor_texture(load_rel("icon/class.svg"))
-
 
 func create_filter_btn(icon: Texture2D, type: StringName) -> Button:
 	var btn: OutlineButton = OutlineButton.new()
@@ -166,7 +158,6 @@ func create_filter_btn(icon: Texture2D, type: StringName) -> Button:
 	btn.right_clicked.connect(on_right_click.bind(btn))
 
 	return btn
-
 
 func on_right_click(btn: OutlineButton):
 	btn.button_pressed = true
@@ -186,83 +177,58 @@ func on_right_click(btn: OutlineButton):
 
 	outline_filter_txt.grab_focus()
 
-
 func on_filter_button_pressed(pressed: bool, btn: Button):
 	plugin.set_setting(btn.get_meta(PROPERTY), pressed)
 
 	update_outline()
 
-
 ## Initializes the outline type structure and sorts it based off the outline order.
 func init_outline_order():
 	var outline_type: OutlineType = OutlineType.new()
 	outline_type.type_name = ENGINE_FUNCS
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			engine_func_btn,
-			func(): add_to_outline(outline_cache.engine_funcs, engine_func_icon, &"func")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(engine_func_btn,
+		func(): add_to_outline(outline_cache.engine_funcs, engine_func_icon, &"func"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = FUNCS
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			func_btn,
-			func(): add_to_outline_ext(outline_cache.funcs, get_func_icon, &"func", &"static")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(func_btn,
+		func(): add_to_outline_ext(outline_cache.funcs, get_func_icon, &"func", &"static"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = SIGNALS
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			signal_btn,
-			func(): add_to_outline(outline_cache.signals, signal_icon, &"signal")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(signal_btn,
+		func(): add_to_outline(outline_cache.signals, signal_icon, &"signal"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = EXPORTED
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			export_btn,
-			func(): add_to_outline(outline_cache.exports, export_icon, &"var", &"@export")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(export_btn,
+		func(): add_to_outline(outline_cache.exports, export_icon, &"var", &"@export"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = PROPERTIES
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			property_btn,
-			func(): add_to_outline(outline_cache.properties, property_icon, &"var")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(property_btn,
+		func(): add_to_outline(outline_cache.properties, property_icon, &"var"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = CLASSES
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			class_btn,
-			func(): add_to_outline(outline_cache.classes, class_icon, &"class")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(class_btn,
+		func(): add_to_outline(outline_cache.classes, class_icon, &"class"))
 	outline_type_order.append(outline_type)
 
 	outline_type = OutlineType.new()
 	outline_type.type_name = CONSTANTS
-	outline_type.add_to_outline = func():
-		add_to_outline_if_selected(
-			constant_btn,
-			func(): add_to_outline(outline_cache.constants, constant_icon, &"const", &"enum")
-		)
+	outline_type.add_to_outline = func(): add_to_outline_if_selected(constant_btn,
+		func(): add_to_outline(outline_cache.constants, constant_icon, &"const", &"enum"))
 	outline_type_order.append(outline_type)
-
 
 func add_to_outline_if_selected(btn: Button, action: Callable):
 	if (btn.button_pressed):
 		action.call()
-
 
 func update_outline_button_order():
 	var all_buttons: Array[Button] = [engine_func_btn, func_btn, signal_btn, export_btn, property_btn, class_btn, constant_btn]
@@ -275,23 +241,18 @@ func update_outline_button_order():
 	for btn: Button in all_buttons:
 		filter_box.add_child(btn)
 
-
 func sort_buttons_by_outline_order(btn1: Button, btn2: Button) -> bool:
 	return sort_by_outline_order(btn1.get_meta(TYPE), btn2.get_meta(TYPE))
-
 
 func sort_types_by_outline_order(type1: OutlineType, type2: OutlineType) -> bool:
 	return sort_by_outline_order(type1.type_name, type2.type_name)
 
-
 func sort_by_outline_order(outline_type1: StringName, outline_type2: StringName) -> bool:
 	return outline_order.find(outline_type1) < outline_order.find(outline_type2)
-
 
 func get_current_script() -> Script:
 	var script_editor: ScriptEditor = EditorInterface.get_script_editor()
 	return script_editor.get_current_script()
-
 
 func update_outline_cache():
 	outline_cache = null
@@ -315,7 +276,6 @@ func update_outline_cache():
 	var base_script: Script = script.get_base_script()
 	if (base_script != null):
 		for_each_script_member(base_script, func(array: Array[String], item: String): array.erase(item))
-
 
 func for_each_script_member(script: Script, consumer: Callable):
 	# Functions / Methods
@@ -380,7 +340,6 @@ func for_each_script_member(script: Script, consumer: Callable):
 		else:
 			consumer.call(outline_cache.constants, name_key)
 
-
 func update_outline():
 	outline.clear()
 
@@ -390,10 +349,8 @@ func update_outline():
 	for outline_type: OutlineType in outline_type_order:
 		outline_type.add_to_outline.call()
 
-
 func add_to_outline(items: Array[String], icon: Texture2D, type: StringName, modifier: StringName = &""):
 	add_to_outline_ext(items, func(str: String): return icon, type, modifier)
-
 
 func add_to_outline_ext(items: Array[String], icon_callable: Callable, type: StringName, modifier: StringName = &""):
 	var text: String = outline_filter_txt.get_text()
@@ -409,10 +366,9 @@ func add_to_outline_ext(items: Array[String], icon_callable: Callable, type: Str
 
 			var dict: Dictionary[StringName, StringName] = {
 				TYPE: type,
-				&"modifier": modifier,
+				&"modifier": modifier
 			}
 			outline.set_item_metadata(outline.item_count - 1, dict)
-
 
 func get_func_icon(func_name: String) -> Texture2D:
 	var icon: Texture2D = func_icon
@@ -422,7 +378,6 @@ func get_func_icon(func_name: String) -> Texture2D:
 		icon = func_set_icon
 
 	return icon
-
 
 func save_restore_filter() -> Array[bool]:
 	var button_flags: Array[bool] = []
@@ -434,14 +389,12 @@ func save_restore_filter() -> Array[bool]:
 
 	return button_flags
 
-
 func restore_filter(button_flags: Array[bool]):
 	var index: int = 0
 	for flag: bool in button_flags:
 		var btn: Button = filter_box.get_child(index)
 		btn.set_pressed_no_signal(flag)
 		index += 1
-
 
 func set_outline_order(new_outline_order: PackedStringArray):
 	outline_order = new_outline_order
@@ -454,7 +407,6 @@ func set_outline_order(new_outline_order: PackedStringArray):
 	update_outline_button_order()
 	update_outline()
 
-
 func set_hide_private_members(new_value: bool):
 	is_hide_private_members = new_value
 
@@ -464,7 +416,6 @@ func set_hide_private_members(new_value: bool):
 	update_outline_cache()
 	update_outline()
 
-
 func update_filter_buttons():
 	# Update filter buttons.
 	for btn_node: Node in filter_box.get_children():
@@ -472,7 +423,6 @@ func update_filter_buttons():
 		var property: StringName = btn.get_meta(PROPERTY)
 
 		btn.button_pressed = plugin.get_setting(property, btn.button_pressed)
-
 
 func create_function_signature(method: Dictionary) -> String:
 	var func_name: String = method[&"name"]
@@ -498,7 +448,7 @@ func create_function_signature(method: Dictionary) -> String:
 			if (!default_arg):
 				var type_hint: int = arg[&"type"]
 				if (is_dictionary(type_hint)):
-					default_arg = { }
+					default_arg = {}
 				elif (is_array(type_hint)):
 					default_arg = []
 
@@ -517,7 +467,6 @@ func create_function_signature(method: Dictionary) -> String:
 	func_name += " -> " + return_str
 
 	return func_name
-
 
 func get_type(dict: Dictionary) -> String:
 	var type: String = dict[&"class_name"]
@@ -546,14 +495,11 @@ func get_type(dict: Dictionary) -> String:
 
 	return type
 
-
 func is_dictionary(type_hint: int) -> bool:
 	return type_hint == 27
 
-
 func is_array(type_hint: int) -> bool:
 	return type_hint == 28
-
 
 func reset_icons():
 	init_icons()
@@ -566,26 +512,21 @@ func reset_icons():
 	constant_btn.icon = constant_icon
 	update_outline()
 
-
 func create_editor_texture(texture: Texture2D) -> Texture2D:
 	var image: Image = texture.get_image().duplicate()
 	image.adjust_bcs(1.0, 1.0, get_editor_icon_saturation())
 
 	return ImageTexture.create_from_image(image)
 
-
 func load_rel(path: String) -> Variant:
 	var script_path: String = get_script().get_path().get_base_dir()
 	return load(script_path.path_join(path))
 
-
 func is_sorted() -> bool:
 	return EditorInterface.get_editor_settings().get_setting("text_editor/script_list/sort_members_outline_alphabetically")
 
-
 func get_editor_icon_saturation() -> float:
 	return EditorInterface.get_editor_settings().get_setting("interface/theme/icon_saturation")
-
 
 ## Cache for everything inside we collected to show in the Outline.
 class OutlineCache:
@@ -596,7 +537,6 @@ class OutlineCache:
 	var properties: Array[String] = []
 	var funcs: Array[String] = []
 	var engine_funcs: Array[String] = []
-
 
 ## Outline type for a concrete button with their items in the Outline.
 class OutlineType:

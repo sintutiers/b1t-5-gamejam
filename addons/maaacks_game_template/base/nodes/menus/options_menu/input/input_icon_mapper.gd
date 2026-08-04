@@ -15,38 +15,36 @@ const COMMON_REPLACE_STRINGS: Dictionary = {
 	"Rb": "Right Shoulder",
 } # Dictionary[String, String]
 ## Gives priority to icons with occurrences of the provided strings.
-@export var prioritized_strings: Array[String]
+@export var prioritized_strings : Array[String]
 ## Replaces the first occurence in icon names of the key with the value.
-@export var replace_strings: Dictionary # Dictionary[String, String]
+@export var replace_strings : Dictionary # Dictionary[String, String]
 ## Filters the icon names of the provided strings.
-@export var filtered_strings: Array[String]
+@export var filtered_strings : Array[String]
 ## Adds entries for "Up", "Down", "Left", "Right" to icon names ending with "Stick".
-@export var add_stick_directions: bool = false
-@export var intial_joypad_device: String = InputEventHelper.DEVICE_GENERIC
+@export var add_stick_directions : bool = false
+@export var intial_joypad_device : String = InputEventHelper.DEVICE_GENERIC
 ## Attempt to match the icon names to the input names based on the string rules.
-@export var _match_icons_to_inputs_action: bool = false:
+@export var _match_icons_to_inputs_action : bool = false :
 	set(value):
 		if value and Engine.is_editor_hint():
 			_match_icons_to_inputs()
 # For Godot 4.4
 # @export_tool_button("Match Icons to Inputs") var _match_icons_to_inputs_action = _match_icons_to_inputs
-@export var matching_icons: Dictionary # Dictionary[String, Texture]
+@export var matching_icons : Dictionary # Dictionary[String, Texture]
 @export_group("Debug")
-@export var all_icons: Dictionary # Dictionary[String, Texture]
+@export var all_icons : Dictionary # Dictionary[String, Texture]
 
 @onready var last_joypad_device = intial_joypad_device
 
-
-func _is_end_of_word(full_string: String, what: String) -> bool:
+func _is_end_of_word(full_string : String, what : String) -> bool:
 	var string_end_position = full_string.find(what) + what.length()
-	var end_of_word: bool
+	var end_of_word : bool
 	if string_end_position + 1 < full_string.length():
 		var next_character = full_string.substr(string_end_position, 1)
 		end_of_word = next_character == " "
 	return full_string.ends_with(what) or end_of_word
 
-
-func _get_standard_joy_name(joy_name: String) -> String:
+func _get_standard_joy_name(joy_name : String) -> String:
 	var all_replace_strings := replace_strings.duplicate()
 	all_replace_strings.merge(COMMON_REPLACE_STRINGS)
 	for what in all_replace_strings:
@@ -54,7 +52,7 @@ func _get_standard_joy_name(joy_name: String) -> String:
 			var position = joy_name.find(what)
 			joy_name = joy_name.erase(position, what.length())
 			joy_name = joy_name.insert(position, all_replace_strings[what])
-	var combined_joystick_name: Array[String] = []
+	var combined_joystick_name : Array[String] = []
 	for part in joy_name.split(" "):
 		if part.to_lower() in filtered_strings:
 			continue
@@ -64,10 +62,9 @@ func _get_standard_joy_name(joy_name: String) -> String:
 	joy_name = joy_name.strip_edges()
 	return joy_name
 
-
-func _match_icon_to_file(file: String) -> void:
-	var matching_string: String = file.get_file().get_basename()
-	var icon: Texture = load(file)
+func _match_icon_to_file(file : String) -> void:
+	var matching_string : String = file.get_file().get_basename()
+	var icon : Texture = load(file)
 	if not icon:
 		return
 	all_icons[matching_string] = icon
@@ -84,10 +81,9 @@ func _match_icon_to_file(file: String) -> void:
 		return
 	matching_icons[matching_string] = icon
 
-
 func _prioritized_files() -> Array[String]:
-	var priority_levels: Dictionary # Dictionary[String, int]
-	var priortized_files: Array[String]
+	var priority_levels : Dictionary # Dictionary[String, int]
+	var priortized_files : Array[String]
 	for prioritized_string in prioritized_strings:
 		for file in files:
 			if file.containsn(prioritized_string):
@@ -95,8 +91,8 @@ func _prioritized_files() -> Array[String]:
 					priority_levels[file] += 1
 				else:
 					priority_levels[file] = 1
-	var priority_file_map: Dictionary # Dictionary[int, Array]
-	var max_priority_level: int = 0
+	var priority_file_map : Dictionary # Dictionary[int, Array]
+	var max_priority_level : int = 0
 	for file in priority_levels:
 		var priority_level = priority_levels[file]
 		max_priority_level = max(priority_level, max_priority_level)
@@ -110,7 +106,6 @@ func _prioritized_files() -> Array[String]:
 		max_priority_level -= 1
 	return priortized_files
 
-
 func _match_icons_to_inputs() -> void:
 	matching_icons.clear()
 	all_icons.clear()
@@ -119,29 +114,23 @@ func _match_icons_to_inputs() -> void:
 	for file in files:
 		_match_icon_to_file(file)
 
-
-func get_icon(input_event: InputEvent) -> Texture:
+func get_icon(input_event : InputEvent) -> Texture:
 	var device_text = InputEventHelper.get_event_device_text(input_event, last_joypad_device)
 	if device_text in matching_icons:
 		return matching_icons[device_text]
 	return null
 
-
 func _assign_joypad_0_to_last() -> void:
-	if last_joypad_device != intial_joypad_device:
-		return
+	if last_joypad_device != intial_joypad_device : return
 	var connected_joypads := Input.get_connected_joypads()
-	if connected_joypads.is_empty():
-		return
+	if connected_joypads.is_empty(): return
 	last_joypad_device = InputEventHelper.get_joypad_device_name_by_id(connected_joypads[0])
 
-
-func _input(event: InputEvent) -> void:
+func _input(event : InputEvent) -> void:
 	var joypad_device_name = InputEventHelper.get_joypad_device_name(event)
 	if joypad_device_name != InputEventHelper.DEVICE_GENERIC and joypad_device_name != last_joypad_device:
 		last_joypad_device = joypad_device_name
 		joypad_device_changed.emit()
-
 
 func _ready() -> void:
 	_assign_joypad_0_to_last()

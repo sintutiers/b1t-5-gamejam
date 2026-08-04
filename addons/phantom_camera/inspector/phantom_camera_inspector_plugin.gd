@@ -3,12 +3,15 @@ extends EditorInspectorPlugin
 
 #var _phantom_camera_script: Script = preload("res://addons/phantom_camera/scripts/phantom_camera.gd")
 
+
 # 	TODO - Enable again once work is resumed for inspector based tasks
 
 #func _can_handle(object) -> bool:
 #	return object is _phantom_camera_script
 
+
 func _parse_category(object: Object, category: String) -> void:
+
 	var _margin_container: MarginContainer = MarginContainer.new()
 	var _margin_v: float = 20
 	_margin_container.add_theme_constant_override("margin_left", 10)
@@ -33,10 +36,10 @@ func _parse_category(object: Object, category: String) -> void:
 	_vbox_container.add_child(preview_camera_button)
 
 
+
 func _align_camera_with_view(object: Object) -> void:
 	print("Aligning camera with view")
 	print(object)
-
 
 func _preview_camera(object: Object) -> void:
 	print("Previewing camera")

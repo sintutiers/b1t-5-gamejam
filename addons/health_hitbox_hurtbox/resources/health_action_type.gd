@@ -1,5 +1,4 @@
-class_name HealthActionType
-extends Object
+class_name HealthActionType extends Object
 
 ## These are the keys used to add [HealthModifier] to [Health] and HurtBoxes.
 ## NOTICE: Developers can add health action types here to enable more modifiers.

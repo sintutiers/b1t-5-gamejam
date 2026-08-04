@@ -42,10 +42,7 @@ func check_for_updates() -> void:
 ## Callback for when the HTTP request is completed.
 ## Parses the response and checks if an update is available.
 func _on_request_completed(
-		result: int,
-		response_code: int,
-		_headers: PackedStringArray,
-		body: PackedByteArray,
+	result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray
 ) -> void:
 	_http.queue_free()
 
@@ -66,7 +63,7 @@ func _on_request_completed(
 		update_check_completed.emit()
 		return
 
-	var latest: String = tag.lstrip("v") # strips a leading "v" if present (e.g. "v1.3.0" → "1.3.0")
+	var latest: String = tag.lstrip("v")  # strips a leading "v" if present (e.g. "v1.3.0" → "1.3.0")
 	var current: String = _get_current_version()
 
 	if current.is_empty():
@@ -77,16 +74,16 @@ func _on_request_completed(
 	if _is_newer(latest, current):
 		print(
 			(
-					"[GODOT DOCTOR]: Update available! Current: %s → Latest: %s\nGet it at: %s\n%s\n%s"
-					% [current, latest, PLUGIN_RELEASE_PAGE_URL, LAG_BEHIND_HINT, SILENCE_HINT]
-			),
+				"[GODOT DOCTOR]: Update available! Current: %s → Latest: %s\nGet it at: %s\n%s\n%s"
+				% [current, latest, PLUGIN_RELEASE_PAGE_URL, LAG_BEHIND_HINT, SILENCE_HINT]
+			)
 		)
 		GodotDoctorNotifier.push_toast(
 			(
-					"Update available for Godot Doctor plugin!\nCurrent: %s → Latest: %s"
-					% [current, latest]
+				"Update available for Godot Doctor plugin!\nCurrent: %s → Latest: %s"
+				% [current, latest]
 			),
-			0,
+			0
 		)
 	else:
 		print("[GODOT DOCTOR]: Plugin is up to date (%s).\n%s" % [current, SILENCE_HINT])

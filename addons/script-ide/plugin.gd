@@ -130,7 +130,7 @@ var tab_splitter: HSplitContainer
 #endregion
 
 #region Plugin variables
-var keywords: Dictionary[String, bool] = { } # Used as Set.
+var keywords: Dictionary[String, bool] = {} # Used as Set.
 
 var old_script_editor_base: ScriptEditorBase
 var old_script_type: StringName
@@ -238,7 +238,6 @@ func _enter_tree() -> void:
 
 	on_tab_changed(old_scripts_tab_bar.current_tab)
 
-
 ## Restore the old Engine script UI and free everything we created
 func _exit_tree() -> void:
 	var file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
@@ -311,7 +310,6 @@ func _process(delta: float) -> void:
 	update_editor()
 	set_process(false)
 
-
 ## Process the user defined shortcuts
 func _shortcut_input(event: InputEvent) -> void:
 	if (!event.is_pressed() || event.is_echo()):
@@ -347,7 +345,6 @@ func _shortcut_input(event: InputEvent) -> void:
 	elif (open_quick_search_popup_resources_shc.matches_event(event)):
 		open_quick_search_popup(QuickOpenPopup.Category.RESOURCES)
 
-
 ## May cancels the quick search shortcut timer.
 func _input(event: InputEvent) -> void:
 	if (event is InputEventKey):
@@ -368,7 +365,6 @@ func setup_change_listener():
 	# Sync settings changes for this plugin.
 	get_editor_settings().settings_changed.connect(sync_settings)
 
-
 ## Initializes all settings.
 ## Every setting can be changed while this plugin is active, which will override them.
 func init_settings():
@@ -383,7 +379,6 @@ func init_settings():
 	if (!show_members):
 		set_setting(SHOW_MEMBERS, true)
 
-
 ## Initializes all shortcuts.
 ## Every shortcut can be changed while this plugin is active, which will override them.
 func init_shortcuts():
@@ -395,7 +390,7 @@ func init_shortcuts():
 		event.command_or_control_autoremap = true
 		event.keycode = KEY_O
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_OUTLINE_POPUP, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_SCRIPTS_POPUP)):
@@ -405,7 +400,7 @@ func init_shortcuts():
 		event.command_or_control_autoremap = true
 		event.keycode = KEY_U
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_SCRIPTS_POPUP, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_QUICK_SEARCH_POPUP)):
@@ -414,7 +409,7 @@ func init_shortcuts():
 		event.device = -1
 		event.keycode = KEY_SHIFT
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_QUICK_SEARCH_POPUP, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_QUICK_SEARCH_POPUP_SCENES)):
@@ -424,7 +419,7 @@ func init_shortcuts():
 		event.command_or_control_autoremap = true
 		event.keycode = KEY_N
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_QUICK_SEARCH_POPUP_SCENES, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_QUICK_SEARCH_POPUP_GDSCRIPTS)):
@@ -435,7 +430,7 @@ func init_shortcuts():
 		event.shift_pressed = true
 		event.keycode = KEY_N
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_QUICK_SEARCH_POPUP_GDSCRIPTS, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_QUICK_SEARCH_POPUP_RESOURCES)):
@@ -447,7 +442,7 @@ func init_shortcuts():
 		event.shift_pressed = true
 		event.keycode = KEY_N
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_QUICK_SEARCH_POPUP_RESOURCES, shortcut)
 
 	if (!editor_settings.has_setting(OPEN_OVERRIDE_POPUP)):
@@ -457,7 +452,7 @@ func init_shortcuts():
 		event.keycode = KEY_INSERT
 		event.alt_pressed = true
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(OPEN_OVERRIDE_POPUP, shortcut)
 
 	if (!editor_settings.has_setting(TAB_CYCLE_FORWARD)):
@@ -467,7 +462,7 @@ func init_shortcuts():
 		event.keycode = KEY_TAB
 		event.ctrl_pressed = true
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(TAB_CYCLE_FORWARD, shortcut)
 
 	if (!editor_settings.has_setting(TAB_CYCLE_BACKWARD)):
@@ -478,7 +473,7 @@ func init_shortcuts():
 		event.shift_pressed = true
 		event.ctrl_pressed = true
 
-		shortcut.events = [event]
+		shortcut.events = [ event ]
 		editor_settings.set_setting(TAB_CYCLE_BACKWARD, shortcut)
 
 	open_outline_popup_shc = editor_settings.get_setting(OPEN_OUTLINE_POPUP)
@@ -495,7 +490,6 @@ func init_shortcuts():
 ## Schedules an update on the next frame.
 func schedule_update():
 	set_process(true)
-
 
 ## Updates all parts of the editor that are needed to be synchronized with the file system change.
 func update_editor():
@@ -514,7 +508,6 @@ func update_editor():
 		# We saved / filesystem changed. so need to update everything.
 		multiline_tab_bar.update_tabs()
 		outline_container.update()
-
 
 func on_tab_changed(index: int):
 	if (old_script_editor_base != null):
@@ -547,7 +540,6 @@ func on_tab_changed(index: int):
 
 	schedule_update()
 
-
 func toggle_split_view():
 	var script_editor: ScriptEditor = EditorInterface.get_script_editor()
 	var split_script_editor_base: ScriptEditorBase = script_editor.get_current_editor()
@@ -577,14 +569,11 @@ func toggle_split_view():
 		if (split_script_editor_base == null):
 			multiline_tab_bar.set_split_disabled(true)
 
-
 func navigate_in_outline(event: InputEvent):
 	navigate_on_list(event, outline_container.outline, outline_container.find_in_outline_and_goto)
 
-
 func notify_order_changed():
 	multiline_tab_bar.script_order_changed()
-
 
 func open_quick_search_popup(category: QuickOpenPopup.Category = QuickOpenPopup.Category.ALL):
 	var pref_size: Vector2
@@ -598,7 +587,6 @@ func open_quick_search_popup(category: QuickOpenPopup.Category = QuickOpenPopup.
 
 	quick_open_popup.popup_exclusive_on_parent(EditorInterface.get_script_editor(), get_center_editor_rect(pref_size))
 	quick_open_popup.set_category(category)
-
 
 func open_override_popup():
 	var script: Script = get_current_script()
@@ -617,11 +605,9 @@ func open_override_popup():
 
 	override_popup.popup_exclusive_on_parent(EditorInterface.get_script_editor(), get_center_editor_rect(pref_size))
 
-
 func hide_scripts_popup():
 	if (scripts_popup != null && scripts_popup.visible):
 		scripts_popup.hide.call_deferred()
-
 
 func create_set_scripts_popup():
 	scripts_popup = PopupPanel.new()
@@ -633,7 +619,6 @@ func create_set_scripts_popup():
 
 	multiline_tab_bar.set_popup(scripts_popup)
 
-
 func restore_scripts_list():
 	script_filter_txt.text = &""
 
@@ -641,7 +626,6 @@ func restore_scripts_list():
 
 	scripts_item_list.get_parent().reparent(script_panel_split_container)
 	script_panel_split_container.move_child(scripts_item_list.get_parent(), 0)
-
 
 func navigate_on_list(event: InputEvent, list: ItemList, submit: Callable):
 	if (event.is_action_pressed(&"ui_text_submit")):
@@ -680,7 +664,6 @@ func navigate_on_list(event: InputEvent, list: ItemList, submit: Callable):
 	elif (event is InputEventKey && list.item_count > 0 && !list.is_anything_selected()):
 		list.select(0)
 
-
 func get_list_index(list: ItemList) -> int:
 	var items: PackedInt32Array = list.get_selected_items()
 
@@ -689,7 +672,6 @@ func get_list_index(list: ItemList) -> int:
 
 	return items[0]
 
-
 func navigate_list(list: ItemList, index: int, amount: int):
 	index = clamp(index + amount, 0, list.item_count - 1)
 
@@ -697,14 +679,12 @@ func navigate_list(list: ItemList, index: int, amount: int):
 	list.ensure_current_is_visible()
 	list.accept_event()
 
-
 func get_center_editor_rect(pref_size: Vector2) -> Rect2i:
 	var script_editor: ScriptEditor = EditorInterface.get_script_editor()
 
 	var position: Vector2 = script_editor.global_position + script_editor.size / 2 - pref_size / 2
 
 	return Rect2i(position, pref_size)
-
 
 func open_outline_popup():
 	if (get_current_script() == null):
@@ -736,7 +716,6 @@ func open_outline_popup():
 	update_outline()
 	outline_filter_txt.grab_focus()
 
-
 func on_outline_popup_hidden(outline_initially_closed: bool, old_text: String, button_flags: Array[bool]):
 	outline_popup.popup_hide.disconnect(on_outline_popup_hidden)
 
@@ -753,21 +732,17 @@ func on_outline_popup_hidden(outline_initially_closed: bool, old_text: String, b
 
 	update_outline()
 
-
 func open_scripts_popup():
 	multiline_tab_bar.show_popup()
-
 
 func get_current_script() -> Script:
 	var script_editor: ScriptEditor = EditorInterface.get_script_editor()
 	return script_editor.get_current_script()
 
-
 func select_script(selected_idx: int):
 	hide_scripts_popup()
 
 	scripts_item_list.item_selected.emit(selected_idx)
-
 
 func goto_line(index: int):
 	if (outline_popup != null && outline_popup.visible):
@@ -786,10 +761,8 @@ func goto_line(index: int):
 
 	code_edit.grab_focus()
 
-
 func update_script_list_visibility():
 	scripts_item_list.get_parent().visible = is_script_list_visible
-
 
 func sync_settings():
 	if (suppress_settings_sync):
@@ -866,10 +839,8 @@ func sync_settings():
 			_:
 				outline_container.update_filter_buttons()
 
-
 func update_selected_tab():
 	multiline_tab_bar.update_selected_tab()
-
 
 func update_tabs_position():
 	var tab_container_parent: Control = multiline_tab_bar.get_parent()
@@ -878,10 +849,8 @@ func update_tabs_position():
 	else:
 		tab_container_parent.move_child(multiline_tab_bar, tab_container_parent.get_child_count() - 1)
 
-
 func update_outline():
 	outline_container.update_outline()
-
 
 func update_outline_position():
 	if (is_outline_right):
@@ -892,7 +861,6 @@ func update_outline_position():
 	else:
 		script_editor_split_container.move_child(files_panel, 0)
 
-
 func update_outline_font():
 	var monospace_outline: bool = get_setting(MONOSPACE_OUTLINE, true)
 	if (monospace_outline):
@@ -900,7 +868,6 @@ func update_outline_font():
 		outline_container.outline.add_theme_font_override(&"font", font)
 	else:
 		outline_container.outline.remove_theme_font_override(&"font")
-
 
 func update_keywords():
 	var script: Script = get_current_script()
@@ -915,20 +882,16 @@ func update_keywords():
 		keywords["_static_init"] = true
 		register_virtual_methods(new_script_type)
 
-
 func register_virtual_methods(clazz: String):
 	for method: Dictionary in ClassDB.class_get_method_list(clazz):
 		if (method[&"flags"] & METHOD_FLAG_VIRTUAL > 0):
 			keywords[method[&"name"]] = true
 
-
 func get_editor_scale() -> float:
 	return EditorInterface.get_editor_scale()
 
-
 func get_editor_settings() -> EditorSettings:
 	return EditorInterface.get_editor_settings()
-
 
 func get_setting(property: StringName, alt: bool) -> bool:
 	var editor_settings: EditorSettings = get_editor_settings()
@@ -938,7 +901,6 @@ func get_setting(property: StringName, alt: bool) -> bool:
 		editor_settings.set_setting(property, alt)
 		return alt
 
-
 func set_setting(property: StringName, value: bool):
 	var editor_settings: EditorSettings = get_editor_settings()
 
@@ -946,10 +908,8 @@ func set_setting(property: StringName, value: bool):
 	editor_settings.set_setting(property, value)
 	suppress_settings_sync = false
 
-
 func get_shortcut(property: StringName) -> Shortcut:
 	return get_editor_settings().get_setting(property)
-
 
 func get_outline_order() -> PackedStringArray:
 	var new_outline_order: PackedStringArray
@@ -962,14 +922,11 @@ func get_outline_order() -> PackedStringArray:
 
 	return new_outline_order
 
-
 static func find_or_null(arr: Array[Node]) -> Control:
 	if (arr.is_empty()):
-		push_error(
-			"""Node that is needed for Script-IDE not found.
+		push_error("""Node that is needed for Script-IDE not found.
 Plugin will not work correctly.
 This might be due to some other plugins or changes in the Engine.
-Please report this to Script-IDE, so we can figure out a fix.""",
-		)
+Please report this to Script-IDE, so we can figure out a fix.""")
 		return null
 	return arr[0] as Control

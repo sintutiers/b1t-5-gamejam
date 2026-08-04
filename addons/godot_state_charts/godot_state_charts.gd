@@ -2,23 +2,23 @@
 extends EditorPlugin
 
 ## The sidebar control for 2D
-var _ui_sidebar_canvas: Control
+var _ui_sidebar_canvas:Control
 ## The sidebar control for 3D
-var _ui_sidebar_spatial: Control
+var _ui_sidebar_spatial:Control
 
 ## Scene holding the sidebar
-var _sidebar_ui: PackedScene = preload("utilities/editor_sidebar.tscn")
+var _sidebar_ui:PackedScene = preload("utilities/editor_sidebar.tscn")
 
-var _debugger_plugin: EditorDebuggerPlugin
-var _inspector_plugin: EditorInspectorPlugin
+var _debugger_plugin:EditorDebuggerPlugin
+var _inspector_plugin:EditorInspectorPlugin
 
 enum SidebarLocation {
 	LEFT = 1,
-	RIGHT = 2,
+	RIGHT = 2
 }
 
 ## The current location of the sidebar. Default is left.
-var _current_sidebar_location: SidebarLocation = SidebarLocation.LEFT
+var _current_sidebar_location:SidebarLocation = SidebarLocation.LEFT
 
 
 func _enter_tree() -> void:
@@ -29,6 +29,7 @@ func _enter_tree() -> void:
 	_ui_sidebar_spatial = _sidebar_ui.instantiate()
 	_ui_sidebar_spatial.sidebar_toggle_requested.connect(_toggle_sidebar)
 	_ui_sidebar_spatial.hide()
+
 
 	# and add it to the right place in the editor ui
 	_add_sidebars()
@@ -74,11 +75,12 @@ func _add_sidebars() -> void:
 
 func _remove_sidebars() -> void:
 	if _current_sidebar_location == SidebarLocation.LEFT:
-		remove_control_from_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_SIDE_LEFT, _ui_sidebar_canvas)
+		remove_control_from_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_SIDE_LEFT,_ui_sidebar_canvas)
 		remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, _ui_sidebar_spatial)
 	else:
-		remove_control_from_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_SIDE_RIGHT, _ui_sidebar_canvas)
+		remove_control_from_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_SIDE_RIGHT,_ui_sidebar_canvas)
 		remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT, _ui_sidebar_spatial)
+
 
 
 func _ready() -> void:
@@ -86,6 +88,7 @@ func _ready() -> void:
 	_ui_sidebar_canvas.setup(get_editor_interface(), get_undo_redo())
 	_ui_sidebar_spatial.setup(get_editor_interface(), get_undo_redo())
 	_inspector_plugin.setup(get_undo_redo())
+
 
 
 func _exit_tree() -> void:
@@ -111,8 +114,8 @@ func _on_selection_changed() -> void:
 	if selection.size() == 1:
 		var selected_node := selection[0]
 		if selected_node is StateChart \
-				or selected_node is StateChartState \
-				or selected_node is Transition:
+			or selected_node is StateChartState \
+			or selected_node is Transition:
 			_ui_sidebar_canvas.show()
 			_ui_sidebar_canvas.change_selected_node(selected_node)
 			_ui_sidebar_spatial.show()

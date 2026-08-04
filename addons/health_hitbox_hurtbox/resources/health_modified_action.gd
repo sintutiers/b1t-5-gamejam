@@ -1,5 +1,4 @@
-class_name HealthModifiedAction
-extends Resource
+class_name HealthModifiedAction extends Resource
 
 var action: HealthAction
 var modifier: HealthModifier
@@ -33,6 +32,7 @@ var multiplier: float:
 func _init(action: HealthAction, modifier: HealthModifier) -> void:
 	self.action = action
 	self.modifier = modifier
+
 
 
 ## clone because duplicate() doesn't work with _init() parameters

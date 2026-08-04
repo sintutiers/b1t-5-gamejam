@@ -1,17 +1,17 @@
 @tool
+
 extends ConfirmationDialog
 
 const StateChartUtil = preload("../state_chart_util.gd")
 
-@onready var _event_list: ItemList = %EventList
-@onready var _event_name_edit: LineEdit = %EventNameEdit
-@onready var _warning_label: Label = %WarningLabel
+@onready var _event_list:ItemList = %EventList
+@onready var _event_name_edit:LineEdit = %EventNameEdit
+@onready var _warning_label:Label = %WarningLabel
 
-var _chart: StateChart
-var _undo_redo: EditorUndoRedoManager
+var _chart:StateChart
+var _undo_redo:EditorUndoRedoManager
 
-
-func open(chart: StateChart, undo_redo: EditorUndoRedoManager, pre_select_event: StringName) -> void:
+func open(chart:StateChart, undo_redo:EditorUndoRedoManager, pre_select_event:StringName) -> void:
 	title = "Events of " + chart.name
 	_chart = chart
 	_undo_redo = undo_redo
@@ -29,7 +29,7 @@ func _refresh_events() -> void:
 
 ## Selects the given event. If it does not exist, selects the 
 ## first event in the list. If the list is empty, selects nothing.
-func _select_event(event_name: StringName) -> void:
+func _select_event(event_name:StringName) -> void:
 	for i in _event_list.item_count:
 		if _event_list.get_item_text(i) == event_name:
 			_event_list.select(i)
@@ -40,11 +40,11 @@ func _select_event(event_name: StringName) -> void:
 		_event_list.select(0)
 		_event_name_edit.text = _event_list.get_item_text(0)
 		return
-
+		
 	_event_name_edit.text = ""
 
 
-func _show_warning(text: String) -> void:
+func _show_warning(text:String) -> void:
 	if text == "":
 		_warning_label.visible = false
 		return
@@ -57,8 +57,8 @@ func _get_selected_event_name() -> StringName:
 	var items := _event_list.get_selected_items()
 	if items.size() != 1:
 		return ""
-
-	return _event_list.get_item_text(items[0])
+		
+	return _event_list.get_item_text(items[0]) 
 
 
 func _update_buttons() -> void:
@@ -66,15 +66,15 @@ func _update_buttons() -> void:
 	get_ok_button().disabled = false
 
 	if not _event_list.is_anything_selected():
-		get_ok_button().disabled = true
+		get_ok_button().disabled = true		
 		_show_warning("Please select an event in the list to rename it.")
 		return
-
+	
 	# disable rename button if the event name is the same as the 
 	# currently selected event. The if above ensures we have an event 
 	# selected.
 	if _event_name_edit.text == _get_selected_event_name():
-		get_ok_button().disabled = true
+		get_ok_button().disabled = true		
 		# but show no warning for it, as this is pretty much
 		# self-evident and the user shouldn't be immediately
 		# greeted by a warning
@@ -85,14 +85,14 @@ func _close() -> void:
 	queue_free()
 
 
-func _on_event_list_item_selected(index: int) -> void:
+func _on_event_list_item_selected(index:int) -> void:
 	_event_name_edit.text = _event_list.get_item_text(index)
 	_update_buttons()
 
-
+	
 func _on_event_name_edit_text_changed(new_text) -> void:
 	_update_buttons()
-
+		
 
 func _on_confirmed() -> void:
 	var old_event_name := _get_selected_event_name()

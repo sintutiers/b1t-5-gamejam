@@ -87,6 +87,7 @@ var _signal_connections: Array = []
 
 #region Plugin Lifecycle
 
+
 ## Called when the plugin enters the scene scene_tree.
 ## Initializes the plugin by connecting signals and adding the dock to the editor,
 ## or running in CLI mode when headless.
@@ -112,8 +113,7 @@ func _enter_tree():
 		# In headless mode, we only run if the appropriate command line argument is provided.
 		if not OS.get_cmdline_user_args().has("--run-godot-doctor"):
 			GodotDoctorNotifier.print_debug(
-				"Skipping validation as --run-godot-doctor was not provided",
-				self,
+				"Skipping validation as --run-godot-doctor was not provided", self
 			)
 			return
 		# If the argument is provided, we initialize for CLI mode.
@@ -196,8 +196,7 @@ func _exit_tree():
 	# for physics node instantiation).
 	if _run_mode == RunMode.CLI and _cli_thread == null:
 		GodotDoctorNotifier.print_debug(
-			"CLI thread was never started. Running validation synchronously...",
-			self,
+			"CLI thread was never started. Running validation synchronously...", self
 		)
 		_has_ran_validation = false
 		_active_runner.run()
@@ -222,7 +221,7 @@ func _teardown() -> void:
 			quit_with_fail_early_if_headless()
 		else:
 			var editor_reporter: GodotDoctorEditorValidationReporter = (
-					_active_reporter as GodotDoctorEditorValidationReporter
+				_active_reporter as GodotDoctorEditorValidationReporter
 			)
 			editor_reporter.teardown()
 	if _cli_thread != null:
@@ -232,7 +231,7 @@ func _teardown() -> void:
 		# during _exit_tree and let process shutdown terminate the worker.
 		if _is_exiting_tree and _run_mode == RunMode.CLI and _cli_thread.is_alive():
 			push_warning(
-				"Skipping wait_to_finish for CLI thread during _exit_tree to avoid deadlock.",
+				"Skipping wait_to_finish for CLI thread during _exit_tree to avoid deadlock."
 			)
 		else:
 			_cli_thread.wait_to_finish()
@@ -242,9 +241,11 @@ func _teardown() -> void:
 		_update_checker.queue_free()
 	_disconnect_signals()
 
+
 #endregion
 
 #region Signal Management
+
 
 ## Connect a [param signal_to_connect_to] to a [param callable_to_execute]
 ## and track the connection for later disconnection.
@@ -283,58 +284,49 @@ func _connect_runner_signals():
 
 	GodotDoctorNotifier.print_debug("Connecting runner signals...", self)
 	_connect_and_track(
-		_active_runner.started_scene_collection,
-		_active_collector.on_started_scene_collection,
+		_active_runner.started_scene_collection, _active_collector.on_started_scene_collection
 	)
 	_connect_and_track(
-		_active_runner.finished_scene_collection,
-		_active_collector.on_finished_scene_collection,
+		_active_runner.finished_scene_collection, _active_collector.on_finished_scene_collection
 	)
 	_connect_and_track(
 		_active_runner.started_run_for_scene_res_path,
-		_active_collector.on_started_run_for_scene_res_path,
+		_active_collector.on_started_run_for_scene_res_path
 	)
 	_connect_and_track(
 		_active_runner.finished_run_for_scene_res_path,
-		_active_collector.on_finished_run_for_scene_res_path,
+		_active_collector.on_finished_run_for_scene_res_path
 	)
 	_connect_and_track(
-		_active_runner.started_resource_collection,
-		_active_collector.on_started_resource_collection,
+		_active_runner.started_resource_collection, _active_collector.on_started_resource_collection
 	)
 	_connect_and_track(
 		_active_runner.finished_resource_collection,
-		_active_collector.on_finished_resource_collection,
+		_active_collector.on_finished_resource_collection
 	)
 	_connect_and_track(
-		_active_runner.started_node_collection,
-		_active_collector.on_started_node_collection,
+		_active_runner.started_node_collection, _active_collector.on_started_node_collection
 	)
 	_connect_and_track(
-		_active_runner.finished_node_collection,
-		_active_collector.on_finished_node_collection,
+		_active_runner.finished_node_collection, _active_collector.on_finished_node_collection
 	)
 	_connect_and_track(
-		_active_runner.started_run_for_resource,
-		_active_collector.on_started_run_for_resource,
+		_active_runner.started_run_for_resource, _active_collector.on_started_run_for_resource
 	)
 	_connect_and_track(
-		_active_runner.finished_run_for_resource,
-		_active_collector.on_finished_run_for_resource,
+		_active_runner.finished_run_for_resource, _active_collector.on_finished_run_for_resource
 	)
 	_connect_and_track(_active_runner.run_complete, _on_run_complete)
 
 	match _run_mode:
 		RunMode.EDITOR:
 			GodotDoctorNotifier.print_debug(
-				"Detected Editor Runner, connecting editor-specific signals...",
-				self,
+				"Detected Editor Runner, connecting editor-specific signals...", self
 			)
 			_connect_editor_runner_signals()
 		RunMode.CLI:
 			GodotDoctorNotifier.print_debug(
-				"Detected CLI Runner, connecting CLI-specific signals...",
-				self,
+				"Detected CLI Runner, connecting CLI-specific signals...", self
 			)
 			_connect_cli_runner_signals()
 		_:
@@ -356,27 +348,27 @@ func _connect_editor_runner_signals():
 
 	var editor_runner: GodotDoctorEditorRunner = _active_runner as GodotDoctorEditorRunner
 	var editor_reporter: GodotDoctorEditorValidationReporter = (
-			_active_reporter as GodotDoctorEditorValidationReporter
+		_active_reporter as GodotDoctorEditorValidationReporter
 	)
 	_connect_and_track(
 		editor_runner.run_for_edited_scene_root_requested,
-		editor_reporter.on_run_for_edited_scene_root_requested,
+		editor_reporter.on_run_for_edited_scene_root_requested
 	)
 	_connect_and_track(
 		editor_runner.started_run_for_edited_scene_root,
-		editor_reporter.on_started_run_for_edited_scene_root,
+		editor_reporter.on_started_run_for_edited_scene_root
 	)
 	_connect_and_track(
 		editor_runner.finished_run_for_edited_scene_root,
-		editor_reporter.on_finished_run_for_edited_scene_root,
+		editor_reporter.on_finished_run_for_edited_scene_root
 	)
 	_connect_and_track(
 		editor_runner.started_run_for_edited_resource,
-		editor_reporter.on_started_run_for_edited_resource,
+		editor_reporter.on_started_run_for_edited_resource
 	)
 	_connect_and_track(
 		editor_runner.finished_run_for_edited_resource,
-		editor_reporter.on_finished_run_for_edited_resource,
+		editor_reporter.on_finished_run_for_edited_resource
 	)
 
 
@@ -393,23 +385,23 @@ func _connect_cli_runner_signals():
 		return
 	var cli_runner: GodotDoctorCLIRunner = _active_runner as GodotDoctorCLIRunner
 	var cli_collector: GodotDoctorCLIValidationCollector = (
-			_active_collector as GodotDoctorCLIValidationCollector
+		_active_collector as GodotDoctorCLIValidationCollector
 	)
 	_connect_and_track(
 		cli_runner.started_validation_suite_collection,
-		cli_collector.on_started_validation_suite_collection,
+		cli_collector.on_started_validation_suite_collection
 	)
 	_connect_and_track(
 		cli_runner.finished_validation_suite_collection,
-		cli_collector.on_finished_validation_suite_collection,
+		cli_collector.on_finished_validation_suite_collection
 	)
 	_connect_and_track(
 		cli_runner.started_run_for_validation_suite,
-		cli_collector.on_started_run_for_validation_suite,
+		cli_collector.on_started_run_for_validation_suite
 	)
 	_connect_and_track(
 		cli_runner.finished_run_for_validation_suite,
-		cli_collector.on_finished_run_for_validation_suite,
+		cli_collector.on_finished_run_for_validation_suite
 	)
 
 
@@ -430,9 +422,11 @@ func _disconnect_signals():
 	GodotDoctorNotifier.print_debug("Disconnecting signals...", self)
 	_disconnect_all_tracked_signals()
 
+
 #endregion
 
 #region Event Handlers
+
 
 ## Called when a scene is saved by the user; triggers validation if
 ## [member GodotDoctorSettings.validate_on_save] is enabled.
@@ -468,8 +462,7 @@ func _on_run_complete() -> void:
 	match _run_mode:
 		RunMode.EDITOR:
 			GodotDoctorNotifier.print_debug(
-				"Detected editor mode, reporting results for editor...",
-				self,
+				"Detected editor mode, reporting results for editor...", self
 			)
 			_report_on_collected_results_for_editor()
 		RunMode.CLI:
@@ -492,26 +485,26 @@ func _report_on_collected_results_for_editor() -> void:
 	# Assert that the active reporter and collector are
 	# of the expected types for editor mode before proceeding.
 	if (
-			not _active_reporter is GodotDoctorEditorValidationReporter
-			or not _active_collector is GodotDoctorEditorValidationCollector
+		not _active_reporter is GodotDoctorEditorValidationReporter
+		or not _active_collector is GodotDoctorEditorValidationCollector
 	):
 		push_error(
-			"Attempted to report on collected results with incompatible reporter or collector types.",
+			"Attempted to report on collected results with incompatible reporter or collector types."
 		)
 		quit_with_fail_early_if_headless()
 		return
 
 	# Cast the active reporter and collector to their expected types for editor mode.
 	var editor_reporter: GodotDoctorEditorValidationReporter = (
-			_active_reporter as GodotDoctorEditorValidationReporter
+		_active_reporter as GodotDoctorEditorValidationReporter
 	)
 	var editor_collector: GodotDoctorEditorValidationCollector = (
-			_active_collector as GodotDoctorEditorValidationCollector
+		_active_collector as GodotDoctorEditorValidationCollector
 	)
 
 	# Report on scene validation results
 	var scene_validation_collection: GodotDoctorSceneValidationCollection = (
-			editor_collector.get_scene_validation_collection()
+		editor_collector.get_scene_validation_collection()
 	)
 	# If no scene validation collection was created,
 	# the user probably didn't have a scene open, or there were no messages reported,
@@ -519,7 +512,7 @@ func _report_on_collected_results_for_editor() -> void:
 	if scene_validation_collection == null:
 		GodotDoctorNotifier.print_debug(
 			"Skipping scene validation reporting as no scene validation collection was created.",
-			self,
+			self
 		)
 	else:
 		# Report on scene validation results using the editor reporter.
@@ -527,18 +520,18 @@ func _report_on_collected_results_for_editor() -> void:
 
 	# Report on resource validation results
 	var resource_validation_collection: GodotDoctorResourceValidationCollection = (
-			editor_collector.get_resource_validation_collection()
+		editor_collector.get_resource_validation_collection()
 	)
 	# If no resource validation collection was created,
 	# the user probably didn't have any resources open, or there were no messages reported,
 	# so we skip reporting on resource validation results and continue.
 	if resource_validation_collection == null:
 		(
-				GodotDoctorNotifier
-				.print_debug(
-					"Skipping resource validation reporting as no resource validation collection was created.",
-					self,
-				)
+			GodotDoctorNotifier
+			. print_debug(
+				"Skipping resource validation reporting as no resource validation collection was created.",
+				self
+			)
 		)
 	else:
 		# Report on resource validation results using the editor reporter.
@@ -562,11 +555,11 @@ func _report_on_collected_results_for_cli() -> bool:
 	# of the expected types for CLI mode before proceeding.
 	GodotDoctorNotifier.print_debug("Reporting on collected results for CLI...", self)
 	if (
-			not _active_reporter is GodotDoctorCLIValidationReporter
-			or not _active_collector is GodotDoctorCLIValidationCollector
+		not _active_reporter is GodotDoctorCLIValidationReporter
+		or not _active_collector is GodotDoctorCLIValidationCollector
 	):
 		push_error(
-			"Attempted to report on collected results with incompatible reporter or collector types.",
+			"Attempted to report on collected results with incompatible reporter or collector types."
 		)
 		quit_with_fail_early_if_headless()
 		# Should already have quit here, but just in case, we
@@ -575,25 +568,27 @@ func _report_on_collected_results_for_cli() -> bool:
 
 	# Cast the active reporter and collector to their expected types for CLI mode.
 	var cli_reporter: GodotDoctorCLIValidationReporter = (
-			_active_reporter as GodotDoctorCLIValidationReporter
+		_active_reporter as GodotDoctorCLIValidationReporter
 	)
 	var cli_collector: GodotDoctorCLIValidationCollector = (
-			_active_collector as GodotDoctorCLIValidationCollector
+		_active_collector as GodotDoctorCLIValidationCollector
 	)
 
 	# Report on validation suite results using the CLI reporter.
 	# This will generate a console report and an optional XML report,
 	# and return whether validation passed.
 	var passed: bool = cli_reporter.report_on_validation_suite_collection(
-		cli_collector.get_validation_suite_collection(),
+		cli_collector.get_validation_suite_collection()
 	)
 	# Return the result of whether validation passed,
 	# which will be used to determine the process exit code.
 	return passed
 
+
 #endregion
 
 #region Process Management
+
 
 ## Quits the editor with the given [param exit_code].
 func quit_with_code(exit_code: int) -> void:
@@ -615,8 +610,10 @@ func _on_update_check_completed() -> void:
 	GodotDoctorNotifier.print_debug("Update check completed, freeing update checker.", self)
 	_update_checker.queue_free()
 
+
 # Subregion for Process Management related to CLI thread management and fallback timers.
 #region CLI Thread Management
+
 
 ## Called by the editor on startup.
 ## We use this hook to start the CLI runner thread once the editor is ready.
@@ -649,8 +646,7 @@ func _start_cli_start_fallback_timer() -> void:
 	var delay: float = settings.fallback_cli_delay_before_start
 	if delay <= 0.0:
 		GodotDoctorNotifier.print_debug(
-			"Start fallback timer disabled (fallback_cli_delay_before_start <= 0)",
-			self,
+			"Start fallback timer disabled (fallback_cli_delay_before_start <= 0)", self
 		)
 		return
 	GodotDoctorNotifier.print_debug("Starting CLI start fallback timer (%.1fs)..." % delay, self)
@@ -663,8 +659,7 @@ func _start_cli_start_fallback_timer() -> void:
 ## [method _set_window_layout] having been called.
 func _on_cli_start_fallback_timeout() -> void:
 	GodotDoctorNotifier.print_debug(
-		"Start fallback timer expired. Starting CLI runner thread...",
-		self,
+		"Start fallback timer expired. Starting CLI runner thread...", self
 	)
 	_start_cli_thread()
 
@@ -675,8 +670,7 @@ func _start_cli_quit_fallback_timer() -> void:
 	var delay: float = settings.fallback_cli_delay_before_quit
 	if delay <= 0.0:
 		GodotDoctorNotifier.print_debug(
-			"Quit fallback timer disabled (fallback_cli_delay_before_quit <= 0)",
-			self,
+			"Quit fallback timer disabled (fallback_cli_delay_before_quit <= 0)", self
 		)
 		return
 	GodotDoctorNotifier.print_debug("Starting CLI quit fallback timer (%.1fs)..." % delay, self)
@@ -689,18 +683,20 @@ func _start_cli_quit_fallback_timer() -> void:
 func _on_cli_quit_fallback_timeout() -> void:
 	push_error(
 		(
-				"CLI quit fallback timer expired (%.1fs). " % settings.fallback_cli_delay_before_quit
-				+ "Force-quitting. Increase 'fallback_cli_delay_before_quit' in "
-				+ "GodotDoctorSettings if your project needs more time."
-		),
+			"CLI quit fallback timer expired (%.1fs). " % settings.fallback_cli_delay_before_quit
+			+ "Force-quitting. Increase 'fallback_cli_delay_before_quit' in "
+			+ "GodotDoctorSettings if your project needs more time."
+		)
 	)
 	quit_with_code(1)
+
 
 #endregion
 
 #endregion
 
 #region External Validation Entry Point
+
 
 ## Validation entry point for both the current scene root and edited resource.
 ## Useful when you want to validate from some external trigger like an [EditorScript]
@@ -717,9 +713,11 @@ func validate_scene_root_and_edited_resource() -> void:
 		return
 	_active_runner.run()
 
+
 #endregion
 
 #region UI
+
 
 ## Shows the welcome dialog on first plugin enable.
 func _show_welcome_dialog() -> void:

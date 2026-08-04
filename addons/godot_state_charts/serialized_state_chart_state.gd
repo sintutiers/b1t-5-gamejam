@@ -34,5 +34,5 @@ func _to_string() -> String:
 		pending_transition_remaining_delay,
 		pending_transition_initial_delay,
 		JSON.stringify(children, "\t"),
-		history.debug_string() if history != null else "null",
+		history.debug_string() if history != null else "null"
 	]

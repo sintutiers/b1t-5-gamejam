@@ -12,8 +12,6 @@ extends Node
 func _get_validation_conditions() -> Array[ValidationCondition]:
 	return [
 		ValidationCondition.is_scene_of_type(
-			packed_scene_of_foo_type,
-			Foo,
-			"packed_scene_of_foo_type",
-		),
+			packed_scene_of_foo_type, Foo, "packed_scene_of_foo_type"
+		)
 	]

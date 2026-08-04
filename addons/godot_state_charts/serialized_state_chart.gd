@@ -9,9 +9,9 @@ extends Resource
 
 ## This is just in case we change the way this is serialized down the road,
 ## so we have a way of migrating.
-@export var version: int = 1
+@export var version:int = 1
 @export var name: String = ""
-@export var expression_properties: Dictionary = { }
+@export var expression_properties: Dictionary = {}
 @export var queued_events: Array[StringName] = []
 @export var property_change_pending: bool = false
 @export var state_change_pending: bool = false
@@ -19,7 +19,6 @@ extends Resource
 @export var queued_transitions: Array[Dictionary] = []
 @export var transitions_processing_active: bool = false
 @export var state: SerializedStateChartState = null
-
 
 func _to_string() -> String:
 	return """SerializedStateChart(
@@ -37,11 +36,11 @@ func _to_string() -> String:
 		version,
 		name,
 		JSON.stringify(expression_properties, "\t"),
-		JSON.stringify(queued_events, "\t"),
+		JSON.stringify(queued_events, "\t"), 
 		property_change_pending,
 		state_change_pending,
 		locked_down,
 		JSON.stringify(queued_transitions, "\t"),
 		transitions_processing_active,
-		state.debug_string() if state != null else "null",
+		state.debug_string() if state != null else "null"
 	]

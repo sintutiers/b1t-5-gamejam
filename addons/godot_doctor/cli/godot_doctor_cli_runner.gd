@@ -36,8 +36,7 @@ func _run_for_suites() -> void:
 ## Runs validation for all scenes and resources listed in [param validation_suite].
 func _run_for_suite(validation_suite: GodotDoctorValidationSuite) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Running validation suite: %s" % validation_suite.resource_path,
-		self,
+		"Running validation suite: %s" % validation_suite.resource_path, self
 	)
 	started_run_for_validation_suite.emit(validation_suite)
 
@@ -103,8 +102,7 @@ func _run_for_resource_path(resource_res_or_uid_path: String) -> void:
 		GodotDoctorPlugin.instance.quit_with_fail_early_if_headless()
 		return
 	GodotDoctorNotifier.print_debug(
-		"Successfully loaded resource: %s" % resource_res_or_uid_path,
-		self,
+		"Successfully loaded resource: %s" % resource_res_or_uid_path, self
 	)
 
 	# Now that the resource is Successfully loaded, we can emit the started signal.

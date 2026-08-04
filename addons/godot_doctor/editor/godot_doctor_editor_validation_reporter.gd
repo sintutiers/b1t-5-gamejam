@@ -17,8 +17,7 @@ func _init() -> void:
 	_dock = preload(DOCK_SCENE_PATH).instantiate() as GodotDoctorDock
 
 	GodotDoctorPlugin.instance.add_control_to_dock(
-		GodotDoctorPlugin.instance.settings.default_dock_position,
-		_dock,
+		GodotDoctorPlugin.instance.settings.default_dock_position, _dock
 	)
 
 
@@ -53,7 +52,7 @@ func on_run_for_edited_scene_root_requested() -> void:
 
 ## Reports validation results from [param scene_validation_collection] to the dock.
 func report_on_scene_validation_collection(
-		scene_validation_collection: GodotDoctorSceneValidationCollection,
+	scene_validation_collection: GodotDoctorSceneValidationCollection
 ) -> void:
 	if scene_validation_collection == null:
 		push_error("Scene validation collection called with a null collection.")
@@ -61,14 +60,14 @@ func report_on_scene_validation_collection(
 		return
 
 	var scene_path_to_node_validation_collection_map: Dictionary = (
-			scene_validation_collection.get_scene_path_to_node_validation_collection_map()
+		scene_validation_collection.get_scene_path_to_node_validation_collection_map()
 	)
 
 	for scene_path: String in scene_path_to_node_validation_collection_map.keys():
 		#gdlint: ignore=max-line-length
 		var node_validation_collection: GodotDoctorNodeValidationCollection = scene_path_to_node_validation_collection_map[scene_path]
 		var node_ancestor_path_to_validation_messages_map: Dictionary = (
-				node_validation_collection.get_node_ancestor_path_to_validation_messages_map()
+			node_validation_collection.get_node_ancestor_path_to_validation_messages_map()
 		)
 		for node_ancestor_path: String in node_ancestor_path_to_validation_messages_map.keys():
 			var messages: Array = node_ancestor_path_to_validation_messages_map[node_ancestor_path]
@@ -77,7 +76,7 @@ func report_on_scene_validation_collection(
 
 ## Reports validation results from [param resource_validation_collection] to the dock.
 func report_on_resource_validation_collection(
-		resource_validation_collection: GodotDoctorResourceValidationCollection,
+	resource_validation_collection: GodotDoctorResourceValidationCollection
 ) -> void:
 	if resource_validation_collection == null:
 		push_error("Resource validation collection called with a null collection.")
@@ -85,7 +84,7 @@ func report_on_resource_validation_collection(
 		return
 
 	var resource_path_to_validation_messages_map: Dictionary = (
-			resource_validation_collection.get_resource_path_to_validation_messages_map()
+		resource_validation_collection.get_resource_path_to_validation_messages_map()
 	)
 
 	for resource_path: String in resource_path_to_validation_messages_map.keys():
@@ -96,17 +95,14 @@ func report_on_resource_validation_collection(
 ## Pushes a toast notification and adds each message in [param messages] to the dock
 ## as a node warning associated with [param node].
 func report_node_messages(
-		node_ancestor_path: String,
-		messages: Array[GodotDoctorValidationMessage],
+	node_ancestor_path: String, messages: Array[GodotDoctorValidationMessage]
 ) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Reporting %s messages for node: %s" % [messages.size(), node_ancestor_path],
-		self,
+		"Reporting %s messages for node: %s" % [messages.size(), node_ancestor_path], self
 	)
 	if messages.is_empty():
 		GodotDoctorNotifier.print_debug(
-			"No messages to report for node: %s" % node_ancestor_path,
-			self,
+			"No messages to report for node: %s" % node_ancestor_path, self
 		)
 		return
 
@@ -115,15 +111,14 @@ func report_node_messages(
 	var promoted_severity_levels: Array = messages.map(
 		func(msg: GodotDoctorValidationMessage) -> int:
 			return promoted_severity_level(
-				GodotDoctorPlugin.instance.settings.treat_warnings_as_errors,
-				msg.severity_level,
+				GodotDoctorPlugin.instance.settings.treat_warnings_as_errors, msg.severity_level
 			)
 	)
 	var toast_severity_level: int = promoted_severity_levels.max()
 
 	GodotDoctorNotifier.push_toast(
 		"Found %s validation message(s) in %s." % [num_messages, node_ancestor_path],
-		toast_severity_level,
+		toast_severity_level
 	)
 
 	for msg in messages:
@@ -133,35 +128,31 @@ func report_node_messages(
 ## Pushes a toast notification and adds each message in [param messages] to the dock
 ## as a resource warning associated with [param resource].
 func report_resource_messages(
-		resource_path: String,
-		messages: Array[GodotDoctorValidationMessage],
+	resource_path: String, messages: Array[GodotDoctorValidationMessage]
 ) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Reporting %s messages for resource: %s" % [messages.size(), resource_path],
-		self,
+		"Reporting %s messages for resource: %s" % [messages.size(), resource_path], self
 	)
 	if messages.is_empty():
 		GodotDoctorNotifier.print_debug(
-			"No messages to report for resource: %s" % resource_path,
-			self,
+			"No messages to report for resource: %s" % resource_path, self
 		)
 		return
 
 	var num_messages: int = messages.size()
 
 	var promoted_severity_levels: Array[ValidationCondition.Severity] = (
-			GodotDoctorValidationMessage
-			.map_to_promoted_severity_levels(
-				GodotDoctorPlugin.instance.settings.treat_warnings_as_errors,
-				messages,
-			)
+		GodotDoctorValidationMessage
+		. map_to_promoted_severity_levels(
+			GodotDoctorPlugin.instance.settings.treat_warnings_as_errors, messages
+		)
 	)
 
 	var toast_severity_level: int = promoted_severity_levels.max()
 
 	GodotDoctorNotifier.push_toast(
 		"Found %s validation message(s) in %s." % [num_messages, resource_path],
-		toast_severity_level,
+		toast_severity_level
 	)
 
 	for msg in messages:
@@ -181,8 +172,7 @@ func teardown() -> void:
 ## [constant ValidationCondition.Severity.WARNING].
 ## Returns the (possibly promoted) severity level as an [int].
 static func promoted_severity_level(
-		treat_warnings_as_errors: bool,
-		severity_level: ValidationCondition.Severity,
+	treat_warnings_as_errors: bool, severity_level: ValidationCondition.Severity
 ) -> int:
 	if treat_warnings_as_errors and severity_level == ValidationCondition.Severity.WARNING:
 		return ValidationCondition.Severity.ERROR

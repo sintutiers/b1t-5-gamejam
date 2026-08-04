@@ -3,6 +3,7 @@
 class_name SomeScriptThatWeReferTo
 extends Node
 
+
 ## Demonstrates why the referring script must have valid exports.
 ## If the holding node's reference is null, this method can never be called.
 ## Prints [param some_string_we_pass]; if it is empty the output will be blank.

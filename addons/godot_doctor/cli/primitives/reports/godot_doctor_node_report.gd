@@ -11,8 +11,7 @@ var _validation_messages: Array[GodotDoctorValidationMessage] = []
 ## Creates a new [GodotDoctorNodeReport] for the node at [param node_ancestor_path]
 ## with the given [param validation_messages].
 func _init(
-		node_ancestor_path: String,
-		validation_messages: Array[GodotDoctorValidationMessage],
+	node_ancestor_path: String, validation_messages: Array[GodotDoctorValidationMessage]
 ) -> void:
 	_node_ancestor_path = node_ancestor_path
 	_validation_messages = validation_messages

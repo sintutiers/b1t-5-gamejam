@@ -21,8 +21,7 @@ var _current_resource_validation_collection: GodotDoctorResourceValidationCollec
 func on_started_scene_collection() -> void:
 	_current_scene_validation_collection = GodotDoctorSceneValidationCollection.new()
 	GodotDoctorNotifier.print_debug(
-		"Created new scene validation collection %s." % _current_scene_validation_collection,
-		self,
+		"Created new scene validation collection %s." % _current_scene_validation_collection, self
 	)
 
 
@@ -30,10 +29,10 @@ func on_started_scene_collection() -> void:
 func on_finished_scene_collection() -> void:
 	GodotDoctorNotifier.print_debug(
 		(
-				"Clearing current node validation collection (was %s)"
-				% _current_node_validation_collection
+			"Clearing current node validation collection (was %s)"
+			% _current_node_validation_collection
 		),
-		self,
+		self
 	)
 	_current_node_validation_collection = null
 
@@ -44,7 +43,7 @@ func on_started_resource_collection() -> void:
 	_current_resource_validation_collection = GodotDoctorResourceValidationCollection.new()
 	GodotDoctorNotifier.print_debug(
 		"Created new resource validation collection %s." % _current_resource_validation_collection,
-		self,
+		self
 	)
 
 
@@ -57,8 +56,7 @@ func on_finished_resource_collection() -> void:
 func on_started_node_collection() -> void:
 	_current_node_validation_collection = GodotDoctorNodeValidationCollection.new()
 	GodotDoctorNotifier.print_debug(
-		"Created new node validation collection %s." % _current_node_validation_collection,
-		self,
+		"Created new node validation collection %s." % _current_node_validation_collection, self
 	)
 
 
@@ -77,19 +75,17 @@ func on_started_run_for_scene_res_path(scene_res_path: String) -> void:
 ## Adds the current [GodotDoctorNodeValidationCollection] to the scene collection.
 func on_finished_run_for_scene_res_path(_scene_res_path: String) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Clearing current scene_res_path (was %s)" % _current_scene_res_path,
-		self,
+		"Clearing current scene_res_path (was %s)" % _current_scene_res_path, self
 	)
 	GodotDoctorNotifier.print_debug(
 		(
-				"Adding node validation collection %s to scene collection %s"
-				% [_current_node_validation_collection, _current_scene_validation_collection]
+			"Adding node validation collection %s to scene collection %s"
+			% [_current_node_validation_collection, _current_scene_validation_collection]
 		),
-		self,
+		self
 	)
 	_current_scene_validation_collection.add_node_validation_collection(
-		_current_scene_res_path,
-		_current_node_validation_collection,
+		_current_scene_res_path, _current_node_validation_collection
 	)
 	_current_scene_res_path = ""
 
@@ -111,10 +107,10 @@ func on_finished_run_for_resource(_resource: Resource) -> void:
 func on_validated_node(node: Node, messages: Array[GodotDoctorValidationMessage]) -> void:
 	GodotDoctorNotifier.print_debug(
 		(
-				"Adding validation for node %s to current node validation collection %s"
-				% [node, _current_node_validation_collection]
+			"Adding validation for node %s to current node validation collection %s"
+			% [node, _current_node_validation_collection]
 		),
-		self,
+		self
 	)
 	var node_ancestor_path: String = _get_node_ancestor_path(node)
 	_current_node_validation_collection.add_node_validation(node_ancestor_path, messages)
@@ -139,15 +135,14 @@ static func _get_node_ancestor_path(node: Node) -> String:
 ## Called when [param resource] has been validated; stores [param messages] in the current
 ## resource collection.
 func on_validated_resource(
-		resource: Resource,
-		messages: Array[GodotDoctorValidationMessage],
+	resource: Resource, messages: Array[GodotDoctorValidationMessage]
 ) -> void:
 	GodotDoctorNotifier.print_debug(
 		(
-				"Adding validation for resource %s to current resource validation collection %s"
-				% [resource, _current_resource_validation_collection]
+			"Adding validation for resource %s to current resource validation collection %s"
+			% [resource, _current_resource_validation_collection]
 		),
-		self,
+		self
 	)
 	var resource_path: String = resource.resource_path
 	_current_resource_validation_collection.add_resource_validation(resource_path, messages)

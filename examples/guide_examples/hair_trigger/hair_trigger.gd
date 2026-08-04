@@ -5,7 +5,6 @@ extends Node
 
 @onready var visualizer: Control = %TriggerVisualizer
 
-
 func _ready() -> void:
 	if mapping_context:
 		GUIDE.enable_mapping_context(mapping_context)
@@ -21,7 +20,7 @@ func _ready() -> void:
 			if action_mapping.action == fire_action:
 				for input_mapping in action_mapping.input_mappings:
 					if not input_mapping.triggers.is_empty():
-						var trigger: GUIDETrigger = input_mapping.triggers[0]
+						var trigger:GUIDETrigger = input_mapping.triggers[0]
 						if trigger is GUIDETriggerHair:
 							visualizer.hair_trigger = trigger
 							break

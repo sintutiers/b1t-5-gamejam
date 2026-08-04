@@ -147,7 +147,7 @@ static func _verify_state_compatiblity(serialized_state: SerializedStateChartSta
 		error_messages.append("%s State type mismatch: %s != %s " % [message_prefix, _type_for_state(target), serialized_state.state_type])
 
 	if not serialized_state.pending_transition_name.is_empty() \
-			and target.get_node_or_null(serialized_state.pending_transition_name) == null:
+	and target.get_node_or_null(serialized_state.pending_transition_name) == null:
 		error_messages.append("%s Pending transition %s not found" % [message_prefix, serialized_state.pending_transition_name])
 
 	var states_in_tree: Array[StringName] = []

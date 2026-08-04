@@ -12,12 +12,14 @@ const TEMP_FILE_NAME = "user://temp.zip"
 
 #endregion
 
+
 #region Signals
 
 signal failed()
 signal updated(updated_to_version: String)
 
 #endregion
+
 
 #region @onready
 
@@ -34,6 +36,7 @@ signal updated(updated_to_version: String)
 #@onready var current_version_label: Label = %CurrentVersionLabel
 
 #endregion
+
 
 #region Variables
 
@@ -55,6 +58,7 @@ var _breaking_window_height: float = 520
 var _breaking_window_height_update: float = 600
 
 #endregion
+
 
 #region Private Functions
 
@@ -146,7 +150,7 @@ func show_updater_warning(next_version_number: Array, current_version_number: Ar
 	var next_version_number_1: int = next_version_number[1] as int # Minor release number in the new release
 
 	if next_version_number_0 > current_version_number_0 or \
-			next_version_number_1 > current_version_number_1:
+	next_version_number_1 > current_version_number_1:
 		_breaking_label.show()
 		_breaking_margin_container.show()
 		_breaking_options_button.show()

@@ -32,10 +32,10 @@ func install_or_update_formatter() -> void:
 
 
 func _on_request_completed(
-		_http_result: int,
-		response_code: int,
-		_http_headers: PackedStringArray,
-		body: PackedByteArray,
+	_http_result: int,
+	response_code: int,
+	_http_headers: PackedStringArray,
+	body: PackedByteArray,
 ) -> void:
 	if response_code != 200:
 		var error_message := "HTTP request failed. Response code: " + str(response_code)
@@ -116,8 +116,8 @@ func _get_platform_info() -> Dictionary:
 	var architecture := "x86_64"
 
 	if (
-			processor_name.contains("aarch64") or processor_name.contains("arm64")
-			or processor_name.contains("apple")
+		processor_name.contains("aarch64") or processor_name.contains("arm64")
+		or processor_name.contains("apple")
 	):
 		architecture = "aarch64"
 	elif processor_name.contains("x86_64") or processor_name.contains("amd64"):
@@ -224,9 +224,9 @@ func _download_and_install_binary(zip_data: PackedByteArray, platform_info: Dict
 	if not OS.get_name().to_lower().contains("windows"):
 		# This should be equivalent to setting the binary to permissions 755
 		const UNIX_EXECUTABLE_PERMISSIONS = (
-				FileAccess.UNIX_READ_OWNER | FileAccess.UNIX_WRITE_OWNER
-				| FileAccess.UNIX_EXECUTE_OWNER | FileAccess.UNIX_READ_GROUP
-				| FileAccess.UNIX_EXECUTE_GROUP | FileAccess.UNIX_READ_OTHER | FileAccess.UNIX_EXECUTE_OTHER
+			FileAccess.UNIX_READ_OWNER | FileAccess.UNIX_WRITE_OWNER
+			| FileAccess.UNIX_EXECUTE_OWNER | FileAccess.UNIX_READ_GROUP
+			| FileAccess.UNIX_EXECUTE_GROUP | FileAccess.UNIX_READ_OTHER | FileAccess.UNIX_EXECUTE_OTHER
 		)
 		var permissions_error := FileAccess.set_unix_permissions(
 			binary_path,

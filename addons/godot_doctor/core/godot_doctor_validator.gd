@@ -23,6 +23,7 @@ const VALIDATING_METHOD_NAME_CSHARP: String = "GetValidationConditions"
 
 #region PUBLIC API - Entry points for validating scenes and resources
 
+
 ## Validates all eligible nodes in [param scene_root] and reports results via the active reporter.
 ## In editor mode, the scene must be currently open in the editor.
 ## In headless mode, any instantiated scene root can be passed directly.
@@ -42,17 +43,18 @@ func validate_scene_root(scene_root: Node) -> void:
 ## Validates [param resource] and reports results via the active reporter.
 func validate_resource(resource: Resource) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Resource validation requested for resource: %s" % resource.resource_path,
-		self,
+		"Resource validation requested for resource: %s" % resource.resource_path, self
 	)
 
 	# Validate the resource and report results
 	var messages: Array[GodotDoctorValidationMessage] = _collect_resource_messages(resource)
 	validated_resource.emit(resource, messages)
 
+
 #endregion
 
 #region Message Collection - Evaluating validation conditions and generating messages
+
 
 ## Collects all validation messages for [param node] by evaluating its conditions.
 ## Handles both @tool and non-@tool scripts transparently.
@@ -65,8 +67,8 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 	# Tracks recursion state while converting exported node references so
 	# cyclic dependencies do not cause stack overflows.
 	var traversal_state: Dictionary[int, Variant] = {
-		TraversalStateKey.ACTIVE_NODE_IDS: { },
-		TraversalStateKey.WARNED_NODE_IDS: { },
+		TraversalStateKey.ACTIVE_NODE_IDS: {},
+		TraversalStateKey.WARNED_NODE_IDS: {},
 		TraversalStateKey.VALIDATION_ROOT_NAME: node.name,
 		TraversalStateKey.CYLIC_WARNING_MESSAGES: [],
 	}
@@ -74,9 +76,7 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 	# The target is either the original node (for @tool scripts)
 	# or a temporary instance (for non-@tool scripts).
 	var validation_target: Object = _make_instance_from_potential_placeholder_node(
-		node,
-		extra_to_free,
-		traversal_state,
+		node, extra_to_free, traversal_state
 	)
 
 	# Declare an array to hold all validation conditions that will be evaluated for this node.
@@ -87,18 +87,17 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 		# This shouldn't happen since we only collect nodes with scripts
 		# in _find_nodes_to_validate_in_tree
 		GodotDoctorNotifier.print_debug(
-			"No script found on node %s, skipping message collection." % node.name,
-			self,
+			"No script found on node %s, skipping message collection." % node.name, self
 		)
 		return []
 
 	# If default validations are enabled, generate conditions based on exported properties.
 	if (
-			GodotDoctorPlugin.instance.settings.use_default_validations
-			and script not in GodotDoctorPlugin.instance.settings.default_validation_ignore_list
+		GodotDoctorPlugin.instance.settings.use_default_validations
+		and script not in GodotDoctorPlugin.instance.settings.default_validation_ignore_list
 	):
 		conditions.append_array(
-			ValidationCondition.get_default_validation_conditions(validation_target),
+			ValidationCondition.get_default_validation_conditions(validation_target)
 		)
 
 	var validating_method_name: String = _get_validating_method_name(validation_target)
@@ -106,8 +105,7 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 	# If the node implements the validating method, call it and append its conditions.
 	if validation_target.has_method(validating_method_name):
 		GodotDoctorNotifier.print_debug(
-			"Calling %s on %s" % [validating_method_name, validation_target],
-			self,
+			"Calling %s on %s" % [validating_method_name, validation_target], self
 		)
 		# We expect the method to return an array of ValidationCondition objects.
 		var generated_conditions: Array[ValidationCondition] = []
@@ -123,22 +121,22 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 		# Report this just in case of mis-use or unexpected edge cases.
 		push_error(
 			(
-					"_collect_node_messages called on %s, but it has no validation method (%s)."
-					% [validation_target.name, validating_method_name]
-			),
+				"_collect_node_messages called on %s, but it has no validation method (%s)."
+				% [validation_target.name, validating_method_name]
+			)
 		)
 		GodotDoctorPlugin.instance.quit_with_fail_early_if_headless()
 
 	# Actual evaluation takes place in the creation of the GodotDoctorValidationResult.
 	# We collect the resulting messages here to report back to the user.
 	var messages: Array[GodotDoctorValidationMessage] = (
-			GodotDoctorValidationResult.new(conditions).messages
+		GodotDoctorValidationResult.new(conditions).messages
 	)
 	# Collect any cyclic warning messages that were generated
 	# and append them to the final messages array.
 	var cyclic_warning_messages: Array[GodotDoctorValidationMessage] = []
 	cyclic_warning_messages.assign(
-		traversal_state.get(TraversalStateKey.CYLIC_WARNING_MESSAGES, []),
+		traversal_state.get(TraversalStateKey.CYLIC_WARNING_MESSAGES, [])
 	)
 	messages.append_array(cyclic_warning_messages)
 
@@ -158,8 +156,7 @@ func _collect_node_messages(node: Node) -> Array[GodotDoctorValidationMessage]:
 ## Collects all validation messages for [param resource] by evaluating its conditions.
 func _collect_resource_messages(resource: Resource) -> Array[GodotDoctorValidationMessage]:
 	GodotDoctorNotifier.print_debug(
-		"Collecting messages for resource: %s" % resource.resource_path,
-		self,
+		"Collecting messages for resource: %s" % resource.resource_path, self
 	)
 	var conditions: Array[ValidationCondition] = []
 
@@ -167,14 +164,14 @@ func _collect_resource_messages(resource: Resource) -> Array[GodotDoctorValidati
 	if script == null:
 		GodotDoctorNotifier.print_debug(
 			"No script found on resource %s, skipping message collection." % resource.resource_path,
-			self,
+			self
 		)
 		return []
 
 	# If default validations are enabled, generate conditions based on exported properties.
 	if (
-			GodotDoctorPlugin.instance.settings.use_default_validations
-			and script not in GodotDoctorPlugin.instance.settings.default_validation_ignore_list
+		GodotDoctorPlugin.instance.settings.use_default_validations
+		and script not in GodotDoctorPlugin.instance.settings.default_validation_ignore_list
 	):
 		conditions.append_array(ValidationCondition.get_default_validation_conditions(resource))
 
@@ -190,9 +187,11 @@ func _collect_resource_messages(resource: Resource) -> Array[GodotDoctorValidati
 	# we collect the resulting messages here to report back to the user.
 	return GodotDoctorValidationResult.new(conditions).messages
 
+
 #endregion
 
 #region Helper Methods
+
 
 func _get_validating_method_name(target: Object) -> String:
 	if target.has_method(VALIDATING_METHOD_NAME_GDSCRIPT):
@@ -213,8 +212,8 @@ func _find_nodes_to_validate_in_tree(node: Node, recursing: bool = false) -> Arr
 	var script: Script = node.get_script()
 	if script != null:
 		if (
-				GodotDoctorPlugin.instance.settings.use_default_validations
-				or not _get_validating_method_name(node).is_empty()
+			GodotDoctorPlugin.instance.settings.use_default_validations
+			or not _get_validating_method_name(node).is_empty()
 		):
 			nodes_to_validate.append(node)
 
@@ -222,7 +221,9 @@ func _find_nodes_to_validate_in_tree(node: Node, recursing: bool = false) -> Arr
 		nodes_to_validate.append_array(_find_nodes_to_validate_in_tree(child, true))
 	return nodes_to_validate
 
+
 #region Placeholder Instance Creation
+
 
 ## Creates a temporary instance of [param original_node]'s script for validation purposes.
 ## For non-@tool scripts, creates a new instance and copies properties and children.
@@ -230,13 +231,12 @@ func _find_nodes_to_validate_in_tree(node: Node, recursing: bool = false) -> Arr
 ## [param extra_to_free] collects any Node instances created during property conversion
 ## so the caller can free them after validation.
 func _make_instance_from_potential_placeholder_node(
-		original_node: Node,
-		extra_to_free: Array[Node] = [],
-		traversal_state: Dictionary[int, Variant] = { },
+	original_node: Node,
+	extra_to_free: Array[Node] = [],
+	traversal_state: Dictionary[int, Variant] = {}
 ) -> Object:
 	GodotDoctorNotifier.print_debug(
-		"Making instance from placeholder for node: %s" % original_node.name,
-		self,
+		"Making instance from placeholder for node: %s" % original_node.name, self
 	)
 	var script: Script = original_node.get_script()
 	var is_tool_script: bool = script and script.is_tool()
@@ -245,7 +245,7 @@ func _make_instance_from_potential_placeholder_node(
 		return original_node
 
 	# Grab the active node IDs from the traversal state to detect cyclic references.
-	var active_node_ids: Dictionary = traversal_state.get(TraversalStateKey.ACTIVE_NODE_IDS, { })
+	var active_node_ids: Dictionary = traversal_state.get(TraversalStateKey.ACTIVE_NODE_IDS, {})
 	var node_id: int = original_node.get_instance_id()
 	# If this node is already in the active set, we have a cyclic reference.
 	if active_node_ids.has(node_id):
@@ -277,23 +277,20 @@ func _make_instance_from_potential_placeholder_node(
 ## Recursively converts placeholder node instances in properties to proper instances.
 ## [param extra_to_free] collects any Node instances created during conversion.
 func _copy_properties(
-		from_node: Node,
-		to_node: Node,
-		extra_to_free: Array[Node] = [],
-		traversal_state: Dictionary[int, Variant] = { },
+	from_node: Node,
+	to_node: Node,
+	extra_to_free: Array[Node] = [],
+	traversal_state: Dictionary[int, Variant] = {}
 ) -> void:
 	GodotDoctorNotifier.print_debug(
-		"Copying properties from %s to placeholder instance" % [from_node.name],
-		self,
+		"Copying properties from %s to placeholder instance" % [from_node.name], self
 	)
 	for prop in from_node.get_property_list():
 		if prop.usage & PROPERTY_USAGE_EDITOR:
 			var prop_name: StringName = prop.name
 			var value: Variant = from_node.get(prop_name)
 			var converted_value: Variant = _convert_placeholder_references(
-				value,
-				extra_to_free,
-				traversal_state,
+				value, extra_to_free, traversal_state
 			)
 
 			if from_node is Control and prop_name == "size":
@@ -307,18 +304,14 @@ func _copy_properties(
 ## [param extra_to_free] collects any Node instances created here so the
 ## caller can free them after validation.
 func _convert_placeholder_references(
-		value: Variant,
-		extra_to_free: Array[Node] = [],
-		traversal_state: Dictionary[int, Variant] = { },
+	value: Variant, extra_to_free: Array[Node] = [], traversal_state: Dictionary[int, Variant] = {}
 ) -> Variant:
 	match typeof(value):
 		TYPE_OBJECT:
 			if value is Node:
 				var node_value: Node = value
 				var converted: Object = _make_instance_from_potential_placeholder_node(
-					node_value,
-					extra_to_free,
-					traversal_state,
+					node_value, extra_to_free, traversal_state
 				)
 				# If a new instance was created, track it for cleanup.
 				if converted != node_value and converted is Node:
@@ -331,9 +324,7 @@ func _convert_placeholder_references(
 			var converted_array: Array = source_array.duplicate()
 			for i in source_array.size():
 				converted_array[i] = _convert_placeholder_references(
-					source_array[i],
-					extra_to_free,
-					traversal_state,
+					source_array[i], extra_to_free, traversal_state
 				)
 			return converted_array
 		_:
@@ -342,10 +333,9 @@ func _convert_placeholder_references(
 
 
 func _warn_about_cyclic_node_reference(
-		node: Node,
-		traversal_state: Dictionary[int, Variant],
+	node: Node, traversal_state: Dictionary[int, Variant]
 ) -> void:
-	var warned_node_ids: Dictionary = traversal_state.get(TraversalStateKey.WARNED_NODE_IDS, { })
+	var warned_node_ids: Dictionary = traversal_state.get(TraversalStateKey.WARNED_NODE_IDS, {})
 	# Get the unique instance ID of this node.
 	var node_id: int = node.get_instance_id()
 	if warned_node_ids.has(node_id):
@@ -353,15 +343,14 @@ func _warn_about_cyclic_node_reference(
 		return
 
 	var validation_root_name: String = traversal_state.get(
-		TraversalStateKey.VALIDATION_ROOT_NAME,
-		"<unknown>",
+		TraversalStateKey.VALIDATION_ROOT_NAME, "<unknown>"
 	)
 	var warning_message: String = (
-			(
-					"Cyclic exported node reference detected at '%s' while validating '%s'. "
-					+ "Skipping recursive placeholder conversion to prevent stack overflow."
-			)
-			% [node.name, validation_root_name]
+		(
+			"Cyclic exported node reference detected at '%s' while validating '%s'. "
+			+ "Skipping recursive placeholder conversion to prevent stack overflow."
+		)
+		% [node.name, validation_root_name]
 	)
 	GodotDoctorNotifier.print_debug(warning_message, self)
 
@@ -370,18 +359,20 @@ func _warn_about_cyclic_node_reference(
 	var runtime_messages: Array[GodotDoctorValidationMessage] = []
 	runtime_messages.assign(traversal_state.get(TraversalStateKey.CYLIC_WARNING_MESSAGES, []))
 	runtime_messages.append(
-		GodotDoctorValidationMessage.new(warning_message, ValidationCondition.Severity.WARNING),
+		GodotDoctorValidationMessage.new(warning_message, ValidationCondition.Severity.WARNING)
 	)
 	traversal_state[TraversalStateKey.CYLIC_WARNING_MESSAGES] = runtime_messages
 
+
 #endregion
+
 
 #region Condition Evaluation
 ## Evaluates [param conditions] and returns an array of [GodotDoctorValidationMessage]
 ## for all conditions that fail.
 ## This is called during the creation of a [GodotDoctorValidationResult]
 static func evaluate_conditions(
-		conditions: Array[ValidationCondition],
+	conditions: Array[ValidationCondition]
 ) -> Array[GodotDoctorValidationMessage]:
 	var errors: Array[GodotDoctorValidationMessage] = []
 	for condition in conditions:
@@ -394,9 +385,8 @@ static func evaluate_conditions(
 				if not condition_passed:
 					errors.append(
 						GodotDoctorValidationMessage.new(
-							condition.error_message,
-							condition.severity_level,
-						),
+							condition.error_message, condition.severity_level
+						)
 					)
 			TYPE_ARRAY:
 				# The result of the evaluation is an array of nested ValidationConditions,
@@ -407,19 +397,19 @@ static func evaluate_conditions(
 				for expected_condition in result:
 					if expected_condition is not ValidationCondition:
 						push_error(
-							"Nested ValidationCondition array contained a different type than ValidationCondition",
+							"Nested ValidationCondition array contained a different type than ValidationCondition"
 						)
 						GodotDoctorPlugin.instance.quit_with_fail_early_if_headless()
 						continue
 					nested_conditions.append(expected_condition as ValidationCondition)
 
 				var nested_errors: Array[GodotDoctorValidationMessage] = evaluate_conditions(
-					nested_conditions,
+					nested_conditions
 				)
 				errors.append_array(nested_errors)
 			_:
 				push_error(
-					"An unexpected type was returned during evaluation of a ValidationCondition.",
+					"An unexpected type was returned during evaluation of a ValidationCondition."
 				)
 				GodotDoctorPlugin.instance.quit_with_fail_early_if_headless()
 	return errors

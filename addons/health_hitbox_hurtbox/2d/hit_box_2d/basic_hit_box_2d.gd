@@ -1,6 +1,6 @@
-class_name BasicHitBox2D
-extends HitBox2D
+class_name BasicHitBox2D extends HitBox2D
 ## [BasicHitBox2D] is associated with an object that can collide with a [HurtBox2D].
+
 
 ## The [Health.Affect] to be performed.
 @export var affect: Health.Affect = Health.Affect.DAMAGE:

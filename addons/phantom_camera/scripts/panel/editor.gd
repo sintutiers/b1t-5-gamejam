@@ -14,6 +14,7 @@ var editor_plugin: EditorPlugin
 
 #endregion
 
+
 #region Private Functions
 
 func _ready():

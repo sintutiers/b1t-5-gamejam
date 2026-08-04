@@ -33,7 +33,7 @@ func get_num_infos() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_num_infos(),
-		0,
+		0
 	)
 
 
@@ -45,7 +45,7 @@ func get_num_warnings() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_num_warnings(),
-		0,
+		0
 	)
 
 
@@ -57,7 +57,7 @@ func get_num_errors() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_num_errors(),
-		0,
+		0
 	)
 
 
@@ -71,7 +71,7 @@ func _get_num_scenes() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_scene_reports().size(),
-		0,
+		0
 	)
 
 
@@ -80,7 +80,7 @@ func _get_num_nodes() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_num_nodes(),
-		0,
+		0
 	)
 
 
@@ -89,7 +89,7 @@ func _get_num_resources() -> int:
 	return suite_reports.reduce(
 		func(total: int, suite_report: GodotDoctorValidationSuiteReport) -> int:
 			return total + suite_report.get_num_resources(),
-		0,
+		0
 	)
 
 
@@ -100,7 +100,7 @@ func _get_num_warnings_as_errors() -> int:
 			if suite_report.get_suite().treat_warnings_as_errors:
 				return total + suite_report.get_num_warnings()
 			return total,
-		0,
+		0
 	)
 
 

@@ -48,7 +48,6 @@ func _enable_plugin() -> void:
 
 	EditorInterface.restart_editor()
 
-
 func _disable_plugin() -> void:
 	if Engine.has_singleton(PHANTOM_CAMERA_MANAGER):
 		remove_autoload_singleton(PHANTOM_CAMERA_MANAGER)
@@ -59,9 +58,9 @@ func _enter_tree() -> void:
 	add_custom_type(PCAM_2D, "Node2D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
 	add_custom_type(PCAM_3D, "Node3D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
 	add_custom_type(PCAM_HOST, "Node", preload("res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
-	add_custom_type(PCAM_NOISE_EMITTER_2D, "Node2D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg"))
-	add_custom_type(PCAM_NOISE_EMITTER_3D, "Node3D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg"))
-	add_custom_type(PCAM_TWEEN_DIRECTOR, "Node", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_tween_director.svg"))
+	add_custom_type(PCAM_NOISE_EMITTER_2D, "Node2D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd"),  preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg"))
+	add_custom_type(PCAM_NOISE_EMITTER_3D, "Node3D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd"),  preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg"))
+	add_custom_type(PCAM_TWEEN_DIRECTOR, "Node", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd"),  preload("res://addons/phantom_camera/icons/phantom_camera_tween_director.svg"))
 
 	# Phantom Camera 3D Gizmo
 	add_node_3d_gizmo_plugin(pcam_3d_gizmo_plugin)
@@ -78,28 +77,26 @@ func _enter_tree() -> void:
 
 	if not ProjectSettings.has_setting(updater_constants.setting_updater_mode):
 		ProjectSettings.set_setting(updater_constants.setting_updater_mode, setting_updater_mode_default)
-	ProjectSettings.add_property_info(
-		{
-			"name": updater_constants.setting_updater_mode,
-			"type": TYPE_INT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": setting_updater_mode,
-		},
-	)
+	ProjectSettings.add_property_info({
+		"name": updater_constants.setting_updater_mode,
+		"type": TYPE_INT,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": setting_updater_mode,
+	})
 	ProjectSettings.set_initial_value(updater_constants.setting_updater_mode, setting_updater_mode_default)
 	ProjectSettings.set_as_basic(updater_constants.setting_updater_mode, true)
+
 
 	## Setting for enabling / disabling Jitter tips in the Output
 	if not ProjectSettings.has_setting(_settings_show_jitter_tips):
 		ProjectSettings.set_setting(_settings_show_jitter_tips, true)
-	ProjectSettings.add_property_info(
-		{
-			"name": _settings_show_jitter_tips,
-			"type": TYPE_BOOL,
-		},
-	)
+	ProjectSettings.add_property_info({
+		"name": _settings_show_jitter_tips,
+		"type": TYPE_BOOL,
+	})
 	ProjectSettings.set_initial_value(_settings_show_jitter_tips, true)
 	ProjectSettings.set_as_basic(_settings_show_jitter_tips, true)
+
 
 # 	TODO - Pending merge of https://github.com/godotengine/godot/pull/102889 - Should only support Godot version after this release
 #	if not ProjectSettings.has_setting(_settings_enable_editor_shortcut):
@@ -113,16 +110,17 @@ func _enter_tree() -> void:
 #		ProjectSettings.set_setting(_settings_editor_shortcut, _editor_shortcut)
 #	ProjectSettings.set_initial_value(_settings_editor_shortcut, _editor_shortcut)
 
-# TODO - Should be disabled unless in editor
-# Viewfinder
-editor_panel_instance = EditorPanel.instantiate()
-editor_panel_instance.editor_plugin = self
-panel_button = add_control_to_bottom_panel(editor_panel_instance, "Phantom Camera")
-panel_button.toggled.connect(_btn_toggled)
-if panel_button.toggle_mode:
-	_btn_toggled(true)
 
-scene_changed.connect(editor_panel_instance.viewfinder.scene_changed)
+	# TODO - Should be disabled unless in editor
+	# Viewfinder
+	editor_panel_instance = EditorPanel.instantiate()
+	editor_panel_instance.editor_plugin = self
+	panel_button = add_control_to_bottom_panel(editor_panel_instance, "Phantom Camera")
+	panel_button.toggled.connect(_btn_toggled)
+	if panel_button.toggle_mode: _btn_toggled(true)
+
+	scene_changed.connect(editor_panel_instance.viewfinder.scene_changed)
+
 
 func _exit_tree() -> void:
 	panel_button.toggled.disconnect(_btn_toggled)
@@ -150,7 +148,6 @@ func _btn_toggled(toggled_on: bool):
 #	else:
 #		editor_panel_instance.viewfinder.viewfinder_visible = false
 
-
 func _make_visible(visible):
 	if editor_panel_instance:
 		editor_panel_instance.set_visible(visible)
@@ -163,6 +160,7 @@ func _make_visible(visible):
 #	return shortcut
 
 #endregion
+
 
 #region Public Functions
 

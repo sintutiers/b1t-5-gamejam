@@ -27,7 +27,6 @@ func save_state() -> void:
 
 	ResourceSaver.save(save_resource, SAVE_PATH)
 
-
 ## Called when the "Load" button is pressed.
 func load_state() -> void:
 	var save_resource: SaveResource = ResourceLoader.load(SAVE_PATH)
@@ -35,7 +34,7 @@ func load_state() -> void:
 	StateChartSerializer.deserialize(save_resource.state_chart, _state_chart)
 
 	# make a lookup table for the boxes
-	var box_lut: Dictionary = { }
+	var box_lut: Dictionary = {}
 	for node in _boxes:
 		box_lut[node.box_id] = node
 

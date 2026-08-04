@@ -19,9 +19,7 @@ func _get_validation_conditions() -> Array[ValidationCondition]:
 		# The below helper method does the same thing as above, but
 		# standardizes the error message.
 		ValidationCondition.has_node_path(
-			self,
-			"MyNodePathNode/MyDeeperNodePathNode",
-			"my_deeper_node_path_node",
-		),
+			self, "MyNodePathNode/MyDeeperNodePathNode", "my_deeper_node_path_node"
+		)
 	]
 	return conditions

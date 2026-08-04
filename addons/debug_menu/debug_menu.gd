@@ -43,10 +43,10 @@ const GRAPH_MAX_FRAMETIME = 1.0 / GRAPH_MAX_FPS
 
 ## Debug menu display style.
 enum Style {
-	HIDDEN, ## Debug menu is hidden.
-	VISIBLE_COMPACT, ## Debug menu is visible, with only the FPS, FPS cap (if any) and time taken to render the last frame.
-	VISIBLE_DETAILED, ## Debug menu is visible with full information, including graphs.
-	MAX, ## Represents the size of the Style enum.
+	HIDDEN,  ## Debug menu is hidden.
+	VISIBLE_COMPACT,  ## Debug menu is visible, with only the FPS, FPS cap (if any) and time taken to render the last frame.
+	VISIBLE_DETAILED,  ## Debug menu is visible with full information, including graphs.
+	MAX,  ## Represents the size of the Style enum.
 }
 
 ## The style to use when drawing the debug menu.
@@ -79,7 +79,7 @@ enum Display_Size {
 	SIZE_24, ## 2.0x the default scale
 	SIZE_30, ## 2.5x the default scale
 	SIZE_CUSTOM, ## Initially 3.0x the default scale, but overwritten with set_font_size()
-	MAX, ## Represents the size of the Display_Size enum.
+	MAX,  ## Represents the size of the Display_Size enum.
 }
 
 ## The size to use when drawing the debug menu.
@@ -88,48 +88,34 @@ var display_size := Display_Size.SIZE_12_DEFAULT:
 		display_size = value
 		match display_size:
 			Display_Size.SIZE_3: # 0.25x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * 0.25,
-					0, # no outline, makes small font look better
-					DEFAULT_HEADER_WIDTH * 0.25,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE * 0.25,
+				0, # no outline, makes small font look better
+				DEFAULT_HEADER_WIDTH* 0.25)
 			Display_Size.SIZE_6: # 0.5x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * 0.5,
-					DEFAULT_FONT_OUTLINE_SIZE * 0.5,
-					DEFAULT_HEADER_WIDTH * 0.5,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE* 0.5,
+				DEFAULT_FONT_OUTLINE_SIZE * 0.5, 
+				DEFAULT_HEADER_WIDTH* 0.5)
 			Display_Size.SIZE_12_DEFAULT: # 1.0x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE,
-					DEFAULT_FONT_OUTLINE_SIZE,
-					DEFAULT_HEADER_WIDTH,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE, 
+				DEFAULT_FONT_OUTLINE_SIZE, 
+				DEFAULT_HEADER_WIDTH)
 			Display_Size.SIZE_18: # 1.5x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * 1.5,
-					DEFAULT_FONT_OUTLINE_SIZE * 1.5,
-					DEFAULT_HEADER_WIDTH * 1.5,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE * 1.5,
+				 DEFAULT_FONT_OUTLINE_SIZE * 1.5,
+				 DEFAULT_HEADER_WIDTH * 1.5)
 			Display_Size.SIZE_24: # 2.0x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * 2.0,
-					DEFAULT_FONT_OUTLINE_SIZE * 2.0,
-					DEFAULT_HEADER_WIDTH * 2.0,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE * 2.0,
+				 DEFAULT_FONT_OUTLINE_SIZE * 2.0,
+				 DEFAULT_HEADER_WIDTH * 2.0)
 			Display_Size.SIZE_30: # 2.5x
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * 2.5,
-					DEFAULT_FONT_OUTLINE_SIZE * 2.5,
-					DEFAULT_HEADER_WIDTH * 2.5,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE * 2.5,
+				 DEFAULT_FONT_OUTLINE_SIZE * 2.5,
+				 DEFAULT_HEADER_WIDTH * 2.5)
 			Display_Size.SIZE_CUSTOM: # initially is 3.0x, replaced when set_font_size() is called
 				var new_scale: float = float(_custom_font_size / DEFAULT_FONT_SIZE)
-				_resize_overlay(
-					DEFAULT_FONT_SIZE * new_scale,
-					DEFAULT_FONT_OUTLINE_SIZE * new_scale,
-					DEFAULT_HEADER_WIDTH * new_scale,
-				)
+				_resize_overlay(DEFAULT_FONT_SIZE * new_scale, 
+				DEFAULT_FONT_OUTLINE_SIZE * new_scale, 
+				DEFAULT_HEADER_WIDTH * new_scale)
 
 # Value of `Time.get_ticks_usec()` on the previous frame.
 var last_tick := 0
@@ -143,14 +129,13 @@ var sum_func := func avg(accum: float, number: float) -> float: return accum + n
 var frame_history_total: Array[float] = []
 var frame_history_cpu: Array[float] = []
 var frame_history_gpu: Array[float] = []
-var fps_history: Array[float] = [] # Only used for graphs.
+var fps_history: Array[float] = []  # Only used for graphs.
 
 var frametime_avg := GRAPH_MIN_FRAMETIME
 var frametime_cpu_avg := GRAPH_MAX_FRAMETIME
 var frametime_gpu_avg := GRAPH_MIN_FRAMETIME
 var frames_per_second := float(GRAPH_MIN_FPS)
 var frame_time_gradient := Gradient.new()
-
 
 func _init() -> void:
 	# This must be done here instead of `_ready()` to avoid having `visibility_changed` be emitted immediately.
@@ -180,12 +165,11 @@ func _init() -> void:
 		event.keycode = KEY_F5
 		InputMap.action_add_event("debug_menu_screenshot", event)
 
-
 func _ready() -> void:
 	# start visibility from project settings
 	if ProjectSettings.has_setting("DebugMenu/settings/startup_visibility"):
 		style = ProjectSettings.get_setting("DebugMenu/settings/startup_visibility")
-
+		
 	# font size from project settings
 	if ProjectSettings.has_setting("DebugMenu/settings/font_size"):
 		set_font_size(ProjectSettings.get_setting("DebugMenu/settings/font_size"))
@@ -204,10 +188,10 @@ func _ready() -> void:
 	# (red = 10 FPS, yellow = 60 FPS, green = 110 FPS, cyan = 160 FPS).
 	# This makes the color gradient non-linear.
 	# Colors are taken from <https://tailwindcolor.com/>.
-	frame_time_gradient.set_color(0, Color.from_rgba8(239, 68, 68)) # red-500
-	frame_time_gradient.set_color(1, Color.from_rgba8(56, 189, 248)) # light-blue-400
-	frame_time_gradient.add_point(0.3333, Color.from_rgba8(250, 204, 21)) # yellow-400
-	frame_time_gradient.add_point(0.6667, Color.from_rgba8(128, 226, 95)) # 50-50 mix of lime-400 and green-400
+	frame_time_gradient.set_color(0, Color.from_rgba8(239, 68, 68))   # red-500
+	frame_time_gradient.set_color(1, Color.from_rgba8(56, 189, 248))  # light-blue-400
+	frame_time_gradient.add_point(0.3333, Color.from_rgba8(250, 204, 21))  # yellow-400
+	frame_time_gradient.add_point(0.6667, Color.from_rgba8(128, 226, 95))  # 50-50 mix of lime-400 and green-400
 
 	get_viewport().size_changed.connect(update_settings_label)
 
@@ -248,7 +232,7 @@ func _input(event: InputEvent) -> void:
 func _resize_overlay(font_size_in: int, outline_size: int, header_width: float):
 	# change font size and outline for all labels
 	for l in get_tree().get_nodes_in_group("debug_menu_label"):
-		var label: Label = l as Label
+		var label : Label = l as Label
 		label.add_theme_font_size_override("font_size", font_size_in)
 		# no outline for very small fonts sizes
 		if font_size_in < 6:
@@ -258,24 +242,24 @@ func _resize_overlay(font_size_in: int, outline_size: int, header_width: float):
 
 	# change header widths
 	for l in get_tree().get_nodes_in_group("debug_menu_header"):
-		var label: Label = l as Label
+		var label : Label = l as Label
 		label.custom_minimum_size.x = header_width
-
+		
 	# main FPS label size is 50% bigger
-	fps.add_theme_font_size_override("font_size", font_size_in * 1.5)
-
+	fps.add_theme_font_size_override("font_size", font_size_in*1.5)
+	
 	# no outline for very small fonts sizes
 	if font_size_in < 6:
 		fps.add_theme_constant_override("outline_size", 0)
 	else:
-		fps.add_theme_constant_override("outline_size", outline_size * 1.5)
-
+		fps.add_theme_constant_override("outline_size", outline_size*1.5)
+	
 	var new_scale: float = font_size_in / DEFAULT_FONT_SIZE
-
+	
 	# scale line spacing for multi line labels
 	settings.add_theme_constant_override("line_spacing", 3 * new_scale)
 	information.add_theme_constant_override("line_spacing", 3 * new_scale)
-
+		
 	# graph re-size
 	GRAPH_SIZE = DEFAULT_GRAPH_SIZE * new_scale
 	for p in get_tree().get_nodes_in_group("debug_menu_graph"):
@@ -284,13 +268,12 @@ func _resize_overlay(font_size_in: int, outline_size: int, header_width: float):
 		# this adjusts the label on the left Y minimum size, so that the graphs are spaced
 		panel.get_parent().find_child("Title").custom_minimum_size.y = GRAPH_SIZE.y + (2.0 * new_scale)
 
-
 ## Set the font size of the Debug Menu overlay
 ## Sets display_size to Display_Size.SIZE_CUSTOM
 ## recalculates all GUI elements
 func set_font_size(font_size_in: int):
 	if font_size_in < MIN_FONT_SIZE or font_size_in > MAX_FONT_SIZE:
-		printerr(str("Font size range for DebugMenu is [", MIN_FONT_SIZE, " to ", MAX_FONT_SIZE, "]"))
+		printerr(str("Font size range for DebugMenu is [", MIN_FONT_SIZE," to ", MAX_FONT_SIZE ,"]"))
 		return
 
 	_custom_font_size = font_size_in
@@ -360,10 +343,10 @@ func update_settings_label() -> void:
 			antialiasing_3d_string += (" + " if not antialiasing_3d_string.is_empty() else "") + "FXAA"
 
 		settings.text += "3D scale (%s): %d%% = %d×%d" % [
-			scaling_3d_mode_string,
-			viewport.scaling_3d_scale * 100,
-			viewport_render_size.x * viewport.scaling_3d_scale,
-			viewport_render_size.y * viewport.scaling_3d_scale,
+				scaling_3d_mode_string,
+				viewport.scaling_3d_scale * 100,
+				viewport_render_size.x * viewport.scaling_3d_scale,
+				viewport_render_size.y * viewport.scaling_3d_scale,
 		]
 
 		if not antialiasing_3d_string.is_empty():
@@ -460,8 +443,8 @@ func _fps_graph_draw() -> void:
 	fps_polyline.resize(HISTORY_NUM_FRAMES)
 	for fps_index in fps_history.size():
 		fps_polyline[fps_index] = Vector2(
-			remap(fps_index, 0, fps_history.size(), 0, GRAPH_SIZE.x),
-			remap(clampf(fps_history[fps_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0),
+				remap(fps_index, 0, fps_history.size(), 0, GRAPH_SIZE.x),
+				remap(clampf(fps_history[fps_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0)
 		)
 	# Don't use antialiasing to speed up line drawing, but use a width that scales with
 	# viewport scale to keep the line easily readable on hiDPI displays.
@@ -473,8 +456,8 @@ func _total_graph_draw() -> void:
 	total_polyline.resize(HISTORY_NUM_FRAMES)
 	for total_index in frame_history_total.size():
 		total_polyline[total_index] = Vector2(
-			remap(total_index, 0, frame_history_total.size(), 0, GRAPH_SIZE.x),
-			remap(clampf(frame_history_total[total_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0),
+				remap(total_index, 0, frame_history_total.size(), 0, GRAPH_SIZE.x),
+				remap(clampf(frame_history_total[total_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0)
 		)
 	# Don't use antialiasing to speed up line drawing, but use a width that scales with
 	# viewport scale to keep the line easily readable on hiDPI displays.
@@ -486,8 +469,8 @@ func _cpu_graph_draw() -> void:
 	cpu_polyline.resize(HISTORY_NUM_FRAMES)
 	for cpu_index in frame_history_cpu.size():
 		cpu_polyline[cpu_index] = Vector2(
-			remap(cpu_index, 0, frame_history_cpu.size(), 0, GRAPH_SIZE.x),
-			remap(clampf(frame_history_cpu[cpu_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0),
+				remap(cpu_index, 0, frame_history_cpu.size(), 0, GRAPH_SIZE.x),
+				remap(clampf(frame_history_cpu[cpu_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0)
 		)
 	# Don't use antialiasing to speed up line drawing, but use a width that scales with
 	# viewport scale to keep the line easily readable on hiDPI displays.
@@ -499,8 +482,8 @@ func _gpu_graph_draw() -> void:
 	gpu_polyline.resize(HISTORY_NUM_FRAMES)
 	for gpu_index in frame_history_gpu.size():
 		gpu_polyline[gpu_index] = Vector2(
-			remap(gpu_index, 0, frame_history_gpu.size(), 0, GRAPH_SIZE.x),
-			remap(clampf(frame_history_gpu[gpu_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0),
+				remap(gpu_index, 0, frame_history_gpu.size(), 0, GRAPH_SIZE.x),
+				remap(clampf(frame_history_gpu[gpu_index], GRAPH_MIN_FPS, GRAPH_MAX_FPS), GRAPH_MIN_FPS, GRAPH_MAX_FPS, GRAPH_SIZE.y, 0.0)
 		)
 	# Don't use antialiasing to speed up line drawing, but use a width that scales with
 	# viewport scale to keep the line easily readable on hiDPI displays.
@@ -621,11 +604,8 @@ func _process(_delta: float) -> void:
 
 		frame_stats.text = str(
 			&"Draw calls: %d" % Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
-			&", Primitives: ",
-			int(Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)),
-			&", VRAM: %d" % snapped(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) * 0.000001, 1.0),
-			&" MB",
-		)
+			&", Primitives: ", int(Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)),
+			&", VRAM: %d" % snapped(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) * 0.000001, 1.0), &" MB")
 
 	last_tick = Time.get_ticks_usec()
 
@@ -633,12 +613,12 @@ func _process(_delta: float) -> void:
 ## Captures a screenshot and saves it to the user folder in user://screenshots.
 func do_screenshot() -> void:
 	await RenderingServer.frame_post_draw # Wait until frame is drawn
-	var image := get_viewport().get_texture().get_image()
+	var image := get_viewport().get_texture().get_image() 
 
 	# Fix image size for true pixel game, too small image output
 	if image.get_size().x != get_viewport().size.x or image.get_size().y != get_viewport().size.y:
 		image.resize(get_viewport().size.x, get_viewport().size.y, Image.INTERPOLATE_NEAREST)
-
+	
 	if not image:
 		printerr("Failed to capture screen.")
 		return
@@ -654,6 +634,7 @@ func do_screenshot() -> void:
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path(path))
 	else:
 		printerr("Failed to save screenshot:", err)
+		
 
 
 func _on_visibility_changed() -> void:

@@ -34,11 +34,11 @@ var _interactive_object: InteractiveType = InteractiveType.NONE
 var InputMovementDic: Dictionary[StringName, Dictionary] = {
 	INPUT_MOVE_LEFT_STRINGNAME: {
 		KEY_STRINGNAME: KEY_A,
-		ACTION_STRINGNAME: INPUT_MOVE_LEFT_STRINGNAME,
+		ACTION_STRINGNAME: INPUT_MOVE_LEFT_STRINGNAME
 	},
 	INPUT_MOVE_RIGHT_STRINGNAME: {
 		KEY_STRINGNAME: KEY_D,
-		ACTION_STRINGNAME: INPUT_MOVE_RIGHT_STRINGNAME,
+		ACTION_STRINGNAME: INPUT_MOVE_RIGHT_STRINGNAME
 	},
 }
 
@@ -78,6 +78,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_hide_interactive_node(_interactive_UI)
 				_interactive_node_logic()
 
+
 		if Input.is_physical_key_pressed(KEY_ESCAPE) and _movement_disabled:
 			_hide_interactive_node(_interactive_UI)
 			_interactive_node_logic()
@@ -115,12 +116,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	if _movement_disabled:
-		return
+	if _movement_disabled: return
 
 	var input_dir: = Input.get_axis(
 		INPUT_MOVE_LEFT_STRINGNAME,
-		INPUT_MOVE_RIGHT_STRINGNAME,
+		INPUT_MOVE_RIGHT_STRINGNAME
 	)
 
 	if input_dir:
@@ -144,19 +144,19 @@ func _show_prompt(body_rid: RID, body: Node2D, body_shape_index: int, local_shap
 
 		if cell_data:
 			var cell_data_type: StringName = cell_data.get_custom_data("Type")
-	#			var cell_global_pos: Vector2 = tile_map.to_global(tile_map.map_to_local(tile_coords))
-	_is_interactive = true
-	_interaction_prompt.set_visible(true)
+#			var cell_global_pos: Vector2 = tile_map.to_global(tile_map.map_to_local(tile_coords))
+			_is_interactive = true
+			_interaction_prompt.set_visible(true)
 
-	match cell_data_type:
-		"Sign":
-			_interactive_UI = owner.get_node("%UISign")
-			_active_pcam = %ItemFocusPhantomCamera2D
-			_interactive_object = InteractiveType.ITEM
-		"Inventory":
-			_interactive_UI = owner.get_node("%UIInventory")
-			_interactive_object = InteractiveType.INVENTORY
-			_active_pcam = %InventoryPhantomCamera2D
+			match cell_data_type:
+				"Sign":
+					_interactive_UI = owner.get_node("%UISign")
+					_active_pcam = %ItemFocusPhantomCamera2D
+					_interactive_object = InteractiveType.ITEM
+				"Inventory":
+					_interactive_UI = owner.get_node("%UIInventory")
+					_interactive_object = InteractiveType.INVENTORY
+					_active_pcam = %InventoryPhantomCamera2D
 
 
 func _hide_prompt(body_rid: RID, body: Node2D, body_shape_index: int, local_shape: int) -> void:

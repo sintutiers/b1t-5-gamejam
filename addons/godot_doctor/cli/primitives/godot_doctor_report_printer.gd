@@ -20,6 +20,7 @@ class ReportColors:
 	const PASSED: Color = Color.GREEN
 	const FAILED: Color = Color.RED
 
+
 ## Defines the number of spaces to use for each indentation level in the report.
 const _INDENT_SIZE: int = 3
 
@@ -94,21 +95,24 @@ const _SUMMARY_LABEL_WARNINGS_AS_ERRORS: String = "Warning as errors:"
 
 #region Public API
 
+
 ## Orchestrates printing of the full validation report from [param validation_suite_reports].
 ## Uses [param stats] (keyed by [enum GodotDoctorSummaryReport.Stat])
 ## to render the summary section without recalculating aggregate totals.
 ## Returns [param stats] for downstream consumers.
 func print_validation_results(
-		validation_suite_reports: Array[GodotDoctorValidationSuiteReport],
-		stats: Dictionary,
+	validation_suite_reports: Array[GodotDoctorValidationSuiteReport],
+	stats: Dictionary,
 ) -> void:
 	_print_report_header()
 	_print_suite_reports(validation_suite_reports)
 	_print_summary(stats)
 
+
 #endregion
 
 #region Report rendering
+
 
 ## Prints the decorative report header to stdout.
 func _print_report_header() -> void:
@@ -125,8 +129,7 @@ func _print_suite_reports(suite_reports: Array[GodotDoctorValidationSuiteReport]
 		var suite: GodotDoctorValidationSuite = suite_report.get_suite()
 		var treat_warnings_as_errors: bool = suite.treat_warnings_as_errors
 		var suite_passed: bool = _messages_passed(
-			suite_report.get_validation_messages(),
-			treat_warnings_as_errors,
+			suite_report.get_validation_messages(), treat_warnings_as_errors
 		)
 
 		_print_pass_fail_tree_section(
@@ -134,7 +137,7 @@ func _print_suite_reports(suite_reports: Array[GodotDoctorValidationSuiteReport]
 			_SECTION_LABEL_SUITE,
 			suite_passed,
 			_resolve_uid_path(suite_report.get_suite_resource_path()),
-			ReportColors.HEADER,
+			ReportColors.HEADER
 		)
 
 		_print_warning_mode_if_needed(treat_warnings_as_errors)
@@ -148,12 +151,11 @@ func _print_suite_reports(suite_reports: Array[GodotDoctorValidationSuiteReport]
 
 ## Prints a [param scene_report].
 func _print_scene_report(
-		scene_report: GodotDoctorSceneReport,
-		treat_warnings_as_errors: bool,
+	scene_report: GodotDoctorSceneReport,
+	treat_warnings_as_errors: bool,
 ) -> void:
 	var scene_passed: bool = _messages_passed(
-		scene_report.get_validation_messages(),
-		treat_warnings_as_errors,
+		scene_report.get_validation_messages(), treat_warnings_as_errors
 	)
 
 	_print_pass_fail_tree_section(
@@ -161,7 +163,7 @@ func _print_scene_report(
 		_SECTION_LABEL_SCENE,
 		scene_passed,
 		_resolve_uid_path(scene_report.get_scene_path()),
-		ReportColors.SCENE,
+		ReportColors.SCENE
 	)
 
 	var node_count: int = scene_report.get_node_reports().size()
@@ -180,8 +182,7 @@ func _print_scene_report(
 			continue
 
 		var ancestor_path: String = node_report.get_node_ancestor_path().replace(
-			"/",
-			_ANCESTOR_SEPARATOR_GLYPH,
+			"/", _ANCESTOR_SEPARATOR_GLYPH
 		)
 		var node_passed: bool = _messages_passed(messages, treat_warnings_as_errors)
 
@@ -196,8 +197,8 @@ func _print_scene_report(
 
 ## Prints a [param resource_report].
 func _print_resource_report(
-		resource_report: GodotDoctorResourceReport,
-		treat_warnings_as_errors: bool,
+	resource_report: GodotDoctorResourceReport,
+	treat_warnings_as_errors: bool,
 ) -> void:
 	var messages: Array[GodotDoctorValidationMessage] = resource_report.get_validation_messages()
 	if messages.is_empty():
@@ -233,101 +234,101 @@ func _print_summary(stats: Dictionary) -> void:
 	# Parenthesized counts: prefix padded to [constant _SUMMARY_PAREN_PREFIX_WIDTH] chars,
 	# "(N)" so digit lands at col [constant _SUMMARY_COLUMN].
 	var validated_items: int = (
-			stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED]
-			+ stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED]
+		stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED]
+		+ stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED]
 	)
 	_print_rich_text(
 		(
-				"\n%s%d"
-				% [_SUMMARY_LABEL_ITEMS_VALIDATED.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH), validated_items]
+			"\n%s%d"
+			% [_SUMMARY_LABEL_ITEMS_VALIDATED.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH), validated_items]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 	_print_rich_text(_BRANCH_EXTEND_GLYPH, ReportColors.TOTALS)
 	_print_rich_text(
 		(
-				"%s(%d)"
-				% [
-					("%s %s" % [_BRANCH_LAST_GLYPH, _SUMMARY_LABEL_SUITES]).rpad(
-						_SUMMARY_PAREN_PREFIX_WIDTH,
-					),
-					stats[GodotDoctorSummaryReport.Stat.SUITE_COUNT],
-				]
+			"%s(%d)"
+			% [
+				("%s %s" % [_BRANCH_LAST_GLYPH, _SUMMARY_LABEL_SUITES]).rpad(
+					_SUMMARY_PAREN_PREFIX_WIDTH
+				),
+				stats[GodotDoctorSummaryReport.Stat.SUITE_COUNT]
+			]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 	_print_rich_text(
 		(
-				"%s(%d)"
-				% [
-					("   %s %s" % [_BRANCH_MIDDLE_GLYPH, _SUMMARY_LABEL_SCENES]).rpad(
-						_SUMMARY_PAREN_PREFIX_WIDTH,
-					),
-					stats[GodotDoctorSummaryReport.Stat.SCENES_VALIDATED],
-				]
+			"%s(%d)"
+			% [
+				("   %s %s" % [_BRANCH_MIDDLE_GLYPH, _SUMMARY_LABEL_SCENES]).rpad(
+					_SUMMARY_PAREN_PREFIX_WIDTH
+				),
+				stats[GodotDoctorSummaryReport.Stat.SCENES_VALIDATED]
+			]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 	_print_rich_text(
 		(
-				"%s%d"
-				% [
+			"%s%d"
+			% [
+				(
 					(
-							(
-									"   %s  %s %s"
-									% [_BRANCH_EXTEND_GLYPH, _BRANCH_LAST_GLYPH, _SUMMARY_LABEL_NODES]
-							)
-							.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH)
-					),
-					stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED],
-				]
+						"   %s  %s %s"
+						% [_BRANCH_EXTEND_GLYPH, _BRANCH_LAST_GLYPH, _SUMMARY_LABEL_NODES]
+					)
+					. rpad(_SUMMARY_PLAIN_PREFIX_WIDTH)
+				),
+				stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED]
+			]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 	_print_rich_text(
 		(
-				"%s%d"
-				% [
-					("   %s %s" % [_BRANCH_LAST_GLYPH, _SUMMARY_LABEL_RESOURCES]).rpad(
-						_SUMMARY_PLAIN_PREFIX_WIDTH,
-					),
-					stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED],
-				]
+			"%s%d"
+			% [
+				("   %s %s" % [_BRANCH_LAST_GLYPH, _SUMMARY_LABEL_RESOURCES]).rpad(
+					_SUMMARY_PLAIN_PREFIX_WIDTH
+				),
+				stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED]
+			]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 
 	# Print the messages tree.
 	var total_messages: int = (
-			stats[GodotDoctorSummaryReport.Stat.INFO_COUNT]
-			+ stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT]
-			+ stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT]
+		stats[GodotDoctorSummaryReport.Stat.INFO_COUNT]
+		+ stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT]
+		+ stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT]
 	)
 	_print_rich_text(
 		(
-				"\n%s%d"
-				% [_SUMMARY_LABEL_MESSAGES_REPORTED.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH), total_messages]
+			"\n%s%d"
+			% [_SUMMARY_LABEL_MESSAGES_REPORTED.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH), total_messages]
 		),
-		ReportColors.TOTALS,
+		ReportColors.TOTALS
 	)
 	_print_rich_text(_BRANCH_EXTEND_GLYPH, ReportColors.TOTALS)
 	_print_summary_tree_line(
 		_BRANCH_MIDDLE_GLYPH,
 		_SUMMARY_LABEL_INFO,
 		stats[GodotDoctorSummaryReport.Stat.INFO_COUNT],
-		ReportColors.INFO,
+		ReportColors.INFO
 	)
 	_print_summary_tree_line(
 		_BRANCH_MIDDLE_GLYPH,
 		_SUMMARY_LABEL_WARNINGS,
 		stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT],
-		ReportColors.WARNING,
+		ReportColors.WARNING
 	)
 	_print_summary_tree_line(
 		_BRANCH_LAST_GLYPH,
 		_SUMMARY_LABEL_HARD_ERRORS,
 		stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT],
-		ReportColors.ERROR,
+		ReportColors.ERROR
 	)
 
 	# Print the errors section.
@@ -336,13 +337,13 @@ func _print_summary(stats: Dictionary) -> void:
 
 	_print_rich_text(
 		(
-				"\n%s%d"
-				% [
-					_SUMMARY_LABEL_TOTAL_ERRORS.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH),
-					effective_errors_count,
-				]
+			"\n%s%d"
+			% [
+				_SUMMARY_LABEL_TOTAL_ERRORS.rpad(_SUMMARY_PLAIN_PREFIX_WIDTH),
+				effective_errors_count
+			]
 		),
-		_get_state_color(passed),
+		_get_state_color(passed)
 	)
 	_print_rich_text("│", ReportColors.TOTALS)
 	_print_summary_tree_line(
@@ -358,26 +359,27 @@ func _print_summary(stats: Dictionary) -> void:
 	# or FAILED if there are one or more errors.
 	_print_rich_text(
 		(
-				"%s VALIDATION %s"
-				% [
-					_get_state_icon(passed),
-					_VALIDATION_PASSED_LABEL if passed else _VALIDATION_FAILED_LABEL,
-				]
+			"%s VALIDATION %s"
+			% [
+				_get_state_icon(passed),
+				_VALIDATION_PASSED_LABEL if passed else _VALIDATION_FAILED_LABEL
+			]
 		),
-		_get_state_color(passed),
+		_get_state_color(passed)
 	)
 
 	# Print a closing divider line.
 	_print_rich_text(divider, ReportColors.HEADER)
 
+
 #endregion
 
 #region Message helpers
 
+
 ## Returns [code]true[/code] if [param messages] contain no effective errors.
 static func _messages_passed(
-		messages: Array[GodotDoctorValidationMessage],
-		treat_warnings_as_errors: bool,
+	messages: Array[GodotDoctorValidationMessage], treat_warnings_as_errors: bool
 ) -> bool:
 	return _get_effective_error_count(messages, treat_warnings_as_errors) == 0
 
@@ -385,22 +387,23 @@ static func _messages_passed(
 ## Returns the number of messages that count as errors, including
 ## warnings promoted to errors when [param treat_warnings_as_errors] is [code]true[/code].
 static func _get_effective_error_count(
-		messages: Array[GodotDoctorValidationMessage],
-		treat_warnings_as_errors: bool,
+	messages: Array[GodotDoctorValidationMessage], treat_warnings_as_errors: bool
 ) -> int:
 	var count: int = 0
 	for msg: GodotDoctorValidationMessage in messages:
 		if msg.severity_level == ValidationCondition.Severity.ERROR:
 			count += 1
 		elif (
-				treat_warnings_as_errors and msg.severity_level == ValidationCondition.Severity.WARNING
+			treat_warnings_as_errors and msg.severity_level == ValidationCondition.Severity.WARNING
 		):
 			count += 1
 	return count
 
+
 #endregion
 
 #region Message rendering
+
 
 ## Returns the branch glyph to use for a message at [param index] in a list of [param count] items.
 func _get_message_branch(index: int, count: int) -> String:
@@ -409,8 +412,7 @@ func _get_message_branch(index: int, count: int) -> String:
 
 ## Prints [param messages] as a branch list, selecting the last branch glyph for the final item.
 func _print_messages_tree(
-		messages: Array[GodotDoctorValidationMessage],
-		treat_warnings_as_errors: bool,
+	messages: Array[GodotDoctorValidationMessage], treat_warnings_as_errors: bool
 ) -> void:
 	var msg_count: int = messages.size()
 
@@ -422,9 +424,7 @@ func _print_messages_tree(
 ## Prints a single [param msg] using [param branch] as the tree connector character.
 ## [param treat_warnings_as_errors] controls whether warnings are displayed as errors.
 func _print_message_tree(
-		msg: GodotDoctorValidationMessage,
-		branch: String,
-		treat_warnings_as_errors: bool,
+	msg: GodotDoctorValidationMessage, branch: String, treat_warnings_as_errors: bool
 ) -> void:
 	var label: String = _severity_label(msg, treat_warnings_as_errors)
 	var padded: String = label.rpad(_SEVERITY_LABEL_WIDTH)
@@ -455,19 +455,17 @@ func _severity_color(label: String) -> Color:
 			return ReportColors.ERROR
 	return ReportColors.INFO
 
+
 #endregion
 
 #region Print primitives
+
 
 ## Prints a pass/fail tree section at [param indent_level] with [param heading_label]
 ## and a glyph representing [param passed], followed by a tree item with [param tree_text] in
 ## [param tree_color].
 func _print_pass_fail_tree_section(
-		indent_level: int,
-		heading_label: String,
-		passed: bool,
-		tree_text: String,
-		tree_color: Color,
+	indent_level: int, heading_label: String, passed: bool, tree_text: String, tree_color: Color
 ) -> void:
 	_print_state_heading(indent_level, heading_label, passed)
 	_print_tree_item(indent_level, tree_text, tree_color)
@@ -487,13 +485,13 @@ func _print_warning_mode_if_needed(treat_warnings_as_errors: bool) -> void:
 ## and then a branch list of [param messages] with severity colors
 ## determined by [param treat_warnings_as_errors].
 func _print_message_section(
-		heading_indent_level: int,
-		heading_label: String,
-		passed: bool,
-		messages: Array[GodotDoctorValidationMessage],
-		treat_warnings_as_errors: bool,
-		tree_text: String = "",
-		tree_color: Color = ReportColors.INFO,
+	heading_indent_level: int,
+	heading_label: String,
+	passed: bool,
+	messages: Array[GodotDoctorValidationMessage],
+	treat_warnings_as_errors: bool,
+	tree_text: String = "",
+	tree_color: Color = ReportColors.INFO
 ) -> void:
 	_print_state_heading(heading_indent_level, heading_label, passed)
 
@@ -508,7 +506,7 @@ func _print_message_section(
 func _print_state_heading(indent_level: int, label: String, passed: bool) -> void:
 	_print_rich_text(
 		"\n%s%s %s" % [_indent(indent_level), _get_state_icon(passed), label],
-		_get_state_color(passed),
+		_get_state_color(passed)
 	)
 
 
@@ -520,8 +518,7 @@ func _print_tree_item(indent_level: int, text: String, color: Color) -> void:
 ## Prints an aligned [code]label: count[/code] line at the given indentation level.
 func _print_count_line(indent_level: int, label: String, count: int, color: Color) -> void:
 	_print_rich_text(
-		"%s%s %d" % [_indent(indent_level), label.rpad(_COUNT_LABEL_WIDTH), count],
-		color,
+		"%s%s %d" % [_indent(indent_level), label.rpad(_COUNT_LABEL_WIDTH), count], color
 	)
 
 
@@ -534,17 +531,14 @@ func _print_rich_text(text: String, color: Color) -> void:
 ## [param label] + [param count] right-aligned at
 ## [constant _SUMMARY_COLUMN] in [param content_color].
 func _print_summary_tree_line(
-		branch: String,
-		label: String,
-		count: int,
-		content_color: Color,
+	branch: String, label: String, count: int, content_color: Color
 ) -> void:
 	var content: String = "%s%d" % [label.rpad(_SUMMARY_TREE_LABEL_WIDTH), count]
 	print_rich(
 		(
-				"[color=%s]%s [/color][color=%s]%s[/color]"
-				% [ReportColors.TOTALS.to_html(), branch, content_color.to_html(), content]
-		),
+			"[color=%s]%s [/color][color=%s]%s[/color]"
+			% [ReportColors.TOTALS.to_html(), branch, content_color.to_html(), content]
+		)
 	)
 
 
@@ -563,9 +557,11 @@ func _get_state_icon(passed: bool) -> String:
 func _get_state_color(passed: bool) -> Color:
 	return ReportColors.PASSED if passed else ReportColors.FAILED
 
+
 #endregion
 
 #region Path utilities
+
 
 ## Resolves [param path] from a [code]uid://[/code] string to a filesystem path.
 ## Returns [param path] unchanged if it is already a filesystem path.

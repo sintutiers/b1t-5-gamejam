@@ -6,23 +6,20 @@ const DebuggerMessage = preload("editor_debugger_message.gd")
 const DebuggerUI = preload("editor_debugger.gd")
 
 ## The UI scene holding the debugger UI
-var _debugger_ui_scene: PackedScene = preload("editor_debugger.tscn")
+var _debugger_ui_scene:PackedScene = preload("editor_debugger.tscn")
 
 ## Current editor settings
-var _settings: EditorSettings = null
+var _settings:EditorSettings = null
 
-
-func initialize(settings: EditorSettings) -> void:
+func initialize(settings:EditorSettings) -> void:
 	_settings = settings
-
 
 func _has_capture(prefix) -> bool:
 	return prefix == DebuggerMessage.MESSAGE_PREFIX
 
-
 func _capture(message, data, session_id) -> bool:
-	var ui: DebuggerUI = get_session(session_id).get_meta("__state_charts_debugger_ui")
-	match (message):
+	var ui:DebuggerUI = get_session(session_id).get_meta("__state_charts_debugger_ui")
+	match(message):
 		DebuggerMessage.STATE_CHART_EVENT_RECEIVED_MESSAGE:
 			ui.event_received(data[0], data[1], data[2])
 		DebuggerMessage.STATE_CHART_ADDED_MESSAGE:
@@ -39,15 +36,14 @@ func _capture(message, data, session_id) -> bool:
 			ui.transition_pending(data[0], data[1], data[2], data[3], data[4])
 		DebuggerMessage.TRANSITION_TAKEN_MESSAGE:
 			ui.transition_taken(data[0], data[1], data[2], data[3], data[4])
-
+			
 	return true
-
 
 func _setup_session(session_id) -> void:
 	# get the session
 	var session := get_session(session_id)
 	# Add a new tab in the debugger session UI containing a label.
-	var debugger_ui: DebuggerUI = _debugger_ui_scene.instantiate()
+	var debugger_ui:DebuggerUI = _debugger_ui_scene.instantiate()
 	# add the session tab
 	session.add_session_tab(debugger_ui)
 	session.stopped.connect(debugger_ui.clear)
