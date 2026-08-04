@@ -483,7 +483,7 @@ rotation = 1.5708
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_kcoy1")
 animation = &"walk"
-frame_progress = 0.75379235
+frame_progress = 0.6654083
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1374761703]
 editor_description = "This navigation agent sends the \"navigation_finished\" event to the state chart whenever the navigation is done."

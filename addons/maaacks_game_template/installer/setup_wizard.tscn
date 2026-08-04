@@ -22,7 +22,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -49.0
+offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -87,6 +87,7 @@ text = "Delete Example Files *"
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
+button_pressed = true
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/StepsContainer" unique_id=391293741]
 unique_name_in_owner = true

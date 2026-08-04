@@ -26,7 +26,7 @@ texture = ExtResource("1_f0fay")
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(80.113, 56.512)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=1772935995]
@@ -40,7 +40,7 @@ position = Vector2(80.113, 56.512)
 script = ExtResource("4_hwoah")
 follow_mode = 1
 follow_target = NodePath("../player")
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_4p6eu")
 follow_damping = true
 follow_damping_value = Vector2(0.02, 0.02)

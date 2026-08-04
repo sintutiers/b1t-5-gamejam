@@ -16,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
+game_scene_path = "uid://cpmb5cfcuq6a2"
 
 [node name="UISoundController" type="Node" parent="." unique_id=1619985599]
 script = ExtResource("6_bs342")
@@ -158,7 +159,7 @@ offset_left = -88.0
 offset_top = -26.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "vv not done for release yet"
+text = "v- pre pre pre alpha not fucking done yet stage of gamedevelopment"
 horizontal_alignment = 2
 script = ExtResource("6_pdiij")
 

@@ -13,7 +13,6 @@
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="9_ra860"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7n6hb"]
-load_path = "res://.godot/imported/pointer.svg-2068835178847b731dd1d6754048fd27.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltt1b"]
 radius = 32.95

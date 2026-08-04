@@ -7,30 +7,32 @@ extends Node
 
 var walk_buffer: float = 0.0
 var idle_time: float = 0.0
-var current_facing: MovementComponent.Direction = MovementComponent.DEFAULT_DIRECTION
+var current_horizontal: MovementComponent.Horizontal = MovementComponent.DEFAULT_HORIZONTAL
+var current_vertical: MovementComponent.Vertical = MovementComponent.DEFAULT_VERTICAL
 
 @onready var sprite: AnimatedSprite2D = %AnimatedSprite2D
 
 
 func _ready() -> void:
 	assert(sprite, "no Sprite.")
-	
 	sprite.play("start")
 
 
-func play_walk(facing: MovementComponent.Direction) -> void:
+func play_walk(
+	horizontal: MovementComponent.Horizontal,
+	vertical: MovementComponent.Vertical,
+) -> void:
 	walk_buffer = buffer_duration
 	idle_time = 0.0
-	current_facing = facing
-	var anim_name: String = MovementComponent.DIRECTION_NAMES.get(facing, "down")
-	_play_if_needed(anim_name)
+	current_horizontal = horizontal
+	current_vertical = vertical
+	_play_if_needed(_walk_anim_name())
 
 
 func update_walk_buffer(delta: float) -> void:
 	walk_buffer -= delta
 	if walk_buffer > 0.0:
-		var anim_name: String = MovementComponent.DIRECTION_NAMES.get(current_facing, "down")
-		_play_if_needed(anim_name)
+		_play_if_needed(_walk_anim_name())
 	else:
 		walk_buffer = 0.0
 		idle_time += delta
@@ -40,6 +42,12 @@ func update_walk_buffer(delta: float) -> void:
 
 func play_idle() -> void:
 	_play_if_needed("idle")
+
+
+func _walk_anim_name() -> String:
+	var h: String = MovementComponent.HORIZONTAL_NAMES.get(current_horizontal, "right")
+	var v: String = MovementComponent.VERTICAL_NAMES.get(current_vertical, "down")
+	return "%s_%s" % [h, v]
 
 
 func _play_if_needed(anim_name: String) -> void:
