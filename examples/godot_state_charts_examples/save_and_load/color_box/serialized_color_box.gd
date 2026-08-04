@@ -1,4 +1,5 @@
-class_name SerializedColorBox extends Resource
+class_name SerializedColorBox
+extends Resource
 
 @export var box_id: String = ""
 @export var color_index: int = 0

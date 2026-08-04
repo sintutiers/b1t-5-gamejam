@@ -1,14 +1,15 @@
 extends Node
-
 ## Node for opening a pause menu when detecting a 'ui_cancel' event.
 
-@export var pause_menu_packed : PackedScene
-@export var focused_viewport : Viewport
+@export var pause_menu_packed: PackedScene
+@export var focused_viewport: Viewport
 
-var pause_menu : Node
+var pause_menu: Node
+
 
 func pause() -> void:
-	if pause_menu.visible: return
+	if pause_menu.visible:
+		return
 	if not focused_viewport:
 		focused_viewport = get_viewport()
 	var _initial_focus_control = focused_viewport.gui_get_focus_owner()
@@ -20,10 +21,12 @@ func pause() -> void:
 	if is_inside_tree() and _initial_focus_control:
 		_initial_focus_control.grab_focus()
 
+
 # If pause menu should take precedence, override _input() instead.
-func _unhandled_input(event : InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		pause()
+
 
 func _ready() -> void:
 	pause_menu = pause_menu_packed.instantiate()

@@ -26,7 +26,7 @@ func _ready() -> void:
 	var last_menu_button := _find_last_menu_button(script_editor)
 	if not is_instance_valid(last_menu_button):
 		push_warning(
-			"GDScript Formatter: Could not find valid menu button in script editor. Menu will not be available. Use the command palette instead."
+			"GDScript Formatter: Could not find valid menu button in script editor. Menu will not be available. Use the command palette instead.",
 		)
 		return
 

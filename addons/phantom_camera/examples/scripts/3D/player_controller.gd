@@ -22,19 +22,19 @@ const INPUT_MOVE_RIGHT_STRINGNAME: StringName = "move_right"
 var InputMovementDic: Dictionary = {
 	INPUT_MOVE_UP_STRINGNAME: {
 		KEY_STRINGNAME: KEY_W,
-		ACTION_STRINGNAME: INPUT_MOVE_UP_STRINGNAME
+		ACTION_STRINGNAME: INPUT_MOVE_UP_STRINGNAME,
 	},
 	INPUT_MOVE_DOWM_STRINGNAME: {
 		KEY_STRINGNAME: KEY_S,
-		ACTION_STRINGNAME: INPUT_MOVE_DOWM_STRINGNAME
+		ACTION_STRINGNAME: INPUT_MOVE_DOWM_STRINGNAME,
 	},
 	INPUT_MOVE_LEFT_STRINGNAME: {
 		KEY_STRINGNAME: KEY_A,
-		ACTION_STRINGNAME: INPUT_MOVE_LEFT_STRINGNAME
+		ACTION_STRINGNAME: INPUT_MOVE_LEFT_STRINGNAME,
 	},
 	INPUT_MOVE_RIGHT_STRINGNAME: {
 		KEY_STRINGNAME: KEY_D,
-		ACTION_STRINGNAME: INPUT_MOVE_RIGHT_STRINGNAME
+		ACTION_STRINGNAME: INPUT_MOVE_RIGHT_STRINGNAME,
 	},
 }
 
@@ -57,7 +57,8 @@ func _physics_process(delta: float) -> void:
 	if enable_gravity and not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if not movement_enabled: return
+	if not movement_enabled:
+		return
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -65,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		INPUT_MOVE_LEFT_STRINGNAME,
 		INPUT_MOVE_RIGHT_STRINGNAME,
 		INPUT_MOVE_UP_STRINGNAME,
-		INPUT_MOVE_DOWM_STRINGNAME
+		INPUT_MOVE_DOWM_STRINGNAME,
 	)
 
 	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

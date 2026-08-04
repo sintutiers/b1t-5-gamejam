@@ -1,6 +1,5 @@
 extends "res://addons/maaacks_game_template/base/nodes/menus/options_menu/paginated_tab_container.gd"
 
-
 ## Shows the tab for controls remapping even if no input actions are found.
 @export var force_show_controls := false
 ## Shows a tab for input sensitivity sliders on the mouse and joypad.

@@ -17,7 +17,7 @@ func _get_validation_conditions() -> Array[ValidationCondition]:
 					# This will be handled by the default validations
 					return true
 				return weapon_resource.get_validation_conditions(),
-			"This string won't be used"
-		)
+			"This string won't be used",
+		),
 	]
 	return conditions

@@ -8,25 +8,26 @@ extends Control
 ## on the first eligible node in its scene tree.
 
 ## Hierarchical depth to search in the scene tree for a focusable control node.
-@export var search_depth : int = 1
+@export var search_depth: int = 1
 ## If true, always capture focus when made visible.
-@export var enabled : bool = false
+@export var enabled: bool = false
 ## If true, capture focus if nothing currently is in focus.
-@export var null_focus_enabled : bool = true
+@export var null_focus_enabled: bool = true
 ## If true, capture focus if there is a joypad detected.
-@export var joypad_enabled : bool = true
+@export var joypad_enabled: bool = true
 ## If true, capture focus if the mouse is hidden.
-@export var mouse_hidden_enabled : bool = true
+@export var mouse_hidden_enabled: bool = true
 
 ## Locks focus
-@export var lock : bool = false :
+@export var lock: bool = false:
 	set(value):
-		var value_changed : bool = lock != value
+		var value_changed: bool = lock != value
 		lock = value
 		if value_changed and not lock:
 			update_focus()
 
-func _focus_first_search(control_node : Control, levels : int = 1) -> bool:
+
+func _focus_first_search(control_node: Control, levels: int = 1) -> bool:
 	if control_node == null or !control_node.is_visible_in_tree():
 		return false
 	if control_node.focus_mode == FOCUS_ALL:
@@ -42,13 +43,17 @@ func _focus_first_search(control_node : Control, levels : int = 1) -> bool:
 			return true
 	return false
 
+
 func focus_first() -> void:
 	_focus_first_search(self, search_depth)
 
+
 func update_focus() -> void:
-	if lock : return
+	if lock:
+		return
 	if _is_visible_and_should_capture():
 		focus_first()
+
 
 func _should_capture_focus() -> bool:
 	var _null_focus := get_viewport().gui_get_focus_owner() == null and null_focus_enabled
@@ -56,11 +61,14 @@ func _should_capture_focus() -> bool:
 	var _mouse_hidden := Input.mouse_mode not in [Input.MOUSE_MODE_VISIBLE, Input.MOUSE_MODE_CONFINED] and mouse_hidden_enabled
 	return enabled or _null_focus or _joypad_detected or _mouse_hidden
 
+
 func _is_visible_and_should_capture() -> bool:
 	return is_visible_in_tree() and _should_capture_focus()
 
+
 func _on_visibility_changed() -> void:
 	call_deferred("update_focus")
+
 
 func _ready() -> void:
 	if is_inside_tree():

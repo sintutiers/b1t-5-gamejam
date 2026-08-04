@@ -26,8 +26,10 @@ var font_hovered_color: Color
 
 var plugin: Plugin
 
-var show_close_button_always: bool = false : set = set_show_close_button_always
-var is_singleline_tabs: bool = false : set = set_singleline_tabs
+var show_close_button_always: bool = false:
+	set = set_show_close_button_always
+var is_singleline_tabs: bool = false:
+	set = set_singleline_tabs
 
 var tab_group: ButtonGroup = ButtonGroup.new()
 
@@ -52,6 +54,7 @@ var current_tab: CustomTab
 func _init() -> void:
 	tab_group.pressed.connect(on_new_tab_selected)
 
+
 func _ready() -> void:
 	popup_btn.pressed.connect(show_popup)
 	split_btn.gui_input.connect(on_right_click)
@@ -64,6 +67,7 @@ func _ready() -> void:
 		return
 
 	schedule_update()
+
 
 func _notification(what: int) -> void:
 	if (what == NOTIFICATION_DRAG_END || what == NOTIFICATION_MOUSE_EXIT):
@@ -87,7 +91,7 @@ func _notification(what: int) -> void:
 			drag_marker = ColorRect.new()
 			drag_marker.set_anchors_and_offsets_preset(PRESET_LEFT_WIDE)
 			drag_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			drag_marker.custom_minimum_size.x = 4 *  EditorInterface.get_editor_scale()
+			drag_marker.custom_minimum_size.x = 4 * EditorInterface.get_editor_scale()
 		drag_marker.color = EditorInterface.get_editor_theme().get_color(&"drop_mark_color", &"TabContainer")
 
 		font_hovered_color = EditorInterface.get_editor_theme().get_color(&"font_hovered_color", &"TabContainer")
@@ -101,6 +105,7 @@ func _notification(what: int) -> void:
 		for tab: CustomTab in get_tabs():
 			update_tab_style(tab)
 
+
 func _process(delta: float) -> void:
 	sync_tabs_with_item_list()
 
@@ -108,6 +113,7 @@ func _process(delta: float) -> void:
 		shift_singleline_tabs()
 
 	set_process(false)
+
 
 func _shortcut_input(event: InputEvent) -> void:
 	if (!event.is_pressed() || event.is_echo()):
@@ -148,6 +154,7 @@ func _shortcut_input(event: InputEvent) -> void:
 		var tab: CustomTab = get_tab(new_tab)
 		tab.button_pressed = true
 
+
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	if !(data is Dictionary):
 		return false
@@ -159,6 +166,7 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 	return can_drop
 
+
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	if (!_can_drop_data(at_position, data)):
 		return
@@ -168,6 +176,7 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 func schedule_update():
 	set_process(true)
+
 
 func set_split(value: bool) -> void:
 	split = value
@@ -183,14 +192,18 @@ func set_split(value: bool) -> void:
 		split_btn.icon = split_icon
 		split_btn.text = ""
 
+
 func is_split() -> bool:
 	return split
+
 
 func toggle_split():
 	split_toggled.emit()
 
+
 func set_split_disabled(value: bool):
 	split_btn.disabled = value
+
 
 func on_right_click(event: InputEvent):
 	if (!split_btn.button_pressed):
@@ -211,12 +224,14 @@ func on_right_click(event: InputEvent):
 
 		EditorInterface.edit_resource(res)
 
+
 func on_drag_drop(source_index: int, target_index: int):
 	var child: Node = scripts_tab_container.get_child(source_index)
-	scripts_tab_container.move_child(child, target_index);
+	scripts_tab_container.move_child(child, target_index)
 
 	var tab: CustomTab = get_tab(target_index)
 	tab.grab_focus()
+
 
 func on_drag_over(tab: CustomTab):
 	if (last_drag_over_tab == tab):
@@ -227,6 +242,7 @@ func on_drag_over(tab: CustomTab):
 
 	last_drag_over_tab = tab
 
+
 func clear_drag_mark():
 	if (last_drag_over_tab == null):
 		return
@@ -235,17 +251,21 @@ func clear_drag_mark():
 	if (drag_marker.get_parent() != null):
 		drag_marker.get_parent().remove_child(drag_marker)
 
+
 func update_tabs():
 	on_scripts_changed()
 
 	for tab: CustomTab in get_tabs():
 		update_tab(tab)
 
+
 func get_tabs() -> Array[Node]:
 	return multiline_tab_bar.get_children()
 
+
 func update_selected_tab():
 	update_tab(tab_group.get_pressed_button())
+
 
 func update_tab(tab: CustomTab):
 	if (tab == null):
@@ -265,14 +285,17 @@ func update_tab(tab: CustomTab):
 	elif (show_close_button_always):
 		tab.text += CLOSE_BTN_SPACER
 
+
 func get_tab(index: int) -> CustomTab:
 	if (index < 0 || index >= get_tab_count()):
 		return null
 
 	return multiline_tab_bar.get_child(index)
 
+
 func get_tab_count() -> int:
 	return multiline_tab_bar.get_child_count()
+
 
 func add_tab() -> CustomTab:
 	var tab: CustomTab = CustomTab.new()
@@ -292,6 +315,7 @@ func add_tab() -> CustomTab:
 	multiline_tab_bar.add_child(tab)
 	return tab
 
+
 func update_tab_style(tab: CustomTab):
 	tab.add_theme_stylebox_override(&"normal", tab_unselected)
 	tab.add_theme_stylebox_override(&"hover", tab_hovered)
@@ -302,6 +326,7 @@ func update_tab_style(tab: CustomTab):
 	tab.add_theme_color_override(&"font_color", font_unselected_color)
 	tab.add_theme_color_override(&"font_hover_color", font_hovered_color)
 	tab.add_theme_color_override(&"font_pressed_color", font_selected_color)
+
 
 func update_icon_color(tab: CustomTab, color: Color):
 	tab.add_theme_color_override(&"icon_normal_color", color)
@@ -314,6 +339,7 @@ func update_icon_color(tab: CustomTab, color: Color):
 func on_tab_right_click(tab: CustomTab):
 	var index: int = tab.get_index()
 	scripts_item_list.item_clicked.emit(index, scripts_item_list.get_local_mouse_position(), MOUSE_BUTTON_RIGHT)
+
 
 func on_new_tab_selected(tab: CustomTab):
 	# Hide and show close button.
@@ -337,6 +363,7 @@ func on_new_tab_selected(tab: CustomTab):
 		update_tab(current_tab)
 	current_tab = tab
 
+
 ## Removes the script filter text and emits the signal so that the tabs stay
 ## and we do not break anything there.
 func update_script_text_filter():
@@ -344,8 +371,10 @@ func update_script_text_filter():
 		script_filter_txt.text = &""
 		script_filter_txt.text_changed.emit(&"")
 
+
 func on_tab_close_pressed(tab: CustomTab) -> void:
 	scripts_item_list.item_clicked.emit(tab.get_index(), scripts_item_list.get_local_mouse_position(), MOUSE_BUTTON_MIDDLE)
+
 
 func sync_tabs_with_item_list() -> void:
 	if (get_tab_count() > scripts_item_list.item_count):
@@ -365,6 +394,7 @@ func sync_tabs_with_item_list() -> void:
 
 		update_tab(tab)
 
+
 func tab_changed():
 	on_scripts_changed()
 	update_script_text_filter()
@@ -373,16 +403,20 @@ func tab_changed():
 	# we need to sync the selection.
 	update_tab(get_tab(scripts_tab_container.current_tab))
 
+
 func on_scripts_changed():
 	update_script_text_filter()
 
 	popup_btn.text = "(" + str(scripts_item_list.item_count) + ")"
 
+
 func script_order_changed() -> void:
 	schedule_update()
 
+
 func set_popup(new_popup: PopupPanel) -> void:
 	popup = new_popup
+
 
 func show_popup() -> void:
 	if (popup == null):
@@ -397,8 +431,10 @@ func show_popup() -> void:
 
 	script_filter_txt.grab_focus()
 
+
 func get_editor_scale() -> float:
 	return EditorInterface.get_editor_scale()
+
 
 func set_show_close_button_always(new_value: bool):
 	if (show_close_button_always == new_value):
@@ -421,12 +457,14 @@ func set_show_close_button_always(new_value: bool):
 			else:
 				tab.text += CLOSE_BTN_SPACER
 
+
 func free_tabs():
 	if (drag_marker != null):
 		drag_marker.free()
 
 	for tab: CustomTab in get_tabs():
 		free_tab(tab)
+
 
 func free_tab(tab: CustomTab):
 	if (tab.close_button != null):
@@ -451,6 +489,7 @@ func set_singleline_tabs(new_value: bool):
 
 		for tab: CustomTab in get_tabs():
 			tab.visible = true
+
 
 func shift_singleline_tabs():
 	if (current_tab == null):

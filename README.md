@@ -1,13 +1,19 @@
 # b1t-5-gamejam
-our cool gamejam project
+Our cool gamejam project.
 
-- contributors
-- Dean (https://github.com/DeanLemans)
-- Chiel (https://github.com/Chielekkuuuh)
-- Erin (https://github.com/WallErin) https://erwall002.wixsite.com/erin-wall-1 
+## Contributors
 
-code is under [GPL2+](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE)
-assets is under [CC-BY-SA-4.0](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE-ASSETS)
+- [Dean](https://deanlemans.github.io/) - https://github.com/DeanLemans
+- [Chiel](https://github.com/Chielekkuuuh)
+- [Erin](https://erwall002.wixsite.com/erin-wall-1) - https://github.com/WallErin
+
+## Licensing
+
+- **Code** = [GPL-2.0-or-later](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE)
+- **Assets** = [CC-BY-SA-4.0](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE-ASSETS)
+
+---
+
 > Do not go gentle into that good night,
 > Old age should burn and rave at close of day;
 > Rage, rage against the dying of the light.

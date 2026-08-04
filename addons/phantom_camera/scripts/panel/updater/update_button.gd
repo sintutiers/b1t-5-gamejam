@@ -13,7 +13,6 @@ const UPDATER_CONSTANTS := preload("res://addons/phantom_camera/scripts/panel/up
 
 #endregion
 
-
 #region @onready
 
 @onready var http_request: HTTPRequest = %HTTPRequest
@@ -23,7 +22,6 @@ const UPDATER_CONSTANTS := preload("res://addons/phantom_camera/scripts/panel/up
 @onready var update_failed_dialog: AcceptDialog = %UpdateFailedDialog
 
 #endregion
-
 
 #region Variables
 
@@ -36,7 +34,6 @@ var needs_reload: bool = false
 var on_before_refresh: Callable = func(): return true
 
 #endregion
-
 
 #region Private Functions
 
@@ -53,25 +50,29 @@ func _ready() -> void:
 
 
 func _request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	if result != HTTPRequest.RESULT_SUCCESS: return
+	if result != HTTPRequest.RESULT_SUCCESS:
+		return
 
-	if not editor_plugin: return
+	if not editor_plugin:
+		return
 	var current_version: String = editor_plugin.get_version()
 
 	# Work out the next version from the releases information on GitHub
 	var response: Array = JSON.parse_string(body.get_string_from_utf8())
-	if typeof(response) != TYPE_ARRAY: return
+	if typeof(response) != TYPE_ARRAY:
+		return
 
 	# GitHub releases are in order of creation, not order of version
-	var versions: Array = response.filter(func(release):
-		var version: String = release.tag_name.substr(1)
-		return version_to_number(version) > version_to_number(current_version)
+	var versions: Array = response.filter(
+		func(release):
+			var version: String = release.tag_name.substr(1)
+			return version_to_number(version) > version_to_number(current_version)
 	)
 
 	if versions.size() > 0:
 		if ProjectSettings.get_setting(UPDATER_CONSTANTS.setting_updater_mode) == 1: ## For console output mode
-
-			print_rich("
+			print_rich(
+				"
 [color=#3AB99A]   ********[/color]
 [color=#3AB99A] ************[/color]
 [color=#3AB99A]**************[/color]
@@ -83,7 +84,8 @@ func _request_request_completed(result: int, response_code: int, headers: Packed
 [color=#3AB99A]*********  **************[/color]
 [color=#3AB99A]**********  *************[/color]
 [color=#3AB99A]**  **  **   *******   **[/color]
-[font_size=18][b]New Phantom Camera version is available[/b][/font_size]")
+[font_size=18][b]New Phantom Camera version is available[/b][/font_size]",
+			)
 
 			if FileAccess.file_exists("res://dev_scenes/3d/dev_scene_3d.tscn"):
 				print_rich("[font_size=14][color=#EAA15E][b]As you're using a fork of the project, you will need to update it manually[/b][/color][/font_size]")
@@ -95,7 +97,7 @@ func _request_request_completed(result: int, response_code: int, headers: Packed
 		download_update_panel.next_version_release = versions[0]
 		download_update_panel.show_updater_warning(
 			versions[0].tag_name.substr(1).split("."),
-			current_version.split(".")
+			current_version.split("."),
 		)
 		_set_scale()
 		editor_plugin.panel_button.add_theme_color_override("font_color", Color("#3AB99A"))
@@ -151,14 +153,14 @@ func _on_timer_timeout() -> void:
 
 #endregion
 
-
 #region Public Functions
 
 # Convert a version number to an actually comparable number
 func version_to_number(version: String) -> int:
 	var regex = RegEx.new()
 	regex.compile("[a-zA-Z]+")
-	if regex.search(str(version)): return 0
+	if regex.search(str(version)):
+		return 0
 
 	var bits = version.split(".")
 	var version_bit: int
@@ -170,7 +172,8 @@ func version_to_number(version: String) -> int:
 
 
 func check_for_update() -> void:
-	if ProjectSettings.get_setting(UPDATER_CONSTANTS.setting_updater_mode) == 0:  return
+	if ProjectSettings.get_setting(UPDATER_CONSTANTS.setting_updater_mode) == 0:
+		return
 
 	http_request.request(REMOTE_RELEASE_URL)
 

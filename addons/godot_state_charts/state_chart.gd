@@ -21,19 +21,19 @@ const StateChartUtil = preload("utilities/state_chart_util.gd")
 ## because the state chart will always finish processing one event
 ## fully before processing the next. If an event is received
 ## while another is still processing, it will be enqueued.
-signal event_received(event:StringName)
+signal event_received(event: StringName)
 
 @export_group("Debugging")
 ## Flag indicating if this state chart should be tracked by the
 ## state chart debugger in the editor.
-@export var track_in_editor:bool = false
+@export var track_in_editor: bool = false
 
 ## If set, the state chart will issue a warning when trying to
 ## send an event that is not configured for any transition of
 ## the state chart. It is usually a good idea to leave this
 ## enabled, but in certain cases this may get in the way so
 ## you can disable it here.
-@export var warn_on_sending_unknown_events:bool = true
+@export var warn_on_sending_unknown_events: bool = true
 
 @export_group("")
 ## Initial values for the expression properties. These properties can be used in expressions, e.g
@@ -41,40 +41,40 @@ signal event_received(event:StringName)
 ## you use in an expression to ensure that this expression is always valid. If you don't set
 ## an initial value, some expressions may fail to be evaluated if they use a property that has
 ## not been set yet.
-@export var initial_expression_properties:Dictionary = {}
+@export var initial_expression_properties: Dictionary = { }
 
 ## The root state of the state chart.
-var _state:StateChartState = null
+var _state: StateChartState = null
 
 ## This dictonary contains known properties used in expression guards. Use the
 ## [method set_expression_property] to add properties to this dictionary.
-var _expression_properties:Dictionary = {
+var _expression_properties: Dictionary = {
 }
 
 ## A list of pending events
-var _queued_events:Array[StringName] = []
+var _queued_events: Array[StringName] = []
 
 ## Whether or not a property change is pending.
-var _property_change_pending:bool = false
+var _property_change_pending: bool = false
 
 ## Whether or not a state change occured during processing and we need to re-run
 ## automatic transitions that may have been triggered by the state change.
-var _state_change_pending:bool = false
+var _state_change_pending: bool = false
 
 ## Flag indicating if the state chart is currently processing.
 ## Until a change is fully processed, no further changes can
 ## be introduced from the outside.
-var _locked_down:bool = false
+var _locked_down: bool = false
 
 ## Flag indicating if the state chart is frozen.
 ## If the state chart is frozen, new events and transitions will be discarded.
-var _frozen:bool = false
+var _frozen: bool = false
 
-var _queued_transitions:Array[Dictionary] = []
-var _transitions_processing_active:bool = false
+var _queued_transitions: Array[Dictionary] = []
+var _transitions_processing_active: bool = false
 
-var _debugger_remote:DebuggerRemote = null
-var _valid_event_names:Array[StringName] = []
+var _debugger_remote: DebuggerRemote = null
+var _valid_event_names: Array[StringName] = []
 
 ## A trigger type that defines events that can trigger a transition.
 enum TriggerType {
@@ -90,6 +90,7 @@ enum TriggerType {
 	STATE_CHANGE = 8,
 }
 
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -100,7 +101,7 @@ func _ready() -> void:
 		return
 
 	# check if the child is a state
-	var child:Node = get_child(0)
+	var child: Node = get_child(0)
 	if not child is StateChartState:
 		push_error("StateMachine's child must be a State")
 		return
@@ -160,7 +161,7 @@ func _enter_initial_state() -> void:
 ## signals. There is no guarantee when the event will be processed. The state chart
 ## will process the event as soon as possible but there is no guarantee that the
 ## event will be fully processed when this method returns.
-func send_event(event:StringName) -> void:
+func send_event(event: StringName) -> void:
 	if _frozen:
 		push_error("The state chart is currently frozen. Cannot set send events.")
 
@@ -175,7 +176,7 @@ func send_event(event:StringName) -> void:
 		return
 
 	if warn_on_sending_unknown_events and event != "" and OS.is_debug_build() and not _valid_event_names.has(event):
-		push_warning("State chart does not have an event '", event , "' defined. Sending this event will do nothing.")
+		push_warning("State chart does not have an event '", event, "' defined. Sending this event will do nothing.")
 
 	_queued_events.append(event)
 	if _locked_down:
@@ -187,7 +188,7 @@ func send_event(event:StringName) -> void:
 ## Sets a property that can be used in expression guards. The property will be available as a global variable
 ## with the same name. E.g. if you set the property "foo" to 42, you can use the expression "foo == 42" in
 ## an expression guard.
-func set_expression_property(property_name:StringName, value) -> void:
+func set_expression_property(property_name: StringName, value) -> void:
 	if _frozen:
 		push_error("The state chart is currently frozen. Cannot set expression properties.")
 		return
@@ -209,7 +210,7 @@ func set_expression_property(property_name:StringName, value) -> void:
 
 ## Returns the value of a previously set expression property. If the property does not exist, the default value
 ## will be returned.
-func get_expression_property(property_name:StringName, default:Variant = null) -> Variant:
+func get_expression_property(property_name: StringName, default: Variant = null) -> Variant:
 	return _expression_properties.get(property_name, default)
 
 
@@ -242,9 +243,9 @@ func _run_changes() -> void:
 ## Allows states to queue a transition for running. This will eventually run the transition
 ## once all currently running transitions have finished. States should call this method
 ## when they want to transition away from themselves.
-func _run_transition(transition:Transition, source:StateChartState) -> void:
+func _run_transition(transition: Transition, source: StateChartState) -> void:
 	# Queue up the transition for running
-	_queued_transitions.append({transition : source})
+	_queued_transitions.append({ transition: source })
 
 	# if we are currently inside of a transition, finish processing the queue so we
 	# get a predictable order. Queing can happen a state has an automatic transition on enter,
@@ -261,7 +262,6 @@ func _run_transition(transition:Transition, source:StateChartState) -> void:
 ## Runs all queued transitions until none are left. This also checks for infinite loops in transitions and
 ## ensures triggering guards on state changes.
 func _run_queued_transitions() -> void:
-
 	_transitions_processing_active = true
 
 	var execution_count := 1
@@ -287,7 +287,7 @@ func _run_queued_transitions() -> void:
 
 
 ## Runs the transition. Used internally by the state chart, do not call this directly.
-func _do_run_transition(transition:Transition, source:StateChartState) -> void:
+func _do_run_transition(transition: Transition, source: StateChartState) -> void:
 	if source.active:
 		# Notify interested parties that the transition is about to be taken
 		transition.taken.emit()
@@ -297,9 +297,8 @@ func _do_run_transition(transition:Transition, source:StateChartState) -> void:
 		_warn_not_active(transition, source)
 
 
-func _warn_not_active(transition:Transition, source:StateChartState) -> void:
+func _warn_not_active(transition: Transition, source: StateChartState) -> void:
 	push_warning("Ignoring request for transitioning from ", source.name, " to ", transition.to, " as the source state is no longer active. Check whether your trigger multiple state changes within a single frame.")
-
 
 
 ## Calls the `step` function in all active states. Used for situations where `state_processing` and
@@ -320,11 +319,11 @@ func step() -> void:
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings:PackedStringArray = []
+	var warnings: PackedStringArray = []
 	if get_child_count() != 1:
 		warnings.append("StateChart must have exactly one child")
 	else:
-		var child:Node = get_child(0)
+		var child: Node = get_child(0)
 		if not child is StateChartState:
 			warnings.append("StateChart's child must be a State")
 	return warnings
@@ -333,19 +332,20 @@ func _get_configuration_warnings() -> PackedStringArray:
 ## Freezes the state chart and all states. While frozen, no changes can be made to a state chart.
 func freeze() -> void:
 	_frozen = true
-	var to_freeze:Array[StateChartState] = [_state]
+	var to_freeze: Array[StateChartState] = [_state]
 	while not to_freeze.is_empty():
-		var next:StateChartState = to_freeze.pop_back()
+		var next: StateChartState = to_freeze.pop_back()
 		next._toggle_processing(true)
 		for child in next.get_children():
 			if child is StateChartState:
 				to_freeze.append(child)
 
+
 ## Thaws the state chart and all states. After being thawed, changes can again be made to the state chart.
 func thaw() -> void:
-	var to_thaw:Array[StateChartState] = [_state]
+	var to_thaw: Array[StateChartState] = [_state]
 	while not to_thaw.is_empty():
-		var next:StateChartState = to_thaw.pop_back()
+		var next: StateChartState = to_thaw.pop_back()
 		next._toggle_processing(false)
 		for child in next.get_children():
 			if child is StateChartState:

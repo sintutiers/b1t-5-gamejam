@@ -14,9 +14,9 @@ var _resource_reports: Array[GodotDoctorResourceReport] = []
 ## Creates a new [GodotDoctorValidationSuiteReport] for [param suite]
 ## with the given [param scene_reports] and [param resource_reports].
 func _init(
-	suite: GodotDoctorValidationSuite,
-	scene_reports: Array[GodotDoctorSceneReport],
-	resource_reports: Array[GodotDoctorResourceReport]
+		suite: GodotDoctorValidationSuite,
+		scene_reports: Array[GodotDoctorSceneReport],
+		resource_reports: Array[GodotDoctorResourceReport],
 ) -> void:
 	_suite = suite
 	_scene_reports = scene_reports
@@ -27,16 +27,16 @@ func _init(
 ## across all scenes and resources in this suite.
 func get_num_infos() -> int:
 	return (
-		_scene_reports.reduce(
-			func(total: int, scene_report: GodotDoctorSceneReport) -> int:
-				return total + scene_report.get_num_infos(),
-			0
-		)
-		+ _resource_reports.reduce(
-			func(total: int, resource_report: GodotDoctorResourceReport) -> int:
-				return total + resource_report.get_num_infos(),
-			0
-		)
+			_scene_reports.reduce(
+				func(total: int, scene_report: GodotDoctorSceneReport) -> int:
+					return total + scene_report.get_num_infos(),
+				0,
+			)
+			+ _resource_reports.reduce(
+				func(total: int, resource_report: GodotDoctorResourceReport) -> int:
+					return total + resource_report.get_num_infos(),
+				0,
+			)
 	)
 
 
@@ -44,16 +44,16 @@ func get_num_infos() -> int:
 ## across all scenes and resources in this suite.
 func get_num_warnings() -> int:
 	return (
-		_scene_reports.reduce(
-			func(total: int, scene_report: GodotDoctorSceneReport) -> int:
-				return total + scene_report.get_num_warnings(),
-			0
-		)
-		+ _resource_reports.reduce(
-			func(total: int, resource_report: GodotDoctorResourceReport) -> int:
-				return total + resource_report.get_num_warnings(),
-			0
-		)
+			_scene_reports.reduce(
+				func(total: int, scene_report: GodotDoctorSceneReport) -> int:
+					return total + scene_report.get_num_warnings(),
+				0,
+			)
+			+ _resource_reports.reduce(
+				func(total: int, resource_report: GodotDoctorResourceReport) -> int:
+					return total + resource_report.get_num_warnings(),
+				0,
+			)
 	)
 
 
@@ -61,16 +61,16 @@ func get_num_warnings() -> int:
 ## across all scenes and resources in this suite.
 func get_num_errors() -> int:
 	return (
-		_scene_reports.reduce(
-			func(total: int, scene_report: GodotDoctorSceneReport) -> int:
-				return total + scene_report.get_num_errors(),
-			0
-		)
-		+ _resource_reports.reduce(
-			func(total: int, resource_report: GodotDoctorResourceReport) -> int:
-				return total + resource_report.get_num_errors(),
-			0
-		)
+			_scene_reports.reduce(
+				func(total: int, scene_report: GodotDoctorSceneReport) -> int:
+					return total + scene_report.get_num_errors(),
+				0,
+			)
+			+ _resource_reports.reduce(
+				func(total: int, resource_report: GodotDoctorResourceReport) -> int:
+					return total + resource_report.get_num_errors(),
+				0,
+			)
 	)
 
 
@@ -79,7 +79,7 @@ func get_num_nodes() -> int:
 	return _scene_reports.reduce(
 		func(total: int, scene_report: GodotDoctorSceneReport) -> int:
 			return total + scene_report.get_node_reports().size(),
-		0
+		0,
 	)
 
 

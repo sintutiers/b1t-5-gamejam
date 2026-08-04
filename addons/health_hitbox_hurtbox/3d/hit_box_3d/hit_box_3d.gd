@@ -1,4 +1,5 @@
-class_name HitBox3D extends Area3D
+class_name HitBox3D
+extends Area3D
 ## [HitBox3D] is associated with an object that can collide with a [HurtBox3D].
 
 ## emitted when collision with [HitBox3D] detected.
@@ -10,7 +11,6 @@ signal action_applied(hurt_box: HurtBox3D)
 ## emitted when collision with [Area3D] that isn't [HitBox3D] or [HurtBox3D].
 ## Can be using to detect things like environment.
 signal unknown_area_entered(area: Area3D)
-
 
 ## Ignore collisions when [color=orange]true[/color].[br]
 ## Set this to [color=orange]true[/color] after a collision is detected to avoid
@@ -31,11 +31,11 @@ func _ready() -> void:
 func _on_area_entered(area: Area3D) -> void:
 	if ignore_collisions:
 		return
-	
+
 	if area is HitBox3D:
 		hit_box_entered.emit(area)
 		return
-	
+
 	if area is not HurtBox3D:
 		unknown_area_entered.emit(area)
 		return
@@ -52,7 +52,7 @@ func _clone_actions() -> Array[HealthAction]:
 	dup.assign(
 		actions.map(
 			func(action: HealthAction) -> HealthAction: return action.clone()
-		)
+		),
 	)
 
 	return dup

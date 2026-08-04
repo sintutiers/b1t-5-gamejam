@@ -2,7 +2,6 @@
 ## Converts [code]uid://[/code] paths to [code]res://[/code] paths when needed.
 class_name GodotDoctorResourceHelper
 
-
 ## Converts [param path] from a uid:// path to a res:// path if needed,
 ## otherwise returns it as-is if it's already a res:// path.
 ## If the path is not valid, logs an error and exits with failure if in headless mode.

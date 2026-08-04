@@ -28,7 +28,8 @@ func _indent(level: int) -> String:
 ## [param summary_stats] is the [Dictionary] from the [GodotDoctorSummaryReport] stats
 ## used to populate top-level report attributes.
 func export_report_from_suite_reports(
-	suite_reports: Array[GodotDoctorValidationSuiteReport], summary_stats: Dictionary
+		suite_reports: Array[GodotDoctorValidationSuiteReport],
+		summary_stats: Dictionary,
 ) -> void:
 	var settings: GodotDoctorSettings = GodotDoctorPlugin.instance.settings
 
@@ -78,41 +79,42 @@ func _ensure_directory_exists(dir_path: String) -> bool:
 
 ## Builds and returns the full JUnit XML report string from [param suite_reports].
 func _build_junit_xml_report(
-	suite_reports: Array[GodotDoctorValidationSuiteReport], summary_stats: Dictionary
+		suite_reports: Array[GodotDoctorValidationSuiteReport],
+		summary_stats: Dictionary,
 ) -> String:
 	var timestamp: String = Time.get_datetime_string_from_system(false, false)
 
 	var total_validated_items: int = (
-		summary_stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED]
-		+ summary_stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED]
+			summary_stats[GodotDoctorSummaryReport.Stat.RESOURCES_VALIDATED]
+			+ summary_stats[GodotDoctorSummaryReport.Stat.NODES_VALIDATED]
 	)
 	var total_messages: int = (
-		summary_stats[GodotDoctorSummaryReport.Stat.INFO_COUNT]
-		+ summary_stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT]
-		+ summary_stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT]
+			summary_stats[GodotDoctorSummaryReport.Stat.INFO_COUNT]
+			+ summary_stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT]
+			+ summary_stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT]
 	)
 
 	var lines: Array[String] = []
 	lines.append('<?xml version="1.0" encoding="UTF-8"?>')
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'<testsuites tests="%d" messages="%d" failures="%d" harderrors="%d" '
-					+ 'warnings="%d" infos="%d" timestamp="%s">'
-				)
-				% [
-					total_validated_items,
-					total_messages,
-					summary_stats[GodotDoctorSummaryReport.Stat.EFFECTIVE_ERROR_COUNT],
-					summary_stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT],
-					summary_stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT],
-					summary_stats[GodotDoctorSummaryReport.Stat.INFO_COUNT],
-					_xml_escape(timestamp),
-				]
+						(
+								'<testsuites tests="%d" messages="%d" failures="%d" harderrors="%d" '
+								+ 'warnings="%d" infos="%d" timestamp="%s">'
+						)
+						% [
+							total_validated_items,
+							total_messages,
+							summary_stats[GodotDoctorSummaryReport.Stat.EFFECTIVE_ERROR_COUNT],
+							summary_stats[GodotDoctorSummaryReport.Stat.HARD_ERROR_COUNT],
+							summary_stats[GodotDoctorSummaryReport.Stat.WARNING_COUNT],
+							summary_stats[GodotDoctorSummaryReport.Stat.INFO_COUNT],
+							_xml_escape(timestamp),
+						]
+				),
 			)
-		)
 	)
 
 	for suite_report: GodotDoctorValidationSuiteReport in suite_reports:
@@ -135,26 +137,26 @@ func _build_testsuite_xml(suite_report: GodotDoctorValidationSuiteReport) -> Str
 
 	var lines: Array[String] = []
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'%s<testsuite name="%s" path="%s" tests="%d" messages="%d" '
-					+ 'failures="%d" harderrors="%d" warnings="%d" infos="%d">'
-				)
-				% [
-					_indent(_INDENT_LEVEL_TESTSUITE),
-					suite_name,
-					suite_path_escaped,
-					suite_validated_items,
-					suite_messages.size(),
-					_get_effective_error_count(suite_messages, treat),
-					suite_report.get_num_errors(),
-					suite_report.get_num_warnings(),
-					suite_report.get_num_infos(),
-				]
+						(
+								'%s<testsuite name="%s" path="%s" tests="%d" messages="%d" '
+								+ 'failures="%d" harderrors="%d" warnings="%d" infos="%d">'
+						)
+						% [
+							_indent(_INDENT_LEVEL_TESTSUITE),
+							suite_name,
+							suite_path_escaped,
+							suite_validated_items,
+							suite_messages.size(),
+							_get_effective_error_count(suite_messages, treat),
+							suite_report.get_num_errors(),
+							suite_report.get_num_warnings(),
+							suite_report.get_num_infos(),
+						]
+				),
 			)
-		)
 	)
 
 	for scene_report: GodotDoctorSceneReport in suite_report.get_scene_reports():
@@ -170,8 +172,8 @@ func _build_testsuite_xml(suite_report: GodotDoctorValidationSuiteReport) -> Str
 ## Builds and returns the XML string for a single [param scene_report] testcase.
 ## Uses [param treat_warnings_as_errors] to calculate effective failure counts.
 func _build_scene_testcase_xml(
-	scene_report: GodotDoctorSceneReport,
-	treat_warnings_as_errors: bool,
+		scene_report: GodotDoctorSceneReport,
+		treat_warnings_as_errors: bool,
 ) -> String:
 	var scene_path: String = scene_report.get_scene_path()
 	var scene_messages: Array[GodotDoctorValidationMessage] = scene_report.get_validation_messages()
@@ -180,26 +182,26 @@ func _build_scene_testcase_xml(
 
 	var lines: Array[String] = []
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'%s<testcase name="%s" path="%s" type="scene" tests="%d" '
-					+ 'messages="%d" failures="%d" harderrors="%d" warnings="%d" infos="%d">'
-				)
-				% [
-					_indent(_INDENT_LEVEL_TESTCASE),
-					testcase_name,
-					testcase_path,
-					scene_report.get_node_reports().size(),
-					scene_messages.size(),
-					_get_effective_error_count(scene_messages, treat_warnings_as_errors),
-					scene_report.get_num_errors(),
-					scene_report.get_num_warnings(),
-					scene_report.get_num_infos(),
-				]
+						(
+								'%s<testcase name="%s" path="%s" type="scene" tests="%d" '
+								+ 'messages="%d" failures="%d" harderrors="%d" warnings="%d" infos="%d">'
+						)
+						% [
+							_indent(_INDENT_LEVEL_TESTCASE),
+							testcase_name,
+							testcase_path,
+							scene_report.get_node_reports().size(),
+							scene_messages.size(),
+							_get_effective_error_count(scene_messages, treat_warnings_as_errors),
+							scene_report.get_num_errors(),
+							scene_report.get_num_warnings(),
+							scene_report.get_num_infos(),
+						]
+				),
 			)
-		)
 	)
 
 	for node_report: GodotDoctorNodeReport in scene_report.get_node_reports():
@@ -215,8 +217,8 @@ func _build_scene_testcase_xml(
 ## Builds and returns the XML string for a single [param resource_report] testcase.
 ## Uses [param treat_warnings_as_errors] to calculate effective failure counts.
 func _build_resource_testcase_xml(
-	resource_report: GodotDoctorResourceReport,
-	treat_warnings_as_errors: bool,
+		resource_report: GodotDoctorResourceReport,
+		treat_warnings_as_errors: bool,
 ) -> String:
 	var resource_path: String = _resolve_uid_path(resource_report.get_resource_path())
 	var messages: Array[GodotDoctorValidationMessage] = resource_report.get_validation_messages()
@@ -225,26 +227,26 @@ func _build_resource_testcase_xml(
 
 	var lines: Array[String] = []
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'%s<testcase name="%s" path="%s" type="resource" tests="%d" '
-					+ 'messages="%d" failures="%d" harderrors="%d" warnings="%d" infos="%d">'
-				)
-				% [
-					_indent(_INDENT_LEVEL_TESTCASE),
-					testcase_name,
-					testcase_path,
-					_RESOURCE_TESTS_COUNT,
-					messages.size(),
-					_get_effective_error_count(messages, treat_warnings_as_errors),
-					resource_report.get_num_errors(),
-					resource_report.get_num_warnings(),
-					resource_report.get_num_infos(),
-				]
+						(
+								'%s<testcase name="%s" path="%s" type="resource" tests="%d" '
+								+ 'messages="%d" failures="%d" harderrors="%d" warnings="%d" infos="%d">'
+						)
+						% [
+							_indent(_INDENT_LEVEL_TESTCASE),
+							testcase_name,
+							testcase_path,
+							_RESOURCE_TESTS_COUNT,
+							messages.size(),
+							_get_effective_error_count(messages, treat_warnings_as_errors),
+							resource_report.get_num_errors(),
+							resource_report.get_num_warnings(),
+							resource_report.get_num_infos(),
+						]
+				),
 			)
-		)
 	)
 
 	lines.append(_build_resource_item_xml(resource_report, treat_warnings_as_errors))
@@ -255,8 +257,8 @@ func _build_resource_testcase_xml(
 ## Builds and returns the XML string for a single [param node_report].
 ## Uses [param treat_warnings_as_errors] to calculate effective failure counts.
 func _build_node_xml(
-	node_report: GodotDoctorNodeReport,
-	treat_warnings_as_errors: bool,
+		node_report: GodotDoctorNodeReport,
+		treat_warnings_as_errors: bool,
 ) -> String:
 	var node_name: String = _xml_escape(node_report.get_node_name())
 	var node_path: String = _xml_escape(node_report.get_node_ancestor_path())
@@ -264,25 +266,25 @@ func _build_node_xml(
 	var lines: Array[String] = []
 
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'%s<node name="%s" path="%s" messages="%d" failures="%d" '
-					+ 'harderrors="%d" warnings="%d" infos="%d">'
-				)
-				% [
-					_indent(_INDENT_LEVEL_TEST_ITEM),
-					node_name,
-					node_path,
-					messages.size(),
-					_get_effective_error_count(messages, treat_warnings_as_errors),
-					node_report.get_num_errors(),
-					node_report.get_num_warnings(),
-					node_report.get_num_infos(),
-				]
+						(
+								'%s<node name="%s" path="%s" messages="%d" failures="%d" '
+								+ 'harderrors="%d" warnings="%d" infos="%d">'
+						)
+						% [
+							_indent(_INDENT_LEVEL_TEST_ITEM),
+							node_name,
+							node_path,
+							messages.size(),
+							_get_effective_error_count(messages, treat_warnings_as_errors),
+							node_report.get_num_errors(),
+							node_report.get_num_warnings(),
+							node_report.get_num_infos(),
+						]
+				),
 			)
-		)
 	)
 
 	for message: GodotDoctorValidationMessage in messages:
@@ -295,8 +297,8 @@ func _build_node_xml(
 ## Builds and returns the XML string for the resource item element within a resource testcase.
 ## Uses [param treat_warnings_as_errors] to calculate effective failure counts.
 func _build_resource_item_xml(
-	resource_report: GodotDoctorResourceReport,
-	treat_warnings_as_errors: bool,
+		resource_report: GodotDoctorResourceReport,
+		treat_warnings_as_errors: bool,
 ) -> String:
 	var resource_path: String = _resolve_uid_path(resource_report.get_resource_path())
 	var resource_name: String = _xml_escape(_basename(resource_path))
@@ -305,25 +307,25 @@ func _build_resource_item_xml(
 	var lines: Array[String] = []
 
 	(
-		lines
-		. append(
-			(
+			lines
+			.append(
 				(
-					'%s<resource name="%s" path="%s" messages="%d" failures="%d" '
-					+ 'harderrors="%d" warnings="%d" infos="%d">'
-				)
-				% [
-					_indent(_INDENT_LEVEL_TEST_ITEM),
-					resource_name,
-					resource_path_escaped,
-					messages.size(),
-					_get_effective_error_count(messages, treat_warnings_as_errors),
-					resource_report.get_num_errors(),
-					resource_report.get_num_warnings(),
-					resource_report.get_num_infos(),
-				]
+						(
+								'%s<resource name="%s" path="%s" messages="%d" failures="%d" '
+								+ 'harderrors="%d" warnings="%d" infos="%d">'
+						)
+						% [
+							_indent(_INDENT_LEVEL_TEST_ITEM),
+							resource_name,
+							resource_path_escaped,
+							messages.size(),
+							_get_effective_error_count(messages, treat_warnings_as_errors),
+							resource_report.get_num_errors(),
+							resource_report.get_num_warnings(),
+							resource_report.get_num_infos(),
+						]
+				),
 			)
-		)
 	)
 
 	for message: GodotDoctorValidationMessage in messages:
@@ -336,7 +338,8 @@ func _build_resource_item_xml(
 ## Builds and returns the XML string for a single validation [param message].
 ## Uses [param treat_warnings_as_errors] to annotate promoted warnings.
 func _build_message_xml(
-	message: GodotDoctorValidationMessage, treat_warnings_as_errors: bool
+		message: GodotDoctorValidationMessage,
+		treat_warnings_as_errors: bool,
 ) -> String:
 	var safe_message: String = _xml_escape(message.message)
 
@@ -345,32 +348,31 @@ func _build_message_xml(
 			return "%s<harderror>%s</harderror>" % [_indent(_INDENT_LEVEL_MESSAGE), safe_message]
 		ValidationCondition.Severity.WARNING:
 			var promoted_attribute: String = (
-				' type="promoted_to_error"' if treat_warnings_as_errors else ""
+					' type="promoted_to_error"' if treat_warnings_as_errors else ""
 			)
 			return (
-				"%s<warning%s>%s</warning>"
-				% [_indent(_INDENT_LEVEL_MESSAGE), promoted_attribute, safe_message]
+					"%s<warning%s>%s</warning>"
+					% [_indent(_INDENT_LEVEL_MESSAGE), promoted_attribute, safe_message]
 			)
 		ValidationCondition.Severity.INFO:
 			return "%s<info>%s</info>" % [_indent(_INDENT_LEVEL_MESSAGE), safe_message]
 
 	return "%s<info>%s</info>" % [_indent(_INDENT_LEVEL_MESSAGE), safe_message]
 
-
 #region Helpers
-
 
 ## Returns the effective error count from [param messages],
 ## counting warnings as errors when [param treat_warnings_as_errors] is [code]true[/code].
 static func _get_effective_error_count(
-	messages: Array[GodotDoctorValidationMessage], treat_warnings_as_errors: bool
+		messages: Array[GodotDoctorValidationMessage],
+		treat_warnings_as_errors: bool,
 ) -> int:
 	var count: int = 0
 	for msg: GodotDoctorValidationMessage in messages:
 		if msg.severity_level == ValidationCondition.Severity.ERROR:
 			count += 1
 		elif (
-			treat_warnings_as_errors and msg.severity_level == ValidationCondition.Severity.WARNING
+				treat_warnings_as_errors and msg.severity_level == ValidationCondition.Severity.WARNING
 		):
 			count += 1
 	return count
@@ -384,12 +386,12 @@ func _basename(path: String) -> String:
 ## Returns [param value] with XML special characters escaped.
 func _xml_escape(value: String) -> String:
 	return (
-		value
-		. replace("&", "&amp;")
-		. replace('"', "&quot;")
-		. replace("'", "&apos;")
-		. replace("<", "&lt;")
-		. replace(">", "&gt;")
+			value
+			.replace("&", "&amp;")
+			.replace('"', "&quot;")
+			.replace("'", "&apos;")
+			.replace("<", "&lt;")
+			.replace(">", "&gt;")
 	)
 
 

@@ -14,7 +14,7 @@ enum Severity {
 	## A potential issue that does not prevent the project from running.
 	WARNING,
 	## A critical issue that should be resolved before shipping.
-	ERROR
+	ERROR,
 }
 
 ## Inheritance search strategies for scene type validation.
@@ -36,7 +36,7 @@ enum InheritanceSearchStrategy {
 	## Only consider the last root node in the PackedScene's inheritance chain,
 	## that has a script attached.
 	## i.e. the root node of the last parent scene that has a script.
-	LAST_SCRIPT_ROOT
+	LAST_SCRIPT_ROOT,
 }
 
 ## The callable evaluated when this condition is tested.
@@ -53,7 +53,9 @@ var severity_level: Severity
 ## The validation fails if [param callable] evaluates to [code]false[/code].
 ## If the validation fails, [param error_message] is reported at [param severity_level] severity.
 func _init(
-	callable: Callable, error_message: String, severity_level: Severity = Severity.WARNING
+		callable: Callable,
+		error_message: String,
+		severity_level: Severity = Severity.WARNING,
 ) -> void:
 	self.callable = callable
 	self.error_message = error_message
@@ -79,7 +81,7 @@ func evaluate(args: Array = []) -> Variant:
 				return false
 		return result as Array[ValidationCondition]
 	push_error(
-		"ValidationCondition Callable did not return a boolean or an array of ValidationConditions."
+		"ValidationCondition Callable did not return a boolean or an array of ValidationConditions.",
 	)
 	GodotDoctorPlugin.instance.quit_with_fail_early_if_headless()
 	return null
@@ -91,7 +93,9 @@ func evaluate(args: Array = []) -> Variant:
 ## This is a convenience method for creating basic validation conditions,
 ## useful for skipping the callable syntax.
 static func simple(
-	result: bool, error_message: String, severity_level: Severity = Severity.WARNING
+		result: bool,
+		error_message: String,
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	return ValidationCondition.new(func(): return result, error_message, severity_level)
 
@@ -100,18 +104,22 @@ static func simple(
 ## [param variable_name] is the display name used in the error message, defaulting to "Instance".
 ## This is a convenience method for checking instance validity with a default error message.
 static func is_instance_valid(
-	instance: Object, variable_name: String = "Instance", severity_level: Severity = Severity.ERROR
+		instance: Object,
+		variable_name: String = "Instance",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return is_instance_valid(instance),
 		"%s is not a valid instance." % variable_name,
-		severity_level
+		severity_level,
 	)
 
 
 ## DEPRECATED: Use [method is_string_not_empty] instead.
 static func string_not_empty(
-	value: String, variable_name: String = "String", severity_level: Severity = Severity.WARNING
+		value: String,
+		variable_name: String = "String",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	#gdlint: ignore=max-line-length
 	var msg: String = "[ValidationCondition.string_not_empty] is deprecated. Please use [ValidationCondition.is_string_not_empty] instead. (string_not_empty will be removed in a future version. Note that the functionality hasn't changed, just the method name for consistency with other ValidationCondition helpers.)"
@@ -123,16 +131,22 @@ static func string_not_empty(
 ## [param variable_name] is the display name used in the error message, defaulting to "String".
 ## This is a convenience method for checking string emptiness with a default error message.
 static func is_string_not_empty(
-	value: String, variable_name: String = "String", severity_level: Severity = Severity.WARNING
+		value: String,
+		variable_name: String = "String",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
-		func() -> bool: return not value.is_empty(), "%s is empty." % variable_name, severity_level
+		func() -> bool: return not value.is_empty(),
+		"%s is empty." % variable_name,
+		severity_level,
 	)
 
 
 ## DEPRECATED: Use [method is_stripped_string_not_empty] instead.
 static func stripped_string_not_empty(
-	value: String, variable_name: String = "String", severity_level: Severity = Severity.WARNING
+		value: String,
+		variable_name: String = "String",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	#gdlint: ignore=max-line-length
 	var msg: String = "[ValidationCondition.stripped_string_not_empty] is deprecated. Please use [ValidationCondition.is_stripped_string_not_empty] instead. (stripped_string_not_empty will be removed in a future version. Note that the functionality hasn't changed, just the method name for consistency with other ValidationCondition helpers.)"
@@ -145,7 +159,9 @@ static func stripped_string_not_empty(
 ## [param variable_name] is the display name used in the error message, defaulting to "String".
 ## This is a convenience method for checking stripped string emptiness with a default error message.
 static func is_stripped_string_not_empty(
-	value: String, variable_name: String = "String", severity_level: Severity = Severity.WARNING
+		value: String,
+		variable_name: String = "String",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	return is_string_not_empty(value.strip_edges(), variable_name, severity_level)
 
@@ -154,15 +170,15 @@ static func is_stripped_string_not_empty(
 ## [param variable_name] is the display name used in the error message, defaulting to "Value".
 ## This is a convenience method for range-checking integers with a default error message.
 static func is_in_range_int(
-	value: int,
-	range: GodotDoctorRangeInt,
-	variable_name: String = "Value",
-	severity_level: Severity = Severity.ERROR
+		value: int,
+		range: GodotDoctorRangeInt,
+		variable_name: String = "Value",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return range.contains(value),
 		"%s (%d) is out of range (%d to %d)." % [variable_name, value, range.start, range.end],
-		severity_level
+		severity_level,
 	)
 
 
@@ -170,15 +186,15 @@ static func is_in_range_int(
 ## [param variable_name] is the display name used in the error message, defaulting to "Value".
 ## This is a convenience method for range-checking floats with a default error message.
 static func is_in_range_float(
-	value: float,
-	range: GodotDoctorRangeFloat,
-	variable_name: String = "Value",
-	severity_level: Severity = Severity.ERROR
+		value: float,
+		range: GodotDoctorRangeFloat,
+		variable_name: String = "Value",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return range.contains(value),
 		"%s (%f) is out of range (%f to %f)." % [variable_name, value, range.start, range.end],
-		severity_level
+		severity_level,
 	)
 
 
@@ -187,18 +203,18 @@ static func is_in_range_float(
 ## [param variable_name] is the display name used in the error message, defaulting to "Node".
 ## This is a convenience method for checking child count with a default error message.
 static func has_child_count(
-	node: Node,
-	expected_count: int,
-	variable_name: String = "Node",
-	severity_level: Severity = Severity.WARNING
+		node: Node,
+		expected_count: int,
+		variable_name: String = "Node",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return node.get_child_count() == expected_count,
 		(
-			"%s has %d children, expected %d."
-			% [variable_name, node.get_child_count(), expected_count]
+				"%s has %d children, expected %d."
+				% [variable_name, node.get_child_count(), expected_count]
 		),
-		severity_level
+		severity_level,
 	)
 
 
@@ -207,18 +223,18 @@ static func has_child_count(
 ## [param variable_name] is the display name used in the error message, defaulting to "Node".
 ## This is a convenience method for checking minimum child count with a default error message.
 static func has_minimum_child_count(
-	node: Node,
-	minimum_count: int,
-	variable_name: String = "Node",
-	severity_level: Severity = Severity.ERROR
+		node: Node,
+		minimum_count: int,
+		variable_name: String = "Node",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return node.get_child_count() >= minimum_count,
 		(
-			"%s has %d children, expected at least %d."
-			% [variable_name, node.get_child_count(), minimum_count]
+				"%s has %d children, expected at least %d."
+				% [variable_name, node.get_child_count(), minimum_count]
 		),
-		severity_level
+		severity_level,
 	)
 
 
@@ -228,18 +244,18 @@ static func has_minimum_child_count(
 ## defaulting to "Node".
 ## This is a convenience method for checking maximum child count with a default error message.
 static func has_maximum_child_count(
-	node: Node,
-	maximum_count: int,
-	variable_name: String = "Node",
-	severity_level: Severity = Severity.ERROR
+		node: Node,
+		maximum_count: int,
+		variable_name: String = "Node",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return node.get_child_count() <= maximum_count,
 		(
-			"%s has %d children, expected at most %d."
-			% [variable_name, node.get_child_count(), maximum_count]
+				"%s has %d children, expected at most %d."
+				% [variable_name, node.get_child_count(), maximum_count]
 		),
-		severity_level
+		severity_level,
 	)
 
 
@@ -248,7 +264,9 @@ static func has_maximum_child_count(
 ## This is a convenience method for checking absence of children;
 ## equivalent to [method has_child_count] with [param expected_count] = 0.
 static func has_no_children(
-	node: Node, variable_name: String = "Node", severity_level: Severity = Severity.WARNING
+		node: Node,
+		variable_name: String = "Node",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	return has_child_count(node, 0, variable_name, severity_level)
 
@@ -257,24 +275,24 @@ static func has_no_children(
 ## [param variable_name] is the display name used in the error message, defaulting to "Node".
 ## This is a convenience method for checking node path existence with a default error message.
 static func has_node_path(
-	node: Node,
-	path: NodePath,
-	variable_name: String = "Node",
-	severity_level: Severity = Severity.ERROR
+		node: Node,
+		path: NodePath,
+		variable_name: String = "Node",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> bool: return node.has_node(path),
 		"%s does not have a child at path: %s." % [variable_name, path],
-		severity_level
+		severity_level,
 	)
 
 
 ## DEPRECATED: Use [method is_scene_of_type] instead.
 static func scene_is_of_type(
-	packed_scene: PackedScene,
-	expected_type: Variant,
-	variable_name: String = "Packed Scene",
-	severity_level: Severity = Severity.ERROR
+		packed_scene: PackedScene,
+		expected_type: Variant,
+		variable_name: String = "Packed Scene",
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	#gdlint: ignore=max-line-length
 	var msg: String = "[ValidationCondition.scene_is_of_type] is deprecated. Please use [ValidationCondition.is_scene_of_type] instead. (scene_is_of_type will be removed in a future version. Note that the functionality hasn't changed, though the new method has better support for inheritance checking and more flexible search strategies, so you may want to review the new method's parameters to ensure it meets your needs.)"
@@ -284,7 +302,7 @@ static func scene_is_of_type(
 		expected_type,
 		variable_name,
 		InheritanceSearchStrategy.LAST_SCRIPT_ROOT,
-		severity_level
+		severity_level,
 	)
 
 
@@ -294,13 +312,13 @@ static func scene_is_of_type(
 ## defaulting to "Packed Scene".
 ## Returns nested [ValidationCondition]s describing any type mismatch in detail.
 static func is_scene_of_type(
-	packed_scene: PackedScene,
-	expected_type: Variant,
-	variable_name: String = "Packed Scene",
-	inheritance_search_strategy: InheritanceSearchStrategy = (
-		InheritanceSearchStrategy.LAST_SCRIPT_ROOT
-	),
-	severity_level: Severity = Severity.ERROR
+		packed_scene: PackedScene,
+		expected_type: Variant,
+		variable_name: String = "Packed Scene",
+		inheritance_search_strategy: InheritanceSearchStrategy = (
+				InheritanceSearchStrategy.LAST_SCRIPT_ROOT
+		),
+		severity_level: Severity = Severity.ERROR,
 ) -> ValidationCondition:
 	return ValidationCondition.new(
 		func() -> Variant:
@@ -309,30 +327,31 @@ static func is_scene_of_type(
 				return [ValidationCondition.simple(false, "%s is null." % variable_name)]
 
 			var search_strategy_string: String = (
-				InheritanceSearchStrategy.keys()[inheritance_search_strategy]
+					InheritanceSearchStrategy.keys()[inheritance_search_strategy]
 			)
 
 			# Get the class name, and convert the expected type to a StringName
 			var class_result: GodotDoctorClassNameQueryResult = _get_class_name_from_packed_scene(
-				packed_scene, inheritance_search_strategy
+				packed_scene,
+				inheritance_search_strategy,
 			)
 
 			var expected_name: StringName = expected_type.get_global_name()
 			var is_csharp_script: bool = (
-				ClassDB.class_exists("CSharpScript")
-				and expected_type != null
-				and expected_type.get_class() == "CSharpScript"
+					ClassDB.class_exists("CSharpScript")
+					and expected_type != null
+					and expected_type.get_class() == "CSharpScript"
 			)
 			if expected_name.is_empty() and is_csharp_script:
 				expected_name = expected_type.resource_path.get_file().get_basename()
 
 			var expected_type_desc: String = (
-				(
-					"(Expecting: %s, based on the filename, Strategy: %s)"
-					% [expected_name, search_strategy_string]
-				)
-				if is_csharp_script
-				else "(Expecting: %s, Strategy: %s)" % [expected_name, search_strategy_string]
+					(
+							"(Expecting: %s, based on the filename, Strategy: %s)"
+							% [expected_name, search_strategy_string]
+					)
+					if is_csharp_script
+					else "(Expecting: %s, Strategy: %s)" % [expected_name, search_strategy_string]
 			)
 
 			# If there's no script, return a nested condition indicating failure.
@@ -341,28 +360,28 @@ static func is_scene_of_type(
 					ValidationCondition.simple(
 						false,
 						"%s has no script attached. %s" % [variable_name, expected_type_desc],
-						severity_level
-					)
+						severity_level,
+					),
 				]
 
 			# If the script has no class_name, return a nested condition indicating failure.
 			if not class_result.has_class_name:
 				if is_csharp_script:
 					var msg = (
-						#gdlint: ignore=max-line-length
-						"%s has a C# script attached, but it bears no 'class_name'. You might be missing the [GlobalClass] attribute. %s"
-						% [variable_name, expected_type_desc]
+							#gdlint: ignore=max-line-length
+							"%s has a C# script attached, but it bears no 'class_name'. You might be missing the [GlobalClass] attribute. %s"
+							% [variable_name, expected_type_desc]
 					)
 					return [ValidationCondition.simple(false, msg, severity_level)]
 				return [
 					ValidationCondition.simple(
 						false,
 						(
-							"%s has a script attached, but it bears no 'class_name'. %s"
-							% [variable_name, expected_type_desc]
+								"%s has a script attached, but it bears no 'class_name'. %s"
+								% [variable_name, expected_type_desc]
 						),
-						severity_level
-					)
+						severity_level,
+					),
 				]
 
 			# If the found class name doesn't match the expected name, or
@@ -373,15 +392,15 @@ static func is_scene_of_type(
 					ValidationCondition.simple(
 						false,
 						(
-							"%s script type (%s) is a mismatch. %s"
-							% [variable_name, found_name, expected_type_desc]
+								"%s script type (%s) is a mismatch. %s"
+								% [variable_name, found_name, expected_type_desc]
 						),
-						severity_level
-					)
+						severity_level,
+					),
 				]
 			return true,
-		"",  # No error message needed here, as the condition is always true at this point.
-		severity_level
+		"", # No error message needed here, as the condition is always true at this point.
+		severity_level,
 	)
 
 
@@ -395,32 +414,32 @@ static func is_scene_of_type(
 ## An example predicate for an [code]Array[/code] that contains [Node]s could be:
 ## [code]func(value: Node): return value.name.begins_with("Enemy")[/code].
 static func array_matches_count_by_predicate(
-	array: Array,
-	expected_count: int,
-	predicate: Callable,
-	variable_name: String = "Array",
-	predicate_description: String = "",
-	severity_level: Severity = Severity.WARNING
+		array: Array,
+		expected_count: int,
+		predicate: Callable,
+		variable_name: String = "Array",
+		predicate_description: String = "",
+		severity_level: Severity = Severity.WARNING,
 ) -> ValidationCondition:
 	var get_actual_count: Callable = func() -> int:
 		return array.reduce(
 			func(acc: int, value: Variant) -> int:
 				return acc + 1 if value != null and predicate.call(value) else acc,
-			0
+			0,
 		)
 
 	return ValidationCondition.new(
 		func() -> bool: return get_actual_count.call() == expected_count,
 		(
-			"%s has %d items matching the predicate, expected %d.%s"
-			% [
-				variable_name,
-				get_actual_count.call(),
-				expected_count,
-				(" (Predicate: %s)" % predicate_description) if predicate_description else "",
-			]
+				"%s has %d items matching the predicate, expected %d.%s"
+				% [
+					variable_name,
+					get_actual_count.call(),
+					expected_count,
+					(" (Predicate: %s)" % predicate_description) if predicate_description else "",
+				]
 		),
-		severity_level
+		severity_level,
 	)
 
 
@@ -428,7 +447,8 @@ static func array_matches_count_by_predicate(
 ## Returns a [GodotDoctorClassNameQueryResult] indicating whether a script
 ## and class name were found.
 static func _get_class_name_from_packed_scene(
-	packed_scene: PackedScene, inheritance_search_strategy: InheritanceSearchStrategy
+		packed_scene: PackedScene,
+		inheritance_search_strategy: InheritanceSearchStrategy,
 ) -> GodotDoctorClassNameQueryResult:
 	var state: SceneState = packed_scene.get_state()
 	if state == null:
@@ -452,7 +472,8 @@ static func _get_root_script(state: SceneState) -> Script:
 
 
 static func _get_target_scene_state(
-	state: SceneState, strategy: InheritanceSearchStrategy
+		state: SceneState,
+		strategy: InheritanceSearchStrategy,
 ) -> SceneState:
 	if strategy == InheritanceSearchStrategy.DIRECT:
 		return state
@@ -505,15 +526,13 @@ static func _inherits_from(child_class_name: StringName, parent_class_name: Stri
 		# Check for match
 		if class_info.class == child_class_name:
 			return (
-				class_info.base == parent_class_name
-				or _inherits_from(class_info.base, parent_class_name)
+					class_info.base == parent_class_name
+					or _inherits_from(class_info.base, parent_class_name)
 			)
 	# If not found, return false.
 	return false
 
-
 #region Default Validation Generation
-
 
 ## Generates default validation conditions for [param validation_target]
 ## by inspecting its exported properties.
@@ -524,10 +543,12 @@ static func _inherits_from(child_class_name: StringName, parent_class_name: Stri
 ##     you should probably not call this directly, unless you have a very good reason for doing so.
 ## [/b]
 static func get_default_validation_conditions(
-	validation_target: Object, _visited: Array[Object] = []
+		validation_target: Object,
+		_visited: Array[Object] = [],
 ) -> Array[ValidationCondition]:
 	GodotDoctorNotifier.print_debug(
-		"Generating default validation conditions for: %s" % validation_target, ValidationCondition
+		"Generating default validation conditions for: %s" % validation_target,
+		ValidationCondition,
 	)
 	## Grab all exported properties from the target's script
 	var export_props: Array[Dictionary] = _get_export_props(validation_target)
@@ -543,21 +564,21 @@ static func get_default_validation_conditions(
 		match prop_type:
 			TYPE_OBJECT:
 				validation_conditions.append(
-					ValidationCondition.is_instance_valid(prop_value, prop_name)
+					ValidationCondition.is_instance_valid(prop_value, prop_name),
 				)
 				# If the property is a valid Resource, also recurse into its exported properties.
 				if (
-					prop_value is Resource
-					and is_instance_valid(prop_value)
-					and prop_value not in _visited
+						prop_value is Resource
+						and is_instance_valid(prop_value)
+						and prop_value not in _visited
 				):
 					_visited.append(prop_value)
 					validation_conditions.append_array(
-						get_default_validation_conditions(prop_value, _visited)
+						get_default_validation_conditions(prop_value, _visited),
 					)
 			TYPE_STRING:
 				validation_conditions.append(
-					ValidationCondition.is_stripped_string_not_empty(prop_value, prop_name)
+					ValidationCondition.is_stripped_string_not_empty(prop_value, prop_name),
 				)
 			_:
 				continue
@@ -568,7 +589,8 @@ static func get_default_validation_conditions(
 ## Only includes properties that are both script variables and marked for editor visibility.
 static func _get_export_props(object: Object) -> Array[Dictionary]:
 	GodotDoctorNotifier.print_debug(
-		"Getting export properties for object: %s" % object, ValidationCondition
+		"Getting export properties for object: %s" % object,
+		ValidationCondition,
 	)
 	if object == null:
 		return []

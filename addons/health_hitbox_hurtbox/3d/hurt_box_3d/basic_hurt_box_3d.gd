@@ -1,4 +1,5 @@
-class_name BasicHurtBox3D extends HurtBox3D
+class_name BasicHurtBox3D
+extends HurtBox3D
 ## [BasicHurtBox3D] enables collision detection by [HitBox3D] or [HitScan3D] and applies affects to [Health].
 
 ## The multiplier to apply to all damage actions.
@@ -24,14 +25,12 @@ class_name BasicHurtBox3D extends HurtBox3D
 		if modifiers.has(HealthActionType.Enum.KINETIC):
 			modifiers[HealthActionType.Enum.KINETIC].convert_affect = _affect_heal_on_damage(enable)
 
-
 ## Applies damage to [Health] when [color=orange]heal()[/color] is called.
 @export var damage_on_heal: bool = false:
 	set(enable):
 		damage_on_heal = enable
 		if modifiers.has(HealthActionType.Enum.MEDICINE):
 			modifiers[HealthActionType.Enum.MEDICINE].convert_affect = _affect_damage_on_heal(enable)
-
 
 
 func _ready() -> void:

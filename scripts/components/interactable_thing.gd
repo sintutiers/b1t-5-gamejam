@@ -2,11 +2,11 @@
 class_name Interactable
 extends Node2D
 
+signal interacted(by: RapierArea2D)
+
 ## TRUE?: pause sprite resume when triggered.
 @export var animate_on_interact: bool = false
 @export var sprite: AnimatedSprite2D
-
-signal interacted(by: RapierArea2D)
 
 
 func _ready() -> void:

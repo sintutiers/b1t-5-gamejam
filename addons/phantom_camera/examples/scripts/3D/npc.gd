@@ -18,6 +18,7 @@ var tween_transition: Tween.TransitionType = Tween.TRANS_QUAD
 var interactable: bool
 var is_interacting: bool
 
+
 func _ready() -> void:
 	dialogueArea.connect("area_entered", _interactable)
 	dialogueArea.connect("area_exited", _not_interactable)
@@ -28,7 +29,6 @@ func _ready() -> void:
 	dialogue_label_initial_rotation = dialogueLabel3D.get_global_rotation()
 
 	npc_pcam.tween_completed.connect(_on_tween_started)
-
 
 
 func _on_tween_started() -> void:
@@ -52,14 +52,15 @@ func _not_interactable(area_3D: Area3D) -> void:
 
 
 func _input(event) -> void:
-	if not interactable: return
+	if not interactable:
+		return
 
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_F:
 			var tween: Tween = get_tree().create_tween() \
-				.set_parallel(true) \
-				.set_trans(Tween.TRANS_QUART) \
-				.set_ease(Tween.EASE_IN_OUT)
+					.set_parallel(true) \
+					.set_trans(Tween.TRANS_QUART) \
+					.set_ease(Tween.EASE_IN_OUT)
 			if not is_interacting:
 				npc_pcam.priority = 20
 				tween.tween_property(player, "global_position", move_to_location, 0.6).set_trans(tween_transition)

@@ -1,6 +1,6 @@
-class_name BasicHitScan3D extends HitScan3D
+class_name BasicHitScan3D
+extends HitScan3D
 ## BasicHitScan3D interacts with [HurtBox3D] to affect [Health] components.
-
 
 ## The [Health.Affect] to be performed.
 @export var affect: Health.Affect = Health.Affect.DAMAGE:

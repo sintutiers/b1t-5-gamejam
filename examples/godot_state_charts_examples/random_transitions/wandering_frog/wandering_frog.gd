@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-const SPEED:float = 50.0
+const SPEED: float = 50.0
 
 @onready var _sprite: Sprite2D = $Sprite
-@onready var _animation_player:AnimationPlayer = $AnimationPlayer
+@onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
-var _direction:Vector2
+var _direction: Vector2
+
 
 # When we enter walk state ...
 func _on_walk_state_entered() -> void:
@@ -19,15 +20,15 @@ func _on_walk_state_entered() -> void:
 
 
 # While we are in walk state... 
-func _on_walk_state_physics_processing(_delta:float) -> void:
+func _on_walk_state_physics_processing(_delta: float) -> void:
 	# set a new velocity
 	velocity = _direction * SPEED
 	# and move into the given direction
 	move_and_slide()
 	# and update scale
 	rescale()
-	
-	
+
+
 # When we enter idle state ...
 func _on_idle_state_entered() -> void:
 	# clear the direction
@@ -36,13 +37,11 @@ func _on_idle_state_entered() -> void:
 	_animation_player.play("idle")
 	# also rescale here in case we entered idle state first
 	rescale()
-	
-	
+
+
 func rescale() -> void:
 	# scale the frog depending on its y position to achieve some pseudo-3d effect
 	# this is hard-coded for resolution of this project which has 480 vertical pixels
 	# so we assume 240 to be 100% size, 0 would be 50% size and 480 would be 150% size.
-	var scale_factor := 1.0  + ((global_position.y - 240) / 480)
-	scale = Vector2(scale_factor, scale_factor)	
-	
-	
+	var scale_factor := 1.0 + ((global_position.y - 240) / 480)
+	scale = Vector2(scale_factor, scale_factor)

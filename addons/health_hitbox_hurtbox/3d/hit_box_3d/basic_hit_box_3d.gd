@@ -1,4 +1,5 @@
-class_name BasicHitBox3D extends HitBox3D
+class_name BasicHitBox3D
+extends HitBox3D
 ## [BasicHitBox3D] is associated with an object that can collide with a [HurtBox3D].
 
 ## The [Health.Affect] to be performed.

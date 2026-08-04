@@ -6,10 +6,11 @@ extends Node
 @export var switch_to_controller: GUIDEAction
 @export var switch_to_keyboard_and_mouse: GUIDEAction
 
+
 func _ready() -> void:
 	GUIDE.enable_mapping_context(controller)
 
 	switch_to_controller.triggered \
-		.connect(func() -> void: GUIDE.enable_mapping_context(controller, true))
+			.connect(func() -> void: GUIDE.enable_mapping_context(controller, true))
 	switch_to_keyboard_and_mouse.triggered \
-		.connect(func() -> void: GUIDE.enable_mapping_context(keyboard_and_mouse, true))
+			.connect(func() -> void: GUIDE.enable_mapping_context(keyboard_and_mouse, true))

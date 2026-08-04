@@ -2,26 +2,27 @@
 class_name OverlaidWindow
 extends WindowContainer
 
-@export var pauses_game : bool = false :
+@export var pauses_game: bool = false:
 	set(value):
 		pauses_game = value
 		if pauses_game:
 			process_mode = PROCESS_MODE_ALWAYS
 		else:
 			process_mode = PROCESS_MODE_INHERIT
-@export var makes_mouse_visible : bool = true
-@export var exclusive : bool = true
-@export var exclusive_background_color : Color
+@export var makes_mouse_visible: bool = true
+@export var exclusive: bool = true
+@export var exclusive_background_color: Color
 
-var _initial_pause_state : bool = false
-var _initial_mouse_mode : Input.MouseMode
+var _initial_pause_state: bool = false
+var _initial_mouse_mode: Input.MouseMode
 var _initial_focus_control
-var _initial_node_focus_modes : Dictionary
-var _initial_tab_focus_modes : Dictionary
-var _scene_tree : SceneTree 
-var _exclusive_control_node : ColorRect
+var _initial_node_focus_modes: Dictionary
+var _initial_tab_focus_modes: Dictionary
+var _scene_tree: SceneTree
+var _exclusive_control_node: ColorRect
 
-func _set_focus_none(node : Node) -> void:
+
+func _set_focus_none(node: Node) -> void:
 	var all_children := node.get_children()
 	for child in all_children:
 		if child == self or (child is Control and not child.visible):
@@ -34,6 +35,7 @@ func _set_focus_none(node : Node) -> void:
 				child.tab_focus_mode = Control.FOCUS_NONE
 		_set_focus_none(child)
 
+
 func _set_focus_initial() -> void:
 	for node in _initial_node_focus_modes:
 		if is_instance_valid(node) and node is Control:
@@ -44,8 +46,10 @@ func _set_focus_initial() -> void:
 			node.tab_focus_mode = _initial_tab_focus_modes[node]
 	_initial_tab_focus_modes.clear()
 
+
 func close() -> void:
-	if not visible: return
+	if not visible:
+		return
 	if pauses_game:
 		_scene_tree.paused = _initial_pause_state
 	Input.set_mouse_mode(_initial_mouse_mode)
@@ -56,6 +60,7 @@ func close() -> void:
 		_exclusive_control_node.queue_free()
 	super.close()
 
+
 func _overlaid_window_setup():
 	if _scene_tree:
 		_initial_pause_state = _scene_tree.paused
@@ -63,7 +68,8 @@ func _overlaid_window_setup():
 	_initial_focus_control = get_viewport().gui_get_focus_owner()
 	if _initial_focus_control:
 		_initial_focus_control.release_focus()
-	if Engine.is_editor_hint(): return
+	if Engine.is_editor_hint():
+		return
 	_scene_tree.paused = pauses_game or _initial_pause_state
 	if makes_mouse_visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -77,9 +83,11 @@ func _overlaid_window_setup():
 		await _exclusive_control_node.draw
 		get_parent().move_child(_exclusive_control_node, get_index())
 
+
 func _on_visibility_changed() -> void:
 	if is_visible_in_tree():
 		_overlaid_window_setup()
+
 
 func _enter_tree() -> void:
 	_scene_tree = get_tree()

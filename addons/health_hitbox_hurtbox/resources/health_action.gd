@@ -1,5 +1,5 @@
-class_name HealthAction extends Resource
-
+class_name HealthAction
+extends Resource
 
 @export var affect: Health.Affect = Health.Affect.DAMAGE
 @export var type: HealthActionType.Enum = HealthActionType.Enum.KINETIC
