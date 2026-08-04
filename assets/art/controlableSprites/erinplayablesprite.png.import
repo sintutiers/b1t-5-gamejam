@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c22k1y6rbntlw"
-path="res://.godot/imported/mrg0000.png-56322fc218a2cd2da5c3055740cc7512.ctex"
+uid="uid://ccixg3cmedwmv"
+path="res://.godot/imported/erinplayablesprite.png-05e452f2440da3e37752739a58622c04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://input/top_down_shooter/player/mrg0000.png"
-dest_files=["res://.godot/imported/mrg0000.png-56322fc218a2cd2da5c3055740cc7512.ctex"]
+source_file="res://assets/art/controlableSprites/erinplayablesprite.png"
+dest_files=["res://.godot/imported/erinplayablesprite.png-05e452f2440da3e37752739a58622c04.ctex"]
 
 [params]
 

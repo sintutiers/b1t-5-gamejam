@@ -61,7 +61,6 @@ metadata/_edit_lock_ = true
 theme = ExtResource("14_5qhti")
 
 [node name="UI Layer" type="CanvasLayer" parent="." unique_id=867187332]
-visible = false
 
 [node name="Instructions Label Controller" type="RichTextLabel" parent="UI Layer" unique_id=1798643945]
 anchors_preset = 1
