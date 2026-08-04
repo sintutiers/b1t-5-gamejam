@@ -4,7 +4,7 @@ our cool gamejam project
 - contributors
 - Dean (https://github.com/DeanLemans)
 - Chiel (https://github.com/Chielekkuuuh)
-- Erin (https://github.com/WallErin)
+- Erin (https://github.com/WallErin) https://erwall002.wixsite.com/erin-wall-1 
 
 code is under [GPL2+](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE)
 assets is under [CC-BY-SA-4.0](https://github.com/sintutiers/b1t-5-gamejam/blob/main/LICENSE-ASSETS)
