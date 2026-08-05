@@ -8,14 +8,76 @@
 [ext_resource type="Texture2D" uid="uid://dynhqydehk1ve" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="6_5r203"]
 [ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="8_7jycx"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
+[ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="10_222sq"]
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="10_va7p5"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="11_222sq"]
+[ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="11_sqgwn"]
+[ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="12_4kau2"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_222sq"]
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_222sq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e52ag"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqgwn"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kau2"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6h5f"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7vi5"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wbli"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2312"]
+atlas = ExtResource("10_222sq")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1sf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e52ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqgwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kau2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6h5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7vi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wbli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2312")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3v5l0"]
 shader = ExtResource("10_va7p5")
@@ -89,6 +151,27 @@ texture = ExtResource("6_5r203")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumppadtest" unique_id=1601023486]
 shape = SubResource("RectangleShape2D_q1sf4")
+
+[node name="interactable test" type="Area2D" parent="darkabe" unique_id=35908412]
+position = Vector2(75, -325)
+script = ExtResource("12_222sq")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/interactable test" unique_id=654747586]
+shape = SubResource("RectangleShape2D_222sq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="darkabe/interactable test" unique_id=201492]
+sprite_frames = SubResource("SpriteFrames_q1sf4")
+
+[node name="CollectableComponent" type="Node" parent="darkabe/interactable test" unique_id=60714528]
+script = ExtResource("12_4kau2")
+disappear_on_collect = false
+metadata/_custom_type_script = "uid://by7xho3qu0wac"
+
+[node name="Interactable" type="Node2D" parent="darkabe/interactable test" unique_id=1616710467 node_paths=PackedStringArray("sprite")]
+script = ExtResource("11_sqgwn")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="background thing" type="CanvasLayer" parent="." unique_id=512853945]
 layer = -1

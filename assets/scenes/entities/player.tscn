@@ -3,14 +3,15 @@
 [ext_resource type="Script" uid="uid://bhjfbnptlsrpn" path="res://assets/scenes/entities/player.gd" id="1_p1n6j"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
-[ext_resource type="Texture2D" uid="uid://eu0i8c1pv778" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
-[ext_resource type="Texture2D" uid="uid://ccixg3cmedwmv" path="res://assets/art/controlableSprites/erinplayablesprite.png" id="5_3v5l0"]
+[ext_resource type="Texture2D" uid="uid://baphlgyok8rg5" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
+[ext_resource type="Texture2D" uid="uid://b31iyhp0xmtvt" path="res://assets/art/controlableSprites/erinplayablesprite.png" id="5_3v5l0"]
 [ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://scripts/components/interaction_component_player.gd" id="5_jyv41"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="6_iphvx"]
+[ext_resource type="Resource" uid="uid://copp6e1o6qg0h" path="res://input/interact.tres" id="11_3v5l0"]
 [ext_resource type="Script" uid="uid://cp2dahx8wkvv6" path="res://scripts/components/audio_component.gd" id="11_ejv5b"]
-[ext_resource type="AudioStream" uid="uid://buuswyl5o3bo6" path="res://assets/sounds/walkSound.mp3" id="12_uylfy"]
+[ext_resource type="AudioStream" uid="uid://0klqoouod712" path="res://assets/sounds/walkSound.mp3" id="12_uylfy"]
 [ext_resource type="Resource" uid="uid://ch070wegl722t" path="res://input/move.tres" id="13_3v5l0"]
-[ext_resource type="AudioStream" uid="uid://dle8uxcup4x60" path="res://assets/sounds/eventSound.mp3" id="13_rnkb8"]
+[ext_resource type="AudioStream" uid="uid://dkchykn8o8cj" path="res://assets/sounds/eventSound.mp3" id="13_rnkb8"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="14_bfnip"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="15_p1n6j"]
 [ext_resource type="Script" uid="uid://ceslyxa3le6hb" path="res://scripts/components/combat_component.gd" id="15_tqwgt"]
@@ -145,6 +146,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+size = Vector2(27, 37)
 
 [node name="player" type="CharacterBody2D" unique_id=2042953629]
 script = ExtResource("1_p1n6j")
@@ -183,6 +185,7 @@ idle_delay = 10.0
 [node name="interaction" type="Node" parent="." unique_id=1388805479]
 unique_name_in_owner = true
 script = ExtResource("5_jyv41")
+interact_action = ExtResource("11_3v5l0")
 
 [node name="combat" type="Node" parent="." unique_id=381484516]
 script = ExtResource("15_tqwgt")
