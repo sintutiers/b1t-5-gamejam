@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://001e5f4bfdk7"
+uid="uid://dynhqydehk1ve"
 path="res://.godot/imported/jumpTiles(jumpTileUp) _0001.png-a3dfd1856bc2728333bd94926c1d2b9c.ctex"
 metadata={
 "vram_texture": false
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

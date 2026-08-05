@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj658oli0klj3"
+uid="uid://b4adgv8fxkbjy"
 path="res://.godot/imported/tex_metal_fill.png-ffe670c31de32892369fb9342e2e8961.ctex"
 metadata={
 "vram_texture": false
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

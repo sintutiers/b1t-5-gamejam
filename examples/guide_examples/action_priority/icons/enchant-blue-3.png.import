@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3j6yx4455rj0"
+uid="uid://dlnivohskutlj"
 path="res://.godot/imported/enchant-blue-3.png-90a0d74ca41c7f1035953bdeb5989037.ctex"
 metadata={
 "vram_texture": false
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

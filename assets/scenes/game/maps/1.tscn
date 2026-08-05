@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bb63f0lorb008"]
 
-[ext_resource type="Texture2D" uid="uid://doquclujya8in" path="res://assets/art/interactableSprites/backgroundColor.png" id="1_f0fay"]
+[ext_resource type="Texture2D" uid="uid://bt7cl4kuun6qx" path="res://assets/art/interactableSprites/backgroundColor.png" id="1_f0fay"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="2_der4t"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_4p6eu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
-[ext_resource type="Texture2D" uid="uid://001e5f4bfdk7" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="6_5r203"]
+[ext_resource type="Texture2D" uid="uid://dynhqydehk1ve" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="6_5r203"]
 [ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="8_7jycx"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="10_va7p5"]

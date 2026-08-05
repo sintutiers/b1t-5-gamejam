@@ -20,7 +20,7 @@ made by dean and chiel"
 config/version="- pre pre pre alpha not fucking done yet stage of gamedevelopment"
 run/main_scene="uid://4atoxgqigr8l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="uid://bc1brx5ex756u"
+config/icon="uid://dynhqydehk1ve"
 
 [audio]
 
@@ -70,6 +70,16 @@ folder_colors={
 
 theme/custom="uid://bac1khm2nmjl3"
 theme/custom_font="uid://coisyh8l6rcuc"
+
+[importer_defaults]
+
+2d_array_texture={
+&"compress/channel_pack": 1,
+&"mipmaps/generate": false
+}
+texture={
+&"detect_3d/compress_to": 0
+}
 
 [input]
 

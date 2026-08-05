@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbwgq8udtj2hp"
+uid="uid://clubymqeu7bxq"
 path="res://.godot/imported/enchant-acid-3.png-c515c66c1a5c3deeb3625b77915e314d.ctex"
 metadata={
 "vram_texture": false
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
