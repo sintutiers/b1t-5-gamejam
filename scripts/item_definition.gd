@@ -7,4 +7,4 @@ extends Resource
 @export var icon: Texture2D
 @export var category: StringName = &"generic"
 @export var stackable: bool = true
-@export var max_stack: int = 99
+@export var max_stack: int = 5

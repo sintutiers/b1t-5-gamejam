@@ -1,5 +1,5 @@
 # inventory_component.gd
-### not sure i need that when im still setting systems up
+### not sure i need this, im still setting systems up
 class_name InventoryComponent
 extends Node
 
