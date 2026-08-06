@@ -76,7 +76,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3v5l0"]
@@ -162,6 +162,7 @@ shape = SubResource("RectangleShape2D_222sq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="darkabe/interactable test" unique_id=201492]
 sprite_frames = SubResource("SpriteFrames_q1sf4")
+frame_progress = 0.65315676
 
 [node name="CollectableComponent" type="Node" parent="darkabe/interactable test" unique_id=60714528]
 script = ExtResource("12_4kau2")
