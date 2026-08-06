@@ -162,7 +162,7 @@ shape = SubResource("RectangleShape2D_222sq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="darkabe/interactable test" unique_id=201492]
 sprite_frames = SubResource("SpriteFrames_q1sf4")
-frame_progress = 0.65315676
+frame_progress = 0.5695321
 
 [node name="CollectableComponent" type="Node" parent="darkabe/interactable test" unique_id=60714528]
 script = ExtResource("12_4kau2")
