@@ -13,9 +13,11 @@ signal collected(definition: ItemDefinition, amount: int)
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
+	add_to_group("collectable")
 
 
 func collect() -> void:
+	print("Collectable: emitting collected signal for ", definition.display_name)
 	collected.emit(definition, amount)
 	if not disappear_on_collect:
 		return

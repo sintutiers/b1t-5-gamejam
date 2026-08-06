@@ -9,12 +9,10 @@ extends Component
 
 
 func _ready() -> void:
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	interact_action.triggered.connect(_on_interact_triggered)
 
 
 func _exit_tree() -> void:
-	DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
 	interact_action.triggered.disconnect(_on_interact_triggered)
 
 
@@ -37,7 +35,6 @@ func interact() -> void:
 			closest_dist_sq = dist_sq
 			closest = interactable
 	if closest:
-		movement.is_interacting = true
 		closest.trigger(interact_area)
 		print("Interacted: ", closest.get_parent().name)
 
@@ -53,7 +50,3 @@ func _find_interactable(node: Node2D) -> Interactable:
 		if child is Interactable:
 			return child
 	return null
-
-
-func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	movement.is_interacting = false
