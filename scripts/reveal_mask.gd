@@ -6,7 +6,6 @@ extends ColorRect
 
 
 func _ready() -> void:
-	mouse_filter = MOUSE_FILTER_IGNORE
 	if not light_area:
 		for child: Node in get_children():
 			if child.name == "LightRadius" and child is RapierArea2D:
