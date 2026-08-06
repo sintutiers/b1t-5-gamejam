@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://wf41kpb8pkjq"]
 
-[ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="1_3u42h"]
-[ext_resource type="Script" uid="uid://ckc3qkmv1qk4f" path="res://scripts/item_definition.gd" id="1_wt53d"]
+[ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="1_mu3ao"]
+[ext_resource type="Script" uid="uid://ckc3qkmv1qk4f" path="res://scripts/item_definition.gd" id="2_484lv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnosa"]
-atlas = ExtResource("1_3u42h")
+atlas = ExtResource("1_mu3ao")
 region = Rect2(2, 103, 29, 24)
 
 [resource]
-script = ExtResource("1_wt53d")
+script = ExtResource("2_484lv")
 id = &"star"
-display_name = "star"
+display_name = "goon"
 icon = SubResource("AtlasTexture_rnosa")
 metadata/_custom_type_script = "uid://ckc3qkmv1qk4f"

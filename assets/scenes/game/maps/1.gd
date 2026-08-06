@@ -1,7 +1,6 @@
 # 1.gd
 extends Node2D
 
-
 func _ready() -> void:
 	_set_mouse_filter_recursive(self, Control.MOUSE_FILTER_IGNORE)
 

@@ -23,8 +23,8 @@ func _ready() -> void:
 
 
 func play_walk(
-	horizontal: MovementComponent.Horizontal,
-	vertical: MovementComponent.Vertical,
+		horizontal: MovementComponent.Horizontal,
+		vertical: MovementComponent.Vertical,
 ) -> void:
 	walk_buffer = buffer_duration
 	idle_time = 0.0

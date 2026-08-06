@@ -1,3 +1,4 @@
+# item_slot
 class_name ItemSlot
 extends Control
 
@@ -11,11 +12,11 @@ func _ready() -> void:
 	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 
 
-func set_item(definition: ItemDefinition, count: int):
+func set_item(definition: ItemDefinition, count: int) -> void:
 	icon_rect.texture = definition.icon
 	update_count(count)
 
 
-func update_count(new_count: int):
+func update_count(new_count: int) -> void:
 	count_label.text = str(new_count)
 	count_label.visible = new_count > 0

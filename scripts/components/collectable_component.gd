@@ -27,4 +27,4 @@ func collect() -> void:
 
 
 func _on_interacted(_by: RapierArea2D) -> void:
-	collect()
+	await collect()

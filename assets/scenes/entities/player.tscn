@@ -20,8 +20,8 @@
 [ext_resource type="Resource" uid="uid://vpsh1myp67ws" path="res://input/look_relative.tres" id="16_i5qhp"]
 [ext_resource type="Resource" uid="uid://c4tpipfhludsi" path="res://input/look_absolute.tres" id="17_3v5l0"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="17_p1n6j"]
+[ext_resource type="Texture2D" uid="uid://d3t48avqghtnv" path="res://assets/art/interactableSprites/jumpTiles(jumpTileRight) _0002.png" id="17_u8sbn"]
 [ext_resource type="Resource" uid="uid://coktqyup12g3w" path="res://input/fire.tres" id="18_3v5l0"]
-[ext_resource type="PackedScene" uid="uid://c0fqv8e3tljmp" path="res://input/top_down_shooter/bolt.tscn" id="19_u8sbn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5qhp"]
 atlas = ExtResource("5_3v5l0")
@@ -145,6 +145,34 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1sf4"]
 
+[sub_resource type="GDScript" id="GDScript_oa2pr"]
+script/source = "extends Sprite2D
+
+@export var speed:float = 500
+@export var lifetime:float = 1.0
+
+func _process(delta: float) -> void:
+	position += transform.x * delta * speed
+	lifetime -= delta
+	if lifetime <= 0:
+		queue_free()
+"
+
+[sub_resource type="PackedScene" id="PackedScene_ejv5b"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("Bolt", "Sprite2D", "texture", "script", "speed", "lifetime"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1318303708),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0),
+"variants": [ExtResource("17_u8sbn"), SubResource("GDScript_oa2pr"), 1000.0, 2.0],
+"version": 3
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
 size = Vector2(27, 37)
 
@@ -195,7 +223,7 @@ script = ExtResource("15_tqwgt")
 look_relative = ExtResource("16_i5qhp")
 look_absolute = ExtResource("17_3v5l0")
 fire = ExtResource("18_3v5l0")
-bolt = ExtResource("19_u8sbn")
+bolt = SubResource("PackedScene_ejv5b")
 
 [node name="InteractAreaPlayer" type="Area2D" parent="." unique_id=569756058]
 unique_name_in_owner = true

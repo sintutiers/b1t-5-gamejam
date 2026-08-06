@@ -1,20 +1,18 @@
 extends Node2D
 
+@onready var _add_coal_to_drill_button: Button = %AddCoalToDrillButton
+@onready var _coal_available_label: Label = %CoalAvailableLabel
+@onready var _coal_in_drill_label: Label = %CoalInDrillLabel
+@onready var _state_chart: StateChart = %StateChart
 
-@onready var _add_coal_to_drill_button:Button = %AddCoalToDrillButton
-@onready var _coal_available_label:Label = %CoalAvailableLabel
-@onready var _coal_in_drill_label:Label = %CoalInDrillLabel
-@onready var _state_chart:StateChart = %StateChart
-
-
-var _coal_available:int = 0:
+var _coal_available: int = 0:
 	set(value):
 		_coal_available = value
 		# update the UI when this changes
 		_coal_available_label.text = str(_coal_available)
 		_add_coal_to_drill_button.disabled = _coal_available == 0
-		
-var _coal_in_drill:int = 0:
+
+var _coal_in_drill: int = 0:
 	set(value):
 		_coal_in_drill = value
 		# update the UI when this changes
@@ -30,13 +28,13 @@ var _coal_in_drill:int = 0:
 
 func _ready() -> void:
 	_coal_available = 1 # we start with 1 coal
-	
+
 
 func _on_add_coal_to_drill_button_pressed() -> void:
 	# take one coal from the pile and put it into the generator
 	_coal_available -= 1
 	_coal_in_drill += 1
-	
+
 
 func _on_drill_has_coal_state_stepped() -> void:
 	# when we are in this state, we produce 2 coal and consume one of the coal in

@@ -1,5 +1,6 @@
 # inventory_component.gd
 ### not sure i need this, im still setting systems up
+## decided to use this as dependency for future exensibility
 class_name InventoryComponent
 extends Node
 

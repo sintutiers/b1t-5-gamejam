@@ -27,7 +27,7 @@ func _initialize() -> void:
 	for def: ItemDefinition in _inventory.items.keys():
 		_add_slot(def, _inventory.items[def])
 	# Connect every collectable
-	for collectable in get_tree().get_nodes_in_group("collectable"):
+	for collectable: Node in get_tree().get_nodes_in_group("collectable"):
 		if collectable.has_signal("collected"):
 			collectable.connect("collected", _inventory.add_item)
 		else:
