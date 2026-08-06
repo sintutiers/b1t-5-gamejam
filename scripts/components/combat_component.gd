@@ -8,12 +8,12 @@ extends Node
 @export var bolt: PackedScene
 
 @onready var body: Node2D = get_parent() as Node2D
-#@onready var left_hand: Node2D = %LeftHand
-#@onready var right_hand: Node2D = %RightHand
 @onready var center_hand: Node2D = %CenterHand
+
 
 func _ready() -> void:
 	fire.triggered.connect(_fire)
+
 
 func _physics_process(delta: float) -> void:
 	var target: Vector2 = Vector2.INF
@@ -25,10 +25,14 @@ func _physics_process(delta: float) -> void:
 		target = body.global_position + look_relative.value_axis_2d
 
 	if target.is_finite():
-		var target_orientation: Transform2D = Transform2D()\
-			.translated(body.global_position)\
-			.looking_at(target)
-		body.global_transform = body.global_transform.interpolate_with(target_orientation, 5 * delta)
+		var target_orientation: Transform2D = Transform2D() \
+				.translated(body.global_position) \
+				.looking_at(target)
+		body.global_transform = body.global_transform.interpolate_with(
+			target_orientation,
+			5 * delta,
+		)
+
 
 func _fire() -> void:
 	for hand: Node2D in [center_hand]:
