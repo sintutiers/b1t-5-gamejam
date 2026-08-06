@@ -1,7 +1,7 @@
 # audio_component.gd
 ### actual dogshit code i need to rewire to my current system
 class_name AudioComponent
-extends Node
+extends Component
 
 @export var footstep_sounds: Array[AudioStream] = []
 @export var fire_sound: AudioStream
@@ -44,8 +44,8 @@ func play_fire() -> void:
 
 
 func _connect_siblings() -> void:
-	animation = _find_sibling_of_type(AnimationComponent)
-	movement = _find_sibling_of_type(MovementComponent)
+	animation = get_sibling(AnimationComponent)
+	movement = get_sibling(MovementComponent)
 	if not animation or not movement:
 		push_error("missing sibling")
 		return
@@ -55,7 +55,6 @@ func _connect_siblings() -> void:
 func _on_frame_changed() -> void:
 	if not movement.move_state.get("active"):
 		return
-
 	var state = movement.move._last_state
 	if (
 		state == GUIDEAction.GUIDEActionState.TRIGGERED
@@ -72,15 +71,3 @@ func _play_one_shot(stream: AudioStream) -> void:
 		return
 	player.stream = stream
 	player.play()
-
-
-func _find_sibling_of_type(type: Script) -> Node:
-	var parent: Node = get_parent()
-	if not parent:
-		push_error("no parent")
-		return null
-	for child: Node in parent.get_children():
-		if is_instance_of(child, type):
-			return child
-	push_warning("no sibling: %s" % type.resource_path)
-	return null

@@ -1,6 +1,6 @@
 # movement_component.gd
 class_name MovementComponent
-extends Node
+extends Component
 
 enum Horizontal {
 	LEFT,
@@ -33,7 +33,7 @@ var is_interacting: bool = false:
 		else:
 			state_chart.send_event(&"interact_end")
 
-@onready var animation: AnimationComponent = _find_sibling_of_type(AnimationComponent)
+@onready var animation: AnimationComponent = get_sibling(AnimationComponent)
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 @onready var state_chart: StateChart = %StateChart
 @onready var move_state: Node = %Move

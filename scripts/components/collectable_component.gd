@@ -1,6 +1,6 @@
 # collectable_component.gd
 class_name CollectableComponent
-extends Node
+extends Component
 
 signal collected(definition: ItemDefinition, amount: int)
 
@@ -8,7 +8,7 @@ signal collected(definition: ItemDefinition, amount: int)
 @export var amount: int = 1
 @export var disappear_on_collect: bool = true
 
-@onready var interactable: Interactable = _find_sibling_of_type(Interactable)
+@onready var interactable: Interactable = get_sibling(Interactable)
 
 
 func _ready() -> void:
@@ -26,11 +26,3 @@ func collect() -> void:
 
 func _on_interacted(_by: RapierArea2D) -> void:
 	collect()
-
-
-func _find_sibling_of_type(type: Script) -> Node:
-	var parent: Node = get_parent()
-	for child: Node in parent.get_children():
-		if is_instance_of(child, type):
-			return child
-	return null
