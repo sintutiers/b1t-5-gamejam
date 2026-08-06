@@ -29,6 +29,7 @@ text = "Actions"
 
 [node name="Actions" type="VFlowContainer" parent="VBoxContainer" unique_id=2024151647]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cggqb75a8w8r"]
 
 [ext_resource type="Script" uid="uid://cjifa1oa5wtn4" path="res://addons/debug_menu/debug_menu.gd" id="1_p440y"]
+[ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="2_mp16e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki0n8"]
 bg_color = Color(0, 0, 0, 0.25098)
@@ -392,5 +393,7 @@ Glow: On
 Volumetric Fog: On
 2D Antialiasing: 2× MSAA"
 horizontal_alignment = 2
+
+[node name="GuideDebugger" parent="." unique_id=1902510748 instance=ExtResource("2_mp16e")]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
