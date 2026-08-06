@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dav2p3brb25hq"]
+
+[ext_resource type="Script" uid="uid://n7tn3aco38t5" path="res://assets/scenes/game/item_slot.gd" id="1_y5wi4"]
+
+[node name="ItemSlot" type="Control" unique_id=2131155143]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y5wi4")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=308528992]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Count" type="Label" parent="." unique_id=1175733850]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -84.0
+grow_horizontal = 2
+grow_vertical = 0

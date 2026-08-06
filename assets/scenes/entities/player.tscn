@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bhjfbnptlsrpn" path="res://assets/scenes/entities/player.gd" id="1_p1n6j"]
 [ext_resource type="Script" uid="uid://e5gqove8tvo5" path="res://scripts/components/movement_component.gd" id="2_3irjl"]
 [ext_resource type="Script" uid="uid://b478jjanulvpt" path="res://scripts/components/animation_component.gd" id="2_47qcb"]
+[ext_resource type="Script" uid="uid://dtt0fwh3eqfdd" path="res://scripts/components/inventory_component.gd" id="4_u8sbn"]
 [ext_resource type="Texture2D" uid="uid://baphlgyok8rg5" path="res://assets/art/interactableSprites/pathColor.png" id="4_vy3dg"]
 [ext_resource type="Texture2D" uid="uid://b31iyhp0xmtvt" path="res://assets/art/controlableSprites/erinplayablesprite.png" id="5_3v5l0"]
 [ext_resource type="Script" uid="uid://covhjnxfl337b" path="res://scripts/components/interaction_component_player.gd" id="5_jyv41"]
@@ -21,7 +22,6 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="17_p1n6j"]
 [ext_resource type="Resource" uid="uid://coktqyup12g3w" path="res://input/fire.tres" id="18_3v5l0"]
 [ext_resource type="PackedScene" uid="uid://c0fqv8e3tljmp" path="res://input/top_down_shooter/bolt.tscn" id="19_u8sbn"]
-[ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="20_oa2pr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5qhp"]
 atlas = ExtResource("5_3v5l0")
@@ -168,6 +168,9 @@ shape = SubResource("CapsuleShape2D_q1sf4")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1982072527]
 unique_name_in_owner = true
 
+[node name="inventory" type="Node" parent="." unique_id=1407872918]
+script = ExtResource("4_u8sbn")
+
 [node name="audio" type="Node" parent="." unique_id=1888526526]
 script = ExtResource("11_ejv5b")
 footstep_sounds = Array[AudioStream]([ExtResource("12_uylfy")])
@@ -201,10 +204,6 @@ metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractAreaPlayer" unique_id=1988242562]
 shape = SubResource("RectangleShape2D_q1sf4")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1696703124]
-
-[node name="GuideDebugger" parent="CanvasLayer" unique_id=1902510748 instance=ExtResource("20_oa2pr")]
 
 [node name="StateChart" type="Node" parent="." unique_id=944945574]
 unique_name_in_owner = true

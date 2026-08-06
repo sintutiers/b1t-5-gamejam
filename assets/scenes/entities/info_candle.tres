@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://i3g44fqnqjp1"]
+
+[ext_resource type="Script" uid="uid://ckc3qkmv1qk4f" path="res://scripts/item_definition.gd" id="1_lupcw"]
+[ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="1_uotmq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2312"]
+atlas = ExtResource("1_uotmq")
+region = Rect2(11, 0, 10, 31)
+
+[resource]
+script = ExtResource("1_lupcw")
+id = &"candle"
+display_name = "candle"
+icon = SubResource("AtlasTexture_b2312")
+metadata/_custom_type_script = "uid://ckc3qkmv1qk4f"
