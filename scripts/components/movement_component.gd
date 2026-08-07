@@ -2,29 +2,16 @@
 class_name MovementComponent
 extends Component
 
-enum Horizontal {
-	LEFT,
-	RIGHT,
-}
-enum Vertical {
-	UP,
-	DOWN,
-}
+signal moved(direction: Vector2)
+signal stopped
+signal jumped(direction: Vector2)
 
-const DEFAULT_HORIZONTAL: Horizontal = Horizontal.RIGHT
-const DEFAULT_VERTICAL: Vertical = Vertical.DOWN
-const HORIZONTAL_NAMES: Dictionary[Horizontal, String] = {
-	Horizontal.LEFT: "left",
-	Horizontal.RIGHT: "right",
-}
-const VERTICAL_NAMES: Dictionary[Vertical, String] = { Vertical.UP: "up", Vertical.DOWN: "down" }
 const FACING_THRESHOLD: float = 0.5
 
 @export var move_speed: int = 150
 @export var move: GUIDEAction
 
-var facing_horizontal: Horizontal = DEFAULT_HORIZONTAL
-var facing_vertical: Vertical = DEFAULT_VERTICAL
+var facing: Vector2 = Vector2.DOWN
 var is_interacting: bool = false:
 	set(value):
 		is_interacting = value
@@ -33,7 +20,6 @@ var is_interacting: bool = false:
 		else:
 			state_chart.send_event(&"interact_end")
 
-@onready var animation: AnimationComponent = get_sibling(AnimationComponent)
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 @onready var state_chart: StateChart = %StateChart
 @onready var move_state: Node = %Move
@@ -62,6 +48,10 @@ func launch(velocity: Vector2) -> void:
 	state_chart.send_event(&"launch")
 
 
+func jump() -> void:
+	jumped.emit(facing)
+
+
 func get_global_position() -> Vector2:
 	return body.global_position
 
@@ -71,12 +61,10 @@ func _on_move_physics_update(delta: float) -> void:
 	if input_dir != Vector2.ZERO:
 		body.velocity = input_dir * move_speed
 		_update_facing(input_dir)
-		if animation:
-			animation.play_walk(facing_horizontal, facing_vertical)
+		moved.emit(facing)
 	else:
 		body.velocity = Vector2.ZERO
-		if animation:
-			animation.update_walk_buffer(delta)
+		stopped.emit()
 	body.move_and_slide()
 
 
@@ -91,19 +79,12 @@ func _on_launch_physics_update(_delta: float) -> void:
 
 func _update_facing(direction: Vector2) -> void:
 	if abs(direction.x) > FACING_THRESHOLD:
-		facing_horizontal = Horizontal.RIGHT if direction.x > 0.0 else Horizontal.LEFT
+		facing.x = 1.0 if direction.x > 0.0 else -1.0
+	else:
+		facing.x = 0.0
 	if abs(direction.y) > FACING_THRESHOLD:
-		facing_vertical = Vertical.DOWN if direction.y > 0.0 else Vertical.UP
-
-
-# yeah im not asgning this manually, fuck that. do it yourself
-func _find_sibling_of_type(type: Script) -> Node:
-	var parent: Node = get_parent()
-	if not parent:
-		push_error("no parent")
-		return null
-	for child: Node in parent.get_children():
-		if is_instance_of(child, type):
-			return child
-	push_warning("no sibling: %s" % type.resource_path)
-	return null
+		facing.y = 1.0 if direction.y > 0.0 else -1.0
+	else:
+		facing.y = 0.0
+	if facing == Vector2.ZERO:
+		facing = Vector2.DOWN
