@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://huy14b6x10bh"]
 
-[ext_resource type="Texture2D" uid="uid://bgswg1pgd01d1" path="res://examples/godot_state_charts_examples/platformer/ninja_frog/full.png" id="2_dka03"]
+[ext_resource type="Texture2D" uid="uid://c1eynl3eriexq" path="res://examples/godot_state_charts_examples/platformer/ninja_frog/full.png" id="2_dka03"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_7ryss"]
 [ext_resource type="Script" uid="uid://jjduf53mb1hc" path="res://examples/godot_state_charts_examples/automatic_transitions/the_frog.gd" id="3_q65wd"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_64ox6"]

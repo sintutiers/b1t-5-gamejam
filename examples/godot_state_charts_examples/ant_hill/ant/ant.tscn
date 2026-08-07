@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dy43c80qlfftx"]
 
 [ext_resource type="Shader" uid="uid://bx4vu24rcr0m5" path="res://examples/godot_state_charts_examples/ant_hill/ant/ant.gdshader" id="1_01qat"]
-[ext_resource type="Texture2D" uid="uid://bqgc7cft671q0" path="res://examples/godot_state_charts_examples/ant_hill/ant/walk.png" id="1_7ajse"]
+[ext_resource type="Texture2D" uid="uid://dxwnpcvm3up1o" path="res://examples/godot_state_charts_examples/ant_hill/ant/walk.png" id="1_7ajse"]
 [ext_resource type="Script" uid="uid://d4ld8mlrjp04a" path="res://examples/godot_state_charts_examples/ant_hill/ant/ant.gd" id="1_i761n"]
 [ext_resource type="PackedScene" uid="uid://dy5xrmjffewnk" path="res://examples/godot_state_charts_examples/ant_hill/marker/marker.tscn" id="2_lqnr1"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_lard5"]
@@ -483,7 +483,7 @@ rotation = 1.5708
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_kcoy1")
 animation = &"walk"
-frame_progress = 0.6654083
+frame_progress = 0.43097633
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1374761703]
 editor_description = "This navigation agent sends the \"navigation_finished\" event to the state chart whenever the navigation is done."

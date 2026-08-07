@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b18rv6o4duide"]
 
-[ext_resource type="Texture2D" uid="uid://bgw8xgbwc2flx" path="res://examples/godot_state_charts_examples/history_states/white_rectangle.svg" id="1_3v23e"]
+[ext_resource type="Texture2D" uid="uid://c2mvbj37c5igr" path="res://examples/godot_state_charts_examples/history_states/white_rectangle.svg" id="1_3v23e"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_fgw1q"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_pqmip"]
 [ext_resource type="Script" uid="uid://bad613wfktgah" path="res://examples/godot_state_charts_examples/history_states/history_demo.gd" id="2_vphtk"]

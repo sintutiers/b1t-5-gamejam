@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnb3sumemposh" path="res://examples/guide_examples/touch/placement_indicator/placement_indicator.gd" id="1_gnpc8"]
 [ext_resource type="Resource" uid="uid://iilpc2tjr5mx" path="res://examples/guide_examples/touch/mapping_contexts/actions/spawn.tres" id="2_grp35"]
-[ext_resource type="Texture2D" uid="uid://geq3rs2fxqs4" path="res://examples/guide_examples/touch/placement_indicator/radial_progress.png" id="2_slqs6"]
+[ext_resource type="Texture2D" uid="uid://cyir2utuk1uoo" path="res://examples/guide_examples/touch/placement_indicator/radial_progress.png" id="2_slqs6"]
 
 [node name="PlacementIndicator" type="Node2D" unique_id=433146294]
 script = ExtResource("1_gnpc8")

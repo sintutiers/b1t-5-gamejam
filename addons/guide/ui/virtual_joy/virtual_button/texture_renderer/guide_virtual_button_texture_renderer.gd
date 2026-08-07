@@ -20,12 +20,15 @@ extends GUIDEVirtualButtonRenderer
 var _idle_sprite: Sprite2D
 var _actuated_sprite: Sprite2D
 
+
 func _ready() -> void:
 	_rebuild()
+
 
 ## React to configuration changes from the parent button.
 func _on_configuration_changed() -> void:
 	_rebuild()
+
 
 ## (Re)build child sprites and apply textures.
 func _rebuild() -> void:
@@ -33,11 +36,13 @@ func _rebuild() -> void:
 	_actuated_sprite = _ensure_sprite(_actuated_sprite, actuated_texture)
 	_update(is_button_actuated)
 
+
 ## Update the visibility based on actuation.
 ## @param is_actuated Whether or not the button is currently actuated.
 func _update(is_actuated: bool) -> void:
 	_idle_sprite.visible = not is_actuated
 	_actuated_sprite.visible = is_actuated
+
 
 ## Ensure a sprite exists, has the given texture, and is scaled to cover the
 ## circular button area based on the current `button_radius`.
@@ -49,9 +54,9 @@ func _ensure_sprite(sprite: Sprite2D, texture: Texture2D) -> Sprite2D:
 		sprite = Sprite2D.new()
 		sprite.centered = true
 		add_child(sprite)
-	
+
 	sprite.texture = texture
-	
+
 	# Apply uniform scaling so the sprite fully covers the circular button area.
 	var diameter: float = button_radius * 2.0
 	if diameter > 0.0:
@@ -63,6 +68,5 @@ func _ensure_sprite(sprite: Sprite2D, texture: Texture2D) -> Sprite2D:
 				var factor: float = diameter / shortest
 				sprite.scale = Vector2(factor, factor)
 				sprite.position = Vector2.ZERO
-	
-	return sprite
 
+	return sprite

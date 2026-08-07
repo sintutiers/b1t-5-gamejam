@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5cis470slhau" path="res://examples/guide_examples/combine_contexts/combine_contexts.gd" id="1_nxm54"]
 [ext_resource type="Resource" uid="uid://byntrqf4ro5ul" path="res://examples/guide_examples/combine_contexts/mapping_contexts/keyboard_and_mouse.tres" id="2_7en4c"]
-[ext_resource type="Texture2D" uid="uid://byjxtsekdl8t2" path="res://examples/guide_examples/shared/godot_logo.svg" id="2_ug15u"]
+[ext_resource type="Texture2D" uid="uid://cx4nrpegkvfpd" path="res://examples/guide_examples/shared/godot_logo.svg" id="2_ug15u"]
 [ext_resource type="Resource" uid="uid://bvg2kv4me6p18" path="res://examples/guide_examples/combine_contexts/mapping_contexts/controller.tres" id="3_iacs2"]
 [ext_resource type="Script" uid="uid://b3l3w1askqxgo" path="res://examples/guide_examples/2d_axis_mapping/player.gd" id="3_w8aur"]
 [ext_resource type="Resource" uid="uid://bxmuoph07ha7w" path="res://examples/guide_examples/combine_contexts/mapping_contexts/move.tres" id="4_7en4c"]

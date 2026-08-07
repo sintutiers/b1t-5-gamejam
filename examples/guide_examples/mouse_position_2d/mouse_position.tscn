@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cndto72qu3boe" path="res://examples/guide_examples/mouse_position_2d/camera_2d.gd" id="3_xpjlw"]
 [ext_resource type="PackedScene" uid="uid://cj8m2n32yjxka" path="res://examples/guide_examples/mouse_position_2d/godot_head.tscn" id="5_6xobh"]
 [ext_resource type="Resource" uid="uid://ehdejslyo58y" path="res://examples/guide_examples/mouse_position_2d/mapping_contexts/actions/camera_movement.tres" id="5_snwnm"]
-[ext_resource type="Texture2D" uid="uid://slnmn5k0drdb" path="res://examples/guide_examples/mouse_position_2d/background.svg" id="6_1tobk"]
+[ext_resource type="Texture2D" uid="uid://bvoab33krqoft" path="res://examples/guide_examples/mouse_position_2d/background.svg" id="6_1tobk"]
 [ext_resource type="Script" uid="uid://by6w26jgvaitm" path="res://examples/guide_examples/mouse_position_2d/background.gd" id="7_4oihe"]
 [ext_resource type="Resource" uid="uid://6dm5j1sdhdp2" path="res://examples/guide_examples/mouse_position_2d/mapping_contexts/actions/camera_zoom.tres" id="8_6tg1h"]
 [ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://examples/guide_examples/shared/instructions_label.gd" id="9_y8piq"]

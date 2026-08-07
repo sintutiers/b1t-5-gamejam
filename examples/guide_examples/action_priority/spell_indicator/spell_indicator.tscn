@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cx8f0hljh5dhs"]
 
-[ext_resource type="Texture2D" uid="uid://dbwgq8udtj2hp" path="res://examples/guide_examples/action_priority/icons/enchant-acid-3.png" id="1_7l2hh"]
+[ext_resource type="Texture2D" uid="uid://clubymqeu7bxq" path="res://examples/guide_examples/action_priority/icons/enchant-acid-3.png" id="1_7l2hh"]
 [ext_resource type="Script" uid="uid://b3h0rac24v3l0" path="res://examples/guide_examples/action_priority/spell_indicator/spell_indicator.gd" id="1_hpegm"]
 
 [sub_resource type="Animation" id="Animation_j3vtt"]

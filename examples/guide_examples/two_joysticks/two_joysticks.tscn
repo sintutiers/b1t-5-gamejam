@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byg4578fnips6" path="res://examples/guide_examples/two_joysticks/two_joysticks.gd" id="1_1dy65"]
 [ext_resource type="Resource" uid="uid://chr8ugns0fh70" path="res://examples/guide_examples/two_joysticks/two_joysticks.tres" id="2_3p2l3"]
-[ext_resource type="Texture2D" uid="uid://byjxtsekdl8t2" path="res://examples/guide_examples/shared/godot_logo.svg" id="2_c65ah"]
+[ext_resource type="Texture2D" uid="uid://cx4nrpegkvfpd" path="res://examples/guide_examples/shared/godot_logo.svg" id="2_c65ah"]
 [ext_resource type="Script" uid="uid://c73evv6t30of" path="res://examples/guide_examples/two_joysticks/player.gd" id="3_3ycuu"]
 [ext_resource type="Resource" uid="uid://d31d5dpoavou1" path="res://examples/guide_examples/two_joysticks/actions/player_one_move.tres" id="4_f356y"]
 [ext_resource type="Resource" uid="uid://7g78pa31v44m" path="res://examples/guide_examples/two_joysticks/actions/player_two_move.tres" id="5_700m5"]

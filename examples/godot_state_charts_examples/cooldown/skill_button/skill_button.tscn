@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ch1pukkyc07qo"]
 
 [ext_resource type="Script" uid="uid://cjlrmcmit4jhm" path="res://examples/godot_state_charts_examples/cooldown/skill_button/skill_button.gd" id="1_r0ivs"]
-[ext_resource type="Texture2D" uid="uid://tgsnqiq40n41" path="res://examples/godot_state_charts_examples/cooldown/icons/cooldown_overlay.png" id="3_pgrfi"]
+[ext_resource type="Texture2D" uid="uid://c0864gvwmw1qw" path="res://examples/godot_state_charts_examples/cooldown/icons/cooldown_overlay.png" id="3_pgrfi"]
 
 [node name="SkillButton" type="MarginContainer" unique_id=457730966]
 offset_right = 32.0

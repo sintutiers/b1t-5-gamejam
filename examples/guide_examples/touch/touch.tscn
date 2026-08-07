@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3kfkmt7p66c2" path="res://examples/guide_examples/touch/godot_head.tscn" id="5_mimge"]
 [ext_resource type="Resource" uid="uid://brsk1axa7e3h" path="res://examples/guide_examples/touch/mapping_contexts/actions/camera_movement.tres" id="7_hbc7d"]
 [ext_resource type="Resource" uid="uid://b2xbr2rqob6gw" path="res://examples/guide_examples/touch/mapping_contexts/actions/camera_zoom.tres" id="8_t7xto"]
-[ext_resource type="Texture2D" uid="uid://slnmn5k0drdb" path="res://examples/guide_examples/mouse_position_2d/background.svg" id="9_0mhj2"]
+[ext_resource type="Texture2D" uid="uid://bvoab33krqoft" path="res://examples/guide_examples/mouse_position_2d/background.svg" id="9_0mhj2"]
 [ext_resource type="Script" uid="uid://by6w26jgvaitm" path="res://examples/guide_examples/mouse_position_2d/background.gd" id="10_7apxo"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://examples/guide_examples/shared/ui_theme.tres" id="11_bclaf"]
 [ext_resource type="PackedScene" uid="uid://c1ht6xduduxri" path="res://examples/guide_examples/touch/placement_indicator/placement_indicator.tscn" id="12_e3xb3"]
