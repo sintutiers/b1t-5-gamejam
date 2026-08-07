@@ -14,7 +14,7 @@ var _dark_layer: CanvasLayer
 
 func _ready() -> void:
 	_parent = get_parent() as Node2D
-	assert(_parent, "RevealableComponent need Node2D.")
+	assert(_parent, "RevealableComponent need.")
 
 	_original_parent = _parent.get_parent()
 	_dark_layer = _find_canvas_layer_by_number(dark_layer_number)

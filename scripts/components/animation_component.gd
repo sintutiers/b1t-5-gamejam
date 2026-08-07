@@ -24,6 +24,7 @@ func _ready() -> void:
 		movement.moved.connect(_on_moved)
 		movement.stopped.connect(_on_stopped)
 		movement.jumped.connect(_on_jumped)
+		movement.landed.connect(_on_landed)
 
 
 func _process(delta: float) -> void:
@@ -35,10 +36,12 @@ func _process(delta: float) -> void:
 	walk_buffer = 0.0
 	idle_time += delta
 	if idle_time >= idle_delay:
+		tree.active = true
 		playback.travel("idle")
 
 
 func _on_moved(direction: Vector2) -> void:
+	tree.active = true
 	walk_buffer = buffer_duration
 	idle_time = 0.0
 	is_actively_moving = true
@@ -49,9 +52,20 @@ func _on_moved(direction: Vector2) -> void:
 
 func _on_stopped() -> void:
 	is_actively_moving = false
+	var anim_player: AnimationPlayer = tree.get_node(tree.anim_player) as AnimationPlayer
+	if anim_player:
+		anim_player.seek(0.0, true)
+	tree.active = false
 	step.emit(false)
 
 
 func _on_jumped(direction: Vector2) -> void:
 	tree["parameters/jump/blend_position"] = direction
 	playback.travel("jump")
+
+
+func _on_landed() -> void:
+	var anim_player: AnimationPlayer = tree.get_node(tree.anim_player) as AnimationPlayer
+	if anim_player:
+		anim_player.seek(0.0, true)
+	tree.active = false

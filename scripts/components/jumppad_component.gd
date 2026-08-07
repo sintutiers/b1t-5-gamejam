@@ -68,3 +68,4 @@ func _launch(movement: MovementComponent) -> void:
 	if additive:
 		new_velocity += movement.body.velocity
 	movement.launch(new_velocity)
+	movement.jumped.emit(dir)

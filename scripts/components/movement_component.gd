@@ -5,8 +5,7 @@ extends Component
 signal moved(direction: Vector2)
 signal stopped
 signal jumped(direction: Vector2)
-
-const FACING_THRESHOLD: float = 0.5
+signal landed
 
 @export var move_speed: int = 150
 @export var move: GUIDEAction
@@ -19,6 +18,9 @@ var is_interacting: bool = false:
 			state_chart.send_event(&"interact")
 		else:
 			state_chart.send_event(&"interact_end")
+var _last_emitted_direction: Vector2 = Vector2.ZERO
+var _was_moving: bool = false
+var _was_airborne: bool = false
 
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 @onready var state_chart: StateChart = %StateChart
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		_on_interact_physics_update(delta)
 	elif launch_state.get("active"):
 		_on_launch_physics_update(delta)
+	_check_landing()
 
 
 func launch(velocity: Vector2) -> void:
@@ -56,15 +59,22 @@ func get_global_position() -> Vector2:
 	return body.global_position
 
 
-func _on_move_physics_update(delta: float) -> void:
+func _on_move_physics_update(_delta: float) -> void:
 	var input_dir: Vector2 = move.value_axis_2d
+	if input_dir.length() < 0.15:
+		input_dir = Vector2.ZERO
 	if input_dir != Vector2.ZERO:
 		body.velocity = input_dir * move_speed
 		_update_facing(input_dir)
-		moved.emit(facing)
+		if not _was_moving or facing != _last_emitted_direction:
+			_last_emitted_direction = facing
+			moved.emit(facing)
+		_was_moving = true
 	else:
 		body.velocity = Vector2.ZERO
-		stopped.emit()
+		if _was_moving:
+			stopped.emit()
+		_was_moving = false
 	body.move_and_slide()
 
 
@@ -77,14 +87,14 @@ func _on_launch_physics_update(_delta: float) -> void:
 	body.move_and_slide()
 
 
+func _check_landing() -> void:
+	var airborne: bool = launch_state.get("active")
+	if _was_airborne and not airborne and body.is_on_floor():
+		landed.emit()
+	_was_airborne = airborne
+
+
 func _update_facing(direction: Vector2) -> void:
-	if abs(direction.x) > FACING_THRESHOLD:
-		facing.x = 1.0 if direction.x > 0.0 else -1.0
-	else:
-		facing.x = 0.0
-	if abs(direction.y) > FACING_THRESHOLD:
-		facing.y = 1.0 if direction.y > 0.0 else -1.0
-	else:
-		facing.y = 0.0
-	if facing == Vector2.ZERO:
-		facing = Vector2.DOWN
+	if direction == Vector2.ZERO:
+		return
+	facing = Vector2(1.0 if direction.x >= 0.0 else -1.0, 1.0 if direction.y >= 0.0 else -1.0).normalized()
