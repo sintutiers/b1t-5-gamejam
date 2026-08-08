@@ -1,0 +1,290 @@
+[gd_scene format=3 uid="uid://bpjx63dl122wk"]
+
+[ext_resource type="Script" uid="uid://dfyqa3nhblwt4" path="res://assets/scenes/game/maps/1.gd" id="1_hu2do"]
+[ext_resource type="Texture2D" uid="uid://b2yknngdbyww5" path="res://assets/art/erinbed.png" id="2_6r8ss"]
+[ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="2_wdwjy"]
+[ext_resource type="Texture2D" uid="uid://byc4ksj2malva" path="res://assets/art/erinfloor.png" id="3_0j813"]
+[ext_resource type="Script" uid="uid://bpsxfvmvbvgte" path="res://scripts/hud.gd" id="3_4mrs3"]
+[ext_resource type="PackedScene" uid="uid://dav2p3brb25hq" path="res://assets/scenes/game/item_slot.tscn" id="4_6r8ss"]
+[ext_resource type="Texture2D" uid="uid://cucp87ha5d0cf" path="res://assets/art/erinpath.png" id="4_lkprt"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_0j813"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_lkprt"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_4g1gd"]
+[ext_resource type="Texture2D" uid="uid://bt7cl4kuun6qx" path="res://assets/art/interactableSprites/backgroundColor.png" id="8_7agbr"]
+[ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="9_itbsq"]
+[ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="10_tb6h7"]
+[ext_resource type="Texture2D" uid="uid://dcpceoyx50dkx" path="res://assets/art/trapdoor.png" id="11_e1dp4"]
+[ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_fhiqb"]
+[ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="13_ktc2h"]
+[ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="14_d78ck"]
+[ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="15_7pat7"]
+[ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="16_c55h8"]
+[ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="17_nn4ef"]
+[ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="18_enafu"]
+[ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="19_rcavj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4g1gd"]
+texture = ExtResource("2_6r8ss")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7agbr"]
+texture = ExtResource("3_0j813")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_itbsq"]
+texture = ExtResource("4_lkprt")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tb6h7"]
+texture = ExtResource("11_e1dp4")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hu2do"]
+sources/0 = SubResource("TileSetAtlasSource_4g1gd")
+sources/1 = SubResource("TileSetAtlasSource_7agbr")
+sources/2 = SubResource("TileSetAtlasSource_itbsq")
+sources/3 = SubResource("TileSetAtlasSource_tb6h7")
+
+[sub_resource type="Resource" id="Resource_4p6eu"]
+script = ExtResource("7_4g1gd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_222sq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6h5f"]
+atlas = ExtResource("13_ktc2h")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1sf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6h5f")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2312"]
+atlas = ExtResource("13_ktc2h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rnosa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2312")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3v5l0"]
+shader = ExtResource("18_enafu")
+shader_parameter/light_pos = Vector2(0.5, 0.5)
+shader_parameter/shape_type = 0
+shader_parameter/circle_radius = 100.0
+shader_parameter/rect_half_extents = Vector2(100, 100)
+shader_parameter/rect_rotation = 0.0
+shader_parameter/dither_size = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_222sq"]
+radius = 100.0
+
+[node name="1" type="Node2D" unique_id=1401155993]
+script = ExtResource("1_hu2do")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=267153179]
+tile_set = SubResource("TileSet_hu2do")
+
+[node name="player" parent="." unique_id=2042953629 instance=ExtResource("2_wdwjy")]
+position = Vector2(80.113, 56.512)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=681289244]
+script = ExtResource("3_4mrs3")
+item_slot_scene = ExtResource("4_6r8ss")
+
+[node name="Control" type="Control" parent="HUD" unique_id=229669583]
+custom_maximum_size = Vector2(1100, 550)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="HUD/Control" unique_id=736664669]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 100
+accessibility_region = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1175696106]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(80.113, 56.512)
+zoom = Vector2(3, 3)
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=1772935995]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_0j813")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=384748085 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(80.113, 56.512)
+script = ExtResource("6_lkprt")
+follow_mode = 1
+follow_target = NodePath("../player")
+zoom = Vector2(3, 3)
+tween_resource = SubResource("Resource_4p6eu")
+follow_damping = true
+follow_damping_value = Vector2(0.02, 0.02)
+draw_limits = true
+
+[node name="darkabe" type="CanvasLayer" parent="." unique_id=770751611]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="BackgroundColor2" type="Sprite2D" parent="darkabe" unique_id=248604076]
+position = Vector2(11.9999695, -311.00006)
+scale = Vector2(4.7578125, 1.2955607)
+texture = ExtResource("8_7agbr")
+
+[node name="reveal2" type="Node" parent="darkabe/BackgroundColor2" unique_id=35404707]
+script = ExtResource("9_itbsq")
+start_hidden = false
+
+[node name="jumppadtest" type="Area2D" parent="darkabe" unique_id=884582300]
+script = ExtResource("10_tb6h7")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="reveal" type="Node" parent="darkabe/jumppadtest" unique_id=1410248804]
+script = ExtResource("9_itbsq")
+start_hidden = false
+disable_collision_when_hidden = false
+
+[node name="ye" type="Sprite2D" parent="darkabe/jumppadtest" unique_id=1894708675]
+scale = Vector2(1.1048678, 1.1048677)
+texture = ExtResource("11_e1dp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumppadtest" unique_id=1601023486]
+shape = SubResource("RectangleShape2D_q1sf4")
+
+[node name="star collectable" type="Area2D" parent="darkabe" unique_id=35908412]
+position = Vector2(75, -325)
+script = ExtResource("12_fhiqb")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/star collectable" unique_id=654747586]
+shape = SubResource("RectangleShape2D_222sq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="darkabe/star collectable" unique_id=201492]
+sprite_frames = SubResource("SpriteFrames_q1sf4")
+frame_progress = 0.5695321
+
+[node name="CollectableComponent" type="Node" parent="darkabe/star collectable" unique_id=60714528]
+script = ExtResource("14_d78ck")
+definition = ExtResource("15_7pat7")
+disappear_on_collect = false
+metadata/_custom_type_script = "uid://by7xho3qu0wac"
+
+[node name="Interactable" type="Node2D" parent="darkabe/star collectable" unique_id=1616710467 node_paths=PackedStringArray("sprite")]
+script = ExtResource("16_c55h8")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="candle collectable" type="Area2D" parent="darkabe" unique_id=149593960]
+position = Vector2(-75, -325)
+script = ExtResource("12_fhiqb")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/candle collectable" unique_id=1649905261]
+shape = SubResource("RectangleShape2D_222sq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="darkabe/candle collectable" unique_id=712355458]
+sprite_frames = SubResource("SpriteFrames_rnosa")
+
+[node name="CollectableComponent" type="Node" parent="darkabe/candle collectable" unique_id=1253932359]
+script = ExtResource("14_d78ck")
+definition = ExtResource("17_nn4ef")
+disappear_on_collect = false
+metadata/_custom_type_script = "uid://by7xho3qu0wac"
+
+[node name="Interactable" type="Node2D" parent="darkabe/candle collectable" unique_id=350674898 node_paths=PackedStringArray("sprite")]
+script = ExtResource("16_c55h8")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="background thing" type="CanvasLayer" parent="." unique_id=512853945]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="background thing" unique_id=1321510009 node_paths=PackedStringArray("light_area")]
+material = SubResource("ShaderMaterial_3v5l0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.1254902, 0.22352941, 1)
+script = ExtResource("19_rcavj")
+light_area = NodePath("RapierArea2D")
+
+[node name="RapierArea2D" type="Area2D" parent="background thing/ColorRect" unique_id=1863776376]
+script = ExtResource("12_fhiqb")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="background thing/ColorRect/RapierArea2D" unique_id=1961524595]
+shape = SubResource("CircleShape2D_222sq")
