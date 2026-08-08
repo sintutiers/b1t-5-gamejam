@@ -6,6 +6,7 @@ signal moved(direction: Vector2)
 signal stopped
 signal jumped(direction: Vector2)
 signal landed
+signal flipped(new_facing_x: float)
 
 @export var move_speed: int = 150
 @export var move: GUIDEAction
@@ -18,7 +19,6 @@ var is_interacting: bool = false:
 			state_chart.send_event(&"interact")
 		else:
 			state_chart.send_event(&"interact_end")
-var _last_emitted_direction: Vector2 = Vector2.ZERO
 var _was_moving: bool = false
 var _was_airborne: bool = false
 
@@ -65,9 +65,8 @@ func _on_move_physics_update(_delta: float) -> void:
 		input_dir = Vector2.ZERO
 	if input_dir != Vector2.ZERO:
 		body.velocity = input_dir * move_speed
-		_update_facing(input_dir)
-		if not _was_moving or facing != _last_emitted_direction:
-			_last_emitted_direction = facing
+		var direction_changed: bool = _update_facing(input_dir)
+		if not _was_moving or direction_changed:
 			moved.emit(facing)
 		_was_moving = true
 	else:
@@ -94,7 +93,15 @@ func _check_landing() -> void:
 	_was_airborne = airborne
 
 
-func _update_facing(direction: Vector2) -> void:
+func _update_facing(direction: Vector2) -> bool:
 	if direction == Vector2.ZERO:
-		return
-	facing = Vector2(1.0 if direction.x >= 0.0 else -1.0, 1.0 if direction.y >= 0.0 else -1.0).normalized()
+		return false
+	var new_facing: Vector2 = Vector2(
+		1.0 if direction.x >= 0.0 else -1.0,
+		1.0 if direction.y >= 0.0 else -1.0,
+	).normalized()
+	var changed: bool = new_facing != facing
+	if sign(new_facing.x) != sign(facing.x) and sign(new_facing.x) != 0.0 and sign(facing.x) != 0.0:
+		flipped.emit(new_facing.x)
+	facing = new_facing
+	return changed

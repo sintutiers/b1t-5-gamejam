@@ -8,12 +8,12 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_4p6eu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
-[ext_resource type="Texture2D" uid="uid://dynhqydehk1ve" path="res://assets/art/interactableSprites/jumpTiles(jumpTileUp) _0001.png" id="6_5r203"]
 [ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="8_7jycx"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
 [ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="10_222sq"]
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="10_va7p5"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="11_222sq"]
+[ext_resource type="Texture2D" uid="uid://dcpceoyx50dkx" path="res://assets/art/trapdoor.png" id="11_b2312"]
 [ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="11_sqgwn"]
 [ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="12_4kau2"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_222sq"]
@@ -144,9 +144,9 @@ script = ExtResource("8_7jycx")
 start_hidden = false
 disable_collision_when_hidden = false
 
-[node name="PathColor" type="Sprite2D" parent="darkabe/jumppadtest" unique_id=1894708675]
+[node name="ye" type="Sprite2D" parent="darkabe/jumppadtest" unique_id=1894708675]
 scale = Vector2(1.1048678, 1.1048677)
-texture = ExtResource("6_5r203")
+texture = ExtResource("11_b2312")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumppadtest" unique_id=1601023486]
 shape = SubResource("RectangleShape2D_q1sf4")
