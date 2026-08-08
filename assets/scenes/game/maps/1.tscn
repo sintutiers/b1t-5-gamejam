@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="2_der4t"]
 [ext_resource type="PackedScene" uid="uid://dav2p3brb25hq" path="res://assets/scenes/game/item_slot.tscn" id="2_n7vi5"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_4p6eu"]
+[ext_resource type="Texture2D" uid="uid://cudp8roqkk1sf" path="res://assets/art/interactableSprites/creaturenpc (1).png" id="3_rgfuu"]
+[ext_resource type="Script" uid="uid://rkvinud86uvp" path="res://scripts/components/dialogue_component.gd" id="4_1p8di"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
+[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="5_h7a0r"]
 [ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="8_7jycx"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
 [ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="10_222sq"]
@@ -19,6 +22,30 @@
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_222sq"]
 [ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="14_n7vi5"]
 [ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="15_b2312"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mwam"]
+atlas = ExtResource("3_rgfuu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3ldw"]
+atlas = ExtResource("3_rgfuu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lfwmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mwam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3ldw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfwmx"]
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
@@ -71,6 +98,29 @@ radius = 100.0
 
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_8wbli")
+
+[node name="NPC" type="Area2D" parent="." unique_id=208642627]
+position = Vector2(0, -392)
+script = ExtResource("12_222sq")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1722183037]
+sprite_frames = SubResource("SpriteFrames_lfwmx")
+frame_progress = 0.8042721
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1859490168]
+shape = SubResource("RectangleShape2D_lfwmx")
+
+[node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
+script = ExtResource("4_1p8di")
+dialogue_resource = ExtResource("5_h7a0r")
+metadata/_custom_type_script = "uid://rkvinud86uvp"
+
+[node name="Interactable" type="Node2D" parent="NPC" unique_id=1191208338 node_paths=PackedStringArray("sprite")]
+script = ExtResource("11_sqgwn")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("2_der4t")]
 position = Vector2(80.113, 56.512)

@@ -4,16 +4,28 @@
 [ext_resource type="Script" uid="uid://bgthh72eu0du" path="res://addons/maaacks_game_template/base/nodes/windows/confirmation_overlaid_window.gd" id="2_sw7p1"]
 
 [node name="ConfirmationOverlaidWindow" unique_id=1482267070 instance=ExtResource("1_vfkm2")]
+offset_left = -215.00003
+offset_top = -116.5
+offset_right = 215.00003
+offset_bottom = 116.5
 script = ExtResource("2_sw7p1")
 confirm_button_text = "Confirm"
 update_content = true
 title = "Confirm?"
 close_button_text = "Cancel"
 
-[node name="TitleLabel" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" parent_id_path=PackedInt32Array(1788474031) index="0" unique_id=1049966061]
+[node name="BoxContainer" parent="ContentContainer/BoxContainer/TitleMargin" parent_id_path=PackedInt32Array(1262022916) index="0" unique_id=1788474031]
+custom_minimum_size = Vector2(0, 25)
+
+[node name="TitleLabel" parent="ContentContainer/BoxContainer/TitleMargin/BoxContainer" index="0" unique_id=1049966061]
+custom_minimum_size = Vector2(0, 20)
+theme_override_font_sizes/font_size = 18
 text = "Confirm?"
 
-[node name="MenuButtons" parent="ContentContainer/BoxContainer/MenuButtonsMargin" parent_id_path=PackedInt32Array(1413292752) index="0" unique_id=1371114575]
+[node name="MenuButtonsMargin" parent="ContentContainer/BoxContainer" parent_id_path=PackedInt32Array(394030069) index="2" unique_id=1413292752]
+custom_minimum_size = Vector2(0, 35)
+
+[node name="MenuButtons" parent="ContentContainer/BoxContainer/MenuButtonsMargin" index="0" unique_id=1371114575]
 vertical = false
 
 [node name="CloseButton" parent="ContentContainer/BoxContainer/MenuButtonsMargin/MenuButtons" index="0" unique_id=314526102]
