@@ -8,5 +8,5 @@ process_mode = 0
 script = ExtResource("1_euyj1")
 pauses_game = false
 makes_mouse_visible = true
-exclusive = true
-exclusive_background_color = Color(0, 0, 0, 0.5)
+exclusive = false
+exclusive_background_color = Color(0, 0, 0, 0)

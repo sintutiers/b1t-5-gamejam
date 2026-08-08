@@ -14,10 +14,10 @@ ss2d/version="3.3.1"
 
 [application]
 
-config/name="cool b1t (5) gamejam"
+config/name="You. Must. Sleep "
 config/description="our cool game jam
-made by dean and chiel"
-config/version="- pre pre pre alpha not fucking done yet stage of gamedevelopment"
+made by dean and chiel and erin"
+config/version="- pre alpha not fucking done yet stage of gamedevelopment"
 run/main_scene="uid://4atoxgqigr8l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://dynhqydehk1ve"
@@ -49,6 +49,10 @@ gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
 gdscript/warnings/return_value_discarded=1
 gdscript/warnings/missing_await=1
+
+[dialogue_manager]
+
+runtime/balloon_path="res://assets/dialogue/balloon.tscn"
 
 [display]
 
@@ -133,7 +137,7 @@ cancel={
 [internationalization]
 
 locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
-locale/translations_pot_files=PackedStringArray("res://assets/dialogue/PLACEHOLDER.dialogue")
+locale/translations_pot_files=PackedStringArray("res://assets/dialogue/creature1.dialogue")
 
 [maaacks_game_template]
 

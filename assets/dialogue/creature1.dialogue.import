@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b2mfjnpavoagi"
+path="res://.godot/imported/creature1.dialogue-c0d9d2ea2d6083b23642ad6868afeb1c.tres"
+
+[deps]
+
+source_file="res://assets/dialogue/creature1.dialogue"
+dest_files=["res://.godot/imported/creature1.dialogue-c0d9d2ea2d6083b23642ad6868afeb1c.tres"]
+
+[params]
+
+defaults=true
