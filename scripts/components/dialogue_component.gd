@@ -2,6 +2,7 @@
 class_name DialogueComponent
 extends Node
 
+## the audio/talk stuff is a hack, need to wire it propperly it into the current system.
 @export var dialogue_resource: DialogueResource
 @export var dialogue_start: String = "start"
 @export var talk_sound: AudioStream
