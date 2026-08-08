@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
 [ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="5_h7a0r"]
+[ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="6_1p8di"]
 [ext_resource type="Script" uid="uid://db56p1rl2v5xs" path="res://scripts/components/revealable_component.gd" id="8_7jycx"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
 [ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="10_222sq"]
@@ -114,7 +115,12 @@ shape = SubResource("RectangleShape2D_lfwmx")
 [node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
 script = ExtResource("4_1p8di")
 dialogue_resource = ExtResource("5_h7a0r")
+talk_sound = ExtResource("6_1p8di")
 metadata/_custom_type_script = "uid://rkvinud86uvp"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=1770966873]
+unique_name_in_owner = true
+volume_db = 14.789
 
 [node name="Interactable" type="Node2D" parent="NPC" unique_id=1191208338 node_paths=PackedStringArray("sprite")]
 script = ExtResource("11_sqgwn")

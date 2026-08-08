@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buynnija0u3tc" path="res://assets/dialogue/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="2_nmn4d"]
 [ext_resource type="Theme" uid="uid://bac1khm2nmjl3" path="res://assets/art/themes/chiel theme he can fuck around with.tres" id="2_ofehm"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
@@ -128,6 +129,7 @@ expand_margin_bottom = 2.0
 [node name="ExampleBalloon" type="CanvasLayer" unique_id=1434168376]
 layer = 100
 script = ExtResource("1_36de5")
+talk_sound = ExtResource("2_nmn4d")
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
