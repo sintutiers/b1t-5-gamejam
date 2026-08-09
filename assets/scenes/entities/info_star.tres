@@ -10,6 +10,6 @@ region = Rect2(2, 103, 29, 24)
 [resource]
 script = ExtResource("2_484lv")
 id = &"star"
-display_name = "goon"
+display_name = "star"
 icon = SubResource("AtlasTexture_rnosa")
 metadata/_custom_type_script = "uid://ckc3qkmv1qk4f"
