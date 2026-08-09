@@ -1,6 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://bac1khm2nmjl3"]
 
 [ext_resource type="FontFile" uid="uid://coisyh8l6rcuc" path="res://assets/art/themes/pixelated-elegance-font/PixelatedEleganceRegular-ovawB.ttf" id="1_iia7y"]
+[ext_resource type="Texture2D" uid="uid://byc4ksj2malva" path="res://assets/art/erinfloor.png" id="2_h73cr"]
+[ext_resource type="Texture2D" uid="uid://dcpceoyx50dkx" path="res://assets/art/trapdoor.png" id="3_qhcgw"]
+[ext_resource type="Texture2D" uid="uid://iijsdomh7v4s" path="res://assets/art/interactableSprites/erinbed.png" id="4_8hx6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rtxy"]
 content_margin_left = 4.0
@@ -151,6 +154,12 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq6eh"]
 bg_color = Color(0.99215686, 0.9882353, 0.8980392, 1)
+
+[sub_resource type="DPITexture" id="DPITexture_6b3ge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1vep"]
+atlas = ExtResource("4_8hx6y")
+region = Rect2(13, 44, 1, 16)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbs47"]
 bg_color = Color(0.93333334, 0.92941177, 0.84705883, 1)
@@ -602,6 +611,10 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_rrxf3")
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_2e0dr")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_fgisk")
 HSeparator/styles/separator = SubResource("StyleBoxFlat_hq6eh")
+HSlider/icons/grabber = ExtResource("3_qhcgw")
+HSlider/icons/grabber_disabled = SubResource("DPITexture_6b3ge")
+HSlider/icons/grabber_highlight = ExtResource("2_h73cr")
+HSlider/icons/tick = SubResource("AtlasTexture_b1vep")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_xbs47")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_6b3ge")
 HSlider/styles/slider = SubResource("StyleBoxFlat_jlkyl")

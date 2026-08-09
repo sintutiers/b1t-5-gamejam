@@ -13,15 +13,18 @@ confirm_new_game = true
 options_packed_scene = ExtResource("3_0jpat")
 credits_packed_scene = ExtResource("4_m0ubd")
 
+[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" parent_id_path=PackedInt32Array(556427956) index="0" unique_id=359406872]
+text = "You. Must. Sleep "
+
 [node name="SubTitleLabel" parent="MenuContainer/SubTitleMargin/SubTitleContainer" parent_id_path=PackedInt32Array(930520368) index="0" unique_id=1037003361]
 text = "very cool"
 
 [node name="MenuButtonsBoxContainer" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="0" unique_id=2017477786]
 custom_minimum_size = Vector2(175, 200)
 offset_left = -87.5
-offset_top = -100.0
+offset_top = -133.0
 offset_right = 87.5
-offset_bottom = 125.0
+offset_bottom = 92.0
 
 [node name="NewGameButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="0" unique_id=2044537792]
 custom_minimum_size = Vector2(0, 45)
@@ -52,6 +55,9 @@ theme_override_font_sizes/font_size = 21
 [node name="ExitButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="5" unique_id=1750454379]
 custom_minimum_size = Vector2(0, 40)
 theme_override_font_sizes/font_size = 21
+
+[node name="VersionLabel" parent="VersionMargin/VersionContainer" parent_id_path=PackedInt32Array(1603969262) index="0" unique_id=793266470]
+text = "v- pre alpha not fucking done yet stage of gamedevelopment"
 
 [node name="NewGameConfirmation" parent="." index="5" unique_id=487332143 instance=ExtResource("5_627ab")]
 unique_name_in_owner = true
