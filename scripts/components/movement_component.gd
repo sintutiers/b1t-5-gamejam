@@ -8,7 +8,7 @@ signal jumped(direction: Vector2)
 signal landed
 signal flipped(new_facing_x: float)
 
-@export var move_speed: int = 150
+@export var move_speed: int = 100
 @export var move: GUIDEAction
 
 var facing: Vector2 = Vector2.DOWN
@@ -19,8 +19,11 @@ var is_interacting: bool = false:
 			state_chart.send_event(&"interact")
 		else:
 			state_chart.send_event(&"interact_end")
+
 var _was_moving: bool = false
 var _was_airborne: bool = false
+var _launch_target: Vector2
+var _launch_speed: float = 0.0
 
 @onready var body: RapierCharacterBody2D = get_parent() as RapierCharacterBody2D
 @onready var state_chart: StateChart = %StateChart
@@ -46,8 +49,11 @@ func _physics_process(delta: float) -> void:
 	_check_landing()
 
 
-func launch(velocity: Vector2) -> void:
-	body.velocity = velocity
+func launch(direction: Vector2, speed: float, distance: float) -> void:
+	if direction == Vector2.ZERO or speed <= 0.0 or distance <= 0.0:
+		return
+	_launch_speed = speed
+	_launch_target = body.global_position + direction.normalized() * distance
 	state_chart.send_event(&"launch")
 
 
@@ -82,7 +88,18 @@ func _on_interact_physics_update(_delta: float) -> void:
 	body.move_and_slide()
 
 
-func _on_launch_physics_update(_delta: float) -> void:
+func _on_launch_physics_update(delta: float) -> void:
+	var to_target: Vector2 = _launch_target - body.global_position
+	var remaining_distance: float = to_target.length()
+	var step_distance: float = _launch_speed * delta
+
+	if remaining_distance <= step_distance:
+		body.global_position = _launch_target
+		body.velocity = Vector2.ZERO
+		state_chart.send_event(&"launch_end")
+		return
+
+	body.velocity = to_target.normalized() * _launch_speed
 	body.move_and_slide()
 
 

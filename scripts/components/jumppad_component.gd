@@ -19,7 +19,8 @@ const DIRECTION_VECTORS: Dictionary[Direction, Vector2] = {
 
 @export var direction: Direction = Direction.UP
 @export var custom_direction: Vector2 = Vector2.UP
-@export var launch_speed: float = 300.0
+@export var speed: float = 300.0
+@export var distance: float = 150.0
 @export var additive: bool = false
 @export var cooldown: float = 0.5
 
@@ -63,9 +64,5 @@ func _launch(movement: MovementComponent) -> void:
 	var dir: Vector2 = get_launch_direction()
 	if dir == Vector2.ZERO:
 		return
-	dir = dir.normalized()
-	var new_velocity: Vector2 = dir * launch_speed
-	if additive:
-		new_velocity += movement.body.velocity
-	movement.launch(new_velocity)
+	movement.launch(dir, speed, distance)
 	movement.jumped.emit(dir)

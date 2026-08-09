@@ -41,6 +41,13 @@ LightManager="*uid://lnayhbjd18wf"
 
 [debug]
 
+gdscript/warnings/directory_rules={
+"res://addons": 0,
+"res://assets/scenes/credits": 0,
+"res://assets/scenes/game/scripts": 0,
+"res://assets/scenes/ui": 0,
+"res://examples": 0
+}
 gdscript/warnings/untyped_declaration=1
 gdscript/warnings/inferred_declaration=1
 gdscript/warnings/unsafe_property_access=1
