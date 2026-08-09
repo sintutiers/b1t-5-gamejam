@@ -11,7 +11,7 @@ var _is_walking: bool = false
 var _footstep_timer: float = 0.0
 
 @onready var player: AudioStreamPlayer2D = %AudioStreamPlayer2D
-@onready var animation: AnimationComponent = get_sibling(AnimationComponent)
+@onready var animation: AnimationComponent = get_component(AnimationComponent)
 
 
 func _ready() -> void:

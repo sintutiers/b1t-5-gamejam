@@ -8,7 +8,7 @@ signal collected(definition: ItemDefinition, amount: int)
 @export var amount: int = 1
 @export var disappear_on_collect: bool = true
 
-@onready var interactable: Interactable = get_sibling(Interactable)
+@onready var interactable: Interactable = get_component(Interactable) as Interactable
 
 
 func _ready() -> void:

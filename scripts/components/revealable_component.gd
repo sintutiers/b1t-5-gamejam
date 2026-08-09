@@ -1,6 +1,6 @@
 #revealable_component.gd
 class_name RevealableComponent
-extends Node
+extends Component
 
 @export var start_hidden: bool = true
 @export var disable_collision_when_hidden: bool = true

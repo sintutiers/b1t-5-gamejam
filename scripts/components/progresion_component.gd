@@ -2,7 +2,7 @@
 class_name ProgressionComponent
 extends Component
 
-@onready var collectable: CollectableComponent = get_sibling(CollectableComponent)
+@onready var collectable: CollectableComponent = get_component(CollectableComponent)
 
 
 func _ready() -> void:

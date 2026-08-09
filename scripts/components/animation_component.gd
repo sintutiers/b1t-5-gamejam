@@ -16,7 +16,7 @@ var _idle_timer: SceneTreeTimer
 
 @onready var tree: AnimationTree = %AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = tree["parameters/playback"]
-@onready var movement: MovementComponent = get_sibling(MovementComponent, false)
+@onready var movement: MovementComponent = get_component(MovementComponent, false)
 @onready var sprite: Node2D = %AnimatedSprite2D
 
 

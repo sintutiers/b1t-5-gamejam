@@ -4,8 +4,8 @@ extends Component
 
 @export var interact_action: GUIDEAction
 
-@onready var interact_area: RapierArea2D = get_sibling(RapierArea2D)
-@onready var movement: MovementComponent = get_sibling(MovementComponent)
+@onready var interact_area: RapierArea2D = get_component(RapierArea2D)
+@onready var movement: MovementComponent = get_component(MovementComponent)
 
 
 func _ready() -> void:

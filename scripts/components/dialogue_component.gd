@@ -1,23 +1,19 @@
 # dialogue_component.gd
 class_name DialogueComponent
-extends Node
-
+extends Component
 ## the audio/talk stuff is a hack, need to wire it propperly it into the current system.
+
 @export var dialogue_resource: DialogueResource
 @export var dialogue_start: String = "start"
 @export var talk_sound: AudioStream
 
 var _movement: MovementComponent
 
-@onready var interactable: Interactable = get_parent() as Interactable
+@onready var interactable: Interactable = get_component(Interactable) as Interactable
 @onready var player: AudioStreamPlayer2D = %AudioStreamPlayer2D
 
 
 func _ready() -> void:
-	if not interactable:
-		interactable = Component.find_sibling_of_type(self, Interactable, false) as Interactable
-		if interactable:
-			push_warning("%s: Interactable is sibling. Prefer child of Interactable." % name)
 	assert(interactable, "Interactable needed.")
 	if not dialogue_resource:
 		push_warning("No DialogueResource.")
@@ -44,10 +40,10 @@ func play_talk_letter(letter: String, letter_index: int) -> void:
 	player.play()
 
 
-func _on_interacted(by: RapierArea2D) -> void:
+func _on_interacted(_by: RapierArea2D) -> void:
 	if not dialogue_resource:
 		return
-	_movement = Component.find_sibling_of_type(by, MovementComponent) as MovementComponent
+	_movement = get_component(MovementComponent) as MovementComponent
 	if _movement:
 		_movement.is_interacting = true
 	DialogueManager.show_dialogue_balloon(dialogue_resource, dialogue_start, [self])

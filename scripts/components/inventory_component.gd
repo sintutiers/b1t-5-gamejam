@@ -2,7 +2,7 @@
 ### not sure i need this, im still setting systems up
 ## decided to use this as dependency for future exensibility
 class_name InventoryComponent
-extends Node
+extends Component
 
 signal item_added(definition: ItemDefinition, count: int)
 signal item_removed(definition: ItemDefinition, count: int)

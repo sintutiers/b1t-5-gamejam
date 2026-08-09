@@ -1,6 +1,6 @@
 # combat_component.gd
 class_name CombatComponent
-extends Node
+extends Component
 
 @export var look_relative: GUIDEAction
 @export var look_absolute: GUIDEAction

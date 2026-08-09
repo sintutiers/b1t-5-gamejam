@@ -3,27 +3,29 @@ class_name Component
 extends Node
 
 
-static func find_sibling_of_type(from: Node, type: Variant, warn_if_missing: bool = true) -> Node:
-	var parent: Node = from.get_parent()
-	if not parent:
-		push_error("%s: no parent." % from.name)
-		return null
-	for child: Node in parent.get_children():
-		if is_instance_of(child, type):
-			return child
-	if warn_if_missing:
-		push_warning("%s: no sibling of type %s." % [from.name, type])
-	return null
-
-
-static func find_child_of_type(from: Node, type: Variant, warn_if_missing: bool = false) -> Node:
+static func find_child_of_type(from: Node, type: Variant, warn: bool = false) -> Node:
 	for child: Node in from.get_children():
 		if is_instance_of(child, type):
 			return child
-	if warn_if_missing:
-		push_warning("%s: no child of type %s." % [from.name, type])
+	if warn:
+		push_warning("%s: no %s child." % [from.name, type])
 	return null
 
 
-func get_sibling(type: Variant, warn_if_missing: bool = true) -> Node:
-	return Component.find_sibling_of_type(self, type, warn_if_missing)
+func get_component(type: Variant, warn: bool = true) -> Node:
+	var root: Node = _find_entity_root()
+	for child: Node in root.find_children("*", "", true, false):
+		if is_instance_of(child, type):
+			return child
+	if warn:
+		push_warning("%s: no %s found." % [name, type])
+	return null
+
+
+func _find_entity_root() -> Node:
+	var node: Node = get_parent()
+	while node:
+		if node is Entity:
+			return node
+		node = node.get_parent()
+	return get_parent()
