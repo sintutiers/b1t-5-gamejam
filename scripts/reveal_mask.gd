@@ -2,74 +2,71 @@ class_name RevealMask
 extends ColorRect
 
 @export var light_area: RapierArea2D
-@export var base_dither_size: float = 40.0
+@export var parallax: Parallax2D
+@export var base_dither_size := 40.0
 
 
 func _ready() -> void:
 	if not light_area:
-		for child: Node in get_children():
+		for child in get_children():
 			if child.name == "LightRadius" and child is RapierArea2D:
-				light_area = child as RapierArea2D
+				light_area = child
 				break
+
 	if light_area:
 		light_area.monitoring = false
 		light_area.monitorable = false
 
 
 func _process(_delta: float) -> void:
-	var player_node: Node = get_tree().get_first_node_in_group("player")
-	if not (player_node is RapierCharacterBody2D):
-		return
-	var player: RapierCharacterBody2D = player_node as RapierCharacterBody2D
-	var active_material: ShaderMaterial = material as ShaderMaterial
-	if not active_material:
+	var player := get_tree().get_first_node_in_group("player") as RapierCharacterBody2D
+	if not player:
 		return
 
-	var canvas_transform: Transform2D = get_viewport().get_canvas_transform()
-	var canvas_scale: Vector2 = canvas_transform.get_scale()
-	var screen_position: Vector2 = canvas_transform * player.global_position
+	if parallax:
+		parallax.screen_offset = player.global_position
 
-	active_material.set_shader_parameter("light_pos", screen_position)
-	active_material.set_shader_parameter(
-		"dither_size",
-		base_dither_size * max(canvas_scale.x, canvas_scale.y),
-	)
-	_push_shape_to_shader(active_material, canvas_scale)
+	var mat := material as ShaderMaterial
+	if not mat:
+		return
+
+	var canvas_transform := get_viewport().get_canvas_transform()
+	var scale := canvas_transform.get_scale()
+
+	mat.set_shader_parameter("light_pos", canvas_transform * player.global_position)
+	mat.set_shader_parameter("dither_size", base_dither_size * max(scale.x, scale.y))
+	_push_shape_to_shader(mat, scale)
 
 
-func _push_shape_to_shader(shader_material: ShaderMaterial, canvas_scale: Vector2) -> void:
+func _push_shape_to_shader(mat: ShaderMaterial, scale: Vector2) -> void:
 	if not light_area:
-		_use_default_circle(shader_material)
+		_use_default_circle(mat)
 		return
 
-	for child: Node in light_area.get_children():
+	for child in light_area.get_children():
 		if not child is CollisionShape2D:
 			continue
-		var collision_shape: CollisionShape2D = child as CollisionShape2D
-		var shape: Shape2D = collision_shape.shape
+
+		var shape := (child as CollisionShape2D).shape
 		if not shape:
 			continue
 
 		if shape is CircleShape2D:
-			var circle: CircleShape2D = shape as CircleShape2D
-			var radius: float = circle.radius * max(canvas_scale.x, canvas_scale.y)
-			shader_material.set_shader_parameter("shape_type", 0)
-			shader_material.set_shader_parameter("circle_radius", radius)
+			mat.set_shader_parameter("shape_type", 0)
+			mat.set_shader_parameter("circle_radius", shape.radius * max(scale.x, scale.y))
 			return
 
 		if shape is RectangleShape2D:
-			var rect: RectangleShape2D = shape as RectangleShape2D
-			var pixel_half: Vector2 = rect.size * 0.5 * canvas_scale
-			shader_material.set_shader_parameter("shape_type", 1)
-			shader_material.set_shader_parameter("rect_half_extents", pixel_half)
-			shader_material.set_shader_parameter("rect_rotation", collision_shape.global_rotation)
+			mat.set_shader_parameter("shape_type", 1)
+			mat.set_shader_parameter("rect_half_extents", shape.size * 0.5 * scale)
+			mat.set_shader_parameter("rect_rotation", child.global_rotation)
 			return
 
 		break
 
-	_use_default_circle(shader_material)
+	_use_default_circle(mat)
 
 
-func _use_default_circle(shader_material: ShaderMaterial) -> void:
-	shader_material.set_shader_parameter("shape_type", 0)
-	shader_material.set_shader_parameter("circle_radius", 150.0)
+func _use_default_circle(mat: ShaderMaterial) -> void:
+	mat.set_shader_parameter("shape_type", 0)
+	mat.set_shader_parameter("circle_radius", 150.0)
