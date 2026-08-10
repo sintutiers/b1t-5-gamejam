@@ -26,6 +26,8 @@
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_222sq"]
 [ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="14_n7vi5"]
 [ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="15_b2312"]
+[ext_resource type="Script" uid="uid://busd3yfk5p1mx" path="res://addons/godot-rapier2d/custom_nodes/rapier_static_body_2d.gd" id="21_m24xu"]
+[ext_resource type="Script" uid="uid://ufme4hlepwb3" path="res://assets/scenes/entities/fall_zone.gd" id="22_lba8b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mwam"]
 atlas = ExtResource("3_rgfuu")
@@ -53,6 +55,21 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0nb1"]
+size = Vector2(133, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6erd"]
+size = Vector2(133, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w7b7"]
+size = Vector2(331, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyou3"]
+size = Vector2(20, 275.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhnbn"]
+size = Vector2(20, 280.75)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgo7i"]
 texture = ExtResource("2_lba8b")
@@ -160,8 +177,38 @@ sources/2 = SubResource("TileSetAtlasSource_vf5v5")
 sources/3 = SubResource("TileSetAtlasSource_k2dqp")
 sources/5 = SubResource("TileSetAtlasSource_e0nb1")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in5qc"]
 size = Vector2(27, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
+size = Vector2(10, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1if87"]
+size = Vector2(171, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3j8a"]
+size = Vector2(453, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_408ou"]
+size = Vector2(417, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgo7i"]
+size = Vector2(27, 290)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0y04"]
+size = Vector2(27, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lba8b"]
+size = Vector2(27, 305)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf5v5"]
+size = Vector2(27, 170.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oeqxl"]
+size = Vector2(27, 92.6875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2dqp"]
+size = Vector2(256, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_222sq"]
 
@@ -205,7 +252,7 @@ shader_parameter/rect_rotation = 0.0
 shader_parameter/dither_size = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_222sq"]
-radius = 40.0
+radius = 38.0
 
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_8wbli")
@@ -295,23 +342,141 @@ draw_limits = true
 layer = -1
 follow_viewport_enabled = true
 
+[node name="walls" type="StaticBody2D" parent="darkabe" unique_id=1458987522]
+position = Vector2(773, -352)
+script = ExtResource("21_m24xu")
+metadata/_custom_type_script = "uid://busd3yfk5p1mx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/walls" unique_id=1150564430]
+position = Vector2(2.5, -7)
+shape = SubResource("RectangleShape2D_e0nb1")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="darkabe/walls" unique_id=296409507]
+position = Vector2(-178, -7)
+shape = SubResource("RectangleShape2D_j6erd")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="darkabe/walls" unique_id=892367599]
+position = Vector2(-82.5, -268)
+shape = SubResource("RectangleShape2D_4w7b7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="darkabe/walls" unique_id=940191421]
+position = Vector2(71, -134.25)
+shape = SubResource("RectangleShape2D_kyou3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="darkabe/walls" unique_id=1808741386]
+position = Vector2(-240, -136.375)
+shape = SubResource("RectangleShape2D_xhnbn")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="darkabe" unique_id=1537970179]
 tile_map_data = PackedByteArray("AAAEAAQABQACAAUAAAAFAAQABQADAAUAAAAGAAQABQACAAUAAAAHAAQABQACAAUAAAAIAAQABQADAAUAAAAJAAQABQACAAUAAAAKAAQABQADAAUAAAALAAQABQACAAUAAAAMAAQABQADAAUAAAAEAAMABQADAAUAADAFAAMABQACAAUAADAGAAMABQADAAUAADAHAAMABQACAAUAADAIAAMABQADAAUAADAJAAMABQACAAUAADAKAAMABQADAAUAADALAAMABQADAAUAADAMAAMABQACAAUAADANAAMABQADAAUAADAOAAMABQACAAUAADAOAAQABQADAAUAAAANAAQABQACAAUAAAAPAAMABQAEAAQAAAAPAAQABQAEAAUAAAAQAAMABQAFAAQAAAAQAAQABQAFAAUAAAAQAAEABQAAAAMAADAQAAIABQAAAAIAADAQAP//BQAAAAMAADAQAAAABQAAAAIAADAPAAEABQAFAAMAADAPAAIABQAFAAIAADADAAQABQAAAAAAAGADAAMABQAAAAAAAAAPAP//BQAAAAIAAAAPAAAABQAAAAMAAAAPAP3/AAAAAAEAAAAQAP7/BQAFAAAAAAAPAP7/BQAFAAAAAGAQAPj/AAAAAAMAADAQAPn/AAAAAAIAADAPAPj/AAABAAMAADAPAPn/AAABAAIAADAPAPf/BQAAAAAAAGAQAPf/BQAAAAAAADAQAPX/BQAFAAIAAAAQAPb/BQAFAAMAAAAPAPX/BQAAAAIAAAAPAPb/BQAAAAMAAAAPAPP/BQAAAAIAAAAPAPT/BQAAAAMAAAAQAPT/BQAAAAIAADAQAPP/BQAAAAMAADAPAPH/BQAAAAAAAAAPAPL/BQAAAAEAAAAQAPH/BQABAAAAAAAQAPL/BQABAAEAAAARAPL/BQACAAUAAAASAPL/BQADAAUAAAARAPH/BQAAAAMAAFASAPH/BQAAAAIAAFAUAPL/BQAAAAMAAGATAPL/BQAAAAIAAGAWAPL/BQAFAAMAAFAVAPL/BQAFAAQAAFATAPH/BQAAAAIAAFAUAPH/BQAAAAEAAFAVAPH/BQAAAAIAAFAWAPH/BQAAAAEAAFAXAPH/BQAAAAIAAFAYAPH/BQAAAAEAAFAYAPL/BQAAAAIAAGAXAPL/BQAAAAEAAGAaAPH/BQAAAAMAAFAZAPH/BQAAAAQA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AAAkAN3/BQACAAMAAAAkAN7/BQACAAQAAAAlANv/BQADAAEAAAAlANz/BQADAAIAAAAlAN3/BQADAAMAAAAlAN7/BQADAAQAAAAmANv/BQAEAAEAAAAmANz/BQAEAAIAAAAmAN3/BQAEAAMAAAAmAN7/BQAEAAQAAAAkAN//BQACAAEAAAAkAOD/BQACAAIAAAAkAOH/BQACAAMAAAAkAOL/BQACAAQAAAAlAN//BQADAAEAAAAlAOD/BQADAAIAAAAlAOH/BQADAAMAAAAlAOL/BQADAAQAAAAmAN//BQAEAAEAAAAmAOD/BQAEAAIAAAAmAOH/BQAEAAMAAAAmAOL/BQAEAAQAAAAkAOP/BQACAAEAAAAkAOT/BQACAAIAAAAlAOP/BQADAAEAAAAlAOT/BQADAAIAAAAmAOP/BQAEAAEAAAAmAOT/BQAEAAIAAAAnAOP/BQABAAEAAAAnAOT/BQABAAIAAAAoAOP/BQACAAEAAAAoAOT/BQACAAIAAAApAOP/BQADAAEAAAApAOT/BQADAAIAAAAqAOP/BQAEAAEAAAAqAOT/BQAEAAIAAAArAOP/BQABAAEAAAArAOT/BQABAAIAAAAsAOP/BQACAAEAAAAsAOT/BQACAAIAAAAtAOP/BQADAAEAAAAtAOT/BQADAAIAAAAuAOP/BQAEAAEAAAAuAOT/BQAEAAIAAAAvAOP/BQABAAEAAAAvAOT/BQABAAIAAAAwAOP/BQACAAEAAAAwAOT/BQACAAIAAAAxAOP/BQADAAEAAAAxAOT/BQADAAIAAAAyAOP/BQAEAAEAAAAyAOT/BQAEAAIAAAAvAN//BQABAAEAAAAvAOD/BQABAAIAAAAvAOH/BQABAAMAAAAvAOL/BQABAAQAAAAwAN//BQACAAEAAAAwAOD/BQACAAIAAAAwAOH/BQACAAMAAAAwAOL/BQACAAQAAAAxAN//BQADAAEAAAAxAOD/BQADAAIAAAAxAOH/BQADAAMAAAAxAOL/BQADAAQAAAAyAN//BQAEAAEAAAAyAOD/BQAEAAIAAAAyAOH/BQAEAAMAAAAyAOL/BQAEAAQAAAAvANv/BQABAAEAAAAvANz/BQABAAIAAAAvAN3/BQABAAMAAAAvAN7/BQABAAQAAAAwANv/BQACAAEAAAAwANz/BQACAAIAAAAwAN3/BQACAAMAAAAwAN7/BQACAAQAAAAxANv/AwAAAAAAAAAxANz/AwAAAAEAAAAxAN3/BQADAAMAAAAxAN7/BQADAAQAAAAyANv/AwABAAAAAAAyANz/AwABAAEAAAAyAN3/BQAEAAMAAAAyAN7/BQAEAAQAAAArANv/AwABAAAAAAArANz/AwABAAEAAAArAN3/BQABAAMAAAArAN7/BQABAAQAAAAsANv/BQACAAEAAAAsANz/BQACAAIAAAAsAN3/BQACAAMAAAAsAN7/BQACAAQAAAAtANv/BQADAAEAAAAtANz/BQADAAIAAAAtAN3/BQADAAMAAAAtAN7/BQADAAQAAAAuANv/BQAEAAEAAAAuANz/BQAEAAIAAAAuAN3/BQAEAAMAAAAuAN7/BQAEAAQAAAAnANv/BQABAAEAAAAnANz/BQABAAIAAAAnAN3/BQABAAMAAAAnAN7/BQABAAQAAAAoANv/BQACAAEAAAAoANz/BQACAAIAAAAoAN3/BQACAAMAAAAoAN7/BQACAAQAAAApANv/BQADAAEAAAApANz/BQADAAIAAAApAN3/BQADAAMAAAApAN7/BQADAAQAAAAqANv/AwAAAAAAAAAqANz/AwAAAAEAAAAqAN3/BQAEAAMAAAAqAN7/BQAEAAQAAAAnAN//BQABAAEAAAAnAOD/BQABAAIAAAAnAOH/BQABAAMAAAAnAOL/BQABAAQAAAAoAN//BQACAAEAAAAoAOD/BQACAAIAAAAoAOH/BQACAAMAAAAoAOL/BQACAAQAAAApAN//BQADAAEAAAApAOD/BQADAAIAAAApAOH/BQADAAMAAAApAOL/BQADAAQAAAAqAN//BQAEAAEAAAAqAOD/BQAEAAIAAAAqAOH/AwAAAAAAAAAqAOL/AwAAAAEAAAArAN//BQABAAEAAAArAOD/BQABAAIAAAArAOH/AwABAAAAAAArAOL/AwABAAEAAAAsAN//BQACAAEAAAAsAOD/BQACAAIAAAAsAOH/BQACAAMAAAAsAOL/BQACAAQAAAAtAN//BQADAAEAAAAtAOD/BQADAAIAAAAtAOH/BQADAAMAAAAtAOL/BQADAAQAAAAuAN//BQAEAAEAAAAuAOD/BQAEAAIAAAAuAOH/BQAEAAMAAAAuAOL/BQAEAAQAAAAkANr/BQACAAUAADAjANr/BQADAAUAADAmANr/BQACAAUAADAlANr/BQADAAUAADAoANr/BQACAAUAADAnANr/BQADAAUAADAqANr/BQACAAUAADApANr/BQADAAUAADAsANr/BQACAAUAADArANr/BQADAAUAADAuANr/BQACAAUAADAtANr/BQADAAUAADAwANr/BQACAAUAADAvANr/BQADAAUAADAyANr/BQACAAUAADAxANr/BQADAAUAADAkAOf/AwABAAEAAAAxAOf/AwAAAAEAAAAQAP3/AAABAAEAAAAPAPz/AAAAAAAAAAAQAPz/AAABAAAAAAA=")
 tile_set = SubResource("TileSet_4w7b7")
 
-[node name="jumpad1" type="Area2D" parent="darkabe" unique_id=884582300]
+[node name="jumpad" type="Area2D" parent="darkabe" unique_id=884582300]
 position = Vector2(255, -42)
 script = ExtResource("8_ux65l")
 distance = 140.0
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad1" unique_id=1601023486]
-position = Vector2(1.5, 5)
-shape = SubResource("RectangleShape2D_q1sf4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad" unique_id=1601023486]
+position = Vector2(1.5, 4)
+shape = SubResource("RectangleShape2D_in5qc")
 
-[node name="Entity" type="Node2D" parent="darkabe/jumpad1" unique_id=1277160699]
+[node name="Entity" type="Node2D" parent="darkabe/jumpad" unique_id=1277160699]
 script = ExtResource("3_h7a0r")
 metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="jumpad2" type="Area2D" parent="darkabe" unique_id=1127595328]
+position = Vector2(253, -115)
+script = ExtResource("8_ux65l")
+direction = 1
+distance = 140.0
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad2" unique_id=1740705599]
+position = Vector2(2.5, -6)
+
+[node name="Entity" type="Node2D" parent="darkabe/jumpad2" unique_id=1586655205]
+script = ExtResource("3_h7a0r")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="jumpad3" type="Area2D" parent="darkabe" unique_id=1001463299]
+position = Vector2(255, -42)
+script = ExtResource("8_ux65l")
+direction = 2
+distance = 140.0
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad3" unique_id=100301214]
+position = Vector2(347, -183)
+
+[node name="Entity" type="Node2D" parent="darkabe/jumpad3" unique_id=1718372876]
+script = ExtResource("3_h7a0r")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="jumpad4" type="Area2D" parent="darkabe" unique_id=1128460404]
+position = Vector2(255, -42)
+script = ExtResource("8_ux65l")
+direction = 3
+distance = 140.0
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad4" unique_id=2142949775]
+position = Vector2(262, -182)
+shape = SubResource("RectangleShape2D_q1sf4")
+
+[node name="Entity" type="Node2D" parent="darkabe/jumpad4" unique_id=319780077]
+script = ExtResource("3_h7a0r")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="fall zones" type="Area2D" parent="darkabe" unique_id=826384429]
+script = ExtResource("12_222sq")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=951631144]
+position = Vector2(121.5, 23)
+shape = SubResource("RectangleShape2D_1if87")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1490047289]
+position = Vector2(434.5, -264)
+shape = SubResource("RectangleShape2D_b3j8a")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1254393427]
+position = Vector2(510.5, -183)
+shape = SubResource("RectangleShape2D_408ou")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=25906249]
+position = Vector2(212, -127)
+shape = SubResource("RectangleShape2D_bgo7i")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1182107418]
+position = Vector2(24, 62)
+shape = SubResource("RectangleShape2D_w0y04")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1523739697]
+position = Vector2(300, -41.5)
+shape = SubResource("RectangleShape2D_lba8b")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=376593878]
+position = Vector2(727, -257.625)
+shape = SubResource("RectangleShape2D_vf5v5")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=234171301]
+position = Vector2(648, -297.65625)
+shape = SubResource("RectangleShape2D_oeqxl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=488132424]
+position = Vector2(164, 102)
+shape = SubResource("RectangleShape2D_k2dqp")
+
+[node name="Entity" type="Node2D" parent="darkabe/fall zones" unique_id=1502777703]
+position = Vector2(299, -41)
+script = ExtResource("3_h7a0r")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="FallZone" type="Node2D" parent="darkabe/fall zones" unique_id=995276367 node_paths=PackedStringArray("area")]
+script = ExtResource("22_lba8b")
+area = NodePath("..")
+metadata/_custom_type_script = "uid://ufme4hlepwb3"
 
 [node name="star collectable" type="Area2D" parent="darkabe" unique_id=35908412]
 position = Vector2(75, -325)
@@ -370,6 +535,7 @@ metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
 layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="background thing" unique_id=1321510009 node_paths=PackedStringArray("light_area")]
+visible = false
 material = SubResource("ShaderMaterial_3v5l0")
 anchors_preset = 15
 anchor_right = 1.0

@@ -8,6 +8,9 @@ signal jumped(direction: Vector2)
 signal landed
 signal flipped(new_facing_x: float)
 
+signal fell
+signal respawned
+
 @export var move_speed: int = 100
 @export var move: GUIDEAction
 
@@ -20,6 +23,7 @@ var is_interacting: bool = false:
 		else:
 			state_chart.send_event(&"interact_end")
 
+var is_falling: bool = false
 var _was_moving: bool = false
 var _was_airborne: bool = false
 var _launch_target: Vector2
@@ -40,6 +44,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_falling:
+		return
 	if move_state.get("active"):
 		_on_move_physics_update(delta)
 	elif interact_state.get("active"):
@@ -63,6 +69,16 @@ func jump() -> void:
 
 func get_global_position() -> Vector2:
 	return body.global_position
+
+
+func fall_and_respawn(respawn_position: Vector2) -> void:
+	if is_falling:
+		return
+	is_falling = true
+	body.velocity = Vector2.ZERO
+	body.global_position = respawn_position
+	is_falling = false
+	respawned.emit()
 
 
 func _on_move_physics_update(_delta: float) -> void:

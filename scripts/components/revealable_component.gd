@@ -51,8 +51,8 @@ func _set_revealed_internal(revealed: bool) -> void:
 		if disable_collision_when_hidden and child is CollisionShape2D:
 			var shape: CollisionShape2D = child as CollisionShape2D
 			shape.disabled = not revealed
-		elif disable_collision_when_hidden and child is Area2D:
-			var area: Area2D = child as Area2D
+		elif disable_collision_when_hidden and child is RapierArea2D:
+			var area: RapierArea2D = child as RapierArea2D
 			area.monitoring = revealed
 			area.monitorable = revealed
 		elif child is MovementComponent:
