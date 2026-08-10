@@ -535,7 +535,6 @@ metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
 layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="background thing" unique_id=1321510009 node_paths=PackedStringArray("light_area")]
-visible = false
 material = SubResource("ShaderMaterial_3v5l0")
 anchors_preset = 15
 anchor_right = 1.0
