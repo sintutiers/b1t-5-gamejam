@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="12_4kau2"]
 [ext_resource type="Script" uid="uid://cburu6b4ckehs" path="res://addons/godot-rapier2d/custom_nodes/rapier_area_2d.gd" id="12_222sq"]
 [ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="14_n7vi5"]
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="15_1if87"]
 [ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="15_b2312"]
 [ext_resource type="Script" uid="uid://busd3yfk5p1mx" path="res://addons/godot-rapier2d/custom_nodes/rapier_static_body_2d.gd" id="21_m24xu"]
 [ext_resource type="Script" uid="uid://ufme4hlepwb3" path="res://assets/scenes/entities/fall_zone.gd" id="22_lba8b"]
@@ -55,6 +56,12 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
+
+[sub_resource type="Resource" id="Resource_lba8b"]
+script = ExtResource("15_1if87")
+amplitude = 1.0
+frequency = 0.1
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0nb1"]
 size = Vector2(133, 20)
@@ -318,6 +325,7 @@ accessibility_region = true
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(80.113, 56.512)
+offset = Vector2(0.0084865065, -0.06187636)
 zoom = Vector2(3, 3)
 editor_draw_limits = true
 
@@ -335,8 +343,9 @@ follow_target = NodePath("../player")
 zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_4p6eu")
 follow_damping = true
-follow_damping_value = Vector2(0.02, 0.02)
+follow_damping_value = Vector2(0.03, 0.03)
 draw_limits = true
+noise = SubResource("Resource_lba8b")
 
 [node name="darkabe" type="CanvasLayer" parent="." unique_id=770751611]
 layer = -1
@@ -551,3 +560,5 @@ metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="background thing/ColorRect/RapierArea2D" unique_id=1961524595]
 shape = SubResource("CircleShape2D_222sq")
+
+[node name="Parallax2D" type="Parallax2D" parent="background thing" unique_id=143519774]
