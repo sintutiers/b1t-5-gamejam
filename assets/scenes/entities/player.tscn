@@ -886,7 +886,7 @@ metadata/_edit_vertical_guides_ = [-208.0]
 
 [node name="CenterHand" type="Marker2D" parent="." unique_id=1583490133]
 unique_name_in_owner = true
-position = Vector2(25, 0)
+position = Vector2(-1.9073486e-06, -23.333334)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=360970681]
 unique_name_in_owner = true
