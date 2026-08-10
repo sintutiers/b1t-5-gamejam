@@ -8,6 +8,8 @@ signal interacted(by: RapierArea2D)
 @export var animate_on_interact: bool = false
 @export var sprite: AnimatedSprite2D
 
+@export_file("*.tscn") var next_scene: String
+
 
 func _ready() -> void:
 	add_to_group(&"interactable")
@@ -18,6 +20,9 @@ func _ready() -> void:
 
 
 func trigger(by: RapierArea2D) -> void:
+	print("door triggered, next_scene=", next_scene)
 	if animate_on_interact and sprite:
 		sprite.play()
 	interacted.emit(by)
+	if next_scene:
+		SceneLoader.load_scene(next_scene)
