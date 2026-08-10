@@ -27,6 +27,9 @@
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="25_va1hk"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="26_yigl2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bleyc"]
+size = Vector2(91, 72)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mwam"]
 atlas = ExtResource("4_xd6b5")
 region = Rect2(0, 0, 32, 32)
@@ -248,6 +251,19 @@ radius = 40.0
 
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_bleyc")
+
+[node name="load_next_scene2" type="Area2D" parent="." unique_id=845867359]
+script = ExtResource("2_s2c0s")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="load_next_scene2" unique_id=1688579555]
+position = Vector2(489.5, -433)
+shape = SubResource("RectangleShape2D_bleyc")
+
+[node name="Interactable" type="Node2D" parent="load_next_scene2/CollisionShape2D" unique_id=532290310]
+script = ExtResource("8_usm1q")
+next_scene = "uid://b7q3b1ynp55b7"
+metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="NPC" type="Area2D" parent="." unique_id=208642627]
 visible = false
