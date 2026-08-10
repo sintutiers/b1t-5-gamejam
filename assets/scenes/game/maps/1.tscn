@@ -330,7 +330,7 @@ accessibility_region = true
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(80.113, 56.512)
-offset = Vector2(-0.19429357, -0.26058915)
+offset = Vector2(-0.022119911, -0.01567245)
 zoom = Vector2(3, 3)
 editor_draw_limits = true
 
@@ -388,6 +388,7 @@ tile_set = SubResource("TileSet_4w7b7")
 [node name="jumpad" type="Area2D" parent="darkabe" unique_id=884582300]
 position = Vector2(255, -42)
 script = ExtResource("8_ux65l")
+speed = 150.0
 distance = 140.0
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
@@ -431,6 +432,7 @@ metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
 position = Vector2(255, -42)
 script = ExtResource("8_ux65l")
 direction = 3
+speed = 150.0
 distance = 140.0
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
