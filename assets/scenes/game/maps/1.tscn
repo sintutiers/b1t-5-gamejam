@@ -270,7 +270,7 @@ radius = 38.0
 script = ExtResource("1_8wbli")
 
 [node name="NPC" type="Area2D" parent="." unique_id=208642627]
-position = Vector2(690, -426)
+position = Vector2(690, -481.057)
 script = ExtResource("12_222sq")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
@@ -330,7 +330,7 @@ accessibility_region = true
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(80.113, 56.512)
-offset = Vector2(-0.085094854, -0.102579825)
+offset = Vector2(-0.005838353, 0.013506009)
 zoom = Vector2(3, 3)
 editor_draw_limits = true
 

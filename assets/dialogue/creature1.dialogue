@@ -1,9 +1,8 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], i am sleep.
-Nathan: sleep or no.
+sleep: [[Hi|Hello|Howdy]], i am sleep.
+sleep: sleep or no.
 - eepy sleepy
-	Nathan: you sleep.
+	sleep: you sleep.
 - nuh uh
-	Nathan: you did a kickflip.
-Nathan: This is placeholder text and need to be updated otherwise were kinda fucked.
+	sleep: you did a kickflip.
 => END
