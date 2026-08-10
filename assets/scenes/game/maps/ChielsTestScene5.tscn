@@ -19,10 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://cucp87ha5d0cf" path="res://assets/art/erinpath.png" id="17_m2sue"]
 [ext_resource type="Texture2D" uid="uid://dcpceoyx50dkx" path="res://assets/art/trapdoor.png" id="18_1mhey"]
 [ext_resource type="Texture2D" uid="uid://sbysu1agubiy" path="res://assets/art/erinnewpath.png" id="19_h87pe"]
-[ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="20_hha01"]
 [ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="21_nm8ax"]
 [ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="22_d303u"]
 [ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="23_6kket"]
+[ext_resource type="Script" uid="uid://ufme4hlepwb3" path="res://assets/scenes/entities/fall_zone.gd" id="24_bleyc"]
 [ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="24_nif66"]
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="25_va1hk"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="26_yigl2"]
@@ -160,9 +160,6 @@ sources/2 = SubResource("TileSetAtlasSource_vf5v5")
 sources/3 = SubResource("TileSetAtlasSource_k2dqp")
 sources/5 = SubResource("TileSetAtlasSource_e0nb1")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
-size = Vector2(27, 10)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_222sq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b6h5f"]
@@ -194,6 +191,48 @@ animations = [{
 "name": &"default",
 "speed": 2.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2c0s"]
+size = Vector2(151, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u25a0"]
+size = Vector2(456.25, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xd6b5"]
+size = Vector2(875.625, 63.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6def2"]
+size = Vector2(92.5, 383)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryjlj"]
+size = Vector2(310, 156.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8o23y"]
+size = Vector2(119, 473.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usm1q"]
+size = Vector2(27, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqsw2"]
+size = Vector2(69.5, 345.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c87xv"]
+size = Vector2(27, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ststa"]
+size = Vector2(108, 255.6875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byab0"]
+size = Vector2(219.375, 162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wb61"]
+size = Vector2(875.5, 56.34375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpvfw"]
+size = Vector2(163.75, 47.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yoewg"]
+size = Vector2(247, 183.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3v5l0"]
 shader = ExtResource("25_va1hk")
@@ -300,21 +339,6 @@ follow_viewport_enabled = true
 tile_map_data = PackedByteArray("AAADAAMABQAAAAQAAAAEAAQABQABAAUAAAAFAAQABQACAAUAAAAGAAQABQADAAUAAAAHAAQABQAEAAUAAAAIAAQABQABAAUAAAAJAAQABQACAAUAAAAKAAQABQADAAUAAAALAAQABQAEAAUAAAAMAAQABQABAAUAAAANAAQABQACAAUAAAAOAAQABQADAAUAAAADAAQABQAAAAUAAAAEAAIABQACAAUAADAFAAIABQACAAUAADAGAAIABQACAAUAADAHAAIABQAEAAUAADAIAAIABQADAAUAADAJAAIABQACAAUAADAKAAIABQAEAAUAADALAAIABQADAAUAADAMAAIABQACAAUAADANAAIABQACAAAAAAADAAIABQAFAAAAAGAPAAEABQAFAAIAAAAPAAIABQAFAAMAAAAPAAMABQAFAAQAAAANAP//BQAAAAEAAAANAAAABQAAAAIAAAANAAEABQABAAAAAGANAP7/BQAAAAIAAAAPAAAABQAFAAEAAAAPAAQABQAAAAAAADAPAP//BQACAAAAADAQAP//BQACAAUAAAARAP//BQADAAUAAAANAP3/BQAAAAAAAAAOAP3/BQAAAAMAAFAPAP3/BQAAAAIAAFAQAP3/BQAAAAEAAFARAP3/BQAAAAMAAFASAP3/BQACAAAAAAAUAP3/BQADAAAAAAAVAP3/BQAAAAIAAFAWAP3/BQAAAAEAAFASAP//BQABAAUAAAATAP//BQACAAUAAAAUAP//BQADAAUAAAAVAP//BQAEAAUAAAAWAP//BQADAAAAADAWAAAABQAAAAEAAAAWAAEABQAAAAIAAAAWAAIABQAAAAEAAAAWAAMABQAAAAIAAAAWAAQABQAAAAMAAAAWAAUABQAAAAQAAAAWAAYABQAAAAEAAAAWAAcABQAAAAIAAAAWAAgABQAAAAMAAAAWAAkABQAAAAQAAAAWAAoABQAAAAEAAAAWAAsABQAAAAIAAAAWAAwABQAAAAMAAAAWAA0ABQAAAAEAAAAWAA4ABQAAAAIAAAAWAA8ABQAAAAMAAAAWABAABQAAAAQAAAAXAP3/BQACAAUAADAYAP3/BQABAAUAADAZAP3/BQAAAAAAAFAZAP7/BQAFAAIAAAAZAP//BQAFAAMAAAAZAAAABQAFAAQAAAAZAAEABQAFAAIAAAAZAAIABQAFAAMAAAAZAAMABQAFAAQAAAAZAAQABQACAAAAAFAZAAYABQADAAAAAFAZAAcABQAFAAQAAAAZAAgABQAFAAEAAAAZAAkABQAFAAIAAAAZAAoABQAFAAMAAAAZAAsABQAFAAEAAAAZAAwABQAFAAIAAAAZAA0ABQAFAAMAAAAZAA4ABQAFAAEAAAAZAA8ABQAFAAIAAAAZABAABQAFAAMAAAAZABEABQAFAAQAAAAZABIABQADAAAAAAAaABIABQAEAAUAADAbABIABQADAAUAADAcABIABQACAAUAADAWABQABQAAAAUAAAAWABEABQAAAAIAAAAWABIABQAAAAMAAAAWABMABQAAAAQAAAAXABQABQABAAUAAAAYABQABQACAAUAAAAZABQABQADAAUAAAAaABQABQAEAAUAAAAbABQABQABAAUAAAAcABQABQACAAUAAAAdABQABQADAAUAAAAeABQABQAEAAUAAAAdABIABQAEAAUAADAeABIABQADAAUAADAfABIABQACAAUAADAgABIABQABAAUAADAhABIABQAFAAAAAAAfABQABQACAAAAAGAfABUABQAAAAIAAAAfABYABQAAAAMAAAAfABcABQAAAAQAAAAhABUABQAAAAIAADAhABQABQAAAAMAADAhABMABQAAAAQAADASAPr/BQAAAAIAAAASAPv/BQAAAAMAAAASAPz/BQAAAAQAAAAUAPr/BQAFAAIAAAAUAPv/BQAFAAMAAAAUAPz/BQAFAAQAAAAUAPf/BQAFAAIAAAAUAPj/BQAFAAMAAAAUAPn/BQAFAAQAAAASAPf/BQAAAAIAAAASAPj/BQAAAAMAAAASAPn/BQAAAAQAAAASAPP/BQADAAAAAGASAPb/BQACAAAAAGAUAPb/BQAAAAIAADAUAPX/BQAAAAMAADAUAPT/BQAAAAQAADAUAPP/BQAAAAIAADAUAPL/BQAAAAMAADAUAPH/BQAAAAQAADAUAPD/BQACAAAAADASAPD/BQAAAAQAAAASAPH/BQAAAAMAAAASAPL/BQAAAAQAAAASAO7/BQAAAAAAAAASAO//BQAAAAMAAAATAO7/BQAAAAQAAFAUAO7/BQAAAAMAAFAVAO7/BQAAAAIAAFAWAO7/BQAAAAQAAFAXAO7/BQAAAAMAAFAYAO7/BQAAAAIAAFAVAPD/BQABAAUAAAAWAPD/BQACAAUAAAAXAPD/BQADAAUAAAAYAPD/BQABAAUAAAAZAPD/BQACAAUAAAAaAPD/BQADAAUAAAAbAPD/BQAEAAUAAAAZAO7/BQAEAAUAADAaAO7/BQADAAUAADAbAO7/BQACAAUAADAcAO7/BQACAAUAADAOAPb/BQAEAAUAAAAPAPb/BQACAAUAAAAQAPb/BQADAAUAAAARAPb/BQAEAAUAAAALAPb/BQABAAUAAAAMAPb/BQACAAUAAAANAPb/BQADAAUAAAAOAPP/BQABAAUAADAPAPP/BQADAAUAADAQAPP/BQACAAUAADARAPP/BQABAAUAADALAPP/BQAEAAUAADAMAPP/BQADAAUAADANAPP/BQACAAUAADAIAPb/BQABAAUAAAAJAPb/BQACAAUAAAAKAPb/BQADAAUAAAAFAPb/BQABAAUAAAAGAPb/BQACAAUAAAAHAPb/BQADAAUAAAAIAPP/BQADAAUAADAJAPP/BQACAAUAADAKAPP/BQABAAUAADAFAPP/BQADAAUAADAGAPP/BQACAAUAADAHAPP/BQABAAUAADAEAPP/BQAAAAAAAAAEAPb/BQAAAAUAAAAEAPX/BQAAAAIAAAAEAPT/BQAAAAIAAAACAPX/AAAAAAAAAAACAPb/AAAAAAEAAAADAPX/AAABAAAAAAADAPb/AAABAAEAAAACAPP/AAAAAAAAAAACAPT/AAAAAAEAAAADAPP/AAABAAAAAAADAPT/AAABAAEAAAAcAPD/BQABAAUAAAAdAPD/BQACAAUAAAAeAPD/BQADAAUAAAAfAPD/BQAFAAUAAAAfAO7/BQAFAAIAAAAeAO7/BQACAAMAAAAdAO7/BQACAAAAAAAdAO3/BQAAAAMAAAAdAOz/BQAAAAIAAAAeAO3/BQACAAIAAAAfAO3/BQAFAAEAAAAfAO//BQAFAAMAAAAcAO//BQADAAQAAAATAPT/BQABAAMAAAARAPT/BQADAAQAAAALAPT/BQADAAQAAAASAPT/BQABAAMAAAAGAPX/BQABAAMAAAAFAPX/BQABAAMAAAAXAP7/BQABAAMAAAAXAAAABQAEAAIAAAANAAMABQAEAAIAAAAXAAQABQAEAAIAAAAYAAQABQAEAAIAAAAYAAUABQADAAEAAAAYAAYABQADAAIAAAAYAAcABQAEAAIAAAAYAAgABQAEAAIAAAAYAAkABQAEAAIAAAAYAAoABQAEAAIAAAAXAAUABQACAAEAAAAXAAYABQACAAIAAAAXAAwABQACAAEAAAAXAA0ABQACAAIAAAAYAAwABQADAAEAAAAYAA0ABQADAAIAAAAXABAABQACAAEAAAAXABEABQACAAIAAAAYABAABQADAAEAAAAYABEABQADAAIAAAAdABMABQACAAMAAAAfABMABQACAAQAAAAgABMABQADAAQAAAAYABMABQACAAIAAAAZABMABQADAAQAAAAXABIABQACAAQAAAAYABIABQADAAQAAAAXABMABQACAAEAAAAYAP7/BQACAAEAAAAVAP7/BQACAAEAAAASAP7/BQACAAMAAAATAP7/BQADAAMAAAAIAAMABQACAAQAAAAJAAMABQADAAQAAAAMAPX/BQACAAQAAAANAPX/BQADAAQAAAAVAO//BQACAAQAAAAWAO//BQADAAQAAAAYAO//BQAEAAEAAAAaAO//BQABAAQAAAAbAO//BQACAAQAAAATAPD/BQABAAIAAAAfAOr/BQAFAAEAAAAfAOv/BQAFAAIAAAAfAOz/BQAFAAMAAAAdAOv/BQAFAAEAADAdAOr/BQAFAAIAADAdAOn/BQAFAAMAADAfAOn/BQAFAAMAAAAaAAQABQAEAAUAADAbAAQABQADAAUAADAcAAQABQACAAUAADAdAAQABQABAAUAADAaAAYABQAAAAEAAGAbAAYABQAAAAIAAGAcAAYABQAAAAMAAGAdAAYABQAAAAEAAGAeAAYABQAAAAIAAGAfAAYABQAAAAMAAGAgAAQABQAAAAAAAFAeAAQABQADAAUAADAfAAQABQACAAUAADAgAAYABQAAAAAAADAgAAUABQAFAAMAAAAfABgABQAAAAUAAAAhABgABQAFAAUAAAAhABcABQAFAAIAAAAhABYABQAFAAIAAAAgABgABQADAAUAAAAgABYABQAEAAIAAAAdAAUABQAEAAIAAAAhAAQAAAAAAAAAAAAhAAUAAAAAAAEAAAAiAAQAAAABAAAAAAAiAAUAAAABAAEAAAAfABoAAAAAAAAAAGAfABkAAAABAAAAAGAgABoAAAAAAAEAAGAgABkAAAABAAEAAGAbAOf/BQAFAAAAADAbAOb/BQAFAAEAADAbAOX/BQAFAAIAADAbAOT/BQAFAAMAADAbAOP/BQAFAAQAADAbAOL/BQAFAAUAADAcAOf/BQAEAAAAADAcAOb/BQAEAAEAADAcAOX/BQAEAAIAADAcAOT/BQAEAAMAADAcAOP/BQAEAAQAADAcAOL/BQAEAAUAADAdAOf/BQADAAAAADAdAOb/BQADAAEAADAdAOX/BQADAAIAADAdAOT/BQADAAMAADAdAOP/BQADAAQAADAdAOL/BQADAAUAADAeAOb/BQACAAEAADAeAOX/BQADAAMAAAAeAOT/BQACAAMAADAeAOP/BQACAAQAADAeAOL/BQACAAUAADAfAOb/BQABAAEAADAfAOX/BQABAAIAADAfAOT/BQABAAMAADAfAOP/BQABAAQAADAfAOL/BQABAAUAADAdAOj/BQAAAAEAAAAfAOj/BQABAAAAAFAfAOf/BQACAAAAADAgAOf/BQAAAAEAAGAhAOf/BQAFAAUAAAAhAOP/BQAFAAEAAAAhAOT/BQAFAAIAAAAhAOX/BQAFAAMAAAAhAOb/BQAFAAQAAAAhAOL/BQAFAAAAAAAgAOL/BQAAAAEAAFAgAOP/BQAEAAIAAAAgAOT/BQAEAAMAAAAgAOX/BQAEAAQAAAAgAOb/BQACAAQAAAA=")
 tile_set = SubResource("TileSet_4w7b7")
 
-[node name="jumpad1" type="Area2D" parent="darkabe" unique_id=884582300]
-visible = false
-position = Vector2(255, -42)
-script = ExtResource("20_hha01")
-distance = 140.0
-metadata/_custom_type_script = "uid://cburu6b4ckehs"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad1" unique_id=1601023486]
-position = Vector2(1.5, 5)
-shape = SubResource("RectangleShape2D_q1sf4")
-
-[node name="Entity" type="Node2D" parent="darkabe/jumpad1" unique_id=1277160699]
-script = ExtResource("3_u25a0")
-metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
-
 [node name="star collectable" type="Area2D" parent="darkabe" unique_id=35908412]
 position = Vector2(75, -325)
 script = ExtResource("2_s2c0s")
@@ -367,6 +391,76 @@ sprite = NodePath("../AnimatedSprite2D")
 [node name="Entity" type="Node2D" parent="darkabe/candle collectable" unique_id=1430289484]
 script = ExtResource("3_u25a0")
 metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="fall zones" type="Area2D" parent="darkabe" unique_id=1132128697]
+script = ExtResource("2_s2c0s")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="fall" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=312994710]
+position = Vector2(120.5, 5)
+shape = SubResource("RectangleShape2D_s2c0s")
+
+[node name="fall2" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=327810154]
+position = Vector2(371, 509)
+shape = SubResource("RectangleShape2D_u25a0")
+
+[node name="fall3" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=760827293]
+position = Vector2(553.1875, 652)
+shape = SubResource("RectangleShape2D_xd6b5")
+
+[node name="fall4" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1026341423]
+position = Vector2(101, -413)
+shape = SubResource("RectangleShape2D_6def2")
+
+[node name="fall14" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1356899947]
+position = Vector2(506, -144)
+shape = SubResource("RectangleShape2D_ryjlj")
+
+[node name="fall5" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1966290494]
+position = Vector2(-32, -246)
+shape = SubResource("RectangleShape2D_8o23y")
+
+[node name="fall6" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=345408128]
+position = Vector2(28, 61)
+shape = SubResource("RectangleShape2D_usm1q")
+
+[node name="fall7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=855514490]
+position = Vector2(303, 200)
+shape = SubResource("RectangleShape2D_cqsw2")
+
+[node name="fall8" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1492875335]
+position = Vector2(129, -617)
+shape = SubResource("RectangleShape2D_c87xv")
+
+[node name="fall9" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=57899194]
+position = Vector2(625, -343)
+shape = SubResource("RectangleShape2D_ststa")
+
+[node name="fall13" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=407783336]
+position = Vector2(560, 198)
+shape = SubResource("RectangleShape2D_byab0")
+
+[node name="fall10" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=199734871]
+position = Vector2(733, -501)
+shape = SubResource("RectangleShape2D_0wb61")
+
+[node name="fall11" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1160772460]
+position = Vector2(100.125, 127.25)
+shape = SubResource("RectangleShape2D_wpvfw")
+
+[node name="fall12" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1322562135]
+position = Vector2(272, -406)
+shape = SubResource("RectangleShape2D_yoewg")
+
+[node name="Entity" type="Node2D" parent="darkabe/fall zones" unique_id=354558729]
+position = Vector2(299, -41)
+script = ExtResource("3_u25a0")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="FallZone" type="Node2D" parent="darkabe/fall zones" unique_id=368817948 node_paths=PackedStringArray("area")]
+script = ExtResource("24_bleyc")
+area = NodePath("..")
+metadata/_custom_type_script = "uid://ufme4hlepwb3"
 
 [node name="background thing" type="CanvasLayer" parent="." unique_id=512853945]
 layer = -1

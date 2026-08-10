@@ -19,11 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://cucp87ha5d0cf" path="res://assets/art/erinpath.png" id="17_nxemt"]
 [ext_resource type="Texture2D" uid="uid://dcpceoyx50dkx" path="res://assets/art/trapdoor.png" id="18_nk3nl"]
 [ext_resource type="Texture2D" uid="uid://sbysu1agubiy" path="res://assets/art/erinnewpath.png" id="19_ewn08"]
-[ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="20_f2v3y"]
 [ext_resource type="Texture2D" uid="uid://bkoqh6kf6x6o8" path="res://assets/art/interactableSprites/erin_collectibles.png" id="21_2fk11"]
 [ext_resource type="Script" uid="uid://by7xho3qu0wac" path="res://scripts/components/collectable_component.gd" id="22_w2ci3"]
 [ext_resource type="Resource" uid="uid://wf41kpb8pkjq" path="res://assets/scenes/entities/info_star.tres" id="23_el2me"]
+[ext_resource type="Script" uid="uid://busd3yfk5p1mx" path="res://addons/godot-rapier2d/custom_nodes/rapier_static_body_2d.gd" id="24_8uy6x"]
 [ext_resource type="Resource" uid="uid://i3g44fqnqjp1" path="res://assets/scenes/entities/info_candle.tres" id="24_iob5i"]
+[ext_resource type="Script" uid="uid://ufme4hlepwb3" path="res://assets/scenes/entities/fall_zone.gd" id="25_dmjti"]
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="25_kdce3"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="26_bmh5e"]
 
@@ -160,9 +161,6 @@ sources/2 = SubResource("TileSetAtlasSource_vf5v5")
 sources/3 = SubResource("TileSetAtlasSource_k2dqp")
 sources/5 = SubResource("TileSetAtlasSource_e0nb1")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1sf4"]
-size = Vector2(27, 10)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_222sq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b6h5f"]
@@ -194,6 +192,57 @@ animations = [{
 "name": &"default",
 "speed": 2.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmjti"]
+size = Vector2(133, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g87bk"]
+size = Vector2(133, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_105lo"]
+size = Vector2(331, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thap2"]
+size = Vector2(20, 139.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvuvt"]
+size = Vector2(20, 153.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbbuc"]
+size = Vector2(312, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nky5"]
+size = Vector2(438.5, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwqix"]
+size = Vector2(448.5, 63.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kncil"]
+size = Vector2(92.5, 383)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uncf1"]
+size = Vector2(27, 115.4395)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmbrg"]
+size = Vector2(27, 182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6x13"]
+size = Vector2(27, 221.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk3nl"]
+size = Vector2(27, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ait1d"]
+size = Vector2(27, 531.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytpr8"]
+size = Vector2(27, 92.6875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayhou"]
+size = Vector2(149.5, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxemt"]
+size = Vector2(303, 25)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3v5l0"]
 shader = ExtResource("25_kdce3")
@@ -300,21 +349,6 @@ follow_viewport_enabled = true
 tile_map_data = PackedByteArray("AAAwAOD/BQACAAIAAAAEAAQABQAAAAUAAAAFAAQABQAFAAUAAAAFAAAABQAFAAEAAAAFAAEABQAFAAIAAAAFAAIABQAFAAMAAAAFAAMABQAFAAQAAAAEAAAABQAAAAEAAAAEAAEABQAAAAIAAAAEAAIABQAAAAMAAAAEAAMABQAAAAQAAAAGAP//BQABAAUAAAAHAP//BQACAAUAAAAIAP//BQADAAUAAAAJAP//BQAEAAUAAAAEAP7/BQAAAAAAAAAEAP//BQAAAAEAAAAFAP7/BQABAAAAAAAFAP//BQABAAEAAAAJAP7/BQABAAUAADAIAP7/BQACAAUAADAHAP7/BQADAAUAADAGAP7/BQAEAAUAADANAP//BQAFAAEAAFAMAP//BQAFAAIAAFALAP//BQAFAAMAAFAKAP//BQAFAAQAAFANAP7/BQAAAAEAAFAMAP7/BQAAAAIAAFALAP7/BQAAAAMAAFAKAP7/BQAAAAQAAFAOAP//BQABAAUAAAAPAP//BQACAAUAAAAQAP//BQADAAUAAAARAP//BQAEAAUAAAARAP7/BQAFAAQAAGAQAP7/BQAFAAMAAGAPAP7/BQAFAAIAAGAOAP7/BQAFAAEAAGASAP//BQABAAUAAAATAP//BQACAAUAAAAUAP//BQADAAUAAAAVAP//BQAEAAUAAAAVAP7/BQAAAAEAAFAUAP7/BQAAAAIAAFATAP7/BQAAAAMAAFASAP7/BQAAAAQAAFAWAP7/BQAEAAQAAAAWAP//BQAEAAUAAAAXAP7/BQAFAAQAAAAXAP//BQAFAAUAAAAWAPr/BQAAAAEAAAAWAPv/BQAAAAIAAAAWAPz/BQAAAAMAAAAWAP3/BQAAAAQAAAAXAPr/BQAFAAEAAAAXAPv/BQAFAAIAAAAXAPz/BQAFAAMAAAAXAP3/BQAFAAQAAAAXAPn/BQABAAUAAGAXAPj/BQACAAUAAGAXAPf/BQADAAUAAGAXAPb/BQAEAAUAAGAWAPb/BQABAAUAAFAWAPf/BQACAAUAAFAWAPj/BQADAAUAAFAWAPn/BQAEAAUAAFAWAPX/BQAAAAAAAAAXAPX/BQAFAAAAAAAWAPP/AAAAAAIAAAAWAPT/AAAAAAMAAAAXAPP/AAABAAIAAAAXAPT/AAABAAMAAAAXAO//AAAAAAMAADAXAPD/AAAAAAIAADAWAO//AAABAAMAADAWAPD/AAABAAIAADAWAO7/BQAAAAUAAAAXAO7/BQAFAAUAAAAYAO3/BQAFAAUAAAAVAO3/BQAAAAUAAAAVAOz/BQAAAAAAAAAWAOv/BQAAAAAAAAAXAOv/BQAFAAAAAAAYAOz/BQAFAAAAAAAWAOz/BQACAAIAADAWAO3/BQACAAEAADAXAOz/BQABAAIAADAXAO3/BQABAAEAADATAOz/AAAAAAQAAAATAO3/AAAAAAUAAAAUAOz/AAABAAQAAAAUAO3/AAABAAUAAAAZAOz/AAAAAAYAAAAZAO3/AAAAAAcAAAAaAOz/AAABAAYAAAAaAO3/AAABAAcAAAAWAOn/AAAAAAIAAAAWAOr/AAAAAAMAAAAXAOn/AAABAAIAAAAXAOr/AAABAAMAAAAdAOz/AAAAAAQAAAAdAO3/AAAAAAUAAAAeAOz/AAABAAQAAAAeAO3/AAABAAUAAAAfAO3/BQAAAAUAAAAgAO7/BQAAAAUAAAAfAOz/BQAAAAAAAAAgAOv/BQAAAAAAAAAhAOv/BQAFAAAAAAAiAOz/BQAFAAAAAAAiAO3/BQAFAAUAAAAhAO7/BQAFAAUAAAAgAOz/BQABAAEAAAAgAO3/BQABAAIAAAAhAOz/BQACAAEAAAAhAO3/BQACAAIAAAAgAOn/AAAAAAIAAAAgAOr/AAAAAAMAAAAhAOn/AAABAAIAAAAhAOr/AAABAAMAAAAhAO//AAAAAAMAADAhAPD/AAAAAAIAADAgAO//AAABAAMAADAgAPD/AAABAAIAADAjAOz/AAAAAAYAAAAjAO3/AAAAAAcAAAAkAOz/AAABAAYAAAAkAO3/AAABAAcAAAAnAOz/AAAAAAQAAAAnAO3/AAAAAAUAAAAoAOz/AAABAAQAAAAoAO3/AAABAAUAAAApAOz/BQAAAAAAAAAqAOv/BQAAAAAAAAApAO3/BQAAAAUAAAAqAO7/BQAAAAUAAAArAOv/BQAFAAAAAAAsAOz/BQAFAAAAAAAsAO3/BQAFAAUAAAArAO7/BQAFAAUAAAAqAOz/BQADAAMAAAAqAO3/BQADAAQAAAArAOz/BQAEAAMAAAArAO3/BQAEAAQAAAAtAOz/AAAAAAYAAAAtAO3/AAAAAAcAAAAuAOz/AAABAAYAAAAuAO3/AAABAAcAAAAqAOn/AAAAAAIAAAAqAOr/AAAAAAMAAAArAOn/AAABAAIAAAArAOr/AAABAAMAAAArAO//AAAAAAMAADArAPD/AAAAAAIAADAqAO//AAABAAMAADAqAPD/AAABAAIAADArAOX/AAAAAAMAADArAOb/AAAAAAIAADAqAOX/AAABAAMAADAqAOb/AAABAAIAADAqAOT/BQAAAAUAAAApAOP/BQAAAAUAAAArAOT/BQAFAAUAAAAsAOP/BQAFAAUAAAAsAOL/BQAFAAAAAAArAOH/BQAFAAAAAAAqAOH/BQAAAAAAAAApAOL/BQAAAAAAAAAqAOL/BQACAAEAAAAqAOP/BQACAAMAAAArAOL/BQADAAEAAAArAOP/BQADAAMAAAAnAOL/AAAAAAQAAAAnAOP/AAAAAAUAAAAoAOL/AAABAAQAAAAoAOP/AAABAAUAAAAtAOL/AAAAAAYAAAAtAOP/AAAAAAcAAAAuAOL/AAABAAYAAAAuAOP/AAABAAcAAAAqAN//AAAAAAIAAAAqAOD/AAAAAAMAAAArAN//AAABAAIAAAArAOD/AAABAAMAAAArANv/AAAAAAMAADArANz/AAAAAAIAADAqANv/AAABAAMAADAqANz/AAABAAIAADAqANr/BQAAAAUAAAApANn/BQAAAAUAAAArANr/BQAFAAUAAAAsANn/BQAFAAUAAAApANj/BQAAAAAAAAAqANf/BQAAAAAAAAArANf/BQAFAAAAAAAsANj/BQAFAAAAAAAqANj/BQABAAIAAAAqANn/BQABAAMAAAArANj/BQACAAIAAAArANn/BQACAAMAAAAnANj/AAAAAAQAAAAnANn/AAAAAAUAAAAoANj/AAABAAQAAAAoANn/AAABAAUAAAAtANj/AAAAAAYAAAAtANn/AAAAAAcAAAAuANj/AAABAAYAAAAuANn/AAABAAcAAAAqANX/AAAAAAIAAAAqANb/AAAAAAMAAAArANX/AAABAAIAAAArANb/AAABAAMAAAApAND/BQABAAUAAAAqAND/BQACAAUAAAArAND/BQADAAUAAAAsAND/BQAEAAUAAAArANH/AAAAAAMAADArANL/AAAAAAIAADAqANH/AAABAAMAADAqANL/AAABAAIAADAoAND/BQAAAAUAAAAtAM//BQAFAAQAAAAtAND/BQAFAAUAAAAtAMz/BQAFAAEAAAAtAM3/BQAFAAIAAAAtAM7/BQAFAAMAAAAtAMv/BQAFAAAAAAAoAMv/BQAAAAAAAAAoAMz/BQAAAAEAAAAoAM3/BQAAAAIAAAAoAM7/BQAAAAMAAAAoAM//BQAAAAQAAAAsAMv/BQABAAUAADArAMv/BQACAAUAADAqAMv/BQADAAUAADApAMv/BQAEAAUAADApAMz/BQABAAEAAAApAM3/BQABAAIAAAApAM7/BQABAAMAAAApAM//BQABAAQAAAAqAMz/BQACAAEAAAAqAM3/BQACAAIAAAAqAM7/BQACAAMAAAAqAM//BQACAAQAAAArAMz/BQADAAEAAAArAM3/BQABAAQAAAArAM7/BQADAAMAAAArAM//BQADAAQAAAAsAMz/BQAEAAEAAAAsAM3/BQAEAAIAAAAsAM7/BQAEAAMAAAAsAM//BQAEAAQAAAA=")
 tile_set = SubResource("TileSet_4w7b7")
 
-[node name="jumpad1" type="Area2D" parent="darkabe" unique_id=884582300]
-visible = false
-position = Vector2(255, -42)
-script = ExtResource("20_f2v3y")
-distance = 140.0
-metadata/_custom_type_script = "uid://cburu6b4ckehs"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="darkabe/jumpad1" unique_id=1601023486]
-position = Vector2(1.5, 5)
-shape = SubResource("RectangleShape2D_q1sf4")
-
-[node name="Entity" type="Node2D" parent="darkabe/jumpad1" unique_id=1277160699]
-script = ExtResource("3_g87bk")
-metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
-
 [node name="star collectable" type="Area2D" parent="darkabe" unique_id=35908412]
 visible = false
 position = Vector2(75, -325)
@@ -344,6 +378,7 @@ script = ExtResource("3_g87bk")
 metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
 
 [node name="candle collectable" type="Area2D" parent="darkabe" unique_id=149593960]
+visible = false
 position = Vector2(-75, -325)
 script = ExtResource("2_dmjti")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
@@ -368,6 +403,93 @@ sprite = NodePath("../AnimatedSprite2D")
 [node name="Entity" type="Node2D" parent="darkabe/candle collectable" unique_id=1430289484]
 script = ExtResource("3_g87bk")
 metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="walls" type="StaticBody2D" parent="darkabe" unique_id=1760185422]
+position = Vector2(773, -352)
+script = ExtResource("24_8uy6x")
+metadata/_custom_type_script = "uid://busd3yfk5p1mx"
+
+[node name="wall" type="CollisionShape2D" parent="darkabe/walls" unique_id=1278862888]
+position = Vector2(21, -385)
+shape = SubResource("RectangleShape2D_dmjti")
+
+[node name="wall2" type="CollisionShape2D" parent="darkabe/walls" unique_id=592266508]
+position = Vector2(-194, -387)
+shape = SubResource("RectangleShape2D_g87bk")
+
+[node name="wall3" type="CollisionShape2D" parent="darkabe/walls" unique_id=1495482522]
+position = Vector2(-70, -531)
+shape = SubResource("RectangleShape2D_105lo")
+
+[node name="wall4" type="CollisionShape2D" parent="darkabe/walls" unique_id=1820662302]
+position = Vector2(-11, -449.875)
+shape = SubResource("RectangleShape2D_thap2")
+
+[node name="wall5" type="CollisionShape2D" parent="darkabe/walls" unique_id=501166143]
+position = Vector2(-164, -455.6875)
+shape = SubResource("RectangleShape2D_tvuvt")
+
+[node name="fall zones" type="Area2D" parent="darkabe" unique_id=708361757]
+script = ExtResource("2_dmjti")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="fall" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1909550648]
+position = Vector2(192, -50.913)
+shape = SubResource("RectangleShape2D_jbbuc")
+
+[node name="fall2" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=903338471]
+position = Vector2(360.75, -444)
+shape = SubResource("RectangleShape2D_4nky5")
+
+[node name="fall3" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1019647876]
+position = Vector2(620.75, -182.75)
+shape = SubResource("RectangleShape2D_vwqix")
+
+[node name="fall4" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=2139635379]
+position = Vector2(244.75, -230.5)
+shape = SubResource("RectangleShape2D_kncil")
+
+[node name="fall5" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1848646017]
+position = Vector2(118, 64.28025)
+shape = SubResource("RectangleShape2D_uncf1")
+
+[node name="fall6" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=573841599]
+position = Vector2(39.496, 29.000002)
+shape = SubResource("RectangleShape2D_bmbrg")
+
+[node name="fall7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=937628405]
+position = Vector2(414, -78.25)
+shape = SubResource("RectangleShape2D_w6x13")
+
+[node name="fall8" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1902780467]
+position = Vector2(567, -599)
+shape = SubResource("RectangleShape2D_nk3nl")
+
+[node name="fall9" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=756624942]
+position = Vector2(825, -462.3125)
+shape = SubResource("RectangleShape2D_ait1d")
+
+[node name="fall10" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=2077141039]
+position = Vector2(648, -297.65625)
+shape = SubResource("RectangleShape2D_ytpr8")
+
+[node name="fall11" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=492641905]
+position = Vector2(75.25, 98)
+shape = SubResource("RectangleShape2D_ayhou")
+
+[node name="fall12" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1128647696]
+position = Vector2(255.5, 20)
+shape = SubResource("RectangleShape2D_nxemt")
+
+[node name="Entity" type="Node2D" parent="darkabe/fall zones" unique_id=295300966]
+position = Vector2(299, -41)
+script = ExtResource("3_g87bk")
+metadata/_custom_type_script = "uid://cvg0uxkiku0d0"
+
+[node name="FallZone" type="Node2D" parent="darkabe/fall zones" unique_id=1728443774 node_paths=PackedStringArray("area")]
+script = ExtResource("25_dmjti")
+area = NodePath("..")
+metadata/_custom_type_script = "uid://ufme4hlepwb3"
 
 [node name="background thing" type="CanvasLayer" parent="." unique_id=512853945]
 layer = -1
