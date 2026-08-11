@@ -1,8 +1,0 @@
-~ start
-sleep: [[Hi|Hello|Howdy]], i am sleep.
-sleep: sleep or no.
-- eepy sleepy
-	sleep: you sleep.
-- nuh uh
-	sleep: you did a kickflip.
-=> END

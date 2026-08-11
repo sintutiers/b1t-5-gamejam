@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvg0uxkiku0d0" path="res://scripts/entity.gd" id="3_v1lg1"]
 [ext_resource type="Texture2D" uid="uid://cudp8roqkk1sf" path="res://assets/art/interactableSprites/creaturenpc (1).png" id="4_ftruu"]
 [ext_resource type="Script" uid="uid://rkvinud86uvp" path="res://scripts/components/dialogue_component.gd" id="5_4v6r6"]
-[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="6_ovyq3"]
+[ext_resource type="Resource" uid="uid://b5iesk6uam28x" path="res://assets/dialogue/creature1dialogue2.dialogue" id="6_ftjxc"]
 [ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="7_myvl1"]
 [ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="8_egvgq"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="9_ahsal"]
@@ -35,7 +35,7 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("4_ftruu")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lfwmx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fld1s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -49,7 +49,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfwmx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cevha"]
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("14_3d074")
@@ -249,33 +249,89 @@ radius = 40.0
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_ftjxc")
 
-[node name="NPC" type="Area2D" parent="." unique_id=208642627]
-visible = false
-position = Vector2(690, -426)
+[node name="NPC" type="Area2D" parent="." unique_id=718355491]
+position = Vector2(884, 506)
 script = ExtResource("2_fld1s")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
-[node name="entity" type="Node2D" parent="NPC" unique_id=101561396]
+[node name="entity" type="Node2D" parent="NPC" unique_id=441450052]
 script = ExtResource("3_v1lg1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1722183037]
-sprite_frames = SubResource("SpriteFrames_lfwmx")
-frame_progress = 0.8042721
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1575946659]
+sprite_frames = SubResource("SpriteFrames_fld1s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1859490168]
-shape = SubResource("RectangleShape2D_lfwmx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1725194873]
+shape = SubResource("RectangleShape2D_cevha")
 
-[node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
+[node name="DialogueComponent" type="Node" parent="NPC" unique_id=1850354130]
 script = ExtResource("5_4v6r6")
-dialogue_resource = ExtResource("6_ovyq3")
+dialogue_resource = ExtResource("6_ftjxc")
 talk_sound = ExtResource("7_myvl1")
 metadata/_custom_type_script = "uid://rkvinud86uvp"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=1770966873]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=225004462]
 unique_name_in_owner = true
 volume_db = 14.789
 
-[node name="Interactable" type="Node2D" parent="NPC" unique_id=1191208338 node_paths=PackedStringArray("sprite")]
+[node name="Interactable" type="Node2D" parent="NPC" unique_id=683733184 node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_egvgq")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://5pxqce3xq6pr"
+
+[node name="NPC3" type="Area2D" parent="." unique_id=1889397172]
+position = Vector2(207, -625)
+script = ExtResource("2_fld1s")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="entity" type="Node2D" parent="NPC3" unique_id=2112811865]
+script = ExtResource("3_v1lg1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC3" unique_id=326535089]
+sprite_frames = SubResource("SpriteFrames_fld1s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC3" unique_id=1663565473]
+shape = SubResource("RectangleShape2D_cevha")
+
+[node name="DialogueComponent" type="Node" parent="NPC3" unique_id=1702461971]
+script = ExtResource("5_4v6r6")
+dialogue_resource = ExtResource("6_ftjxc")
+talk_sound = ExtResource("7_myvl1")
+metadata/_custom_type_script = "uid://rkvinud86uvp"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC3/DialogueComponent" unique_id=1568884719]
+volume_db = 14.789
+
+[node name="Interactable" type="Node2D" parent="NPC3" unique_id=192201898 node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_egvgq")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://5pxqce3xq6pr"
+
+[node name="NPC2" type="Area2D" parent="." unique_id=925890947]
+position = Vector2(970, -396)
+script = ExtResource("2_fld1s")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="entity" type="Node2D" parent="NPC2" unique_id=2111626474]
+script = ExtResource("3_v1lg1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC2" unique_id=137760610]
+sprite_frames = SubResource("SpriteFrames_fld1s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC2" unique_id=36659435]
+shape = SubResource("RectangleShape2D_cevha")
+
+[node name="DialogueComponent" type="Node" parent="NPC2" unique_id=514924934]
+script = ExtResource("5_4v6r6")
+dialogue_resource = ExtResource("6_ftjxc")
+talk_sound = ExtResource("7_myvl1")
+metadata/_custom_type_script = "uid://rkvinud86uvp"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC2/DialogueComponent" unique_id=1143112267]
+volume_db = 14.789
+
+[node name="Interactable" type="Node2D" parent="NPC2" unique_id=2145027766 node_paths=PackedStringArray("sprite")]
 script = ExtResource("8_egvgq")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")

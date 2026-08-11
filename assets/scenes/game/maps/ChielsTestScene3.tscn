@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvg0uxkiku0d0" path="res://scripts/entity.gd" id="3_od8fm"]
 [ext_resource type="Texture2D" uid="uid://cudp8roqkk1sf" path="res://assets/art/interactableSprites/creaturenpc (1).png" id="4_g4dhn"]
 [ext_resource type="Script" uid="uid://rkvinud86uvp" path="res://scripts/components/dialogue_component.gd" id="5_y3m8h"]
-[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="6_mhibp"]
+[ext_resource type="Resource" uid="uid://b5iesk6uam28x" path="res://assets/dialogue/creature1dialogue2.dialogue" id="6_88vmj"]
 [ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="7_tweu0"]
 [ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="8_nmukq"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="9_rngt3"]
@@ -36,7 +36,7 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("4_g4dhn")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lfwmx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_88vmj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -50,7 +50,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfwmx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aia8g"]
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("14_lkljn")
@@ -232,9 +232,6 @@ size = Vector2(27, 122)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nci1m"]
 size = Vector2(27, 295.75)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aia8g"]
-size = Vector2(27, 242)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vicrb"]
 size = Vector2(27, 531.375)
 
@@ -265,33 +262,31 @@ radius = 40.0
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_ai3ux")
 
-[node name="NPC" type="Area2D" parent="." unique_id=208642627]
-visible = false
-position = Vector2(690, -426)
+[node name="NPC" type="Area2D" parent="." unique_id=137959132]
+position = Vector2(1794, 818)
 script = ExtResource("2_88vmj")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
-[node name="entity" type="Node2D" parent="NPC" unique_id=101561396]
+[node name="entity" type="Node2D" parent="NPC" unique_id=208938172]
 script = ExtResource("3_od8fm")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1722183037]
-sprite_frames = SubResource("SpriteFrames_lfwmx")
-frame_progress = 0.8042721
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1054440357]
+sprite_frames = SubResource("SpriteFrames_88vmj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1859490168]
-shape = SubResource("RectangleShape2D_lfwmx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1290893905]
+shape = SubResource("RectangleShape2D_aia8g")
 
-[node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
+[node name="DialogueComponent" type="Node" parent="NPC" unique_id=884685939]
 script = ExtResource("5_y3m8h")
-dialogue_resource = ExtResource("6_mhibp")
+dialogue_resource = ExtResource("6_88vmj")
 talk_sound = ExtResource("7_tweu0")
 metadata/_custom_type_script = "uid://rkvinud86uvp"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=1770966873]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=271380558]
 unique_name_in_owner = true
 volume_db = 14.789
 
-[node name="Interactable" type="Node2D" parent="NPC" unique_id=1191208338 node_paths=PackedStringArray("sprite")]
+[node name="Interactable" type="Node2D" parent="NPC" unique_id=1293777710 node_paths=PackedStringArray("sprite")]
 script = ExtResource("8_nmukq")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")
@@ -468,10 +463,6 @@ shape = SubResource("RectangleShape2D_lkljn")
 [node name="fall7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1183327700]
 position = Vector2(166, 298.125)
 shape = SubResource("RectangleShape2D_nci1m")
-
-[node name="fall8" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=622336358]
-position = Vector2(567, -599)
-shape = SubResource("RectangleShape2D_aia8g")
 
 [node name="fall9" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1739906875]
 position = Vector2(1668, 365)

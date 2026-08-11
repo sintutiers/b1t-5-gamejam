@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvg0uxkiku0d0" path="res://scripts/entity.gd" id="3_g87bk"]
 [ext_resource type="Texture2D" uid="uid://cudp8roqkk1sf" path="res://assets/art/interactableSprites/creaturenpc (1).png" id="4_105lo"]
 [ext_resource type="Script" uid="uid://rkvinud86uvp" path="res://scripts/components/dialogue_component.gd" id="5_thap2"]
-[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="6_tvuvt"]
+[ext_resource type="Resource" uid="uid://b5iesk6uam28x" path="res://assets/dialogue/creature1dialogue2.dialogue" id="6_dmjti"]
 [ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="7_jbbuc"]
 [ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="8_4nky5"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="9_vwqix"]
@@ -260,8 +260,7 @@ radius = 40.0
 script = ExtResource("1_8uy6x")
 
 [node name="NPC" type="Area2D" parent="." unique_id=208642627]
-visible = false
-position = Vector2(690, -426)
+position = Vector2(688.527, -830.661)
 script = ExtResource("2_dmjti")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
@@ -277,7 +276,7 @@ shape = SubResource("RectangleShape2D_lfwmx")
 
 [node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
 script = ExtResource("5_thap2")
-dialogue_resource = ExtResource("6_tvuvt")
+dialogue_resource = ExtResource("6_dmjti")
 talk_sound = ExtResource("7_jbbuc")
 metadata/_custom_type_script = "uid://rkvinud86uvp"
 

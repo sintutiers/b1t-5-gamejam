@@ -1,0 +1,4 @@
+~ start
+sleep: Wrong dream.
+sleep: Try [[another one|somewhere else|deeper]].
+=> END

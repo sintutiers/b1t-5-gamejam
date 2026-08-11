@@ -149,7 +149,7 @@ cancel={
 [internationalization]
 
 locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
-locale/translations_pot_files=PackedStringArray("res://assets/dialogue/creature1.dialogue")
+locale/translations_pot_files=PackedStringArray("res://assets/dialogue/creature1dialogue1.dialogue", "res://assets/dialogue/creature1dialogue2.dialogue", "res://assets/dialogue/creature1dialogue3.dialogue")
 
 [maaacks_game_template]
 

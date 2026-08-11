@@ -1,0 +1,16 @@
+~ start
+sleep: [[Hi|Hello|Howdy]], I am Sleep.
+sleep: Explore your dreams. One of them holds the key to [[WAKING|AWAKENING|ESCAPING]].
+sleep: Choose wisely. Or don't. I'm a dream, not [[a COP|the police|your mom]].
+- Eepy sleepy
+	sleep: You sleep.
+	sleep: The dream [[swallows|eats|absorbs]] you whole.
+- Nuh uh
+	sleep: You did a [[kickflip|360|barrel roll]].
+	sleep: (Your stuck in your dream forever)
+- What key?
+	sleep: [[The one that|A|The]] key.
+	sleep: Don't [[overthink|question|worry about]] it.
+- Who are you?
+	sleep: I'm a metaphor. I'm the ID of sleep.
+=> END

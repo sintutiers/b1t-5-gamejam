@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cucp87ha5d0cf" path="res://assets/art/erinpath.png" id="4_b3j8a"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_hwoah"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_5r203"]
-[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="5_h7a0r"]
+[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1dialogue1.dialogue" id="5_h7a0r"]
 [ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="6_1p8di"]
 [ext_resource type="Texture2D" uid="uid://sbysu1agubiy" path="res://assets/art/erinnewpath.png" id="6_408ou"]
 [ext_resource type="Script" uid="uid://bil6i47qlrkcp" path="res://scripts/components/jumppad_component.gd" id="8_ux65l"]
@@ -57,6 +57,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfwmx"]
+size = Vector2(34, 35.000008)
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("5_5r203")
@@ -325,7 +326,7 @@ next_scene = "uid://dqgejqgmjcujb"
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="NPC" type="Area2D" parent="." unique_id=208642627]
-position = Vector2(690, -481.057)
+position = Vector2(690, -578.337)
 script = ExtResource("12_222sq")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
@@ -337,6 +338,7 @@ sprite_frames = SubResource("SpriteFrames_lfwmx")
 frame_progress = 0.8042721
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1859490168]
+position = Vector2(-2, 2.836975)
 shape = SubResource("RectangleShape2D_lfwmx")
 
 [node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
@@ -385,7 +387,7 @@ accessibility_region = true
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(80.113, 56.512)
-offset = Vector2(0.014240103, 0.053275105)
+offset = Vector2(0.02613785, -0.03118469)
 zoom = Vector2(3, 3)
 editor_draw_limits = true
 

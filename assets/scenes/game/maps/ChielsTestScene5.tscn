@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvg0uxkiku0d0" path="res://scripts/entity.gd" id="3_u25a0"]
 [ext_resource type="Texture2D" uid="uid://cudp8roqkk1sf" path="res://assets/art/interactableSprites/creaturenpc (1).png" id="4_xd6b5"]
 [ext_resource type="Script" uid="uid://rkvinud86uvp" path="res://scripts/components/dialogue_component.gd" id="5_6def2"]
-[ext_resource type="Resource" uid="uid://b2mfjnpavoagi" path="res://assets/dialogue/creature1.dialogue" id="6_ryjlj"]
+[ext_resource type="Resource" uid="uid://b5iesk6uam28x" path="res://assets/dialogue/creature1dialogue2.dialogue" id="6_bleyc"]
 [ext_resource type="AudioStream" uid="uid://bwbl7jm2nl64c" path="res://assets/sounds/npcTalkBit1.mp3" id="7_8o23y"]
 [ext_resource type="Script" uid="uid://5pxqce3xq6pr" path="res://scripts/components/interactable_thing.gd" id="8_usm1q"]
 [ext_resource type="PackedScene" uid="uid://unuoxxc2hyxj" path="res://assets/scenes/entities/player.tscn" id="9_cqsw2"]
@@ -27,9 +27,6 @@
 [ext_resource type="Shader" uid="uid://dsct8775ik2co" path="res://assets/scenes/game/maps/1.gdshader" id="25_va1hk"]
 [ext_resource type="Script" uid="uid://bcjblkycrpupp" path="res://scripts/reveal_mask.gd" id="26_yigl2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bleyc"]
-size = Vector2(91, 72)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mwam"]
 atlas = ExtResource("4_xd6b5")
 region = Rect2(0, 0, 32, 32)
@@ -38,7 +35,7 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("4_xd6b5")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lfwmx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_s2c0s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -52,7 +49,10 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfwmx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxc4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bleyc"]
+size = Vector2(91, 72)
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("14_wpvfw")
@@ -252,6 +252,35 @@ radius = 40.0
 [node name="1" type="Node2D" unique_id=1401155993]
 script = ExtResource("1_bleyc")
 
+[node name="NPC" type="Area2D" parent="." unique_id=1852677527]
+position = Vector2(475, -268)
+script = ExtResource("2_s2c0s")
+metadata/_custom_type_script = "uid://cburu6b4ckehs"
+
+[node name="entity" type="Node2D" parent="NPC" unique_id=636574028]
+script = ExtResource("3_u25a0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1807334838]
+sprite_frames = SubResource("SpriteFrames_s2c0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1812764438]
+shape = SubResource("RectangleShape2D_bxc4s")
+
+[node name="DialogueComponent" type="Node" parent="NPC" unique_id=1934912374]
+script = ExtResource("5_6def2")
+dialogue_resource = ExtResource("6_bleyc")
+talk_sound = ExtResource("7_8o23y")
+metadata/_custom_type_script = "uid://rkvinud86uvp"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=1676596045]
+volume_db = 14.789
+
+[node name="Interactable" type="Node2D" parent="NPC" unique_id=1565942098 node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_usm1q")
+animate_on_interact = true
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://5pxqce3xq6pr"
+
 [node name="load_next_scene2" type="Area2D" parent="." unique_id=845867359]
 script = ExtResource("2_s2c0s")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
@@ -263,38 +292,6 @@ shape = SubResource("RectangleShape2D_bleyc")
 [node name="Interactable" type="Node2D" parent="load_next_scene2/CollisionShape2D" unique_id=532290310]
 script = ExtResource("8_usm1q")
 next_scene = "uid://b7q3b1ynp55b7"
-metadata/_custom_type_script = "uid://5pxqce3xq6pr"
-
-[node name="NPC" type="Area2D" parent="." unique_id=208642627]
-visible = false
-position = Vector2(690, -426)
-script = ExtResource("2_s2c0s")
-metadata/_custom_type_script = "uid://cburu6b4ckehs"
-
-[node name="entity" type="Node2D" parent="NPC" unique_id=101561396]
-script = ExtResource("3_u25a0")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=1722183037]
-sprite_frames = SubResource("SpriteFrames_lfwmx")
-frame_progress = 0.8042721
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1859490168]
-shape = SubResource("RectangleShape2D_lfwmx")
-
-[node name="DialogueComponent" type="Node" parent="NPC" unique_id=679934069]
-script = ExtResource("5_6def2")
-dialogue_resource = ExtResource("6_ryjlj")
-talk_sound = ExtResource("7_8o23y")
-metadata/_custom_type_script = "uid://rkvinud86uvp"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NPC/DialogueComponent" unique_id=1770966873]
-unique_name_in_owner = true
-volume_db = 14.789
-
-[node name="Interactable" type="Node2D" parent="NPC" unique_id=1191208338 node_paths=PackedStringArray("sprite")]
-script = ExtResource("8_usm1q")
-animate_on_interact = true
-sprite = NodePath("../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("9_cqsw2")]
