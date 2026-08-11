@@ -40,6 +40,10 @@ func play_talk_letter(letter: String, letter_index: int) -> void:
 	player.play()
 
 
+func to_next_scene() -> void:
+	interactable.load_next_scene()
+
+
 func _on_interacted(_by: RapierArea2D) -> void:
 	if not dialogue_resource:
 		return

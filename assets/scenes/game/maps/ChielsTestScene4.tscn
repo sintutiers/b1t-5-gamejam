@@ -241,6 +241,7 @@ volume_db = 14.789
 script = ExtResource("8_egvgq")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")
+next_scene = "uid://dqgejqgmjcujb"
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="NPC3" type="Area2D" parent="." unique_id=1889397172]
@@ -270,6 +271,7 @@ volume_db = 14.789
 script = ExtResource("8_egvgq")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")
+next_scene = "uid://dqgejqgmjcujb"
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="NPC2" type="Area2D" parent="." unique_id=925890947]
@@ -299,6 +301,7 @@ volume_db = 14.789
 script = ExtResource("8_egvgq")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")
+next_scene = "uid://dqgejqgmjcujb"
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("9_ahsal")]
@@ -431,7 +434,6 @@ metadata/_custom_type_script = "uid://ufme4hlepwb3"
 
 [node name="background thing" type="CanvasLayer" parent="." unique_id=512853945]
 layer = -1
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="background thing" unique_id=1321510009 node_paths=PackedStringArray("light_area")]
 material = SubResource("ShaderMaterial_3v5l0")

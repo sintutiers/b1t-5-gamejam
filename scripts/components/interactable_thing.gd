@@ -20,9 +20,11 @@ func _ready() -> void:
 
 
 func trigger(by: RapierArea2D) -> void:
-	print("door triggered, next_scene=", next_scene)
 	if animate_on_interact and sprite:
 		sprite.play()
 	interacted.emit(by)
+
+
+func load_next_scene() -> void:
 	if next_scene:
 		SceneLoader.load_scene(next_scene)

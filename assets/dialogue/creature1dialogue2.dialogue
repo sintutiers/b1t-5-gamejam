@@ -1,4 +1,5 @@
 ~ start
 sleep: Wrong dream.
-sleep: Try [[another one|somewhere else|deeper]].
+sleep: Try [[another one|somewhere else|deeper]]. 
+do to_next_scene()
 => END

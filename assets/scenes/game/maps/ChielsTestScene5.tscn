@@ -46,9 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxc4s"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bleyc"]
-size = Vector2(91, 72)
+size = Vector2(34, 28)
 
 [sub_resource type="Resource" id="Resource_4p6eu"]
 script = ExtResource("14_wpvfw")
@@ -160,19 +158,25 @@ sources/3 = SubResource("TileSetAtlasSource_k2dqp")
 sources/5 = SubResource("TileSetAtlasSource_e0nb1")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2c0s"]
-size = Vector2(151, 25)
+size = Vector2(151, 80.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpg7q"]
+size = Vector2(94, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u25a0"]
 size = Vector2(456.25, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xd6b5"]
-size = Vector2(875.625, 63.5)
+size = Vector2(164.8125, 258)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6def2"]
-size = Vector2(92.5, 383)
+size = Vector2(231.25, 383)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryjlj"]
 size = Vector2(310, 156.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmmkj"]
+size = Vector2(310, 85.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o23y"]
 size = Vector2(119, 473.5)
@@ -180,23 +184,23 @@ size = Vector2(119, 473.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usm1q"]
 size = Vector2(27, 122)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqsw2"]
-size = Vector2(69.5, 345.75)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdbeo"]
+size = Vector2(56, 87)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c87xv"]
-size = Vector2(27, 242)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqsw2"]
+size = Vector2(66, 345.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ststa"]
 size = Vector2(108, 255.6875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byab0"]
-size = Vector2(219.375, 162)
+size = Vector2(219.375, 150)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wb61"]
-size = Vector2(875.5, 56.34375)
+size = Vector2(470.75, 56.34375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpvfw"]
-size = Vector2(163.75, 47.5)
+size = Vector2(254.75, 47.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yoewg"]
 size = Vector2(247, 183.5)
@@ -217,7 +221,7 @@ radius = 40.0
 script = ExtResource("1_bleyc")
 
 [node name="NPC" type="Area2D" parent="." unique_id=1852677527]
-position = Vector2(475, -268)
+position = Vector2(485.693, -453.758)
 script = ExtResource("2_s2c0s")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
@@ -228,6 +232,7 @@ script = ExtResource("3_u25a0")
 sprite_frames = SubResource("SpriteFrames_s2c0s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=1812764438]
+position = Vector2(-0.69299316, 1.7579956)
 shape = SubResource("RectangleShape2D_bxc4s")
 
 [node name="DialogueComponent" type="Node" parent="NPC" unique_id=1934912374]
@@ -243,19 +248,7 @@ volume_db = 14.789
 script = ExtResource("8_usm1q")
 animate_on_interact = true
 sprite = NodePath("../AnimatedSprite2D")
-metadata/_custom_type_script = "uid://5pxqce3xq6pr"
-
-[node name="load_next_scene2" type="Area2D" parent="." unique_id=845867359]
-script = ExtResource("2_s2c0s")
-metadata/_custom_type_script = "uid://cburu6b4ckehs"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="load_next_scene2" unique_id=1688579555]
-position = Vector2(489.5, -433)
-shape = SubResource("RectangleShape2D_bleyc")
-
-[node name="Interactable" type="Node2D" parent="load_next_scene2/CollisionShape2D" unique_id=532290310]
-script = ExtResource("8_usm1q")
-next_scene = "uid://b7q3b1ynp55b7"
+next_scene = "uid://djfcnww1hisw1"
 metadata/_custom_type_script = "uid://5pxqce3xq6pr"
 
 [node name="player" parent="." unique_id=2042953629 instance=ExtResource("9_cqsw2")]
@@ -321,23 +314,35 @@ script = ExtResource("2_s2c0s")
 metadata/_custom_type_script = "uid://cburu6b4ckehs"
 
 [node name="fall" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=312994710]
-position = Vector2(120.5, 5)
+position = Vector2(120.5, -22.75)
 shape = SubResource("RectangleShape2D_s2c0s")
 
+[node name="fall17" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=278726510]
+position = Vector2(517, 471)
+shape = SubResource("RectangleShape2D_jpg7q")
+
 [node name="fall2" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=327810154]
-position = Vector2(371, 509)
+position = Vector2(250, 424)
 shape = SubResource("RectangleShape2D_u25a0")
 
 [node name="fall3" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=760827293]
-position = Vector2(553.1875, 652)
+position = Vector2(639, 371)
 shape = SubResource("RectangleShape2D_xd6b5")
 
 [node name="fall4" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1026341423]
-position = Vector2(101, -413)
+position = Vector2(170.375, -413)
 shape = SubResource("RectangleShape2D_6def2")
 
+[node name="fall15" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1272974655]
+position = Vector2(587, -27)
+shape = SubResource("RectangleShape2D_ryjlj")
+
+[node name="fall18" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1654203004]
+position = Vector2(122, -95.625)
+shape = SubResource("RectangleShape2D_bmmkj")
+
 [node name="fall14" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1356899947]
-position = Vector2(506, -144)
+position = Vector2(507, -145)
 shape = SubResource("RectangleShape2D_ryjlj")
 
 [node name="fall5" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1966290494]
@@ -348,28 +353,28 @@ shape = SubResource("RectangleShape2D_8o23y")
 position = Vector2(28, 61)
 shape = SubResource("RectangleShape2D_usm1q")
 
-[node name="fall7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=855514490]
-position = Vector2(303, 200)
-shape = SubResource("RectangleShape2D_cqsw2")
+[node name="fall16" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1584200227]
+position = Vector2(595, 90.5)
+shape = SubResource("RectangleShape2D_qdbeo")
 
-[node name="fall8" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1492875335]
-position = Vector2(129, -617)
-shape = SubResource("RectangleShape2D_c87xv")
+[node name="fall7" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=855514490]
+position = Vector2(303, 186)
+shape = SubResource("RectangleShape2D_cqsw2")
 
 [node name="fall9" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=57899194]
 position = Vector2(625, -343)
 shape = SubResource("RectangleShape2D_ststa")
 
 [node name="fall13" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=407783336]
-position = Vector2(560, 198)
+position = Vector2(560, 199)
 shape = SubResource("RectangleShape2D_byab0")
 
 [node name="fall10" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=199734871]
-position = Vector2(733, -501)
+position = Vector2(530.625, -508)
 shape = SubResource("RectangleShape2D_0wb61")
 
 [node name="fall11" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1160772460]
-position = Vector2(100.125, 127.25)
+position = Vector2(145.625, 116.25)
 shape = SubResource("RectangleShape2D_wpvfw")
 
 [node name="fall12" type="CollisionShape2D" parent="darkabe/fall zones" unique_id=1322562135]

@@ -2,4 +2,5 @@
 sleep: There it is.
 sleep: You found it.
 sleep: Now you can finally [[WAKE THE FUCK UP|DREAM|SLEEP|DIE]].
+do to_next_scene()
 => END
